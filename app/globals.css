@@ -59,3 +59,42 @@ body::before {
 .animate-pulse-glow {
   animation: pulseGlow 2s ease infinite;
 }
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  nav, footer, video, .animate-fade-up, .animate-pulse-glow {
+    display: none !important;
+  }
+  
+  main {
+    padding: 0 !important;
+  }
+  
+  section {
+    background: white !important;
+    break-inside: avoid;
+  }
+  
+  h1, h2, h3 {
+    color: black !important;
+  }
+  
+  p, span {
+    color: #333 !important;
+  }
+  
+  a {
+    color: black !important;
+    text-decoration: underline !important;
+  }
+  
+  a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+  }
+}
