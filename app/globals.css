@@ -5,14 +5,20 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap');
 
 :root {
+  /* Matching the exact colors from original */
   --bg-deep: #06080e;
   --bg-primary: #0b0e18;
   --bg-card: #0f1222;
+  --bg-card-hover: #141830;
   --gold: #c4a24e;
+  --gold-hero: #9b824e;
   --gold-light: #dfc06a;
+  --gold-muted: rgba(196, 162, 78, 0.15);
   --text-white: #f0ede6;
   --text-light: #c8c5bc;
   --text-muted: #7a7870;
+  --border-gold: rgba(196, 162, 78, 0.25);
+  --border-gold-light: rgba(196, 162, 78, 0.12);
 }
 
 * {
@@ -30,9 +36,10 @@ body {
   color: var(--text-white);
   font-family: 'DM Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
 }
 
-/* Noise texture overlay */
+/* Noise texture overlay like original */
 body::before {
   content: '';
   position: fixed;
@@ -42,6 +49,7 @@ body::before {
   z-index: 9999;
 }
 
+/* Animations */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(28px); }
   to { opacity: 1; transform: translateY(0); }
@@ -52,6 +60,11 @@ body::before {
   50% { box-shadow: 0 0 40px rgba(196, 162, 78, 0.3); }
 }
 
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
 .animate-fade-up {
   animation: fadeUp 0.7s cubic-bezier(.23,1,.32,1) forwards;
 }
@@ -60,11 +73,136 @@ body::before {
   animation: pulseGlow 2s ease infinite;
 }
 
+/* Section dividers with text - matching original */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(196, 162, 78, 0.4), transparent);
+  flex: 1;
+  max-width: 150px;
+}
+
+/* Gold gradient text */
+.gold-gradient {
+  background: linear-gradient(135deg, #c4a24e 0%, #dfc06a 50%, #c4a24e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Service card with image background */
+.service-card-bg {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.service-card-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6, 8, 14, 0.3) 0%, rgba(6, 8, 14, 0.85) 100%);
+  z-index: 1;
+}
+
+.service-card-bg:hover::before {
+  background: linear-gradient(180deg, rgba(6, 8, 14, 0.2) 0%, rgba(6, 8, 14, 0.75) 100%);
+}
+
+.service-card-bg > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Testimonial card styling */
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold-light);
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+}
+
+.testimonial-card::before {
+  content: '"';
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  font-family: 'DM Serif Display', serif;
+  font-size: 4rem;
+  color: rgba(196, 162, 78, 0.15);
+  line-height: 1;
+}
+
+/* Star rating */
+.star-rating {
+  color: #ffc107;
+  letter-spacing: 2px;
+}
+
+/* Button styles matching original */
+.btn-primary {
+  background: var(--gold);
+  color: var(--bg-deep);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196, 162, 78, 0.25);
+}
+
+.btn-secondary {
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--gold);
+  color: var(--bg-deep);
+}
+
+/* Icon container */
+.icon-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
 /* Print styles */
 @media print {
   body {
     background: white !important;
     color: black !important;
+  }
+  
+  body::before {
+    display: none !important;
   }
   
   nav, footer, video, .animate-fade-up, .animate-pulse-glow {
@@ -93,7 +231,7 @@ body::before {
     text-decoration: underline !important;
   }
   
-  a::after {
+  a[href]::after {
     content: " (" attr(href) ")";
     font-size: 0.8em;
   }
