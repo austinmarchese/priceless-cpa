@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'pricelesscpa.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'assets.cdn.filesafe.space',
+      },
     ],
   },
 }

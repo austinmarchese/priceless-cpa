@@ -1,186 +1,231 @@
 'use client'
 
+import { useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const comparisonData = [
-  { metric: 'Net Profits', before: '$100,000', after: '$100,000', note: '($50,000 S-Corp Salary)' },
-  { metric: 'Social Security Taxes', before: '$12,400', beforePct: '12.4%', after: '$6,200', afterPct: '12.4%' },
-  { metric: 'Medicare Taxes', before: '$2,800', beforePct: '2.8%', after: '$1,400', afterPct: '2.8%' },
-  { metric: 'Total SE Taxes', before: '$15,300', after: '$7,650' },
-  { metric: 'Annual SE Tax Savings', before: '$0', after: '$7,650/yr', highlight: true },
+const benefits = [
+  { text: 'S-Corp election alone could save you', highlight: '$15K–$30K+', suffix: ' in self-employment taxes annually' },
+  { text: 'The wrong entity structure is silently', highlight: 'draining', suffix: ' thousands from your business every year' },
+  { text: 'Most CPAs don\'t proactively recommend the', highlight: 'right structure', suffix: ' — they just file what you tell them' },
+  { text: 'A free consultation where Anthony', highlight: 'personally', suffix: ' analyzes YOUR entity situation' },
 ]
 
-const faqItems = [
-  { 
-    question: '15.3% Self Employment Taxes', 
-    answer: 'S-Corps are used to mitigate your self employment taxes, which are comprised of your social security and medicare taxes.' 
-  },
-  { 
-    question: 'How is a Sole Prop Taxed?', 
-    answer: 'Out of the gate, you are taxed as a sole proprietorship, which means you\'re 100% subject to self employment taxes.' 
-  },
-  { 
-    question: 'How is an S-Corp Taxed?', 
-    answer: 'S-Corps are different because you get income in two manners: your corporation will pay you a salary, and you\'ll take distributions as the owner. The payroll is subject to the 15.3% SE tax, while the distribution is not subject to the SE taxes.' 
-  },
-  { 
-    question: 'Maximizing the S-Corp', 
-    answer: 'You\'ll need to work to maximize the tax benefits of an S-Corp, while obeying the IRS law and case law. Your business must pay you a "reasonable salary", and we help you determine that.' 
-  },
+const stats = [
+  { number: '$15K–$30K', label: 'Average Annual Savings From S-Corp' },
+  { number: '60+', label: 'Business Owners Restructured' },
+  { number: '90 Days', label: 'To Get It Done Right' },
 ]
+
+const credentials = ['CPA Licensed', 'Entity Specialist', '24hr Slack Response', 'S-Corp Expert', 'Year-Round Strategy']
 
 export default function SCorpVsLLC() {
+  const calendlyUrl = 'https://calendly.com/pricelesscpa/intro'
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('visible')
+      })
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' })
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
+
+    const hero = document.getElementById('pcpa-hero')
+    const stickyCta = document.getElementById('pcpa-sticky-cta')
+    if (hero && stickyCta) {
+      const stickyObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) stickyCta.classList.remove('visible')
+          else stickyCta.classList.add('visible')
+        })
+      }, { threshold: 0 })
+      stickyObserver.observe(hero)
+    }
+
+    document.querySelectorAll('.bullet-item').forEach((el, i) => {
+      (el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
+    })
+    document.querySelectorAll('.stat-card').forEach((el, i) => {
+      (el as HTMLElement).style.transitionDelay = `${i * 0.12}s`
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <main className="min-h-screen bg-[#06080e]">
+    <div className="pcpa-wrap">
       {/* Top Bar */}
-      <div className="bg-gradient-to-r from-[#0b0e18] via-[#c4a24e]/5 to-[#0b0e18] border-b border-[#c4a24e]/10 py-3 px-4">
-        <div className="flex items-center justify-center gap-3 text-xs tracking-wider uppercase text-[#7a7870]">
-          <span className="w-2 h-2 bg-[#c4a24e] rounded-full animate-pulse-glow"></span>
-          <span>Could you be saving thousands? — <strong className="text-[#c4a24e]">Find out for free</strong></span>
+      <div className="top-bar">
+        <div className="top-bar-inner">
+          <span className="top-bar-dot"></span>
+          <span>For Business Owners Making <strong>$100K+</strong></span>
         </div>
       </div>
 
       {/* Logo Bar */}
-      <div className="text-center py-8 border-b border-[#c4a24e]/5">
-        <Link href="/" className="inline-block">
-          <div className="font-display text-[#c4a24e] text-xl tracking-wide">PRICELESS</div>
-          <div className="text-[#7a7870] text-[10px] tracking-[0.3em] uppercase mt-1">Certified Public Accountant</div>
-        </Link>
+      <div className="logo-bar">
+        <div className="container">
+          <div className="logo-text">
+            PRICELESS CPA
+            <span>Entity Structure & S-Corp Election</span>
+          </div>
+        </div>
       </div>
 
-      {/* Hero Section */}
-      <section className="px-6 py-16 md:py-24">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-[#c4a24e] uppercase tracking-[0.2em] text-sm mb-6 animate-fade-up font-medium">
-            Sole Proprietorship vs. S-Corps for Taxes
-          </p>
-          <h1 className="font-display text-3xl md:text-5xl lg:text-6xl text-[#f0ede6] leading-tight mb-8 animate-fade-up" style={{animationDelay: '0.1s'}}>
-            Get the Most Tax Benefit{' '}
-            <span className="text-[#c4a24e]">Possible from an S-Corp</span>
+      {/* Hero */}
+      <section className="hero" id="pcpa-hero">
+        <div className="container">
+          <h1>
+            S-Corp vs LLC:<br />
+            <span className="gold">Which One Saves You More?</span><br />
+            (It's Probably Not What You Have)
           </h1>
-          <p className="text-[#c8c5bc] text-lg md:text-xl max-w-2xl mx-auto mb-10 animate-fade-up leading-relaxed" style={{animationDelay: '0.2s'}}>
-            S-Corp could be the most powerful tax tool available. In most cases, an S-Corp is able to save dramatically in taxes.
+          <p className="hero-sub">
+            If you're making $100K+ and still operating as a sole prop or single-member LLC, you're likely <strong>overpaying by $15K–$30K per year</strong> in self-employment taxes. Let's fix that.
           </p>
-          <a 
-            href="https://calendly.com/pricelesscpa/intro" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary text-lg px-12 py-5 animate-fade-up inline-flex items-center gap-2"
-            style={{animationDelay: '0.3s'}}
-          >
-            Discover If S-Corp Is Right For You
-            <span className="text-xl">→</span>
-          </a>
+          <div style={{ textAlign: 'center' }}>
+            <a href={calendlyUrl} target="_blank" rel="noopener noreferrer" className="cta-primary">
+              Find Out What You're Overpaying <span className="arrow">→</span>
+            </a>
+            <p className="cta-sub"><strong>Free.</strong> 20-minute call. No obligation.</p>
+          </div>
         </div>
       </section>
 
-      {/* Tax Comparison Table */}
-      <section className="px-6 py-20 bg-[#0b0e18]">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="font-display text-2xl md:text-3xl text-center text-[#c4a24e] mb-12">Tax Savings Comparison</h2>
-          
-          {/* Table */}
-          <div className="bg-[#0f1222] rounded-xl border border-[#c4a24e]/20 overflow-hidden">
-            {/* Header */}
-            <div className="grid grid-cols-3 bg-[#141830] border-b border-[#c4a24e]/10">
-              <div className="p-4 text-[#7a7870] text-sm font-medium">DATA</div>
-              <div className="p-4 text-[#7a7870] text-sm font-medium text-center">BEFORE (Sole Prop)</div>
-              <div className="p-4 text-[#c4a24e] text-sm font-medium text-center">AFTER (S-Corp)</div>
+      <div className="divider"></div>
+
+      {/* Bullets */}
+      <section className="bullets-section">
+        <div className="container">
+          <ul className="bullets-list">
+            {benefits.map((benefit, i) => (
+              <li key={i} className="bullet-item reveal">
+                <div className="bullet-check">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <div className="bullet-text">
+                  {benefit.text} <span className="highlight">{benefit.highlight}</span>{benefit.suffix}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* CTA Break */}
+      <div className="cta-break">
+        <a href={calendlyUrl} target="_blank" rel="noopener noreferrer" className="cta-primary" style={{ animation: 'none' }}>
+          Find Out What You're Overpaying <span className="arrow">→</span>
+        </a>
+      </div>
+
+      {/* Stats */}
+      <section className="stats-section">
+        <div className="container">
+          <div className="stats-grid">
+            {stats.map((stat, i) => (
+              <div key={i} className="stat-card reveal">
+                <div className="stat-number">{stat.number}</div>
+                <div className="stat-label">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Bio */}
+      <section className="bio-section">
+        <div className="container">
+          <div className="bio-header reveal">
+            <div className="bio-eyebrow">Your Entity Structure Expert</div>
+            <h2 className="bio-title">Meet <em>Anthony Price</em></h2>
+          </div>
+          <div className="bio-card reveal">
+            <div className="bio-photo">
+              <Image 
+                src="https://assets.cdn.filesafe.space/w9nlFqFeNgvMxlmA50dr/media/699f741e9a0c1877dc9f3858.jpeg"
+                alt="Anthony Price, CPA"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="340px"
+                priority
+              />
+              <div className="bio-photo-overlay">
+                <span className="bio-photo-name">Anthony Price</span>
+                <span className="bio-photo-title-tag">CPA & Entity Specialist</span>
+              </div>
             </div>
-            
-            {/* Rows */}
-            {comparisonData.map((row, i) => (
-              <div 
-                key={i} 
-                className={`grid grid-cols-3 border-b border-[#c4a24e]/10 last:border-b-0 ${row.highlight ? 'bg-[#c4a24e]/10' : ''}`}
-              >
-                <div className="p-4 text-[#c8c5bc] text-sm">{row.metric}</div>
-                <div className="p-4 text-center">
-                  <span className={`text-sm ${row.highlight ? 'text-[#7a7870]' : 'text-[#f0ede6]'}`}>{row.before}</span>
-                  {row.beforePct && <span className="text-[#7a7870] text-xs block">{row.beforePct}</span>}
-                </div>
-                <div className="p-4 text-center">
-                  <span className={`text-sm ${row.highlight ? 'text-[#c4a24e] font-bold' : 'text-[#f0ede6]'}`}>{row.after}</span>
-                  {row.afterPct && <span className="text-[#7a7870] text-xs block">{row.afterPct}</span>}
-                  {row.note && <span className="text-[#7a7870] text-xs block">{row.note}</span>}
-                </div>
+            <div className="bio-body">
+              <p>Anthony Price is a CPA and entity structure specialist who has helped <strong>60+ business owners</strong> restructure their businesses and save an average of <strong>$15K–$30K per year</strong> in self-employment taxes.</p>
+
+              <p>The math is simple: If you're making $150K+ as a sole prop or single-member LLC, you're paying 15.3% self-employment tax on <strong>all</strong> of it. With an S-Corp election, you only pay SE tax on your "reasonable salary" — the rest is profit distribution.</p>
+
+              <p className="callout">"I've seen business owners overpay by six figures over 5 years just because no one told them about the S-Corp election. It takes 90 days to set up properly. That's it."</p>
+
+              <p>When you work with Priceless CPA, you get a full entity analysis, help with the S-Corp election (if it makes sense), payroll setup, and <strong>year-round support</strong> to make sure you're maximizing savings.</p>
+
+              <div className="bio-credentials">
+                {credentials.map((cred, i) => (
+                  <span key={i} className="bio-cred-tag">{cred}</span>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* What We Do */}
-      <section className="px-6 py-20 bg-[#06080e]">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="font-display text-2xl md:text-3xl text-center text-[#c4a24e] mb-12">What We Do For You</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              'We can determine if an S-Corp is right for you',
-              'We can convert you to an S-Corp & build a perfect tax plan',
-              'We will pay in your taxes through the payroll system & provide guidance on the reasonable salary',
-              'We will file your 1120S tax returns at the end of the year and make sure you\'re compliant',
-            ].map((item, i) => (
-              <div key={i} className="flex items-start gap-4 bg-[#0f1222] rounded-lg p-5 border border-[#c4a24e]/10 hover:border-[#c4a24e]/30 transition">
-                <span className="text-[#c4a24e] text-xl font-bold">✓</span>
-                <span className="text-[#c8c5bc] leading-relaxed">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="px-6 py-20 bg-[#0b0e18]">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="font-display text-2xl md:text-3xl text-center text-[#c4a24e] mb-12">LLC vs. S-Corp for Small Business</h2>
-          <div className="space-y-4">
-            {faqItems.map((item, i) => (
-              <div key={i} className="bg-[#0f1222] rounded-xl p-6 border border-[#c4a24e]/10">
-                <h3 className="text-[#f0ede6] font-medium mb-3">{item.question}</h3>
-                <p className="text-[#c8c5bc] leading-relaxed">{item.answer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* CTA Break */}
+      <div className="cta-break">
+        <a href={calendlyUrl} target="_blank" rel="noopener noreferrer" className="cta-primary" style={{ animation: 'none' }}>
+          Find Out What You're Overpaying <span className="arrow">→</span>
+        </a>
+      </div>
 
       {/* Final CTA */}
-      <section className="px-6 py-24 bg-[#06080e]">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="font-display text-3xl md:text-4xl text-[#f0ede6] mb-6">
-            Discover If an S-Corp Is Right For You
-          </h2>
-          <p className="text-[#c8c5bc] mb-6 text-lg leading-relaxed">
-            We help business owners determine if an S-Corp is right, and how it impacts your overall tax reduction planning.
-          </p>
-          <p className="text-[#7a7870] mb-10">
-            We will help you set up the S-Corp, manage it and maximize its tax reduction abilities.
-          </p>
-          <a 
-            href="https://calendly.com/pricelesscpa/intro" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary text-lg px-12 py-5 inline-flex items-center gap-2"
-          >
-            Book Your Free Analysis
-            <span className="text-xl">→</span>
-          </a>
+      <section className="final-cta" id="book">
+        <div className="container">
+          <div className="reveal">
+            <h2 className="final-cta-headline">
+              Stop Paying Taxes<br />
+              <span className="gold">You Don't Owe.</span>
+            </h2>
+            <p className="final-cta-sub">
+              Every month with the wrong entity structure is money you're giving to the IRS unnecessarily. Book a free call and let Anthony show you exactly what you could be saving.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 bg-[#06080e] border-t border-[#c4a24e]/10 text-center">
-        <Image 
-          src="https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1-60x60.webp" 
-          alt="Priceless CPA" 
-          width={50} 
-          height={50}
-          className="mx-auto mb-4 rounded-lg"
-        />
-        <p className="text-[#7a7870] text-sm">© {new Date().getFullYear()} Priceless CPA. All rights reserved.</p>
+      <footer className="site-footer">
+        <div className="container">
+          <div className="footer-logo">
+            <Image 
+              src="https://assets.cdn.filesafe.space/w9nlFqFeNgvMxlmA50dr/media/6966851ce2d75b4e0f1bd866.png"
+              alt="Priceless CPA"
+              width={80}
+              height={80}
+              style={{ borderRadius: '12px' }}
+            />
+          </div>
+          <p className="footer-links">
+            <Link href="/privacy">Privacy Policy</Link> &nbsp;|&nbsp; <Link href="/terms">Terms of Service</Link>
+          </p>
+          <p className="footer-copy">
+            Copyright © {new Date().getFullYear()}. Priceless CPA. All Rights Reserved.<br />
+            6 W Flagler St #900-7468, Miami, FL 33130
+          </p>
+        </div>
       </footer>
-    </main>
+
+      {/* Sticky CTA */}
+      <div className="pcpa-sticky-cta" id="pcpa-sticky-cta">
+        <span className="sticky-cta-text">Your savings are waiting →</span>
+        <a href={calendlyUrl} target="_blank" rel="noopener noreferrer" className="sticky-cta-btn">
+          Find Out What You're Overpaying →
+        </a>
+      </div>
+    </div>
   )
 }

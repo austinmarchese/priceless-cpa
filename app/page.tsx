@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-// Using actual icons from pricelesscpa.com
 const valueProps = [
   { icon: 'https://pricelesscpa.com/wp-content/uploads/2025/07/Priceless_CPA_Icon1.webp', title: 'Comprehensive accounting services' },
   { icon: 'https://pricelesscpa.com/wp-content/uploads/2025/07/Priceless_CPA_Icon2.webp', title: 'Tailored tax advice' },
@@ -79,7 +78,7 @@ export default function Home() {
               </div>
             </div>
             <Link href="/s-corp-vs-llc" className="text-[#c8c5bc] hover:text-[#c4a24e] transition text-sm font-medium hidden md:block">S-CORP VS. LLC</Link>
-            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="btn-primary text-sm">
+            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="bg-[#c4a24e] text-[#06080e] px-6 py-2.5 rounded-lg font-semibold hover:bg-[#dfc06a] transition text-sm">
               Book a Call
             </a>
           </div>
@@ -96,7 +95,7 @@ export default function Home() {
           <source src="https://pricelesscpa.com/wp-content/uploads/2024/05/7247822-hd_1920_1080_30fps.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-[#06080e]/60"></div>
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto animate-fade-up">
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <h1 className="font-display text-4xl md:text-6xl lg:text-7xl mb-8 leading-tight tracking-tight">
             <span className="text-[#9b824e]">Financial solutions</span>
             <br />
@@ -105,10 +104,10 @@ export default function Home() {
             <span className="text-white">Legally & organically</span>
           </h1>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="btn-primary text-lg px-10 py-4">
+            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="bg-[#c4a24e] text-[#06080e] px-10 py-4 rounded-lg font-semibold hover:bg-[#dfc06a] transition text-lg">
               Book a Call
             </a>
-            <a href="https://wa.me/13057078959" target="_blank" rel="noopener noreferrer" className="btn-secondary text-lg px-10 py-4">
+            <a href="https://wa.me/13057078959" target="_blank" rel="noopener noreferrer" className="border-2 border-[#c4a24e] text-[#c4a24e] px-10 py-4 rounded-lg font-semibold hover:bg-[#c4a24e] hover:text-[#06080e] transition text-lg">
               Chat with me
             </a>
           </div>
@@ -118,8 +117,10 @@ export default function Home() {
       {/* Why Work With Us */}
       <section className="py-24 px-6 bg-[#0b0e18]">
         <div className="max-w-6xl mx-auto">
-          <div className="section-divider">
+          <div className="flex items-center gap-4 justify-center mb-6">
+            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
             <h2 className="font-display text-3xl md:text-4xl text-[#c4a24e] whitespace-nowrap">Why work with us?</h2>
+            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
           </div>
           <p className="text-[#c8c5bc] text-center max-w-3xl mx-auto mb-16 text-lg leading-relaxed">
             We provide successful entrepreneurs value-driven accounting solutions to minimize lifetime taxes, optimize business decisions with data, while saving time and money on their accounting and operational costs.
@@ -127,7 +128,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {valueProps.map((prop, i) => (
               <div key={i} className="text-center group">
-                <div className="icon-container mb-4">
+                <div className="w-20 h-20 mx-auto mb-4">
                   <Image src={prop.icon} alt={prop.title} width={80} height={80} className="transition group-hover:scale-110" />
                 </div>
                 <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent mb-4"></div>
@@ -141,8 +142,10 @@ export default function Home() {
       {/* Team Section */}
       <section className="py-24 px-6 bg-[#06080e]">
         <div className="max-w-6xl mx-auto">
-          <div className="section-divider">
+          <div className="flex items-center gap-4 justify-center mb-12">
+            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
             <h2 className="font-display text-3xl md:text-4xl text-[#c4a24e] whitespace-nowrap">Who WE ARE?</h2>
+            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
           </div>
           <div className="flex flex-wrap justify-center gap-8 mt-12">
             {team.map((member, i) => (
@@ -169,7 +172,7 @@ export default function Home() {
               Schedule your tax<br />Analysis for free
             </h3>
             <p className="text-[#c8c5bc] mb-8">Let&apos;s build an accurate strategy to optimize your money income</p>
-            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="btn-primary text-lg px-10 py-4">
+            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="bg-[#c4a24e] text-[#06080e] px-10 py-4 rounded-lg font-semibold hover:bg-[#dfc06a] transition text-lg inline-block">
               Book a Call
             </a>
           </div>
@@ -188,18 +191,29 @@ export default function Home() {
       {/* Services Section */}
       <section className="py-24 px-6 bg-[#06080e]">
         <div className="max-w-6xl mx-auto">
-          <div className="section-divider mb-12">
+          <div className="flex items-center gap-4 justify-center mb-12">
+            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
             <h2 className="font-display text-3xl md:text-4xl text-[#c4a24e] whitespace-nowrap">Our Services</h2>
+            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map((service, i) => (
               <Link 
                 key={i} 
                 href={service.href} 
-                className="service-card-bg rounded-xl h-64 flex items-end p-8 group"
-                style={{ backgroundImage: `url(${service.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                className="relative rounded-xl h-64 flex items-end p-8 group overflow-hidden"
               >
-                <div>
+                <div className="absolute inset-0">
+                  <Image 
+                    src={service.image} 
+                    alt={service.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#06080e]/85 to-[#06080e]/30 group-hover:from-[#06080e]/75 group-hover:to-[#06080e]/20 transition-all"></div>
+                </div>
+                <div className="relative z-10">
                   <h3 className="font-display text-2xl text-white group-hover:text-[#c4a24e] transition">{service.title}</h3>
                   <p className="text-[#c8c5bc] mt-2 group-hover:text-white transition">Learn more →</p>
                 </div>
@@ -212,13 +226,16 @@ export default function Home() {
       {/* Testimonials */}
       <section className="py-24 px-6 bg-[#0b0e18]">
         <div className="max-w-6xl mx-auto">
-          <div className="section-divider mb-12">
+          <div className="flex items-center gap-4 justify-center mb-12">
+            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
             <h2 className="font-display text-3xl md:text-4xl text-[#c4a24e] whitespace-nowrap">What Clients Say</h2>
+            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {testimonials.map((testimonial, i) => (
-              <div key={i} className="testimonial-card">
-                <div className="star-rating text-lg mb-4">{'★'.repeat(testimonial.rating)}</div>
+              <div key={i} className="bg-[#0f1222] border border-[#c4a24e]/10 rounded-xl p-8 relative">
+                <div className="absolute top-4 left-6 text-6xl text-[#c4a24e]/15 font-display">"</div>
+                <div className="text-[#ffc107] text-lg mb-4 tracking-wider">{'★'.repeat(testimonial.rating)}</div>
                 <p className="text-[#c8c5bc] mb-6 leading-relaxed relative z-10">{testimonial.text}</p>
                 <p className="text-[#c4a24e] font-semibold">— {testimonial.name}</p>
               </div>
