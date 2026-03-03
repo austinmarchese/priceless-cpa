@@ -9,35 +9,44 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Exact colors from pricelesscpa.com
-        'bg-deep': '#06080e',
-        'bg-primary': '#0b0e18',
-        'bg-card': '#0f1222',
-        'bg-card-hover': '#141830',
-        'gold': '#c4a24e',
-        'gold-hero': '#9b824e',
-        'gold-light': '#dfc06a',
-        'gold-muted': 'rgba(196, 162, 78, 0.15)',
-        'text-white': '#f0ede6',
-        'text-light': '#c8c5bc',
-        'text-muted': '#7a7870',
+        gold: {
+          DEFAULT: '#c4a24e',
+          light: '#dfc06a',
+          dark: '#9b824e',
+          muted: 'rgba(196, 162, 78, 0.15)',
+        },
+        dark: {
+          bg: '#06080e',
+          card: '#0f1222',
+          'card-hover': '#141830',
+          secondary: '#0b0e18',
+        },
+        text: {
+          primary: '#f0ede6',
+          secondary: '#c8c5bc',
+          muted: '#7a7870',
+        },
       },
       fontFamily: {
-        display: ['DM Serif Display', 'Georgia', 'serif'],
-        body: ['DM Sans', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
-        'fade-up': 'fadeUp 0.7s cubic-bezier(.23,1,.32,1) forwards',
-        'pulse-glow': 'pulseGlow 2s ease infinite',
+        'fade-up': 'fadeUp 0.6s ease-out forwards',
+        'fade-in': 'fadeIn 0.4s ease-out forwards',
+        'scale-in': 'scaleIn 0.3s ease-out forwards',
       },
       keyframes: {
         fadeUp: {
-          from: { opacity: '0', transform: 'translateY(28px)' },
-          to: { opacity: '1', transform: 'translateY(0)' },
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(196, 162, 78, 0.15)' },
-          '50%': { boxShadow: '0 0 40px rgba(196, 162, 78, 0.3)' },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
         },
       },
     },
