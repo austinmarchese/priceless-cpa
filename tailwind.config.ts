@@ -9,35 +9,35 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Exact colors from pricelesscpa.com
-        'bg-deep': '#06080e',
-        'bg-primary': '#0b0e18',
-        'bg-card': '#0f1222',
-        'bg-card-hover': '#141830',
-        'gold': '#c4a24e',
-        'gold-hero': '#9b824e',
-        'gold-light': '#dfc06a',
-        'gold-muted': 'rgba(196, 162, 78, 0.15)',
-        'text-white': '#f0ede6',
-        'text-light': '#c8c5bc',
-        'text-muted': '#7a7870',
+        // Full Send Inspired - Bold Dark with Electric Orange
+        'bg-deep': '#0a0a0a',
+        'bg-primary': '#111111',
+        'bg-card': '#1a1a1a',
+        'bg-card-hover': '#222222',
+        'accent': '#ff6b35',
+        'accent-hero': '#ff6b35',
+        'accent-light': '#ff8c5a',
+        'accent-muted': 'rgba(255, 107, 53, 0.12)',
+        'text-white': '#ffffff',
+        'text-light': '#b0b0b0',
+        'text-muted': '#666666',
       },
       fontFamily: {
-        display: ['DM Serif Display', 'Georgia', 'serif'],
+        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
         body: ['DM Sans', 'system-ui', 'sans-serif'],
       },
       animation: {
-        'fade-up': 'fadeUp 0.7s cubic-bezier(.23,1,.32,1) forwards',
-        'pulse-glow': 'pulseGlow 2s ease infinite',
+        'fade-up': 'fadeUp 0.5s cubic-bezier(.17,.67,.35,.96) forwards',
+        'pulse': 'pulse 2s ease-in-out infinite',
       },
       keyframes: {
         fadeUp: {
-          from: { opacity: '0', transform: 'translateY(28px)' },
+          from: { opacity: '0', transform: 'translateY(40px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
-        pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(196, 162, 78, 0.15)' },
-          '50%': { boxShadow: '0 0 40px rgba(196, 162, 78, 0.3)' },
+        pulse: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.05)' },
         },
       },
     },
