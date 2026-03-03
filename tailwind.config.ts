@@ -9,35 +9,30 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Exact colors from pricelesscpa.com
-        'bg-deep': '#06080e',
-        'bg-primary': '#0b0e18',
-        'bg-card': '#0f1222',
-        'bg-card-hover': '#141830',
-        'gold': '#c4a24e',
-        'gold-hero': '#9b824e',
-        'gold-light': '#dfc06a',
-        'gold-muted': 'rgba(196, 162, 78, 0.15)',
-        'text-white': '#f0ede6',
-        'text-light': '#c8c5bc',
-        'text-muted': '#7a7870',
+        // Moss Adams Inspired - Enterprise Navy Blue
+        'bg-deep': '#ffffff',
+        'bg-primary': '#f7f8fa',
+        'bg-card': '#ffffff',
+        'bg-card-hover': '#f0f2f5',
+        'accent': '#002F6C',
+        'accent-hero': '#002F6C',
+        'accent-light': '#1a4a8a',
+        'accent-muted': 'rgba(0, 47, 108, 0.08)',
+        'text-white': '#1a1a2e',
+        'text-light': '#4a4a5a',
+        'text-muted': '#8a8a9a',
       },
       fontFamily: {
         display: ['DM Serif Display', 'Georgia', 'serif'],
         body: ['DM Sans', 'system-ui', 'sans-serif'],
       },
       animation: {
-        'fade-up': 'fadeUp 0.7s cubic-bezier(.23,1,.32,1) forwards',
-        'pulse-glow': 'pulseGlow 2s ease infinite',
+        'fade-up': 'fadeUp 0.6s ease forwards',
       },
       keyframes: {
         fadeUp: {
-          from: { opacity: '0', transform: 'translateY(28px)' },
+          from: { opacity: '0', transform: 'translateY(20px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
-        },
-        pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(196, 162, 78, 0.15)' },
-          '50%': { boxShadow: '0 0 40px rgba(196, 162, 78, 0.3)' },
         },
       },
     },

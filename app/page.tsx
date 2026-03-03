@@ -51,9 +51,9 @@ const testimonials = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#06080e]/95 backdrop-blur-md border-b border-[#c4a24e]/10" role="navigation">
+    <main className="min-h-screen bg-white">
+      {/* Navigation - Light corporate style */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#002F6C]/10" role="navigation">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
             <Image 
@@ -64,144 +64,138 @@ export default function Home() {
               className="rounded-lg"
               priority
             />
+            <span className="font-display text-xl text-[#002F6C] hidden sm:block">Priceless CPA</span>
           </Link>
           <div className="flex items-center gap-8">
-            <Link href="/blog" className="text-[#c8c5bc] hover:text-[#c4a24e] transition text-sm font-medium hidden md:block">BLOG</Link>
+            <Link href="/blog" className="text-[#4a4a5a] hover:text-[#002F6C] transition text-sm font-medium hidden md:block">BLOG</Link>
             <div className="relative group hidden md:block">
-              <button className="text-[#c8c5bc] hover:text-[#c4a24e] transition text-sm font-medium">SERVICES</button>
-              <div className="absolute top-full left-0 mt-2 w-72 bg-[#0f1222] rounded-lg border border-[#c4a24e]/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-2xl">
+              <button className="text-[#4a4a5a] hover:text-[#002F6C] transition text-sm font-medium">SERVICES</button>
+              <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-lg border border-[#002F6C]/15 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-xl">
                 {services.map((service) => (
-                  <Link key={service.href} href={service.href} className="block px-5 py-3 text-[#c8c5bc] hover:text-[#c4a24e] hover:bg-[#141830] transition text-sm first:rounded-t-lg last:rounded-b-lg">
+                  <Link key={service.href} href={service.href} className="block px-5 py-3 text-[#4a4a5a] hover:text-[#002F6C] hover:bg-[#f7f8fa] transition text-sm first:rounded-t-lg last:rounded-b-lg">
                     {service.title}
                   </Link>
                 ))}
               </div>
             </div>
-            <Link href="/s-corp-vs-llc" className="text-[#c8c5bc] hover:text-[#c4a24e] transition text-sm font-medium hidden md:block">S-CORP VS. LLC</Link>
-            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="bg-[#c4a24e] text-[#06080e] px-6 py-2.5 rounded-lg font-semibold hover:bg-[#dfc06a] transition text-sm">
-              Book a Call
+            <Link href="/s-corp-vs-llc" className="text-[#4a4a5a] hover:text-[#002F6C] transition text-sm font-medium hidden md:block">S-CORP VS. LLC</Link>
+            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="bg-[#002F6C] text-white px-6 py-2.5 rounded font-semibold hover:bg-[#1a4a8a] transition text-sm">
+              Schedule Consultation
             </a>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section with Video Background */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <video 
-          autoPlay muted loop playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          poster="https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1.webp"
-        >
-          <source src="https://pricelesscpa.com/wp-content/uploads/2024/05/7247822-hd_1920_1080_30fps.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-[#06080e]/60"></div>
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl mb-8 leading-tight tracking-tight">
-            <span className="text-[#9b824e]">Financial solutions</span>
-            <br />
-            <span className="text-white">To scale your business</span>
-            <br />
-            <span className="text-white">Legally & organically</span>
+      {/* Hero Section - Corporate Light with Subtle Image */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#f7f8fa] to-white">
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23002F6C\" fill-opacity=\"0.15\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+        </div>
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-20">
+          <p className="text-[#002F6C] text-sm font-semibold uppercase tracking-wider mb-6">Trusted Financial Partners</p>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl mb-8 leading-tight text-[#1a1a2e]">
+            Expert Financial Guidance<br />
+            <span className="text-[#002F6C]">For Growing Businesses</span>
           </h1>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="bg-[#c4a24e] text-[#06080e] px-10 py-4 rounded-lg font-semibold hover:bg-[#dfc06a] transition text-lg">
-              Book a Call
+          <p className="text-[#4a4a5a] text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+            We provide comprehensive accounting, tax strategy, and business advisory services to help you scale with confidence and clarity.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="bg-[#002F6C] text-white px-10 py-4 rounded font-semibold hover:bg-[#1a4a8a] transition text-lg shadow-lg hover:shadow-xl">
+              Schedule a Consultation
             </a>
-            <a href="https://wa.me/13057078959" target="_blank" rel="noopener noreferrer" className="border-2 border-[#c4a24e] text-[#c4a24e] px-10 py-4 rounded-lg font-semibold hover:bg-[#c4a24e] hover:text-[#06080e] transition text-lg">
-              Chat with me
+            <a href="https://wa.me/13057078959" target="_blank" rel="noopener noreferrer" className="border-2 border-[#002F6C] text-[#002F6C] px-10 py-4 rounded font-semibold hover:bg-[#002F6C] hover:text-white transition text-lg">
+              Contact Us
             </a>
           </div>
         </div>
       </section>
 
-      {/* Why Work With Us */}
-      <section className="py-24 px-6 bg-[#0b0e18]">
+      {/* Why Work With Us - Clean corporate cards */}
+      <section className="py-24 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-4 justify-center mb-6">
-            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
-            <h2 className="font-display text-3xl md:text-4xl text-[#c4a24e] whitespace-nowrap">Why work with us?</h2>
-            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
+          <div className="text-center mb-16">
+            <p className="text-[#002F6C] text-sm font-semibold uppercase tracking-wider mb-4">Our Commitment</p>
+            <h2 className="font-display text-3xl md:text-4xl text-[#1a1a2e]">Why Clients Trust Us</h2>
           </div>
-          <p className="text-[#c8c5bc] text-center max-w-3xl mx-auto mb-16 text-lg leading-relaxed">
+          <p className="text-[#4a4a5a] text-center max-w-3xl mx-auto mb-16 text-lg leading-relaxed">
             We provide successful entrepreneurs value-driven accounting solutions to minimize lifetime taxes, optimize business decisions with data, while saving time and money on their accounting and operational costs.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {valueProps.map((prop, i) => (
-              <div key={i} className="text-center group">
-                <div className="w-20 h-20 mx-auto mb-4">
-                  <Image src={prop.icon} alt={prop.title} width={80} height={80} className="transition group-hover:scale-110" />
+              <div key={i} className="text-center group p-6 rounded-lg hover:bg-[#f7f8fa] transition">
+                <div className="w-16 h-16 mx-auto mb-4">
+                  <Image src={prop.icon} alt={prop.title} width={64} height={64} className="transition group-hover:scale-110" />
                 </div>
-                <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent mb-4"></div>
-                <p className="text-[#f0ede6] text-sm font-medium leading-relaxed">{prop.title}</p>
+                <div className="h-px bg-[#002F6C]/15 mb-4"></div>
+                <p className="text-[#1a1a2e] text-sm font-medium leading-relaxed">{prop.title}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-24 px-6 bg-[#06080e]">
+      {/* Team Section - Professional headshots with navy overlay */}
+      <section className="py-24 px-6 bg-[#f7f8fa]">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-4 justify-center mb-12">
-            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
-            <h2 className="font-display text-3xl md:text-4xl text-[#c4a24e] whitespace-nowrap">Who WE ARE?</h2>
-            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
+          <div className="text-center mb-16">
+            <p className="text-[#002F6C] text-sm font-semibold uppercase tracking-wider mb-4">Our Team</p>
+            <h2 className="font-display text-3xl md:text-4xl text-[#1a1a2e]">Meet Our Professionals</h2>
           </div>
           <div className="flex flex-wrap justify-center gap-8 mt-12">
             {team.map((member, i) => (
               <div key={i} className={`text-center group ${member.featured ? 'order-first lg:order-none' : ''}`}>
-                <div className={`relative mx-auto mb-4 rounded-full overflow-hidden border-2 transition ${member.featured ? 'w-40 h-40 border-[#c4a24e]' : 'w-32 h-32 border-[#c4a24e]/20 group-hover:border-[#c4a24e]'}`}>
+                <div className={`relative mx-auto mb-4 rounded-lg overflow-hidden border-2 transition shadow-lg ${member.featured ? 'w-40 h-40 border-[#002F6C]' : 'w-32 h-32 border-[#002F6C]/20 group-hover:border-[#002F6C]'}`}>
                   <Image src={member.image} alt={member.name} fill className="object-cover" sizes="160px" />
                 </div>
-                <h3 className="text-[#f0ede6] font-semibold">{member.name}</h3>
-                <p className="text-[#c4a24e] text-sm">{member.role}</p>
+                <h3 className="text-[#1a1a2e] font-semibold">{member.name}</h3>
+                <p className="text-[#002F6C] text-sm">{member.role}</p>
               </div>
             ))}
           </div>
           
-          {/* CTA Box */}
-          <div className="mt-20 bg-[#0f1222] rounded-2xl p-10 md:p-14 border border-[#c4a24e]/20 text-center max-w-2xl mx-auto">
+          {/* CTA Box - Navy background */}
+          <div className="mt-20 bg-[#002F6C] rounded-lg p-10 md:p-14 text-center max-w-2xl mx-auto shadow-xl">
             <Image 
               src="https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo2.webp" 
               alt="Priceless CPA Logo" 
-              width={100} 
-              height={100}
-              className="mx-auto mb-8 rounded-xl"
+              width={80} 
+              height={80}
+              className="mx-auto mb-8 rounded-xl bg-white p-2"
             />
-            <h3 className="font-display text-2xl md:text-3xl text-[#f0ede6] mb-4">
-              Schedule your tax<br />Analysis for free
+            <h3 className="font-display text-2xl md:text-3xl text-white mb-4">
+              Schedule Your Complimentary<br />Tax Analysis
             </h3>
-            <p className="text-[#c8c5bc] mb-8">Let&apos;s build an accurate strategy to optimize your money income</p>
-            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="bg-[#c4a24e] text-[#06080e] px-10 py-4 rounded-lg font-semibold hover:bg-[#dfc06a] transition text-lg inline-block">
-              Book a Call
+            <p className="text-white/80 mb-8">Let our experts develop a comprehensive strategy tailored to your business needs</p>
+            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="bg-white text-[#002F6C] px-10 py-4 rounded font-semibold hover:bg-[#f7f8fa] transition text-lg inline-block">
+              Request Consultation
             </a>
           </div>
         </div>
       </section>
 
       {/* CPA Standard Statement */}
-      <section className="py-12 px-6 bg-[#0b0e18]">
+      <section className="py-12 px-6 bg-white border-y border-[#002F6C]/10">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-[#c8c5bc] text-lg italic leading-relaxed">
-            Priceless has a commitment to always provide the highest CPA standard, of empowering the client with accurate information and circumstantial advice
+          <p className="text-[#4a4a5a] text-lg italic leading-relaxed">
+            &ldquo;Priceless has a commitment to always provide the highest CPA standard, of empowering the client with accurate information and circumstantial advice.&rdquo;
           </p>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-24 px-6 bg-[#06080e]">
+      {/* Services Section - Clean cards with subtle shadows */}
+      <section className="py-24 px-6 bg-[#f7f8fa]">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-4 justify-center mb-12">
-            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
-            <h2 className="font-display text-3xl md:text-4xl text-[#c4a24e] whitespace-nowrap">Our Services</h2>
-            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
+          <div className="text-center mb-16">
+            <p className="text-[#002F6C] text-sm font-semibold uppercase tracking-wider mb-4">What We Offer</p>
+            <h2 className="font-display text-3xl md:text-4xl text-[#1a1a2e]">Our Services</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map((service, i) => (
               <Link 
                 key={i} 
                 href={service.href} 
-                className="relative rounded-xl h-64 flex items-end p-8 group overflow-hidden"
+                className="relative rounded-lg h-64 flex items-end p-8 group overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
               >
                 <div className="absolute inset-0">
                   <Image 
@@ -211,11 +205,11 @@ export default function Home() {
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#06080e]/85 to-[#06080e]/30 group-hover:from-[#06080e]/75 group-hover:to-[#06080e]/20 transition-all"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#002F6C]/90 to-[#002F6C]/30 group-hover:from-[#002F6C]/80 group-hover:to-[#002F6C]/20 transition-all"></div>
                 </div>
                 <div className="relative z-10">
-                  <h3 className="font-display text-2xl text-white group-hover:text-[#c4a24e] transition">{service.title}</h3>
-                  <p className="text-[#c8c5bc] mt-2 group-hover:text-white transition">Learn more →</p>
+                  <h3 className="font-display text-2xl text-white">{service.title}</h3>
+                  <p className="text-white/80 mt-2 group-hover:text-white transition">Learn more →</p>
                 </div>
               </Link>
             ))}
@@ -223,44 +217,43 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24 px-6 bg-[#0b0e18]">
+      {/* Testimonials - Light cards with navy accents */}
+      <section className="py-24 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-4 justify-center mb-12">
-            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
-            <h2 className="font-display text-3xl md:text-4xl text-[#c4a24e] whitespace-nowrap">What Clients Say</h2>
-            <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent flex-1 max-w-[150px]"></div>
+          <div className="text-center mb-16">
+            <p className="text-[#002F6C] text-sm font-semibold uppercase tracking-wider mb-4">Client Success</p>
+            <h2 className="font-display text-3xl md:text-4xl text-[#1a1a2e]">What Our Clients Say</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {testimonials.map((testimonial, i) => (
-              <div key={i} className="bg-[#0f1222] border border-[#c4a24e]/10 rounded-xl p-8 relative">
-                <div className="absolute top-4 left-6 text-6xl text-[#c4a24e]/15 font-display">"</div>
-                <div className="text-[#ffc107] text-lg mb-4 tracking-wider">{'★'.repeat(testimonial.rating)}</div>
-                <p className="text-[#c8c5bc] mb-6 leading-relaxed relative z-10">{testimonial.text}</p>
-                <p className="text-[#c4a24e] font-semibold">— {testimonial.name}</p>
+              <div key={i} className="bg-[#f7f8fa] border border-[#002F6C]/10 rounded-lg p-8 relative hover:shadow-lg transition">
+                <div className="absolute top-4 left-6 text-6xl text-[#002F6C]/10 font-display">&ldquo;</div>
+                <div className="text-[#002F6C] text-lg mb-4 tracking-wider">{'★'.repeat(testimonial.rating)}</div>
+                <p className="text-[#4a4a5a] mb-6 leading-relaxed relative z-10">{testimonial.text}</p>
+                <p className="text-[#002F6C] font-semibold">— {testimonial.name}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-16 px-6 bg-[#06080e] border-t border-[#c4a24e]/10">
+      {/* Footer - Clean professional */}
+      <footer className="py-16 px-6 bg-[#002F6C]">
         <div className="max-w-6xl mx-auto text-center">
           <Image 
             src="https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1-60x60.webp" 
             alt="Priceless CPA" 
             width={60} 
             height={60}
-            className="mx-auto mb-6 rounded-lg"
+            className="mx-auto mb-6 rounded-lg bg-white p-1"
           />
-          <p className="text-[#7a7870] text-sm mb-6">© {new Date().getFullYear()} Priceless CPA. All rights reserved.</p>
+          <p className="text-white/60 text-sm mb-6">© {new Date().getFullYear()} Priceless CPA. All rights reserved.</p>
           <nav className="flex justify-center gap-8">
-            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="text-[#c4a24e] hover:text-[#dfc06a] transition text-sm">
-              Book a Call
+            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition text-sm">
+              Schedule Consultation
             </a>
-            <a href="https://wa.me/13057078959" target="_blank" rel="noopener noreferrer" className="text-[#c4a24e] hover:text-[#dfc06a] transition text-sm">
-              WhatsApp
+            <a href="https://wa.me/13057078959" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition text-sm">
+              Contact
             </a>
           </nav>
         </div>
