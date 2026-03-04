@@ -130,33 +130,31 @@ export default function Home() {
         </nav>
       </div>
 
-      {/* Hero Section - Dark style with Priceless branding */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+      {/* Hero Section - Light style with illustrated background */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image 
             src="/hero-bg.png" 
             alt="" 
             fill 
-            className="object-cover object-bottom"
+            className="object-cover object-center"
             priority
           />
-          {/* Dark overlay for text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#06080e]/90 via-[#06080e]/70 to-transparent" />
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-24">
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-[1.2] mb-8">
-            <span className="font-serif italic bg-gradient-to-r from-[#9b824e] to-[#c4a24e] bg-clip-text text-transparent">Financial </span>
-            <span className="font-sans font-semibold text-white">Solutions to Scale </span>
-            <span className="font-serif italic bg-gradient-to-r from-[#9b824e] to-[#c4a24e] bg-clip-text text-transparent">your </span>
-            <span className="font-sans font-semibold text-white">Business Legally & </span>
-            <span className="font-serif italic bg-gradient-to-r from-[#9b824e] to-[#c4a24e] bg-clip-text text-transparent">Organically</span>
+            <span className="font-serif italic text-[#9b824e]">Financial </span>
+            <span className="font-sans font-semibold text-[#0f1222]">Solutions to Scale </span>
+            <span className="font-serif italic text-[#9b824e]">your </span>
+            <span className="font-sans font-semibold text-[#0f1222]">Business Legally & </span>
+            <span className="font-serif italic text-[#9b824e]">Organically</span>
           </h1>
-          <p className="text-[#c8c5bc] text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-[#4a4a4a] text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
             Expert accounting for entrepreneurs, crypto investors, and growing businesses. We transform your messy finances into clean books and confident decisions.
           </p>
-          <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#c4a24e] text-[#06080e] px-8 py-4 rounded-full text-lg font-medium hover:bg-[#dfc06a] transition shadow-lg shadow-[#c4a24e]/20">
+          <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#c4a24e] text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-[#b08f3e] transition shadow-lg">
             Talk to an expert <span>→</span>
           </a>
         </div>
