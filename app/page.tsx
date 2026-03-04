@@ -131,31 +131,16 @@ export default function Home() {
       </div>
 
       {/* Hero Section - Dark style with Priceless branding */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#06080e] to-[#0b0e18]">
-        {/* Decorative shapes */}
-        <div className="absolute left-0 bottom-0 w-48 md:w-72 h-64 md:h-96">
-          <svg viewBox="0 0 200 300" className="w-full h-full" fill="none">
-            <ellipse cx="50" cy="200" rx="120" ry="180" fill="#9b824e" opacity="0.15"/>
-            <ellipse cx="80" cy="220" rx="80" ry="120" fill="#c4a24e" opacity="0.1"/>
-          </svg>
-        </div>
-        <div className="absolute right-0 bottom-0 w-48 md:w-80 h-64 md:h-[500px]">
-          <svg viewBox="0 0 250 400" className="w-full h-full" fill="none">
-            <ellipse cx="200" cy="280" rx="140" ry="200" fill="#9b824e" opacity="0.15"/>
-            <ellipse cx="180" cy="300" rx="100" ry="150" fill="#c4a24e" opacity="0.1"/>
-            <path d="M150,100 Q200,150 180,250" stroke="#c4a24e" strokeWidth="2" fill="none" opacity="0.3"/>
-            <path d="M170,80 Q220,130 200,230" stroke="#c4a24e" strokeWidth="2" fill="none" opacity="0.2"/>
-          </svg>
-        </div>
-        <div className="absolute left-[10%] top-[20%] w-24 md:w-32 h-32 md:h-44 opacity-20">
-          <svg viewBox="0 0 100 150" className="w-full h-full" fill="none">
-            <ellipse cx="50" cy="100" rx="45" ry="70" fill="#c4a24e"/>
-          </svg>
-        </div>
-        <div className="absolute right-[15%] top-[15%] w-16 md:w-24 h-24 md:h-36 opacity-15">
-          <svg viewBox="0 0 80 120" className="w-full h-full" fill="none">
-            <ellipse cx="40" cy="70" rx="35" ry="55" fill="#9b824e"/>
-          </svg>
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image 
+            src="/hero-bg.png" 
+            alt="" 
+            fill 
+            className="object-cover object-bottom"
+            priority
+          />
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-24">
