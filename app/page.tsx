@@ -141,6 +141,8 @@ export default function Home() {
             className="object-cover object-bottom"
             priority
           />
+          {/* Dark overlay for text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#06080e]/90 via-[#06080e]/70 to-transparent" />
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-24">
