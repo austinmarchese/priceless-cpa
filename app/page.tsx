@@ -358,9 +358,9 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 md:gap-16">
             {/* Pain Points */}
-            <div>
-              <h3 className="text-xl md:text-2xl font-semibold text-[#1a3a2f] mb-8">Founder&apos;s frustrations</h3>
-              <div className="space-y-4">
+            <div className="flex flex-col items-center">
+              <h3 className="text-xl md:text-2xl font-semibold text-[#1a3a2f] mb-8 text-center">Founder&apos;s frustrations</h3>
+              <div className="space-y-4 w-full max-w-sm">
                 {painPoints.map((point, i) => (
                   <div key={i} className="flex items-center gap-4 group">
                     <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
@@ -373,9 +373,9 @@ export default function Home() {
             </div>
             
             {/* Solutions */}
-            <div>
-              <h3 className="text-xl md:text-2xl font-semibold text-[#1a3a2f] mb-8">The Priceless Solution</h3>
-              <div className="space-y-4">
+            <div className="flex flex-col items-center">
+              <h3 className="text-xl md:text-2xl font-semibold text-[#1a3a2f] mb-8 text-center">The Priceless Solution</h3>
+              <div className="space-y-4 w-full max-w-sm">
                 {solutions.map((solution, i) => (
                   <div key={i} className="flex items-center gap-4 group">
                     <div className="w-8 h-8 rounded-full bg-[#9b824e]/10 flex items-center justify-center flex-shrink-0">
