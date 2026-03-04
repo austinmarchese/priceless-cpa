@@ -131,7 +131,7 @@ export default function Home() {
       </div>
 
       {/* Hero Section - Light style with illustrated background */}
-      <section className="relative min-h-[120vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image 
