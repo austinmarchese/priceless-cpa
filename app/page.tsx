@@ -320,13 +320,27 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Say Goodbye Section */}
+      <section className="py-20 px-6 bg-[#e8e4d9]">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-[#1a3a2f] leading-tight">
+              Say goodbye to your financial headaches
+            </h2>
+            <p className="text-[#4a4a4a] text-lg leading-relaxed md:pt-4">
+              Feeling overwhelmed? Solving unique and complex problems can be hard for some accounting solutions. Priceless handles yours with strategy, accuracy, and automation, ensuring you always have an answer for the toughest question or scenario.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Pain Points vs Solutions */}
-      <section className="py-20 px-6 bg-[#faf8f5]">
+      <section className="py-20 px-6 bg-[#e8e4d9]">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 md:gap-16">
             {/* Pain Points */}
             <div>
-              <h3 className="text-xs uppercase tracking-widest text-[#7a7a7a] mb-8 font-medium">Founder&apos;s frustrations</h3>
+              <h3 className="text-xl md:text-2xl font-semibold text-[#1a3a2f] mb-8">Founder&apos;s frustrations</h3>
               <div className="space-y-4">
                 {painPoints.map((point, i) => (
                   <div key={i} className="flex items-center gap-4 group">
@@ -341,7 +355,7 @@ export default function Home() {
             
             {/* Solutions */}
             <div>
-              <h3 className="text-xs uppercase tracking-widest text-[#7a7a7a] mb-8 font-medium">The Priceless Solution</h3>
+              <h3 className="text-xl md:text-2xl font-semibold text-[#1a3a2f] mb-8">The Priceless Solution</h3>
               <div className="space-y-4">
                 {solutions.map((solution, i) => (
                   <div key={i} className="flex items-center gap-4 group">
