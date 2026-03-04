@@ -249,9 +249,9 @@ export default function Home() {
               <div className={`flex-1 flex ${activeCard === 0 ? 'flex-row items-center' : 'flex-col justify-center'} gap-6`}>
                 {/* Left: Details (shows when active) */}
                 <div className={`flex-1 transition-all duration-500 ${activeCard === 0 ? 'opacity-100' : 'opacity-0 hidden'}`}>
-                  <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Our Secret Sauce</p>
+                  <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Long-Term Relationships</p>
                   <p className="text-[#4a4a4a] text-base leading-relaxed">
-                    Software works for you, but people work WITH you. We combine both for a full-service, hands-on experience. We&apos;re the trusted finance partner you need.
+                    We&apos;re not just accountants — we&apos;re your dedicated financial partners. Responsive communication and relationships built to last through every stage of your business.
                   </p>
                 </div>
                 
@@ -286,9 +286,9 @@ export default function Home() {
               <div className={`flex-1 flex ${activeCard === 1 ? 'flex-row items-center' : 'flex-col justify-center'} gap-6`}>
                 {/* Left: Details (shows when active) */}
                 <div className={`flex-1 transition-all duration-500 ${activeCard === 1 ? 'opacity-100' : 'opacity-0 hidden'}`}>
-                  <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Our Roadmap to Success</p>
+                  <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Comprehensive & Tailored</p>
                   <p className="text-[#4a4a4a] text-base leading-relaxed">
-                    We&apos;ve created streamlined processes that adapt to your unique business needs. From onboarding to ongoing support, our systems ensure efficiency, accuracy, and scalability.
+                    Full-service accounting paired with tailored tax advice. From bookkeeping to strategic planning, we customize our approach to fit your unique business needs.
                   </p>
                 </div>
                 
@@ -323,9 +323,9 @@ export default function Home() {
               <div className={`flex-1 flex ${activeCard === 2 ? 'flex-row items-center' : 'flex-col justify-center'} gap-6`}>
                 {/* Left: Details (shows when active) */}
                 <div className={`flex-1 transition-all duration-500 ${activeCard === 2 ? 'opacity-100' : 'opacity-0 hidden'}`}>
-                  <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Cutting-Edge Tools</p>
+                  <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Ethical & Confidential</p>
                   <p className="text-[#4a4a4a] text-base leading-relaxed">
-                    We leverage the latest accounting software and automation tools to give you real-time insights, reduce errors, and save you time on manual tasks.
+                    Modern tools backed by bank-level security. Your financial data stays protected with encrypted systems and strict confidentiality standards.
                   </p>
                 </div>
                 
