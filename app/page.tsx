@@ -223,7 +223,47 @@ export default function Home() {
       {/* People, Process, Tech - Auto-Rotating Cards */}
       <section className="py-20 px-6 bg-[#0f1222]">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row gap-4 h-[400px]">
+          {/* Mobile: Stacked expanded cards */}
+          <div className="flex flex-col gap-6 md:hidden">
+            {/* People Card - Mobile */}
+            <div className="bg-white rounded-2xl p-8">
+              <h3 className="text-3xl font-serif italic text-[#0f1222] mb-4">People</h3>
+              <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Long-Term Relationships</p>
+              <p className="text-[#4a4a4a] text-base leading-relaxed mb-6">
+                We&apos;re not just accountants — we&apos;re your dedicated financial partners. Responsive communication and relationships built to last through every stage of your business.
+              </p>
+              <div className="flex justify-center">
+                <Image src="/illustrations/people.png" alt="People" width={200} height={250} className="w-48 h-60 object-contain" />
+              </div>
+            </div>
+
+            {/* Process Card - Mobile */}
+            <div className="bg-white rounded-2xl p-8">
+              <h3 className="text-3xl font-serif italic text-[#0f1222] mb-4">Process</h3>
+              <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Comprehensive & Tailored</p>
+              <p className="text-[#4a4a4a] text-base leading-relaxed mb-6">
+                Full-service accounting paired with tailored tax advice. From bookkeeping to strategic planning, we customize our approach to fit your unique business needs.
+              </p>
+              <div className="flex justify-center">
+                <Image src="/illustrations/process.png" alt="Process" width={200} height={200} className="w-48 h-48 object-contain" />
+              </div>
+            </div>
+
+            {/* Tech Card - Mobile */}
+            <div className="bg-white rounded-2xl p-8">
+              <h3 className="text-3xl font-serif italic text-[#0f1222] mb-4">Tech</h3>
+              <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Ethical & Confidential</p>
+              <p className="text-[#4a4a4a] text-base leading-relaxed mb-6">
+                Modern tools backed by bank-level security. Your financial data stays protected with encrypted systems and strict confidentiality standards.
+              </p>
+              <div className="flex justify-center">
+                <Image src="/illustrations/tech.png" alt="Tech" width={180} height={200} className="w-44 h-48 object-contain" />
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop: Expanding cards with animation */}
+          <div className="hidden md:flex flex-row gap-4 h-[400px]">
             {/* People Card */}
             <div 
               onClick={() => handleCardClick(0)}
@@ -232,26 +272,19 @@ export default function Home() {
               <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-[#0f1222] mb-6">People</h3>
               
               <div className={`flex-1 flex ${activeCard === 0 ? 'flex-row items-center' : 'flex-col justify-center'} gap-6`}>
-                {/* Left: Details (shows when active) */}
                 <div className={`flex-1 transition-all duration-500 ${activeCard === 0 ? 'opacity-100' : 'opacity-0 hidden'}`}>
                   <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Long-Term Relationships</p>
                   <p className="text-[#4a4a4a] text-base leading-relaxed">
                     We&apos;re not just accountants — we&apos;re your dedicated financial partners. Responsive communication and relationships built to last through every stage of your business.
                   </p>
                 </div>
-                
-                {/* Right: Illustration */}
                 <div className={`flex justify-center ${activeCard === 0 ? 'flex-1' : ''}`}>
                   <Image src="/illustrations/people.png" alt="People" width={240} height={300} className="w-60 h-72 object-contain" />
                 </div>
               </div>
               
-              {/* Bottom progress bar */}
               <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#e8e4dc]">
-                <div 
-                  className="h-full bg-[#0f1222] transition-all duration-100"
-                  style={{ width: activeCard === 0 ? `${progress}%` : '0%' }}
-                />
+                <div className="h-full bg-[#0f1222] transition-all duration-100" style={{ width: activeCard === 0 ? `${progress}%` : '0%' }} />
               </div>
             </div>
 
@@ -263,26 +296,19 @@ export default function Home() {
               <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-[#0f1222] mb-6">Process</h3>
               
               <div className={`flex-1 flex ${activeCard === 1 ? 'flex-row items-center' : 'flex-col justify-center'} gap-6`}>
-                {/* Left: Details (shows when active) */}
                 <div className={`flex-1 transition-all duration-500 ${activeCard === 1 ? 'opacity-100' : 'opacity-0 hidden'}`}>
                   <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Comprehensive & Tailored</p>
                   <p className="text-[#4a4a4a] text-base leading-relaxed">
                     Full-service accounting paired with tailored tax advice. From bookkeeping to strategic planning, we customize our approach to fit your unique business needs.
                   </p>
                 </div>
-                
-                {/* Right: Illustration */}
                 <div className={`flex justify-center ${activeCard === 1 ? 'flex-1' : ''}`}>
                   <Image src="/illustrations/process.png" alt="Process" width={280} height={260} className="w-60 h-56 object-contain" />
                 </div>
               </div>
               
-              {/* Bottom progress bar */}
               <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#e8e4dc]">
-                <div 
-                  className="h-full bg-[#0f1222] transition-all duration-100"
-                  style={{ width: activeCard === 1 ? `${progress}%` : '0%' }}
-                />
+                <div className="h-full bg-[#0f1222] transition-all duration-100" style={{ width: activeCard === 1 ? `${progress}%` : '0%' }} />
               </div>
             </div>
 
@@ -294,26 +320,19 @@ export default function Home() {
               <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-[#0f1222] mb-6">Tech</h3>
               
               <div className={`flex-1 flex ${activeCard === 2 ? 'flex-row items-center' : 'flex-col justify-center'} gap-6`}>
-                {/* Left: Details (shows when active) */}
                 <div className={`flex-1 transition-all duration-500 ${activeCard === 2 ? 'opacity-100' : 'opacity-0 hidden'}`}>
                   <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Ethical & Confidential</p>
                   <p className="text-[#4a4a4a] text-base leading-relaxed">
                     Modern tools backed by bank-level security. Your financial data stays protected with encrypted systems and strict confidentiality standards.
                   </p>
                 </div>
-                
-                {/* Right: Illustration */}
                 <div className={`flex justify-center ${activeCard === 2 ? 'flex-1' : ''}`}>
                   <Image src="/illustrations/tech.png" alt="Tech" width={220} height={240} className="w-56 h-60 object-contain" />
                 </div>
               </div>
               
-              {/* Bottom progress bar */}
               <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#e8e4dc]">
-                <div 
-                  className="h-full bg-[#0f1222] transition-all duration-100"
-                  style={{ width: activeCard === 2 ? `${progress}%` : '0%' }}
-                />
+                <div className="h-full bg-[#0f1222] transition-all duration-100" style={{ width: activeCard === 2 ? `${progress}%` : '0%' }} />
               </div>
             </div>
           </div>
