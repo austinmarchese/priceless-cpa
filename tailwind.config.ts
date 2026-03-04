@@ -24,6 +24,15 @@ const config: Config = {
         '6xl': ['3.75rem', { lineHeight: '1.05', letterSpacing: '-0.04em', fontWeight: '700' }],
         '7xl': ['4.5rem', { lineHeight: '1.05', letterSpacing: '-0.04em', fontWeight: '700' }],
       },
+      keyframes: {
+        progress: {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' },
+        },
+      },
+      animation: {
+        progress: 'progress 5s linear forwards',
+      },
     },
   },
   plugins: [],

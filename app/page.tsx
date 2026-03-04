@@ -72,26 +72,21 @@ const team = [
 
 export default function Home() {
   const [activeCard, setActiveCard] = useState(0)
-  const [progress, setProgress] = useState(0)
+  const [progressKey, setProgressKey] = useState(0)
   
   // Auto-rotate cards every 5 seconds
   useEffect(() => {
-    const progressInterval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          setActiveCard(current => (current + 1) % 3)
-          return 0
-        }
-        return prev + 2 // 2% every 100ms = 5 seconds total
-      })
-    }, 100)
+    const rotateInterval = setInterval(() => {
+      setActiveCard(current => (current + 1) % 3)
+      setProgressKey(prev => prev + 1)
+    }, 5000)
     
-    return () => clearInterval(progressInterval)
+    return () => clearInterval(rotateInterval)
   }, [])
   
   const handleCardClick = (index: number) => {
     setActiveCard(index)
-    setProgress(0)
+    setProgressKey(prev => prev + 1)
   }
   
   return (
@@ -284,7 +279,7 @@ export default function Home() {
               </div>
               
               <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#e8e4dc]">
-                <div className="h-full bg-[#0f1222] transition-all duration-100" style={{ width: activeCard === 0 ? `${progress}%` : '0%' }} />
+                <div key={activeCard === 0 ? progressKey : 'inactive-0'} className={`h-full bg-[#0f1222] ${activeCard === 0 ? 'animate-progress' : 'w-0'}`} />
               </div>
             </div>
 
@@ -308,7 +303,7 @@ export default function Home() {
               </div>
               
               <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#e8e4dc]">
-                <div className="h-full bg-[#0f1222] transition-all duration-100" style={{ width: activeCard === 1 ? `${progress}%` : '0%' }} />
+                <div key={activeCard === 1 ? progressKey : 'inactive-1'} className={`h-full bg-[#0f1222] ${activeCard === 1 ? 'animate-progress' : 'w-0'}`} />
               </div>
             </div>
 
@@ -332,7 +327,7 @@ export default function Home() {
               </div>
               
               <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#e8e4dc]">
-                <div className="h-full bg-[#0f1222] transition-all duration-100" style={{ width: activeCard === 2 ? `${progress}%` : '0%' }} />
+                <div key={activeCard === 2 ? progressKey : 'inactive-2'} className={`h-full bg-[#0f1222] ${activeCard === 2 ? 'animate-progress' : 'w-0'}`} />
               </div>
             </div>
           </div>
