@@ -2,250 +2,514 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
 
-// Using actual icons from pricelesscpa.com
-const valueProps = [
-  { icon: 'https://pricelesscpa.com/wp-content/uploads/2025/07/Priceless_CPA_Icon1.webp', title: 'Comprehensive accounting services' },
-  { icon: 'https://pricelesscpa.com/wp-content/uploads/2025/07/Priceless_CPA_Icon2.webp', title: 'Tailored tax advice' },
-  { icon: 'https://pricelesscpa.com/wp-content/uploads/2025/07/Priceless_CPA_Icon3.webp', title: 'Long term relationships' },
-  { icon: 'https://pricelesscpa.com/wp-content/uploads/2025/07/Priceless_CPA_Icon4.webp', title: 'Responsive communication' },
-  { icon: 'https://pricelesscpa.com/wp-content/uploads/2025/07/Priceless_CPA_Icon5.webp', title: 'Ethical and confidential' },
+const painPoints = [
+  '"Where\'d all my money go?"',
+  '"I need help with crypto taxes!"',
+  '"Another surprise tax bill?!"',
+  '"Spreadsheets everywhere."',
+  '"I\'m not a numbers person."',
+  '"Tax season stress again?"',
+  '"Doing this alone is exhausting."',
+  '"My books are a mess!"',
 ]
 
-const team = [
-  { name: 'Jeffrey Carpenter', role: 'Senior Accountant', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/Jeff-300x300.webp' },
-  { name: 'Billy Henriquez', role: 'CPA & Senior Accountant', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/IMG_8824-2-300x295.png' },
-  { name: 'Anthony Price', role: 'CEO & Founder, CPA', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/Anthony-300x300.webp', featured: true },
-  { name: 'Matthew Deepe', role: 'Tax Director, Licensed CPA', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/Matt-300x300.webp' },
-  { name: 'Natalia Shanko', role: 'Accounting Manager', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/Natalie-300x300.webp' },
+const solutions = [
+  'Clear financial visibility',
+  'Expert crypto & DeFi accounting',
+  'Proactive tax planning',
+  'Streamlined, organized systems',
+  'Simple, jargon-free guidance',
+  'Year-round tax strategy',
+  'Your dedicated finance team',
+  'Clean, accurate bookkeeping',
 ]
 
 const services = [
   { 
     title: 'Crypto Accounting & Advising', 
+    description: 'Navigate the complex world of crypto taxes with experts who understand DeFi, NFTs, and digital assets inside and out.',
     href: '/crypto-accounting',
-    image: 'https://pricelesscpa.com/wp-content/uploads/2025/07/Crypto-accounting-advising.webp'
   },
   { 
-    title: 'Tax Strategy & Mitigation Planning', 
+    title: 'Tax Strategy & Planning', 
+    description: 'Proactive tax planning that minimizes your lifetime tax burden. No surprises on tax day—just smart strategies.',
     href: '/tax-strategy',
-    image: 'https://pricelesscpa.com/wp-content/uploads/2025/07/Tax-Strategy-Mitigation-Planning.webp'
   },
   { 
-    title: 'Business Accounting Services', 
+    title: 'Business Accounting', 
+    description: 'Daily bookkeeping, monthly reporting, and financial clarity so you can make data-driven decisions.',
     href: '/business-accounting',
-    image: 'https://pricelesscpa.com/wp-content/uploads/2025/07/Business-accounting-services.webp'
   },
   { 
     title: 'Tax Preparation', 
+    description: 'Accurate, timely tax filing for individuals and businesses. We handle the complexity so you don\'t have to.',
     href: '/tax-preparation',
-    image: 'https://pricelesscpa.com/wp-content/uploads/2025/07/Tax-Preparation.webp'
   },
 ]
 
+const stats = [
+  { value: '500+', label: 'Clients served', sublabel: 'and counting' },
+  { value: '98%', label: 'Client retention', sublabel: 'they stay with us' },
+  { value: '5+ years', label: 'Average partnership', sublabel: 'we grow together' },
+]
+
 const testimonials = [
-  { name: 'Mike Grumble', rating: 5, text: 'I had the pleasure of working with Anthony as my CPA, and I couldn\'t be happier with his services. He went above and beyond to assist me in reconciling my crypto transactions and filing both my business and personal taxes. His extensive knowledge and down-to-earth, personable approach are truly one of a kind.' },
-  { name: 'Owen Focke', rating: 5, text: 'Have had the pleasure of working with Anthony for the past two years. My books and everything were an absolute mess, and I was worried nobody would be able to help clean everything up. That\'s when I met Anthony and everything changed. He made it a personal mission to clean up years of books and get everything squared away. He\'s a real superstar.' },
-  { name: 'Dianna Cochrane', rating: 5, text: 'Mr. Price is incredibly knowledgeable in his field! He is an excellent communicator and clearly explains complicated concepts. With my husband being military my taxes can be a bit tricky, and Mr. Price navigates it without a hitch. He has made tax season stress free.' },
-  { name: 'Madison Radke', rating: 5, text: 'There is no software or system that matches having real, personal help with taxes. Anthony cares about what he does and who he does it for. He\'s made our tax seasons stress-free, as he is easy to communicate with, very responsive, and exceptional at his work.' },
+  { name: 'Mike Grumble', text: 'Anthony went above and beyond to assist me in reconciling my crypto transactions. His extensive knowledge and down-to-earth approach are truly one of a kind.' },
+  { name: 'Owen Focke', text: 'My books were an absolute mess. Anthony made it a personal mission to clean up years of chaos. He\'s a real superstar.' },
+  { name: 'Dianna Cochrane', text: 'Mr. Price is incredibly knowledgeable and clearly explains complicated concepts. He has made tax season stress free.' },
+  { name: 'Madison Radke', text: 'There is no software that matches having real, personal help. Anthony is responsive, exceptional at his work, and genuinely cares.' },
+]
+
+const team = [
+  { name: 'Anthony Price', role: 'CEO & Founder, CPA', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/Anthony-300x300.webp' },
+  { name: 'Matthew Deepe', role: 'Tax Director, CPA', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/Matt-300x300.webp' },
+  { name: 'Billy Henriquez', role: 'Senior Accountant, CPA', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/IMG_8824-2-300x295.png' },
+  { name: 'Jeffrey Carpenter', role: 'Senior Accountant', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/Jeff-300x300.webp' },
+  { name: 'Natalia Shanko', role: 'Accounting Manager', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/Natalie-300x300.webp' },
 ]
 
 export default function Home() {
+  const [activeCard, setActiveCard] = useState(0)
+  const [progress, setProgress] = useState(0)
+  
+  // Auto-rotate cards every 5 seconds
+  useEffect(() => {
+    const progressInterval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) {
+          setActiveCard(current => (current + 1) % 3)
+          return 0
+        }
+        return prev + 2 // 2% every 100ms = 5 seconds total
+      })
+    }, 100)
+    
+    return () => clearInterval(progressInterval)
+  }, [])
+  
+  const handleCardClick = (index: number) => {
+    setActiveCard(index)
+    setProgress(0)
+  }
+  
   return (
     <main className="min-h-screen">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#06080e]/95 backdrop-blur-md border-b border-[#c4a24e]/10" role="navigation">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
+      {/* Navigation - Floating pill style */}
+      <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
+        <nav className="max-w-6xl mx-auto bg-[#0f1222]/90 backdrop-blur-md rounded-full border border-[#c4a24e]/10 px-6 py-3 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
             <Image 
               src="https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1-60x60.webp" 
               alt="Priceless CPA" 
-              width={50} 
-              height={50}
+              width={40} 
+              height={40}
               className="rounded-lg"
               priority
             />
+            <span className="text-white font-semibold text-lg hidden sm:block">Priceless</span>
           </Link>
-          <div className="flex items-center gap-8">
-            <Link href="/blog" className="text-[#c8c5bc] hover:text-[#c4a24e] transition text-sm font-medium hidden md:block">BLOG</Link>
+          <div className="flex items-center gap-1 md:gap-6">
             <div className="relative group hidden md:block">
-              <button className="text-[#c8c5bc] hover:text-[#c4a24e] transition text-sm font-medium">SERVICES</button>
-              <div className="absolute top-full left-0 mt-2 w-72 bg-[#0f1222] rounded-lg border border-[#c4a24e]/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-2xl">
+              <button className="text-[#c8c5bc] hover:text-[#c4a24e] transition text-sm px-3 py-2">Our Services</button>
+              <div className="absolute top-full left-0 mt-2 w-64 bg-[#0f1222] rounded-2xl border border-[#c4a24e]/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-xl p-2">
                 {services.map((service) => (
-                  <Link key={service.href} href={service.href} className="block px-5 py-3 text-[#c8c5bc] hover:text-[#c4a24e] hover:bg-[#141830] transition text-sm first:rounded-t-lg last:rounded-b-lg">
+                  <Link key={service.href} href={service.href} className="block px-4 py-3 text-[#c8c5bc] hover:text-[#c4a24e] hover:bg-[#141830] rounded-xl transition text-sm">
                     {service.title}
                   </Link>
                 ))}
               </div>
             </div>
-            <Link href="/s-corp-vs-llc" className="text-[#c8c5bc] hover:text-[#c4a24e] transition text-sm font-medium hidden md:block">S-CORP VS. LLC</Link>
-            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="btn-primary text-sm">
-              Book a Call
+            <Link href="/s-corp-vs-llc" className="text-[#c8c5bc] hover:text-[#c4a24e] transition text-sm px-3 py-2 hidden md:block">S-Corp vs LLC</Link>
+            <Link href="/blog" className="text-[#c8c5bc] hover:text-[#c4a24e] transition text-sm px-3 py-2 hidden md:block">Resources</Link>
+            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="bg-[#c4a24e] text-[#06080e] px-5 py-2.5 rounded-full text-sm font-medium hover:bg-[#dfc06a] transition flex items-center gap-2">
+              Get Started <span>→</span>
             </a>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
 
-      {/* Hero Section with Video Background */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <video 
-          autoPlay muted loop playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          poster="https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1.webp"
-        >
-          <source src="https://pricelesscpa.com/wp-content/uploads/2024/05/7247822-hd_1920_1080_30fps.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-[#06080e]/60"></div>
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto animate-fade-up">
-          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl mb-8 leading-tight tracking-tight">
-            <span className="text-[#9b824e]">Financial solutions</span>
-            <br />
-            <span className="text-white">To scale your business</span>
-            <br />
-            <span className="text-white">Legally & organically</span>
+      {/* Hero Section - Dark style with Priceless branding */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#06080e] to-[#0b0e18]">
+        {/* Decorative shapes */}
+        <div className="absolute left-0 bottom-0 w-48 md:w-72 h-64 md:h-96">
+          <svg viewBox="0 0 200 300" className="w-full h-full" fill="none">
+            <ellipse cx="50" cy="200" rx="120" ry="180" fill="#9b824e" opacity="0.15"/>
+            <ellipse cx="80" cy="220" rx="80" ry="120" fill="#c4a24e" opacity="0.1"/>
+          </svg>
+        </div>
+        <div className="absolute right-0 bottom-0 w-48 md:w-80 h-64 md:h-[500px]">
+          <svg viewBox="0 0 250 400" className="w-full h-full" fill="none">
+            <ellipse cx="200" cy="280" rx="140" ry="200" fill="#9b824e" opacity="0.15"/>
+            <ellipse cx="180" cy="300" rx="100" ry="150" fill="#c4a24e" opacity="0.1"/>
+            <path d="M150,100 Q200,150 180,250" stroke="#c4a24e" strokeWidth="2" fill="none" opacity="0.3"/>
+            <path d="M170,80 Q220,130 200,230" stroke="#c4a24e" strokeWidth="2" fill="none" opacity="0.2"/>
+          </svg>
+        </div>
+        <div className="absolute left-[10%] top-[20%] w-24 md:w-32 h-32 md:h-44 opacity-20">
+          <svg viewBox="0 0 100 150" className="w-full h-full" fill="none">
+            <ellipse cx="50" cy="100" rx="45" ry="70" fill="#c4a24e"/>
+          </svg>
+        </div>
+        <div className="absolute right-[15%] top-[15%] w-16 md:w-24 h-24 md:h-36 opacity-15">
+          <svg viewBox="0 0 80 120" className="w-full h-full" fill="none">
+            <ellipse cx="40" cy="70" rx="35" ry="55" fill="#9b824e"/>
+          </svg>
+        </div>
+
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-24">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-[1.2] mb-8">
+            <span className="font-serif italic bg-gradient-to-r from-[#9b824e] to-[#c4a24e] bg-clip-text text-transparent">Financial </span>
+            <span className="font-sans font-semibold text-white">Solutions to Scale </span>
+            <span className="font-serif italic bg-gradient-to-r from-[#9b824e] to-[#c4a24e] bg-clip-text text-transparent">your </span>
+            <span className="font-sans font-semibold text-white">Business Legally & </span>
+            <span className="font-serif italic bg-gradient-to-r from-[#9b824e] to-[#c4a24e] bg-clip-text text-transparent">Organically</span>
           </h1>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="btn-primary text-lg px-10 py-4">
-              Book a Call
-            </a>
-            <a href="https://wa.me/13057078959" target="_blank" rel="noopener noreferrer" className="btn-secondary text-lg px-10 py-4">
-              Chat with me
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Work With Us */}
-      <section className="py-24 px-6 bg-[#0b0e18]">
-        <div className="max-w-6xl mx-auto">
-          <div className="section-divider">
-            <h2 className="font-display text-3xl md:text-4xl text-[#c4a24e] whitespace-nowrap">Why work with us?</h2>
-          </div>
-          <p className="text-[#c8c5bc] text-center max-w-3xl mx-auto mb-16 text-lg leading-relaxed">
-            We provide successful entrepreneurs value-driven accounting solutions to minimize lifetime taxes, optimize business decisions with data, while saving time and money on their accounting and operational costs.
+          <p className="text-[#c8c5bc] text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+            Expert accounting for entrepreneurs, crypto investors, and growing businesses. We transform your messy finances into clean books and confident decisions.
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            {valueProps.map((prop, i) => (
-              <div key={i} className="text-center group">
-                <div className="icon-container mb-4">
-                  <Image src={prop.icon} alt={prop.title} width={80} height={80} className="transition group-hover:scale-110" />
-                </div>
-                <div className="h-px bg-gradient-to-r from-transparent via-[#c4a24e]/40 to-transparent mb-4"></div>
-                <p className="text-[#f0ede6] text-sm font-medium leading-relaxed">{prop.title}</p>
-              </div>
-            ))}
-          </div>
+          <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#c4a24e] text-[#06080e] px-8 py-4 rounded-full text-lg font-medium hover:bg-[#dfc06a] transition shadow-lg shadow-[#c4a24e]/20">
+            Talk to an expert <span>→</span>
+          </a>
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-24 px-6 bg-[#06080e]">
+      {/* We Love Our Clients + Logo Marquee */}
+      <section className="py-16 px-6 bg-[#faf8f5]">
         <div className="max-w-6xl mx-auto">
-          <div className="section-divider">
-            <h2 className="font-display text-3xl md:text-4xl text-[#c4a24e] whitespace-nowrap">Who WE ARE?</h2>
-          </div>
-          <div className="flex flex-wrap justify-center gap-8 mt-12">
-            {team.map((member, i) => (
-              <div key={i} className={`text-center group ${member.featured ? 'order-first lg:order-none' : ''}`}>
-                <div className={`relative mx-auto mb-4 rounded-full overflow-hidden border-2 transition ${member.featured ? 'w-40 h-40 border-[#c4a24e]' : 'w-32 h-32 border-[#c4a24e]/20 group-hover:border-[#c4a24e]'}`}>
-                  <Image src={member.image} alt={member.name} fill className="object-cover" sizes="160px" />
-                </div>
-                <h3 className="text-[#f0ede6] font-semibold">{member.name}</h3>
-                <p className="text-[#c4a24e] text-sm">{member.role}</p>
-              </div>
-            ))}
+          {/* We love our clients */}
+          <div className="text-center mb-12">
+            <p className="text-[#9b824e] text-sm tracking-widest">
+              We <span className="inline-block">♥</span> our clients
+            </p>
           </div>
           
-          {/* CTA Box */}
-          <div className="mt-20 bg-[#0f1222] rounded-2xl p-10 md:p-14 border border-[#c4a24e]/20 text-center max-w-2xl mx-auto">
-            <Image 
-              src="https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo2.webp" 
-              alt="Priceless CPA Logo" 
-              width={100} 
-              height={100}
-              className="mx-auto mb-8 rounded-xl"
-            />
-            <h3 className="font-display text-2xl md:text-3xl text-[#f0ede6] mb-4">
-              Schedule your tax<br />Analysis for free
-            </h3>
-            <p className="text-[#c8c5bc] mb-8">Let&apos;s build an accurate strategy to optimize your money income</p>
-            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="btn-primary text-lg px-10 py-4">
-              Book a Call
-            </a>
+          {/* Logo Marquee - placeholder logos */}
+          <div className="overflow-hidden relative">
+            <div className="flex items-center gap-16 animate-marquee">
+              {[...Array(2)].map((_, setIndex) => (
+                <div key={setIndex} className="flex items-center gap-16 min-w-max">
+                  <span className="text-[#1a1a1a]/30 font-semibold text-xl">CRYPTO TRADERS</span>
+                  <span className="text-[#1a1a1a]/30 font-semibold text-xl">STARTUPS</span>
+                  <span className="text-[#1a1a1a]/30 font-semibold text-xl">E-COMMERCE</span>
+                  <span className="text-[#1a1a1a]/30 font-semibold text-xl">AGENCIES</span>
+                  <span className="text-[#1a1a1a]/30 font-semibold text-xl">CONSULTANTS</span>
+                  <span className="text-[#1a1a1a]/30 font-semibold text-xl">CREATORS</span>
+                  <span className="text-[#1a1a1a]/30 font-semibold text-xl">REAL ESTATE</span>
+                  <span className="text-[#1a1a1a]/30 font-semibold text-xl">SAAS</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CPA Standard Statement */}
-      <section className="py-12 px-6 bg-[#0b0e18]">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-[#c8c5bc] text-lg italic leading-relaxed">
-            Priceless has a commitment to always provide the highest CPA standard, of empowering the client with accurate information and circumstantial advice
-          </p>
+      {/* Magic Formula Section - Two Column Layout */}
+      <section className="py-24 px-6 bg-[#faf8f5]">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+            {/* Left - Big Heading */}
+            <div>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-[#1a1a1a] leading-[1.1]">
+                The Priceless<br />Magic Formula
+              </h2>
+            </div>
+            
+            {/* Right - Description */}
+            <div>
+              <p className="text-[#4a4a4a] text-lg mb-4">
+                We&apos;ve cracked the code to build great financial operations:
+              </p>
+              <p className="text-[#1a1a1a] text-lg font-semibold mb-6">
+                Great People + Smart Processes + Cutting-Edge Technology = Priceless
+              </p>
+              <p className="text-[#4a4a4a] mb-8">
+                Unlike traditional firms or generic software, we tailor our approach to your unique needs.
+              </p>
+              <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#0f1222] text-white px-6 py-4 rounded-full font-medium hover:bg-[#1a1a2e] transition">
+                See the Priceless Difference <span>→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* People, Process, Tech - Auto-Rotating Cards */}
+      <section className="py-20 px-6 bg-[#0f1222]">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row gap-4 h-[400px]">
+            {/* People Card */}
+            <div 
+              onClick={() => handleCardClick(0)}
+              className={`bg-white rounded-2xl p-8 relative overflow-hidden transition-all duration-700 cursor-pointer flex flex-col ${activeCard === 0 ? 'flex-[2.5]' : 'flex-1'}`}
+            >
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-[#0f1222] mb-6">People</h3>
+              
+              <div className={`flex-1 flex ${activeCard === 0 ? 'flex-row items-center' : 'flex-col justify-center'} gap-6`}>
+                {/* Left: Details (shows when active) */}
+                <div className={`flex-1 transition-all duration-500 ${activeCard === 0 ? 'opacity-100' : 'opacity-0 hidden'}`}>
+                  <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Our Secret Sauce</p>
+                  <p className="text-[#4a4a4a] text-base leading-relaxed">
+                    Software works for you, but people work WITH you. We combine both for a full-service, hands-on experience. We&apos;re the trusted finance partner you need.
+                  </p>
+                </div>
+                
+                {/* Right: Illustration */}
+                <div className={`flex justify-center ${activeCard === 0 ? 'flex-1' : ''}`}>
+                  <svg viewBox="0 0 120 150" className={`transition-all duration-500 ${activeCard === 0 ? 'w-40 h-52 rotate-6' : 'w-24 h-32'}`} fill="none">
+                    <rect x="10" y="10" width="100" height="130" rx="4" stroke="#1a1a1a" strokeWidth="2" fill="white"/>
+                    <circle cx="60" cy="45" r="18" stroke="#1a1a1a" strokeWidth="2"/>
+                    <circle cx="40" cy="80" r="14" stroke="#1a1a1a" strokeWidth="2"/>
+                    <circle cx="80" cy="80" r="14" stroke="#1a1a1a" strokeWidth="2"/>
+                    <ellipse cx="60" cy="115" rx="25" ry="12" stroke="#1a1a1a" strokeWidth="2"/>
+                  </svg>
+                </div>
+              </div>
+              
+              {/* Bottom progress bar */}
+              <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#e8e4dc]">
+                <div 
+                  className="h-full bg-[#0f1222] transition-all duration-100"
+                  style={{ width: activeCard === 0 ? `${progress}%` : '0%' }}
+                />
+              </div>
+            </div>
+
+            {/* Process Card */}
+            <div 
+              onClick={() => handleCardClick(1)}
+              className={`bg-white rounded-2xl p-8 relative overflow-hidden transition-all duration-700 cursor-pointer flex flex-col ${activeCard === 1 ? 'flex-[2.5]' : 'flex-1'}`}
+            >
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-[#0f1222] mb-6">Process</h3>
+              
+              <div className={`flex-1 flex ${activeCard === 1 ? 'flex-row items-center' : 'flex-col justify-center'} gap-6`}>
+                {/* Left: Details (shows when active) */}
+                <div className={`flex-1 transition-all duration-500 ${activeCard === 1 ? 'opacity-100' : 'opacity-0 hidden'}`}>
+                  <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Our Roadmap to Success</p>
+                  <p className="text-[#4a4a4a] text-base leading-relaxed">
+                    We&apos;ve created streamlined processes that adapt to your unique business needs. From onboarding to ongoing support, our systems ensure efficiency, accuracy, and scalability.
+                  </p>
+                </div>
+                
+                {/* Right: Illustration */}
+                <div className={`flex justify-center ${activeCard === 1 ? 'flex-1' : ''}`}>
+                  <svg viewBox="0 0 140 130" className={`transition-all duration-500 ${activeCard === 1 ? 'w-44 h-44 rotate-3' : 'w-24 h-24'}`} fill="none">
+                    <rect x="15" y="20" width="110" height="90" rx="4" stroke="#1a1a1a" strokeWidth="2" fill="white" transform="rotate(-8 70 65)"/>
+                    <path d="M35 70 Q70 35 105 70" stroke="#1a1a1a" strokeWidth="2" fill="none"/>
+                    <circle cx="45" cy="60" r="6" stroke="#1a1a1a" strokeWidth="2"/>
+                    <circle cx="95" cy="60" r="6" stroke="#1a1a1a" strokeWidth="2"/>
+                    <path d="M60 85 L80 85" stroke="#1a1a1a" strokeWidth="2"/>
+                  </svg>
+                </div>
+              </div>
+              
+              {/* Bottom progress bar */}
+              <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#e8e4dc]">
+                <div 
+                  className="h-full bg-[#0f1222] transition-all duration-100"
+                  style={{ width: activeCard === 1 ? `${progress}%` : '0%' }}
+                />
+              </div>
+            </div>
+
+            {/* Tech Card */}
+            <div 
+              onClick={() => handleCardClick(2)}
+              className={`bg-white rounded-2xl p-8 relative overflow-hidden transition-all duration-700 cursor-pointer flex flex-col ${activeCard === 2 ? 'flex-[2.5]' : 'flex-1'}`}
+            >
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-[#0f1222] mb-6">Tech</h3>
+              
+              <div className={`flex-1 flex ${activeCard === 2 ? 'flex-row items-center' : 'flex-col justify-center'} gap-6`}>
+                {/* Left: Details (shows when active) */}
+                <div className={`flex-1 transition-all duration-500 ${activeCard === 2 ? 'opacity-100' : 'opacity-0 hidden'}`}>
+                  <p className="text-[#2d5a47] text-sm font-medium tracking-wide uppercase mb-3">Cutting-Edge Tools</p>
+                  <p className="text-[#4a4a4a] text-base leading-relaxed">
+                    We leverage the latest accounting software and automation tools to give you real-time insights, reduce errors, and save you time on manual tasks.
+                  </p>
+                </div>
+                
+                {/* Right: Illustration */}
+                <div className={`flex justify-center ${activeCard === 2 ? 'flex-1' : ''}`}>
+                  <svg viewBox="0 0 100 110" className={`transition-all duration-500 ${activeCard === 2 ? 'w-36 h-40 -rotate-6' : 'w-20 h-24'}`} fill="none">
+                    <path d="M15 85 L15 40 L50 15 L85 40 L85 85 L50 110 Z" stroke="#1a1a1a" strokeWidth="2" fill="white"/>
+                    <path d="M15 40 L50 65 L85 40" stroke="#1a1a1a" strokeWidth="2"/>
+                    <path d="M50 65 L50 110" stroke="#1a1a1a" strokeWidth="2"/>
+                    <path d="M58 50 L70 62" stroke="#1a1a1a" strokeWidth="2"/>
+                    <circle cx="64" cy="56" r="3" fill="#1a1a1a"/>
+                  </svg>
+                </div>
+              </div>
+              
+              {/* Bottom progress bar */}
+              <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#e8e4dc]">
+                <div 
+                  className="h-full bg-[#0f1222] transition-all duration-100"
+                  style={{ width: activeCard === 2 ? `${progress}%` : '0%' }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pain Points vs Solutions */}
+      <section className="py-20 px-6 bg-[#faf8f5]">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16">
+            {/* Pain Points */}
+            <div>
+              <h3 className="text-xs uppercase tracking-widest text-[#7a7a7a] mb-8 font-medium">Founder&apos;s frustrations</h3>
+              <div className="space-y-4">
+                {painPoints.map((point, i) => (
+                  <div key={i} className="flex items-center gap-4 group">
+                    <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+                      <span className="text-red-500 text-sm">✕</span>
+                    </div>
+                    <p className="text-[#4a4a4a] group-hover:text-[#1a1a1a] transition">{point}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Solutions */}
+            <div>
+              <h3 className="text-xs uppercase tracking-widest text-[#7a7a7a] mb-8 font-medium">The Priceless Solution</h3>
+              <div className="space-y-4">
+                {solutions.map((solution, i) => (
+                  <div key={i} className="flex items-center gap-4 group">
+                    <div className="w-8 h-8 rounded-full bg-[#9b824e]/10 flex items-center justify-center flex-shrink-0">
+                      <span className="text-[#9b824e] text-sm">✓</span>
+                    </div>
+                    <p className="text-[#1a1a1a] group-hover:text-[#9b824e] transition">{solution}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="py-24 px-6 bg-[#06080e]">
+      <section className="py-20 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="section-divider mb-12">
-            <h2 className="font-display text-3xl md:text-4xl text-[#c4a24e] whitespace-nowrap">Our Services</h2>
+          <div className="text-center mb-16">
+            <h3 className="text-xs uppercase tracking-widest text-[#7a7a7a] mb-4 font-medium">End-to-end financial operations</h3>
+            <h2 className="text-3xl md:text-4xl font-semibold text-[#1a1a1a]">All in one place.</h2>
+            <p className="text-[#4a4a4a] mt-4 max-w-2xl mx-auto">
+              We deliver financial services that meet the unique needs of your business. Together, we&apos;ll create a solution as exceptional as your vision.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <div className="grid md:grid-cols-2 gap-6">
             {services.map((service, i) => (
               <Link 
                 key={i} 
                 href={service.href} 
-                className="service-card-bg rounded-xl h-64 flex items-end p-8 group"
-                style={{ backgroundImage: `url(${service.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                className="group bg-[#faf8f5] rounded-2xl p-8 border border-[#e8e4dc] hover:border-[#9b824e]/40 transition-all hover:shadow-lg"
               >
-                <div>
-                  <h3 className="font-display text-2xl text-white group-hover:text-[#c4a24e] transition">{service.title}</h3>
-                  <p className="text-[#c8c5bc] mt-2 group-hover:text-white transition">Learn more →</p>
-                </div>
+                <h3 className="text-xl font-semibold text-[#1a1a1a] mb-3 group-hover:text-[#9b824e] transition">{service.title}</h3>
+                <p className="text-[#4a4a4a] text-sm leading-relaxed mb-4">{service.description}</p>
+                <span className="text-[#9b824e] text-sm font-medium group-hover:underline">Learn more →</span>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24 px-6 bg-[#0b0e18]">
+      {/* Team Section */}
+      <section className="py-20 px-6 bg-[#faf8f5]">
         <div className="max-w-6xl mx-auto">
-          <div className="section-divider mb-12">
-            <h2 className="font-display text-3xl md:text-4xl text-[#c4a24e] whitespace-nowrap">What Clients Say</h2>
+          <div className="text-center mb-16">
+            <h3 className="text-xs uppercase tracking-widest text-[#7a7a7a] mb-4 font-medium">The team behind Priceless</h3>
+            <h2 className="text-3xl md:text-4xl font-semibold text-[#1a1a1a]">Real people, real expertise.</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {testimonials.map((testimonial, i) => (
-              <div key={i} className="testimonial-card">
-                <div className="star-rating text-lg mb-4">{'★'.repeat(testimonial.rating)}</div>
-                <p className="text-[#c8c5bc] mb-6 leading-relaxed relative z-10">{testimonial.text}</p>
-                <p className="text-[#c4a24e] font-semibold">— {testimonial.name}</p>
+          
+          <div className="flex flex-wrap justify-center gap-10">
+            {team.map((member, i) => (
+              <div key={i} className="text-center group">
+                <div className="relative w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden ring-2 ring-[#e8e4dc] group-hover:ring-[#9b824e] transition">
+                  <Image src={member.image} alt={member.name} fill className="object-cover" sizes="112px" />
+                </div>
+                <h3 className="text-[#1a1a1a] font-medium text-sm">{member.name}</h3>
+                <p className="text-[#9b824e] text-xs mt-1">{member.role}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-16 px-6 bg-[#06080e] border-t border-[#c4a24e]/10">
-        <div className="max-w-6xl mx-auto text-center">
-          <Image 
-            src="https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1-60x60.webp" 
-            alt="Priceless CPA" 
-            width={60} 
-            height={60}
-            className="mx-auto mb-6 rounded-lg"
-          />
-          <p className="text-[#7a7870] text-sm mb-6">© {new Date().getFullYear()} Priceless CPA. All rights reserved.</p>
-          <nav className="flex justify-center gap-8">
-            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="text-[#c4a24e] hover:text-[#dfc06a] transition text-sm">
+      {/* Testimonials */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h3 className="text-xs uppercase tracking-widest text-[#7a7a7a] mb-4 font-medium">Real results, real growth</h3>
+            <h2 className="text-3xl md:text-4xl font-semibold text-[#1a1a1a]">What our clients say</h2>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {testimonials.map((t, i) => (
+              <div key={i} className="bg-[#faf8f5] rounded-2xl p-8 border border-[#e8e4dc]">
+                <div className="text-[#9b824e] text-lg mb-4">★★★★★</div>
+                <p className="text-[#4a4a4a] leading-relaxed mb-6">&ldquo;{t.text}&rdquo;</p>
+                <p className="text-[#1a1a1a] font-medium text-sm">— {t.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 px-6 border-y border-[#e8e4dc] bg-[#faf8f5]">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-3 gap-8">
+            {stats.map((stat, i) => (
+              <div key={i} className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-[#9b824e] mb-2">{stat.value}</div>
+                <div className="text-[#4a4a4a] text-sm">{stat.label}</div>
+                <div className="text-[#7a7a7a] text-xs mt-1">{stat.sublabel}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-6 bg-[#9b824e]">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">Ready to get started?</h2>
+          <p className="text-white/80 mb-8">
+            Schedule a free consultation and let&apos;s build a financial strategy that works for you.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="bg-[#9b824e] text-white px-8 py-4 rounded-full font-medium hover:bg-[#8a7345] transition">
               Book a Call
             </a>
-            <a href="https://wa.me/13057078959" target="_blank" rel="noopener noreferrer" className="text-[#c4a24e] hover:text-[#dfc06a] transition text-sm">
-              WhatsApp
+            <a href="https://wa.me/13057078959" target="_blank" rel="noopener noreferrer" className="border border-white/30 text-white px-8 py-4 rounded-full font-medium hover:bg-white/10 transition">
+              WhatsApp Us
             </a>
-          </nav>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 px-6 border-t border-[#e8e4dc] bg-white">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <Image 
+              src="https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1-60x60.webp" 
+              alt="Priceless CPA" 
+              width={36} 
+              height={36}
+              className="rounded-lg"
+            />
+            <span className="text-[#7a7a7a] text-sm">© {new Date().getFullYear()} Priceless CPA</span>
+          </div>
+          <div className="flex items-center gap-6 text-sm">
+            <Link href="/blog" className="text-[#4a4a4a] hover:text-[#9b824e] transition">Blog</Link>
+            <Link href="/s-corp-vs-llc" className="text-[#4a4a4a] hover:text-[#9b824e] transition">S-Corp vs LLC</Link>
+            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="text-[#4a4a4a] hover:text-[#9b824e] transition">Book a Call</a>
+          </div>
         </div>
       </footer>
     </main>
