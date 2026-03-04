@@ -257,13 +257,7 @@ export default function Home() {
                 
                 {/* Right: Illustration */}
                 <div className={`flex justify-center ${activeCard === 0 ? 'flex-1' : ''}`}>
-                  <svg viewBox="0 0 120 150" className="w-28 h-36" fill="none">
-                    <rect x="10" y="10" width="100" height="130" rx="4" stroke="#1a1a1a" strokeWidth="2" fill="white"/>
-                    <circle cx="60" cy="45" r="18" stroke="#1a1a1a" strokeWidth="2"/>
-                    <circle cx="40" cy="80" r="14" stroke="#1a1a1a" strokeWidth="2"/>
-                    <circle cx="80" cy="80" r="14" stroke="#1a1a1a" strokeWidth="2"/>
-                    <ellipse cx="60" cy="115" rx="25" ry="12" stroke="#1a1a1a" strokeWidth="2"/>
-                  </svg>
+                  <Image src="/illustrations/people.png" alt="People" width={120} height={150} className="w-28 h-36 object-contain" />
                 </div>
               </div>
               
@@ -294,13 +288,7 @@ export default function Home() {
                 
                 {/* Right: Illustration */}
                 <div className={`flex justify-center ${activeCard === 1 ? 'flex-1' : ''}`}>
-                  <svg viewBox="0 0 140 130" className="w-28 h-28" fill="none">
-                    <rect x="15" y="20" width="110" height="90" rx="4" stroke="#1a1a1a" strokeWidth="2" fill="white" transform="rotate(-8 70 65)"/>
-                    <path d="M35 70 Q70 35 105 70" stroke="#1a1a1a" strokeWidth="2" fill="none"/>
-                    <circle cx="45" cy="60" r="6" stroke="#1a1a1a" strokeWidth="2"/>
-                    <circle cx="95" cy="60" r="6" stroke="#1a1a1a" strokeWidth="2"/>
-                    <path d="M60 85 L80 85" stroke="#1a1a1a" strokeWidth="2"/>
-                  </svg>
+                  <Image src="/illustrations/process.png" alt="Process" width={140} height={130} className="w-28 h-28 object-contain" />
                 </div>
               </div>
               
@@ -331,13 +319,7 @@ export default function Home() {
                 
                 {/* Right: Illustration */}
                 <div className={`flex justify-center ${activeCard === 2 ? 'flex-1' : ''}`}>
-                  <svg viewBox="0 0 100 110" className="w-24 h-28" fill="none">
-                    <path d="M15 85 L15 40 L50 15 L85 40 L85 85 L50 110 Z" stroke="#1a1a1a" strokeWidth="2" fill="white"/>
-                    <path d="M15 40 L50 65 L85 40" stroke="#1a1a1a" strokeWidth="2"/>
-                    <path d="M50 65 L50 110" stroke="#1a1a1a" strokeWidth="2"/>
-                    <path d="M58 50 L70 62" stroke="#1a1a1a" strokeWidth="2"/>
-                    <circle cx="64" cy="56" r="3" fill="#1a1a1a"/>
-                  </svg>
+                  <Image src="/illustrations/tech.png" alt="Tech" width={100} height={110} className="w-24 h-28 object-contain" />
                 </div>
               </div>
               
