@@ -257,7 +257,7 @@ export default function Home() {
                 
                 {/* Right: Illustration */}
                 <div className={`flex justify-center ${activeCard === 0 ? 'flex-1' : ''}`}>
-                  <Image src="/illustrations/people.png" alt="People" width={120} height={150} className="w-28 h-36 object-contain" />
+                  <Image src="/illustrations/people.png" alt="People" width={180} height={225} className="w-44 h-56 object-contain" />
                 </div>
               </div>
               
@@ -288,7 +288,7 @@ export default function Home() {
                 
                 {/* Right: Illustration */}
                 <div className={`flex justify-center ${activeCard === 1 ? 'flex-1' : ''}`}>
-                  <Image src="/illustrations/process.png" alt="Process" width={140} height={130} className="w-28 h-28 object-contain" />
+                  <Image src="/illustrations/process.png" alt="Process" width={220} height={200} className="w-44 h-44 object-contain" />
                 </div>
               </div>
               
@@ -319,7 +319,7 @@ export default function Home() {
                 
                 {/* Right: Illustration */}
                 <div className={`flex justify-center ${activeCard === 2 ? 'flex-1' : ''}`}>
-                  <Image src="/illustrations/tech.png" alt="Tech" width={100} height={110} className="w-24 h-28 object-contain" />
+                  <Image src="/illustrations/tech.png" alt="Tech" width={160} height={175} className="w-40 h-44 object-contain" />
                 </div>
               </div>
               
