@@ -27,26 +27,34 @@ const solutions = [
 ]
 
 const services = [
-  { 
-    title: 'Crypto Accounting & Advising', 
+  {
+    title: 'Crypto Accounting & Advising',
     description: 'Navigate the complex world of crypto taxes with experts who understand DeFi, NFTs, and digital assets inside and out.',
     href: '/crypto-accounting',
   },
-  { 
-    title: 'Tax Strategy & Planning', 
+  {
+    title: 'Tax Strategy & Planning',
     description: 'Proactive tax planning that minimizes your lifetime tax burden. No surprises on tax day—just smart strategies.',
     href: '/tax-strategy',
   },
-  { 
-    title: 'Business Accounting', 
+  {
+    title: 'Business Accounting',
     description: 'Daily bookkeeping, monthly reporting, and financial clarity so you can make data-driven decisions.',
     href: '/business-accounting',
   },
-  { 
-    title: 'Tax Preparation', 
+  {
+    title: 'Tax Preparation',
     description: 'Accurate, timely tax filing for individuals and businesses. We handle the complexity so you don\'t have to.',
     href: '/tax-preparation',
   },
+]
+
+const industries = [
+  { title: 'Law Firms & Attorneys', href: '/industries/lawyers' },
+  { title: 'AI & Tech Startups', href: '/industries/ai-businesses' },
+  { title: 'E-Commerce Brands', href: '/industries/ecommerce' },
+  { title: 'Real Estate', href: '/industries/real-estate' },
+  { title: 'Content Creators', href: '/industries/creators' },
 ]
 
 const stats = [
@@ -116,6 +124,16 @@ export default function Home() {
                 ))}
               </div>
             </div>
+            <div className="relative group hidden md:block">
+              <button className="text-[#c8c5bc] hover:text-[#c4a24e] transition text-sm px-3 py-2">Industries</button>
+              <div className="absolute top-full left-0 mt-2 w-56 bg-[#0f1222] rounded-2xl border border-[#c4a24e]/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-xl p-2">
+                {industries.map((industry) => (
+                  <Link key={industry.href} href={industry.href} className="block px-4 py-3 text-[#c8c5bc] hover:text-[#c4a24e] hover:bg-[#141830] rounded-xl transition text-sm">
+                    {industry.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
             <Link href="/s-corp-vs-llc" className="text-[#c8c5bc] hover:text-[#c4a24e] transition text-sm px-3 py-2 hidden md:block">S-Corp vs LLC</Link>
             <Link href="/blog" className="text-[#c8c5bc] hover:text-[#c4a24e] transition text-sm px-3 py-2 hidden md:block">Resources</Link>
             <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="bg-[#c4a24e] text-[#06080e] px-5 py-2.5 rounded-full text-sm font-medium hover:bg-[#dfc06a] transition flex items-center gap-2">
@@ -126,7 +144,7 @@ export default function Home() {
       </div>
 
       {/* Hero Section - Light style with illustrated background */}
-      <section className="relative min-h-[120vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-start justify-center pt-40 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image 
@@ -334,49 +352,48 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Say Goodbye Section */}
-      <section className="py-20 px-6 bg-[#e8e4d9]">
+      {/* Say Goodbye + Pain Points Section */}
+      <section className="py-16 px-6 bg-[#e8e4d9]">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-[#1a3a2f] leading-tight">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-[#1a3a2f] leading-tight mb-4">
               Say goodbye to your financial headaches
             </h2>
-            <p className="text-[#4a4a4a] text-lg leading-relaxed md:pt-4">
-              Feeling overwhelmed? Solving unique and complex problems can be hard for some accounting solutions. Priceless handles yours with strategy, accuracy, and automation, ensuring you always have an answer for the toughest question or scenario.
+            <p className="text-[#4a4a4a] text-lg leading-relaxed max-w-2xl mx-auto">
+              Priceless handles your unique challenges with strategy, accuracy, and automation.
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* Pain Points vs Solutions */}
-      <section className="py-20 px-6 bg-[#e8e4d9]">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-16">
-            {/* Pain Points */}
-            <div className="flex flex-col items-center">
-              <h3 className="text-xl md:text-2xl font-semibold text-[#1a3a2f] mb-8 text-center">Founder&apos;s frustrations</h3>
-              <div className="space-y-4 w-full max-w-sm">
+          {/* Pain Points vs Solutions - Side by Side Cards */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Pain Points Card */}
+            <div className="bg-white/60 rounded-2xl p-8 border border-red-200/50">
+              <h3 className="text-lg font-semibold text-[#1a3a2f] mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-red-400"></span>
+                Founder&apos;s frustrations
+              </h3>
+              <div className="space-y-3">
                 {painPoints.map((point, i) => (
-                  <div key={i} className="flex items-center gap-4 group">
-                    <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
-                      <span className="text-red-500 text-sm">✕</span>
-                    </div>
-                    <p className="text-[#4a4a4a] group-hover:text-[#1a1a1a] transition">{point}</p>
+                  <div key={i} className="flex items-center gap-3 group">
+                    <span className="text-red-400 text-xs flex-shrink-0">✕</span>
+                    <p className="text-[#4a4a4a] text-sm">{point}</p>
                   </div>
                 ))}
               </div>
             </div>
-            
-            {/* Solutions */}
-            <div className="flex flex-col items-center">
-              <h3 className="text-xl md:text-2xl font-semibold text-[#1a3a2f] mb-8 text-center">The Priceless Solution</h3>
-              <div className="space-y-4 w-full max-w-sm">
+
+            {/* Solutions Card */}
+            <div className="bg-[#1a3a2f] rounded-2xl p-8">
+              <h3 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#c4a24e]"></span>
+                The Priceless Solution
+              </h3>
+              <div className="space-y-3">
                 {solutions.map((solution, i) => (
-                  <div key={i} className="flex items-center gap-4 group">
-                    <div className="w-8 h-8 rounded-full bg-[#9b824e]/10 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#9b824e] text-sm">✓</span>
-                    </div>
-                    <p className="text-[#1a1a1a] group-hover:text-[#9b824e] transition">{solution}</p>
+                  <div key={i} className="flex items-center gap-3 group">
+                    <span className="text-[#c4a24e] text-xs flex-shrink-0">✓</span>
+                    <p className="text-white/90 text-sm">{solution}</p>
                   </div>
                 ))}
               </div>
@@ -412,22 +429,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-20 px-6 bg-[#faf8f5]">
+      {/* Team + Stats Combined Section */}
+      <section className="py-16 px-6 bg-[#0f1222]">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h3 className="text-xs uppercase tracking-widest text-[#7a7a7a] mb-4 font-medium">The team behind Priceless</h3>
-            <h2 className="text-3xl md:text-4xl font-semibold text-[#1a1a1a]">Real people, real expertise.</h2>
+          {/* Stats Row */}
+          <div className="grid grid-cols-3 gap-4 mb-16">
+            {stats.map((stat, i) => (
+              <div key={i} className="text-center py-6 px-4 rounded-xl bg-white/5 border border-white/10">
+                <div className="text-2xl md:text-3xl font-bold text-[#c4a24e] mb-1">{stat.value}</div>
+                <div className="text-white/80 text-sm">{stat.label}</div>
+              </div>
+            ))}
           </div>
-          
-          <div className="flex flex-wrap justify-center gap-10">
+
+          {/* Team */}
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-semibold text-white">Meet the team</h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {team.map((member, i) => (
-              <div key={i} className="text-center group">
-                <div className="relative w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden ring-2 ring-[#e8e4dc] group-hover:ring-[#9b824e] transition">
-                  <Image src={member.image} alt={member.name} fill className="object-cover" sizes="112px" />
+              <div key={i} className="bg-white/5 rounded-xl p-4 text-center border border-white/10 hover:border-[#c4a24e]/40 transition group">
+                <div className="relative w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden ring-2 ring-[#c4a24e]/30 group-hover:ring-[#c4a24e] transition">
+                  <Image src={member.image} alt={member.name} fill className="object-cover" sizes="64px" />
                 </div>
-                <h3 className="text-[#1a1a1a] font-medium text-sm">{member.name}</h3>
-                <p className="text-[#9b824e] text-xs mt-1">{member.role}</p>
+                <h3 className="text-white font-medium text-sm">{member.name}</h3>
+                <p className="text-[#c4a24e] text-xs mt-1">{member.role}</p>
               </div>
             ))}
           </div>
@@ -435,18 +462,19 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h3 className="text-xs uppercase tracking-widest text-[#7a7a7a] mb-4 font-medium">Real results, real growth</h3>
-            <h2 className="text-3xl md:text-4xl font-semibold text-[#1a1a1a]">What our clients say</h2>
+      <section className="py-16 px-6 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-semibold text-[#1a1a1a]">What our clients say</h2>
           </div>
-          
-          <div className="grid md:grid-cols-2 gap-6">
+
+          <div className="grid md:grid-cols-2 gap-4">
             {testimonials.map((t, i) => (
-              <div key={i} className="bg-[#faf8f5] rounded-2xl p-8 border border-[#e8e4dc]">
-                <div className="text-[#9b824e] text-lg mb-4">★★★★★</div>
-                <p className="text-[#4a4a4a] leading-relaxed mb-6">&ldquo;{t.text}&rdquo;</p>
+              <div key={i} className="bg-[#faf8f5] rounded-xl p-6 border border-[#e8e4dc] hover:shadow-md transition">
+                <div className="flex items-center gap-1 text-[#c4a24e] text-sm mb-3">
+                  {[...Array(5)].map((_, j) => <span key={j}>★</span>)}
+                </div>
+                <p className="text-[#4a4a4a] text-sm leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
                 <p className="text-[#1a1a1a] font-medium text-sm">— {t.name}</p>
               </div>
             ))}
@@ -454,33 +482,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 px-6 border-y border-[#e8e4dc] bg-[#faf8f5]">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-3 gap-8">
-            {stats.map((stat, i) => (
-              <div key={i} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#9b824e] mb-2">{stat.value}</div>
-                <div className="text-[#4a4a4a] text-sm">{stat.label}</div>
-                <div className="text-[#7a7a7a] text-xs mt-1">{stat.sublabel}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-[#9b824e]">
+      <section className="py-16 px-6 bg-gradient-to-br from-[#1a3a2f] to-[#0f1222]">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">Ready to get started?</h2>
-          <p className="text-white/80 mb-8">
+          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4">Ready to get started?</h2>
+          <p className="text-white/70 mb-8 text-sm">
             Schedule a free consultation and let&apos;s build a financial strategy that works for you.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="bg-[#9b824e] text-white px-8 py-4 rounded-full font-medium hover:bg-[#8a7345] transition">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="bg-[#c4a24e] text-white px-8 py-3 rounded-full font-medium hover:bg-[#d4b25e] transition">
               Book a Call
             </a>
-            <a href="https://wa.me/13057078959" target="_blank" rel="noopener noreferrer" className="border border-white/30 text-white px-8 py-4 rounded-full font-medium hover:bg-white/10 transition">
+            <a href="https://wa.me/13057078959" target="_blank" rel="noopener noreferrer" className="border border-white/30 text-white px-8 py-3 rounded-full font-medium hover:bg-white/10 transition">
               WhatsApp Us
             </a>
           </div>
@@ -501,6 +514,7 @@ export default function Home() {
             <span className="text-[#7a7a7a] text-sm">© {new Date().getFullYear()} Priceless CPA</span>
           </div>
           <div className="flex items-center gap-6 text-sm">
+            <Link href="/industries" className="text-[#4a4a4a] hover:text-[#9b824e] transition">Industries</Link>
             <Link href="/blog" className="text-[#4a4a4a] hover:text-[#9b824e] transition">Blog</Link>
             <Link href="/s-corp-vs-llc" className="text-[#4a4a4a] hover:text-[#9b824e] transition">S-Corp vs LLC</Link>
             <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="text-[#4a4a4a] hover:text-[#9b824e] transition">Book a Call</a>
