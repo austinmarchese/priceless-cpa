@@ -1,181 +1,90 @@
-# Priceless CPA Website — Client Setup Guide
+# Priceless CPA Website — Client Guide
 
-This guide helps you set up the website locally and use OpenClaw to create new industry landing pages.
-
----
-
-## Quick Start
-
-### 1. Install Prerequisites
-
-You need these installed on your Mac:
-
-```bash
-# Install Homebrew (if you don't have it)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Install Node.js
-brew install node
-
-# Install GitHub CLI
-brew install gh
-
-# Install OpenClaw
-npm install -g @anthropic/openclaw
-```
-
-### 2. Clone the Repository
-
-```bash
-git clone https://github.com/austinmarchese/priceless-cpa.git
-cd priceless-cpa
-npm install
-```
-
-### 3. Authenticate with GitHub
-
-So you can push changes:
-
-```bash
-gh auth login
-```
-
-Follow the prompts (choose GitHub.com, HTTPS, and authenticate via browser).
-
-### 4. Run the Dev Server
-
-```bash
-npm run dev
-```
-
-View the site at: http://localhost:3001
+This guide shows you how to create and update landing pages by messaging OpenClaw on Telegram.
 
 ---
 
-## Using OpenClaw
+## Creating a New Industry Landing Page
 
-OpenClaw is an AI assistant that can build landing pages for you through conversation.
+### Step 1: Start the conversation
 
-### Start OpenClaw
+Message OpenClaw on Telegram:
 
-In the `priceless-cpa` folder:
+> **"I want to build a new industry landing page"**
 
-```bash
-openclaw
-```
+or
 
-### Available Commands
+> **"Create a landing page for dentists"**
 
-| Say this... | What happens |
-|-------------|--------------|
-| "I want to build a new industry landing page" | Interviews you, then creates the page |
-| "Create a landing page for dentists" | Same as above, starts with "dentists" |
-| "Push the code" | Commits and pushes your changes to GitHub |
+### Step 2: Answer the interview questions
+
+OpenClaw will ask you about:
+
+1. **The industry** — Who are you targeting?
+2. **The audience** — Solo operators? Small firms? Growing companies?
+3. **Pain points** — Tax surprises? Compliance fears? Cash flow chaos?
+4. **Your services** — What do you offer them?
+5. **Your differentiator** — Why should they choose you?
+6. **Proof points** — Stats, client count, average savings?
+7. **Urgency hook** — What goes in the top banner?
+
+Pick from the options given for each question.
+
+### Step 3: Confirm and build
+
+OpenClaw will summarize what it learned and ask you to confirm. Once you approve, it automatically:
+
+- Creates the page content
+- Builds the landing page
+- Updates the site navigation
+- Pushes to GitHub (site updates automatically)
+
+---
+
+## Other Commands
+
+| Message this... | What happens |
+|-----------------|--------------|
+| "Push the code" | Saves and publishes any pending changes |
 | "Push changes" | Same as above |
-
-### Creating a New Industry Page
-
-1. Say: **"I want to build a new industry landing page"**
-
-2. OpenClaw will ask you questions like:
-   - What industry?
-   - Who's the target client?
-   - What are their pain points?
-   - What services do you offer them?
-
-3. Answer each question (pick from the options given)
-
-4. OpenClaw creates:
-   - Content in `workflow/industries-content.ts`
-   - Page at `app/industries/<slug>/page.tsx`
-   - Updates the navigation
-
-5. Say: **"Push the code"** to save to GitHub
+| "Undo my changes" | Reverts recent edits |
 
 ---
 
 ## Editing Existing Pages
 
-### Edit Industry Copy
+If you want to tweak copy on an existing industry page, message OpenClaw:
 
-All industry page text lives in one file:
+> **"Update the lawyers page headline to say 'Tax Strategy for Law Firms'"**
 
-```
-workflow/industries-content.ts
-```
+or
 
-Open it, find the industry you want to edit, change the text inside quotes, save.
+> **"Change the dentists page description"**
 
-### What You Can Safely Edit
+OpenClaw will make the edit and push it live.
+
+---
+
+## What You Can Change
 
 - Headlines and descriptions
 - Benefits lists
-- Stats
+- Stats (client count, savings, etc.)
 - CTA button text
-
-### What NOT to Change
-
-- Variable names (e.g., `lawyersContent`)
-- Punctuation like commas, brackets `{}`, `[]`
-- The structure of the file
+- Urgency banner text
 
 ---
 
-## File Structure
+## Current Industry Pages
 
-```
-priceless-cpa/
-├── app/
-│   ├── page.tsx              # Homepage
-│   ├── industries/
-│   │   ├── page.tsx          # Industries landing page
-│   │   ├── lawyers/          # Each industry has a folder
-│   │   ├── ai-businesses/
-│   │   └── ...
-│   └── ...
-├── workflow/
-│   ├── industries-content.ts # All industry copy (EDIT THIS)
-│   └── README.md             # Editing instructions
-├── skills/                   # OpenClaw skills
-│   ├── industry-page/        # Creates new industry pages
-│   └── git-push/             # Pushes code to GitHub
-└── SETUP.md                  # This file
-```
-
----
-
-## Troubleshooting
-
-### "Push failed" or authentication error
-
-Run:
-```bash
-gh auth login
-```
-
-### Site won't start
-
-Make sure you ran:
-```bash
-npm install
-```
-
-### Changes not showing
-
-1. Make sure the dev server is running (`npm run dev`)
-2. Hard refresh your browser (Cmd+Shift+R)
-
-### Broke something?
-
-Undo your changes:
-```bash
-git checkout .
-```
-
-Or ask OpenClaw: "Undo my changes"
+- Lawyers: `/industries/lawyers`
+- AI Businesses: `/industries/ai-businesses`
+- E-commerce: `/industries/ecommerce`
+- Real Estate: `/industries/real-estate`
+- Content Creators: `/industries/creators`
 
 ---
 
 ## Need Help?
 
-Contact the development team or ask OpenClaw — it can read the codebase and help debug issues.
+Just ask OpenClaw — it can read the codebase, explain what's on any page, and help you make changes.
