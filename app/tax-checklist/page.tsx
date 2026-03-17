@@ -282,7 +282,7 @@ export default function TaxChecklist() {
       formData.append('Real Estate', answers.realEstate)
       formData.append('Frustration', answers.frustration)
 
-      await fetch('https://formsubmit.co/ajax/anthony@pricelesscpa.com', {
+      await fetch('https://formsubmit.co/ajax/anthony@priceless.cpa', {
         method: 'POST',
         body: formData,
       })
