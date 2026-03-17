@@ -28,6 +28,7 @@ When helping with content:
 | `context/best-work/` | Examples of content that performed well |
 | `context/consultants/` | Expert frameworks to apply (copywriting, marketing) |
 | `context/audience/` | Target industry profiles and personas |
+| `context/shorts/` | Format library and example scripts for short-form video |
 
 ## Skills
 
@@ -43,6 +44,7 @@ Skills are in `skills/[name]/SKILL.md`. When the user runs `/[skill-name]`, read
 | `/create-consultant` | Clone an expert's frameworks |
 | `/industry-page` | Build a new industry landing page through interview |
 | `/git-push` | Commit and push changes to GitHub |
+| `/shorts-script` | Write short-form video scripts for tax content |
 
 ## Content Creation Principles
 
