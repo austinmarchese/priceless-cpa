@@ -18,7 +18,7 @@ export default function TaxStrategy() {
       <header className="py-8 px-6 text-center border-b border-[#c4a24e]/10">
         <Link href="/" className="inline-block">
           <Image 
-            src="https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1-60x60.webp" 
+            src="/logo.webp" 
             alt="Priceless CPA" 
             width={50} 
             height={50}
@@ -124,7 +124,7 @@ export default function TaxStrategy() {
       {/* Footer */}
       <footer className="py-10 px-6 bg-[#06080e] border-t border-[#c4a24e]/10 text-center">
         <Image 
-          src="https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1-60x60.webp" 
+          src="/logo.webp" 
           alt="Priceless CPA" 
           width={40} 
           height={40}

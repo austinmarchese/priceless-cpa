@@ -104,7 +104,7 @@ export default function Home() {
         <nav className="max-w-6xl mx-auto bg-[#0f1222]/90 backdrop-blur-md rounded-full border border-[#c4a24e]/10 px-6 py-3 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image 
-              src="https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1-60x60.webp" 
+              src="/logo.webp" 
               alt="Priceless CPA" 
               width={40} 
               height={40}
@@ -505,7 +505,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
             <Image 
-              src="https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1-60x60.webp" 
+              src="/logo.webp" 
               alt="Priceless CPA" 
               width={36} 
               height={36}

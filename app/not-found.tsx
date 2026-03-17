@@ -6,7 +6,7 @@ export default function NotFound() {
     <main className="min-h-screen bg-bg-deep flex items-center justify-center px-6">
       <div className="text-center max-w-md">
         <Image 
-          src="https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1-60x60.webp" 
+          src="/logo.webp" 
           alt="Priceless CPA Logo" 
           width={80} 
           height={80}

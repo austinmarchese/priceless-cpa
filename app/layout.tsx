@@ -29,8 +29,8 @@ export const metadata: Metadata = {
     images: ['https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1.webp'],
   },
   icons: {
-    icon: 'https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1-60x60.webp',
-    apple: 'https://pricelesscpa.com/wp-content/uploads/2025/07/PCPALogotipo1-60x60.webp',
+    icon: '/logo.webp',
+    apple: '/logo.webp',
   },
   robots: {
     index: true,
