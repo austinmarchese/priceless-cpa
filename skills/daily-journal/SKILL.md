@@ -17,6 +17,20 @@ Run `/daily-journal` after:
 
 ## Process
 
+### Pre-flight: Sync Check
+
+Before starting, check if there are updates on main:
+
+```bash
+git fetch origin main
+BEHIND=$(git rev-list HEAD..origin/main --count)
+```
+
+If `$BEHIND` > 0, warn the user:
+> "There are [N] new commits on main. Run `git pull origin main` to get the latest context files before continuing?"
+
+If up to date, proceed silently.
+
 ### Step 1: Ask What Happened
 
 Ask the user:

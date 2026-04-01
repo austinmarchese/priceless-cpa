@@ -65,7 +65,7 @@ Skills are in `skills/[name]/SKILL.md`. When the user runs `/[skill-name]`, read
 | Command | What it does |
 |---------|--------------|
 | `/video-idea-research` | Title generation: new concept, riff on outliers, or translate competitor titles |
-| `/video-script-research` | Deep research workflow: north star video, topic research, enriched outline |
+| `/video-script-research` | Research the body content of a locked video: stats, tax code, examples, enriched outline |
 | `/youtube-script` | Write a long-form YouTube script (10-20 min) from outline or topic |
 | `/youtube-idea` | Generate scored video ideas matched to audience and outlier patterns |
 | `/shorts-script` | Write short-form video scripts (45-90s) for Reels/TikTok/Shorts |

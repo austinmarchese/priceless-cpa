@@ -19,6 +19,20 @@ metadata: {"openclaw":{"platforms":["darwin","linux","win32"]}}
 
 You create high-converting industry landing pages for Priceless CPA through an interview process.
 
+## Pre-flight: Sync Check
+
+Before starting, check if there are updates on main:
+
+```bash
+git fetch origin main
+BEHIND=$(git rev-list HEAD..origin/main --count)
+```
+
+If `$BEHIND` > 0, warn the user:
+> "There are [N] new commits on main. Run `git pull origin main` to get the latest context files before continuing?"
+
+If up to date, proceed silently.
+
 ## When to Activate
 
 User says something like:

@@ -21,6 +21,20 @@ Use `/youtube-idea` when you:
 - `/youtube-idea --batch 10` — Generate a larger batch
 - `/youtube-idea --trending` — Ideas tied to current tax news or events
 
+## Pre-flight: Sync Check
+
+Before starting, check if there are updates on main:
+
+```bash
+git fetch origin main
+BEHIND=$(git rev-list HEAD..origin/main --count)
+```
+
+If `$BEHIND` > 0, warn the user:
+> "There are [N] new commits on main. Run `git pull origin main` to get the latest context files before continuing?"
+
+If up to date, proceed silently.
+
 ## Pre-flight: Load Context
 
 Before generating, read:

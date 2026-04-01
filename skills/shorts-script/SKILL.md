@@ -20,6 +20,20 @@ Use `/shorts-script` when you:
 - `/shorts-script --hot-take "Your CPA shouldn't just file taxes"` — Write from a specific hot take
 - `/shorts-script --from-youtube [slug]` — Create shorts clips from an existing YouTube script
 
+## Pre-flight: Sync Check
+
+Before starting, check if there are updates on main:
+
+```bash
+git fetch origin main
+BEHIND=$(git rev-list HEAD..origin/main --count)
+```
+
+If `$BEHIND` > 0, warn the user:
+> "There are [N] new commits on main. Run `git pull origin main` to get the latest context files before continuing?"
+
+If up to date, proceed silently.
+
 ## Pre-flight: Load Context
 
 Before writing, read these context files:

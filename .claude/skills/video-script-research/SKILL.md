@@ -1,11 +1,12 @@
 ---
 name: video-script-research
-description: Deep research workflow for YouTube videos. Generates enriched outlines from north star videos, topic research, and expert takes.
+description: Research the body content of a video. Takes a locked title and builds an enriched outline with stats, examples, and tax code references.
 triggers:
   - video script research
   - video research
   - script research
   - research video
+  - research the video
 tools:
   - Read
   - Write

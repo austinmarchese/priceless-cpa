@@ -1,270 +1,208 @@
 ---
 name: video-script-research
-description: Deep research workflow for YouTube videos. Generates enriched outlines from north star videos, topic research, and personal takes.
+description: Research the body content of a YouTube video. Takes a locked title and builds an enriched outline with stats, examples, tax code references, and client stories.
 ---
 
 ## When to use
 
 Use `/video-script-research` when you:
-- Have a video project and want to do deep research before scripting
-- Want to create an enriched outline modeled after a north star video
-- Need to gather stats, examples, client stories, and expert takes on a tax topic
-- Want to prepare for `/youtube-script`
+- Have a locked video title and need to research what the video should actually cover
+- Want to build a research-backed outline before writing the script
+- Need stats, IRS data, tax code references, and client story ideas for a specific topic
+
+**Prerequisite:** The video title should already be decided (via `/video-idea-research` or manually). A project folder should already exist at `content/youtube/projects/[slug]/`.
 
 ## How to use
 
-Run `/video-script-research` with a video concept. The skill guides you through:
-1. Creating a base outline from a north star video
-2. Deep diving on the specific tax topic (iterative)
-3. Layering in Anthony's expertise and client examples
-4. Curating and cleaning the final outline
+Run `/video-script-research [slug]` where slug is the project folder name:
+- `/video-script-research how-rich-avoid-irs-audits`
+- `/video-script-research write-off-your-house`
+
+Or just run `/video-script-research` and pick from existing projects.
 
 ---
 
 ## Process
 
-### Step 0: Load Context
+### Pre-flight: Sync Check
 
-Before asking the user anything, read these files:
+Before starting, check if there are updates on main:
 
-```
-Read: context/audience/serial-entrepreneur/profile.md
-Read: context/audience/serial-entrepreneur/content-strategy.md
-Read: context/shorts/example-scripts.md (for Anthony's voice)
-Scan: context/lived-experiences/ (for relevant learnings)
-Scan: context/best-work/ (for voice reference)
+```bash
+git fetch origin main
+BEHIND=$(git rev-list HEAD..origin/main --count)
 ```
 
-Confirm: "Loaded persona, content strategy, and voice reference."
+If `$BEHIND` > 0, warn the user:
+> "There are [N] new commits on main. Run `git pull origin main` to get the latest context files before continuing?"
+
+If up to date, proceed silently.
+
+### Step 0: Load the Project
+
+1. If a slug was provided, read `content/youtube/projects/[slug]/idea.md`
+2. If no slug, list all project folders and ask which one to research
+3. Read the persona: `context/audience/serial-entrepreneur/profile.md`
+4. Scan `context/lived-experiences/` for relevant learnings on this topic
+
+Confirm: "Researching: [Video Title]. Project folder: [slug]."
 
 ---
 
-### Step 1: Get Video Info
+### Step 1: Find a North Star Video
 
-Ask the user for:
+Ask:
+> "Is there a reference video you want to model the structure after? This could be a competitor video on the same topic, or a video with a structure you liked."
 
-1. **North Star video** - URL or title of reference video to model structure after
-2. **Our video title** - What we're making (working title is fine)
-3. **Does a project folder exist?** - Check `content/youtube/projects/[slug]/`
+Options:
+- User provides a YouTube URL
+- User provides a title to search for
+- Skip (build outline from scratch based on the topic)
 
----
-
-### Step 2: Set Up Project Folder
-
-If the project folder doesn't exist, create `content/youtube/projects/[slug]/` with:
-- `research.md` - Main research document (built up through workflow)
-- `outline.md` - Final enriched outline
-
-If the folder already exists and has an `idea.md`, read it for context.
-
-**Initial `research.md` template:**
-
-```markdown
-# Research: {Video Title}
-
-## North Star Video
-- **Title:** {title}
-- **URL:** {url}
-
-## Research Sources
-
-### Topic-Specific Research
-_Filled in during Step 4_
-
-### Expert/Authority Sources
-_Filled in during Step 5_
-
-## Key Findings
-_Summary of most valuable research_
-
-## Discarded Notes
-_Good material that didn't fit this video (save for future videos)_
-```
-
----
-
-### Step 3: Generate Base Outline
-
-**Option A: User provides transcript**
-> "Paste the north star video transcript, or provide the YouTube URL and I'll fetch it."
-
-**Option B: Fetch transcript**
-If URL provided, fetch transcript using:
+If a URL is provided, fetch the transcript:
 ```bash
 yt-dlp --skip-download --write-auto-sub --sub-lang en --convert-subs srt -o "%(title)s" "{url}"
 ```
 
-**Then generate outline:**
+Extract the structure (not the content): how many sections, what order, how the hook works, how examples are placed, pacing.
 
-Review the north star video structure and create a general outline adapted for Anthony's video. For each section, add Personal Notes placeholders:
+---
+
+### Step 2: Build Base Outline
+
+Using the north star structure (or a standard structure if skipped), create an outline specific to this video's topic.
+
+Each section gets two placeholders to fill through research:
 
 ```markdown
 ## {Section Title}
-{outline content}
+{What this section covers}
 
-**Personal Notes:**
-_To be filled with research_
+**Research Notes:**
+_Stats, tax code references, expert takes_
 
 **Client Example:**
-_Anonymized client story that illustrates this point_
+_Anonymized story that illustrates this point_
 ```
 
 Save to `content/youtube/projects/{slug}/outline.md`
 
-Confirm: "Created base outline with {N} sections. Ready for topic research."
-
 ---
 
-### Step 4: Topic-Specific Deep Dive (Iterative)
+### Step 3: Topic Deep Dive (Iterative)
 
-Do a deep dive on the specific tax topic. This is iterative -- continue until there's enough valuable material.
+This is the core of the skill. Research the actual substance of the video.
 
-**Goal:** Get research, IRS rules, tax code references, real-world examples, stats, and expert takes specific to the video topic.
+**Goal:** Fill every section of the outline with specific, defensible content Anthony can speak to.
 
-**Examples:**
-- Video about "How the Rich Avoid IRS Audits" -> Research actual IRS audit triggers, audit rates by income level, DIF scores, common red flags for multi-entity entrepreneurs
-- Video about "How to Write Off Your House" -> Research home office deduction rules, Augusta Rule, Section 280A, actual dollar examples at different income levels
-- Video about "How Elon Musk Avoids Taxes" -> Research buy-borrow-die strategy, unrealized gains, charitable vehicles, how these translate to $5-50M entrepreneurs
+#### 3A: Tax Code and IRS Data
 
-**Research Sources (use all that apply):**
-
-#### 4A: YouTube Videos on Topic
-
-Ask:
-> "What are the top-performing YouTube videos on {TOPIC}? Let me find 3-5 and extract key insights."
-
-Options:
-- User provides video URLs directly
-- Use web search to find relevant videos
-- Fetch transcripts using yt-dlp
-
-For each video found:
-1. Pull transcript
-2. Extract: key quotes, unique insights, statistics, examples
-3. Add to outline Personal Notes
-
-#### 4B: Web Research
-
-> "Let me search for authoritative content on {TOPIC}."
-
-Search for:
-- IRS publications and tax code references
-- Case studies and real-world examples
-- Expert opinions from tax attorneys and CPAs
-- Statistics and data points (audit rates, savings amounts)
-- Recent tax law changes that affect this topic
-
-Synthesize findings into Personal Notes.
-
-#### 4C: Client Story Development
-
-For each section of the outline, ask:
-> "Does Anthony have a client story that illustrates this point? Even a general scenario works."
-
-If not, suggest anonymized scenarios based on the serial entrepreneur persona:
-- "A client making $1.2M across two businesses who..."
-- "An entrepreneur with 3 LLCs and 2 rental properties who..."
-- "A client who came to us paying $180K in taxes and..."
-
-These should feel real and specific, not hypothetical.
-
-#### 4D: Iteration Loop
-
-After each research source:
-
-1. Show what was added to outline
-2. Update `research.md` with sources used
-3. Ask:
-   > "Is this enough depth, or should we dig deeper?"
-
-4. If "dig deeper":
-   - Suggest specific areas to explore
-   - Try alternative search angles
-   - Look for adjacent topics that add value
-
-5. Continue until user says "enough" or "move on"
-
----
-
-### Step 5: Expert/Authority Enhancement
-
-Layer in authoritative sources to add credibility:
-
-#### 5A: IRS Data and Tax Code
-
-Search for:
-- Actual IRS statistics (audit rates, collection amounts)
-- Relevant tax code sections
-- Recent IRS guidance or rulings
+Search for the actual rules, not summaries:
+- IRS publications (e.g., Pub 587 for home office, Pub 946 for depreciation)
+- Relevant IRC sections (e.g., Section 280A, Section 469)
+- IRS audit statistics by income level and filing type
+- Recent IRS guidance, revenue rulings, or court cases
 - Treasury Department reports
 
-#### 5B: Competitor Video Analysis
+**What to capture:** Specific numbers, thresholds, percentages, and rules Anthony can cite in the video.
 
-Check how competitors covered the same topic:
-- What did they include that Anthony should also cover?
-- What did they miss that Anthony can add?
-- What did they get wrong that Anthony can correct?
-- What unique angle can Anthony bring?
+#### 3B: Competitor Video Analysis
 
-#### 5C: Industry Publications
+Find 3-5 top-performing videos on the same topic from:
+- Karlton Dennis
+- Mark J Kohler
+- Navi Maraj CPA
+- Jasmine DiLucci
+- LYFE Accounting
+
+For each:
+1. Pull transcript if possible
+2. Extract: key points they made, examples they used, stats they cited
+3. Note: what did they miss? What did they get wrong? What angle did they NOT take?
+
+**The goal is differentiation.** Anthony's video needs to go deeper or take an angle competitors missed.
+
+#### 3C: Web Research
 
 Search for:
-- Journal of Accountancy articles
-- Tax Foundation research
-- AICPA guidance
-- Forbes/Bloomberg Tax coverage
+- Case studies and real-world examples
+- Expert opinions from tax attorneys
+- Recent news or law changes affecting this topic
+- Data points that make abstract concepts concrete
+
+#### 3D: Client Story Development
+
+For each section of the outline, ask:
+> "Does Anthony have a real client story for this? Even a general scenario works."
+
+If not, suggest specific anonymized scenarios based on the persona:
+- "A client making $1.2M across an S-corp and two LLCs who..."
+- "An entrepreneur with 3 rental properties who was depreciating over 39 years when..."
+- "A married couple running separate businesses who didn't realize..."
+
+**Good client stories have:** A specific starting situation, a specific problem or miss, a specific dollar outcome.
+
+#### 3E: Iteration Loop
+
+After each research pass:
+
+1. Show what was added to the outline
+2. Update `research.md` with sources
+3. Ask: "Is this enough depth, or should we dig deeper on anything?"
+4. If "dig deeper," suggest specific areas to explore
+5. Continue until the outline feels substantive
 
 ---
 
-### Step 6: Curate and Clean
+### Step 4: Identify the Unique Angle
 
-Final curation pass on the outline:
+After research is done, answer these questions:
 
-1. Remove notes that aren't valuable enough
-2. Ensure all sections work together for a cohesive video
-3. Front-load value (best material should support the hook)
-4. Check that every section has at least one specific example or number
-5. Verify persona fit (every example speaks to serial entrepreneur situation)
+1. **What does Anthony know that competitors didn't cover?** (This becomes the core differentiator)
+2. **What's the one thing viewers will remember?** (This anchors the hook and the close)
+3. **What's the "aha moment"?** (The point where the viewer thinks "my CPA never told me this")
 
-Show summary of what was:
-- Kept (and why)
-- Removed (and why)
-- Moved (and why)
-
-Ask: "Approve these curation changes?"
+Write these answers into the top of the outline.
 
 ---
 
-### Step 7: Save Final Outline
+### Step 5: Curate and Clean
 
-Update `content/youtube/projects/{slug}/outline.md` with final curated version.
+Final pass:
+
+1. Remove research notes that aren't strong enough to make the video
+2. Ensure each section has at least one specific number or example
+3. Front-load the best material (strongest stats and stories support the hook)
+4. Check that every example speaks to the serial entrepreneur ($250K-$3M+, multi-entity)
+5. Move any good material that doesn't fit to "Discarded Notes" in research.md (future video fodder)
+
+Show what was kept, removed, and moved. Ask for approval.
+
+---
+
+### Step 6: Save Everything
+
+Update `content/youtube/projects/{slug}/outline.md` with the final enriched outline.
 
 Update `content/youtube/projects/{slug}/research.md` with:
-- All sources used
-- Key research findings
-- Discarded but potentially useful notes (for future videos)
-- Stats and data points with citations
+- All sources used (URLs, IRS publications, tax code sections)
+- Key findings organized by section
+- Discarded notes for future videos
+- Competitor video analysis
 
-Confirm: "Saved final outline and research notes."
+Confirm: "Research complete. Outline saved to [path]."
 
----
-
-### Step 8: Next Steps
-
-> "Research complete! Your enriched outline is ready at: `content/youtube/projects/{slug}/outline.md`"
->
-> "Run `/youtube-script` to turn this outline into a full script."
+Suggest: "Ready to write the script? Run `/youtube-script [slug]`."
 
 ---
 
-## Tips
+## What Good Research Looks Like
 
-- **Track sources** in research.md -- helpful for video description links
-- **Save discarded notes** -- they might be useful for future videos or shorts
-- **Iterate on Step 4** until you have rich topic-specific material
-- **Front-load value** in curation -- best material should support the hook
-- **Use specific numbers** -- "$47K" not "thousands," "39 years" not "decades"
-- **Client stories make it real** -- even anonymized, specific scenarios beat abstract advice
+| Weak | Strong |
+|------|--------|
+| "Home office deductions can save you money" | "Section 280A allows you to deduct $5/sq ft (simplified) or actual expenses. For a 300 sq ft office in a $500K home, that's $1,500 simplified or potentially $8K+ actual method" |
+| "The IRS audits high earners more" | "IRS data shows 0.4% audit rate for returns under $200K, but 1.1% for $1-5M and 8.7% for $10M+. Multi-entity filers get flagged more because of related-party transactions" |
+| "Cost segregation saves taxes" | "A cost seg study on a $1.2M commercial property reclassified $340K from 39-year to 5/7/15-year depreciation, generating $95K in first-year deductions" |
 
 ## Learnings
 

@@ -9,6 +9,20 @@ description: Framework for creating lead magnet pages that capture emails and de
 
 Use this skill when Anthony wants to create a new lead magnet, whether that's a checklist, guide, quiz, calculator, or any free resource that captures an email.
 
+## Pre-flight: Sync Check
+
+Before starting, check if there are updates on main:
+
+```bash
+git fetch origin main
+BEHIND=$(git rev-list HEAD..origin/main --count)
+```
+
+If `$BEHIND` > 0, warn the user:
+> "There are [N] new commits on main. Run `git pull origin main` to get the latest context files before continuing?"
+
+If up to date, proceed silently.
+
 ## The Lead Magnet Framework
 
 Every effective lead magnet for Priceless CPA should hit these five criteria before building:
