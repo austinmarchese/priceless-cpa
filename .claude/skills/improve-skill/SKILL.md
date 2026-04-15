@@ -16,6 +16,20 @@ Run `/improve-skill` when:
 
 ## Process
 
+### Pre-flight: Sync Check
+
+Before starting, check if there are updates on main:
+
+```bash
+git fetch origin main
+BEHIND=$(git rev-list HEAD..origin/main --count)
+```
+
+If `$BEHIND` > 0, warn the user:
+> "There are [N] new commits on main. Run `git pull origin main` to get the latest context files before continuing?"
+
+If up to date, proceed silently.
+
 ### Step 1: Identify the Skill
 
 Ask:
@@ -108,7 +122,7 @@ Claude: Got it. Here's the current industry-page process:
 [Summary of steps]
 
 **Proposed change:**
-Add Step 8: Save audience insights to `context/audience/[industry]/profile.md`
+Add Step 8: Save audience insights to `wiki/audience/[industry]/profile.md`
 
 Should I apply this change?
 

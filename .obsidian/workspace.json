@@ -1,0 +1,232 @@
+{
+  "main": {
+    "id": "7caadabe19e96746",
+    "type": "split",
+    "children": [
+      {
+        "id": "b00192407b03e3f6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f9737c12a98eb46a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "content/youtube/outliers/titles.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "titles"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "fc37c4da84c1199d",
+    "type": "split",
+    "children": [
+      {
+        "id": "351aa773f9c28b69",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "afd89687b83b196a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "0064118aaecf36be",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "489b785312986e05",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "44cbab27164cd0f7",
+    "type": "split",
+    "children": [
+      {
+        "id": "adc2d523f4acdc54",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "95fc8cc8938ba7ff",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "content/youtube/outliers/titles.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for titles"
+            }
+          },
+          {
+            "id": "3d6394113c627e35",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "content/youtube/outliers/titles.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from titles"
+            }
+          },
+          {
+            "id": "bc21beddaae93fed",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "338d51a6421433d8",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "379123ada136494a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "content/youtube/outliers/titles.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of titles"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "f9737c12a98eb46a",
+  "lastOpenFiles": [
+    "skills/video-script-research/SKILL.md",
+    "skills/video-script-research",
+    "skills/video-idea-research/SKILL.md",
+    "skills/video-idea-research",
+    "content/youtube/projects/write-off-your-house/idea.md",
+    "content/youtube/projects/smart-investors-after-filing/idea.md",
+    "content/youtube/projects/how-rich-become-poor/idea.md",
+    "content/youtube/projects/how-rich-avoid-irs-audits/idea.md",
+    "content/youtube/projects/elon-musk-avoids-taxes/idea.md",
+    "content/youtube/projects/write-off-your-house",
+    "content/youtube/projects/smart-investors-after-filing",
+    "content/youtube/projects/how-rich-become-poor",
+    "content/youtube/projects/how-rich-avoid-irs-audits",
+    "content/youtube/projects/elon-musk-avoids-taxes",
+    "content/youtube/projects",
+    "content/youtube/ideas/smart-investors-after-filing/idea.md",
+    "content/youtube/ideas/smart-investors-after-filing",
+    "content/youtube/ideas/how-rich-become-poor/idea.md",
+    "content/youtube/ideas/how-rich-become-poor",
+    "content/youtube/ideas/elon-musk-avoids-taxes/idea.md",
+    "content/youtube/ideas/write-off-your-house/idea.md",
+    "content/youtube/ideas/how-rich-avoid-irs-audits/idea.md",
+    "content/youtube/ideas/2026-03-31-video-queue.md",
+    "content/shorts/7-questions-lead-magnet.md",
+    "skills/shorts-script/SKILL.md",
+    "skills/youtube-idea/SKILL.md",
+    "skills/youtube-script/SKILL.md",
+    "skills/lead-magnet/SKILL.md",
+    "skills/code-review/SKILL.md",
+    "reports/yt-packaging-round1/images/house-thumb-final.png",
+    "reports/yt-packaging-round1/images/smart-investors-thumb2.png",
+    "reports/yt-packaging-round1/images/smart-investors-outlier2.png",
+    "reports/yt-packaging-round1/images/rich-poor-archive.png",
+    "reports/yt-packaging-round1/images/elon-outlier2.png",
+    "reports/yt-packaging-round1/images/elon-thumb3.png",
+    "reports/yt-packaging-round1/images/elon-thumb2.png",
+    "reports/yt-packaging-round1/images/house-thumb1.png",
+    "reports/yt-packaging-round1/images/smart-investors-thumb1.png",
+    "reports/yt-packaging-round1/images/smart-investors-outlier1.png",
+    "context/mvp-sales-process.md",
+    "content/youtube/outliers/status.md",
+    "content/youtube/outliers/titles.md",
+    "content/youtube/outliers/README.md"
+  ]
+}

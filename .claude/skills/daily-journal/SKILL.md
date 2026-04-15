@@ -17,6 +17,20 @@ Run `/daily-journal` after:
 
 ## Process
 
+### Pre-flight: Sync Check
+
+Before starting, check if there are updates on main:
+
+```bash
+git fetch origin main
+BEHIND=$(git rev-list HEAD..origin/main --count)
+```
+
+If `$BEHIND` > 0, warn the user:
+> "There are [N] new commits on main. Run `git pull origin main` to get the latest context files before continuing?"
+
+If up to date, proceed silently.
+
 ### Step 1: Ask What Happened
 
 Ask the user:
@@ -61,7 +75,7 @@ Generate a markdown file with this structure:
 
 ### Step 4: Save the Entry
 
-Save to: `context/lived-experiences/[DATE]-[slug].md`
+Save to: `wiki/lived-experiences/[DATE]-[slug].md`
 
 Use format: `2026-03-17-lawyers-love-specificity.md`
 
@@ -78,7 +92,7 @@ Ask:
 
 ## Output
 
-- Markdown file in `context/lived-experiences/`
+- Markdown file in `wiki/lived-experiences/`
 - Confirmation message
 
 ## Example

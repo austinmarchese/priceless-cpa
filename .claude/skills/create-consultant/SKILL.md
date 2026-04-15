@@ -16,6 +16,20 @@ Run `/create-consultant` when you:
 
 ## Process
 
+### Pre-flight: Sync Check
+
+Before starting, check if there are updates on main:
+
+```bash
+git fetch origin main
+BEHIND=$(git rev-list HEAD..origin/main --count)
+```
+
+If `$BEHIND` > 0, warn the user:
+> "There are [N] new commits on main. Run `git pull origin main` to get the latest context files before continuing?"
+
+If up to date, proceed silently.
+
 ### Step 1: Identify the Expert
 
 Ask:
@@ -73,14 +87,14 @@ Ask:
 
 Create the file at:
 ```
-context/consultants/[name]/frameworks.md
+wiki/consultants/[name]/frameworks.md
 ```
 
-Use the template from `context/consultants/_template.md`.
+Use the template from `wiki/consultants/_template.md`.
 
 ### Step 6: Confirm Creation
 
-> "Created [name] consultant at `context/consultants/[name]/frameworks.md`
+> "Created [name] consultant at `wiki/consultants/[name]/frameworks.md`
 >
 > To use this consultant, tell me:
 > 'Review this copy using [name]'s frameworks'
@@ -118,7 +132,7 @@ your customer" or "too vague—what does 'quality service' actually
 mean?" She pushes for specifics constantly.
 
 Claude: Created Joanna Wiebe consultant at
-`context/consultants/joanna-wiebe/frameworks.md`
+`wiki/consultants/joanna-wiebe/frameworks.md`
 
 To use: "Review this landing page using Joanna's frameworks"
 ```
