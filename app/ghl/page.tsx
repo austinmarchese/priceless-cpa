@@ -208,7 +208,7 @@ function GHLForm() {
                 Based on your revenue, you may be overpaying in taxes.<br />
                 Book a free strategy call to find out how much.
               </p>
-              <a href="https://calendly.com/pricelesscpa/intro" target="_blank" rel="noopener noreferrer" className="ghl-btn">
+              <a href="https://api.leadconnectorhq.com/widget/bookings/anthony-price-personal-calendar" target="_blank" rel="noopener noreferrer" className="ghl-btn">
                 Book My Free Strategy Call →
               </a>
               <p className="ghl-security" style={{ marginTop: 24 }}>
