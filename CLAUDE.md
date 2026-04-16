@@ -82,6 +82,15 @@ When helping with content:
 | `wiki/marketing/marketing-growth-engine.md` | Full marketing funnel: lead gen, sales process, lead magnets |
 | `wiki/marketing/mvp-sales-process.md` | GHL pipeline, automations, lead scoring, implementation checklist |
 
+### Official Content Database (Notion)
+
+The single source of truth for every video and short is the **[Priceless] Social Media** Notion database. See `wiki/notion-content-database.md` for schema, status pipeline, views, and workflow integration.
+
+- **URL:** https://www.notion.so/3040df1f244e80c98e5be8be6e6e008d
+- **Data source ID:** `collection://3040df1f-244e-803a-b840-000b46f9686c`
+
+Every project folder in `projects/videos/` or `projects/shorts/` must correspond to a row in this database. Use the Notion MCP tools (`notion-fetch`, `notion-create-pages`, `notion-update-page`) to read and write.
+
 ## Skills
 
 Skills are in `.claude/skills/[name]/SKILL.md`. When the user runs `/[skill-name]`, read the SKILL.md and follow the process.
