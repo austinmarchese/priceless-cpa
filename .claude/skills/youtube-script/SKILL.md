@@ -61,7 +61,22 @@ If no topic provided, present the top 5 adapted titles from outlier research. If
 | Authority Takedown | "CPA Reacts to [Bad Advice]" | Debunking/reaction content |
 | Newsjacking | "[News Event]. What This Means For You" | Timely content |
 
-### Step 2: Packaging (Title + Thumbnail)
+### Step 2: Lock the Through-Line
+
+Before drafting or packaging, define the through-line: the single arguable thesis the entire video exists to prove. Write it in one sentence, in this shape:
+
+> "The reason [audience pain/outcome] is actually [contrarian root cause], which means [implication that sets up the video's answer]."
+
+Rules:
+- One sentence. If it needs two, it isn't focused enough.
+- It must be arguable. If no one would disagree, it's a truism.
+- State or imply it in the cold open / context.
+- Every body section must prove, extend, or complicate it. No orphan tips.
+- The close restates it as the final takeaway.
+
+Include the through-line in the output header and reference it when writing each section.
+
+### Step 3: Packaging (Title + Thumbnail)
 
 Before writing the script, define the packaging:
 
@@ -75,7 +90,7 @@ Before writing the script, define the packaging:
 
 Present packaging for approval before writing the script.
 
-### Step 3: Script Structure
+### Step 4: Script Structure
 
 Use this structure for 10-20 minute videos:
 
@@ -96,7 +111,13 @@ Include a mini-story or client example (anonymized).
 Second major point. Build on Section 1.
 Address the "but what about..." objection they're thinking.
 
-[SECTION 3 — 8:00-11:00]
+[MID-VIDEO CTA — 8:00-8:30]
+Soft CTA after the viewer has received real value. 20-30 seconds max.
+Acknowledge the value just delivered, name the gap between watching and
+implementing, offer the next step (book a strategy call / link in description),
+then transition cleanly back into content. Only ONE mid-video CTA per script.
+
+[SECTION 3 — 8:30-11:00]
 Third major point or the "how to actually do this" section.
 Make it actionable, not just theoretical.
 
@@ -113,7 +134,7 @@ Recap the key insight. Soft CTA.
 "If you want help implementing this, link's in the description."
 ```
 
-### Step 4: Writing Rules
+### Step 5: Writing Rules
 
 1. **Write for speaking, not reading.** Short sentences. Conversational. How Anthony would actually talk in a meeting.
 2. **Use specific numbers.** "$47K" not "thousands." "3 entities" not "multiple entities."
@@ -125,7 +146,7 @@ Recap the key insight. Soft CTA.
 8. **No em dashes.** Use commas, periods, or restructure.
 9. **Persona filter.** Every example should feel like it's about THEIR situation ($250K-$3M+, multiple entities, real estate + business).
 
-### Step 5: Persona Check
+### Step 6: Persona Check
 
 Before finalizing, verify:
 
@@ -137,8 +158,9 @@ Before finalizing, verify:
 | Beyond basic | Not something they'd find in a 2-minute Google search |
 | Expert positioning | Makes Anthony the CPA who "gets it" |
 | Actionable | Viewer can do something specific after watching |
+| Through-line | Every body section visibly proves, extends, or complicates the through-line. No orphan tips. |
 
-### Step 6: Output Format
+### Step 7: Output Format
 
 Save to: `projects/videos/[slug]/script.md`
 
@@ -152,6 +174,8 @@ If the project folder doesn't exist yet, create it. If an `idea.md` already exis
 **Target:** Serial entrepreneur, [specific situation]
 **Duration:** ~[X] minutes
 **Status:** Draft
+
+**Through-line:** [One-sentence arguable thesis every section must reinforce]
 
 ---
 
@@ -188,7 +212,11 @@ If the project folder doesn't exist yet, create it. If an `idea.md` already exis
 
 [Script text]
 
-### Section 3: [Title] (8:00-11:00)
+### Mid-Video CTA (8:00-8:30)
+
+[20-30s soft CTA tied to value just delivered, then transition back into content]
+
+### Section 3: [Title] (8:30-11:00)
 
 [Script text]
 

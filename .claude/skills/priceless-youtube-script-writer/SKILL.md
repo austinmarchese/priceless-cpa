@@ -138,7 +138,28 @@ Before writing the script, define the packaging:
 
 Present packaging for approval before writing the script.
 
-## Step W4: Search for Relevant Material
+## Step W4: Lock the Through-Line
+
+Before any drafting, define the **through-line**: the single central argument the entire video exists to prove. Every section, example, and mid-video CTA must reinforce it.
+
+Write it in one sentence, in this shape:
+
+> "The reason [audience pain/outcome] is actually [contrarian root cause], which means [implication that sets up the video's answer]."
+
+Examples:
+- "The reason you're overpaying in taxes isn't missing deductions, it's that your entity structure was built for a smaller version of your business, which means no amount of year-end strategy will fix it."
+- "The reason your CPA isn't saving you money isn't incompetence, it's that they're playing compliance while your situation needs strategy, which means you need a different role on your team, not a better version of the same one."
+
+**Rules:**
+- One sentence. If it needs two, it isn't focused enough.
+- It must be **arguable** — if no one would disagree, it's a truism, not a through-line.
+- State or clearly imply it in the intro's Contrarian beat.
+- Every body section must prove, extend, or complicate it. No orphan tips.
+- The close restates it in plain language as the final takeaway.
+
+Present the through-line for approval before continuing to Step W5. Save it near the top of `script.md` as a `**Through-line:**` field so revisions can reference it.
+
+## Step W5: Search for Relevant Material
 
 Before drafting, search for material to weave in:
 
@@ -148,7 +169,7 @@ Before drafting, search for material to weave in:
 
 **The Authenticity Test**: For each section, ask: "Could any CPA have written this?" If yes, a lived experience or specific client story makes it uniquely Anthony's.
 
-## Step W5: Draft Script
+## Step W6: Draft Script
 
 Follow the structure and principles below. The exact section count and timestamps are flexible based on the topic. What matters is the principles, not rigid structure.
 
@@ -201,6 +222,23 @@ Here's exactly what this looks like:
 "And just like that, [OUTCOME with specific number]."
 ```
 
+### MID-VIEW CTA (Required, ~40-60% through the video)
+
+Place a soft CTA after the viewer has received at least one high-value point, ideally right before or after the strongest value moment in the body. It should feel like a natural aside, not a pitch break.
+
+**Structure (20-30 seconds):**
+1. **Acknowledge the value just delivered** — "If what I just walked through is already saving you money, here's what most people do next..."
+2. **Name the gap** — The difference between watching and implementing. Reference the reactive-CPA frustration.
+3. **Offer the next step** — "If you want us to actually build this out for your situation, there's a link in the description to book a strategy call."
+4. **Transition back into content** — "But before you do that, there's one more piece you need to understand, because it's where most people mess this up..."
+
+**Rules:**
+- Never interrupt a point mid-thought. Place it between sections, at a natural value peak.
+- Keep it 20-30 seconds. Longer breaks churn retention.
+- Specific > generic. "Book a strategy call" beats "reach out."
+- Tie it to what they just learned, not a generic sales ask.
+- Only ONE mid-video CTA per script.
+
 ### COMMON MISTAKES (Optional Section)
 
 If the topic has clear pitfalls, include a mistakes section. Structure each as:
@@ -227,7 +265,7 @@ At least one mistake should be "what your CPA is probably doing wrong" to reinfo
 
 ---
 
-## Step W6: Apply Voice & Style
+## Step W7: Apply Voice & Style
 
 ### Anthony's Voice Markers
 
@@ -293,16 +331,20 @@ At least one mistake should be "what your CPA is probably doing wrong" to reinfo
 5. "Now I know what you're thinking: [objection]. Let me address that."
 6. "But wait, there's a catch that nobody talks about..."
 
-## Step W7: Run Quality Checklist
+## Step W8: Run Quality Checklist
 
 Before presenting draft, verify:
 
 ### Structure
+- [ ] Through-line is defined in one arguable sentence and stated (or implied) in the intro's Contrarian beat
+- [ ] Every body section visibly proves, extends, or complicates the through-line. No orphan tips.
+- [ ] Close restates the through-line as the final takeaway
 - [ ] Intro follows: Context → Common Belief → Contrarian → Proof → Plan
 - [ ] Intro under 60 seconds
 - [ ] Body points follow ascending value (each better than the last)
 - [ ] Re-hooks every 60-90 seconds
 - [ ] Each point has What → Why → How
+- [ ] Mid-video CTA placed at 40-60% mark, tied to value just delivered
 - [ ] ONE ending, not multiple
 
 ### Content & Value
@@ -332,7 +374,7 @@ Before presenting draft, verify:
 - [ ] Evidence is stacked (multiple examples/cases, not just one)
 - [ ] Every legal point is translated to plain English immediately after
 
-## Step W8: Present Draft
+## Step W9: Present Draft
 
 Create `script.md` with inline feedback blocks after each section:
 
@@ -377,6 +419,11 @@ When user says "done" or "ready":
 
 Before revising, automatically check:
 
+**Through-Line Integrity**
+- Re-read the `**Through-line:**` field at the top of `script.md`.
+- For each body section, ask: "Does this section prove, extend, or complicate the through-line?" If not, flag it.
+- If the close doesn't restate the through-line as the final takeaway, flag it.
+
 **Lived Experiences Integration**
 - Any generic advice that could use a real client story?
 - Any claims without proof that need a specific example?
@@ -406,6 +453,7 @@ For each section with feedback:
 | Feedback | Interpretation |
 |----------|----------------|
 | "Feels slapped on" | Weave into narrative earlier, don't cut |
+| "Jumps around" / "feels like a list" | Through-line drift. Re-anchor each section to the stated through-line. |
 | "Clean up" / "tighten" | Keep idea, remove clutter |
 | "Cut" / "unnecessary" | Remove entirely |
 | "More like Anthony" | Add specificity, client examples, signature phrases |
@@ -525,6 +573,8 @@ If the project folder doesn't exist yet, create it. If an `idea.md` already exis
 **Duration:** ~[X] minutes
 **Status:** Draft
 
+**Through-line:** [One-sentence arguable thesis every section must reinforce]
+
 ---
 
 ## Packaging
@@ -555,6 +605,10 @@ If the project folder doesn't exist yet, create it. If an `idea.md` already exis
 ### [Body Section 2 Title] (~timestamp)
 
 [Script text]
+
+### Mid-Video CTA (~40-60% mark)
+
+[20-30s soft CTA tied to the value just delivered, then transition back into content]
 
 [... as many sections as the topic needs]
 
