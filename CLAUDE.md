@@ -114,6 +114,7 @@ Skills are in `.claude/skills/[name]/SKILL.md`. When the user runs `/[skill-name
 | `/create-skill` | Create a new reusable workflow |
 | `/improve-skill` | Enhance a skill based on learnings |
 | `/create-consultant` | Clone an expert's frameworks |
+| `/update-system` | Pull latest main, preview changes, and brief you on what's new |
 | `/git-push` | Commit and push changes to GitHub |
 
 ## YouTube Content Workflow
