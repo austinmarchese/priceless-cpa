@@ -13,11 +13,6 @@ export async function POST(request: NextRequest) {
   const webhookUrl = process.env.GHL_WEBHOOK_URL
   const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL
 
-  if (!webhookUrl) {
-    console.error('GHL_WEBHOOK_URL is not set')
-    return NextResponse.json({ error: 'Webhook not configured' }, { status: 500 })
-  }
-
   // Split name into first/last for GHL field mapping
   const nameParts = name.trim().split(/\s+/)
   const firstName = nameParts[0] || ''
@@ -31,47 +26,69 @@ export async function POST(request: NextRequest) {
   const tags = [`source:${utmSource}`]
   if (utmCampaign) tags.push(`campaign:${utmCampaign}`)
 
-  try {
-    // 1. Send to GHL webhook
-    const ghlResponse = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
-        email,
-        phone: phone || '',
-        revenue: revenue || '',
-        source: utmSource,
-        medium: utmMedium,
-        campaign: utmCampaign,
-        content: content || '',
-        tags,
-      }),
-    })
+  const qualified = ['$150K - $500K', '$500K - $1M', '$1M - $3M', '$3M+'].includes(revenue || '')
+  tags.push(qualified ? 'qualified' : 'unqualified')
 
-    if (!ghlResponse.ok) {
-      console.error('GHL webhook failed:', ghlResponse.status, await ghlResponse.text())
-      return NextResponse.json({ error: 'Webhook delivery failed' }, { status: 502 })
+  const ghlResult = { ok: false, status: 0, error: '' }
+  const slackResult = { ok: false, status: 0, error: '' }
+
+  // 1. GHL webhook (create contact)
+  if (!webhookUrl) {
+    ghlResult.error = 'GHL_WEBHOOK_URL not configured'
+    console.error('[leads] GHL_WEBHOOK_URL is not set')
+  } else {
+    try {
+      const ghlResponse = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          first_name: firstName,
+          last_name: lastName,
+          full_name: `${firstName} ${lastName}`.trim(),
+          email,
+          phone: phone || '',
+          revenue: revenue || '',
+          qualified: qualified ? 'yes' : 'no',
+          source: utmSource,
+          medium: utmMedium,
+          campaign: utmCampaign,
+          content: content || '',
+          tags,
+        }),
+      })
+      ghlResult.ok = ghlResponse.ok
+      ghlResult.status = ghlResponse.status
+      if (!ghlResponse.ok) {
+        const text = await ghlResponse.text()
+        ghlResult.error = text
+        console.error('[leads] GHL webhook failed:', ghlResponse.status, text)
+      } else {
+        console.log('[leads] GHL webhook delivered for', email)
+      }
+    } catch (err) {
+      ghlResult.error = err instanceof Error ? err.message : String(err)
+      console.error('[leads] GHL webhook exception:', err)
     }
+  }
 
-    // 2. Send Slack notification
-    if (slackWebhookUrl) {
+  // 2. Slack notification (fires regardless of GHL outcome so we never lose a lead)
+  if (!slackWebhookUrl) {
+    slackResult.error = 'SLACK_WEBHOOK_URL not configured'
+    console.error('[leads] SLACK_WEBHOOK_URL is not set')
+  } else {
+    try {
       const contactSearchUrl = `https://app.gohighlevel.com/v2/location/${GHL_LOCATION_ID}/contacts/smart_list`
       const campaignLine = utmCampaign ? `*Campaign:*\n${utmCampaign}` : '*Campaign:*\nN/A'
+      const headerText = qualified ? 'New Qualified Lead (5 Tax Traps)' : 'New Organic Lead (5 Tax Traps)'
 
-      await fetch(slackWebhookUrl, {
+      const slackResponse = await fetch(slackWebhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           blocks: [
             {
               type: 'header',
-              text: {
-                type: 'plain_text',
-                text: 'New Organic Lead',
-                emoji: true,
-              },
+              text: { type: 'plain_text', text: headerText, emoji: true },
             },
             {
               type: 'section',
@@ -82,28 +99,38 @@ export async function POST(request: NextRequest) {
                 { type: 'mrkdwn', text: `*Revenue:*\n${revenue || 'N/A'}` },
                 { type: 'mrkdwn', text: `*Source:*\n${utmSource} / ${utmMedium}` },
                 { type: 'mrkdwn', text: campaignLine },
+                { type: 'mrkdwn', text: `*Qualified:*\n${qualified ? 'Yes (book incoming)' : 'No (under $150K)'}` },
+                { type: 'mrkdwn', text: `*GHL webhook:*\n${ghlResult.ok ? 'Delivered' : `Failed (${ghlResult.status || 'no-status'})`}` },
               ],
             },
             {
               type: 'actions',
               elements: [
-                {
-                  type: 'button',
-                  text: { type: 'plain_text', text: 'View in GHL' },
-                  url: contactSearchUrl,
-                },
+                { type: 'button', text: { type: 'plain_text', text: 'View in GHL' }, url: contactSearchUrl },
               ],
             },
           ],
         }),
-      }).catch((err) => {
-        console.error('Slack notification failed:', err)
       })
+      slackResult.ok = slackResponse.ok
+      slackResult.status = slackResponse.status
+      if (!slackResponse.ok) {
+        const text = await slackResponse.text()
+        slackResult.error = text
+        console.error('[leads] Slack notification failed:', slackResponse.status, text)
+      } else {
+        console.log('[leads] Slack notification delivered for', email)
+      }
+    } catch (err) {
+      slackResult.error = err instanceof Error ? err.message : String(err)
+      console.error('[leads] Slack exception:', err)
     }
-
-    return NextResponse.json({ success: true })
-  } catch (error) {
-    console.error('GHL webhook error:', error)
-    return NextResponse.json({ error: 'Failed to send to GHL' }, { status: 500 })
   }
+
+  // Return 200 as long as at least one channel succeeded. We never want to block reveal.
+  const overallOk = ghlResult.ok || slackResult.ok
+  return NextResponse.json(
+    { success: overallOk, ghl: ghlResult, slack: slackResult },
+    { status: overallOk ? 200 : 502 },
+  )
 }
