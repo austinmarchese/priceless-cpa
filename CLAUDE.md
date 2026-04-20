@@ -105,6 +105,7 @@ Skills are in `.claude/skills/[name]/SKILL.md`. When the user runs `/[skill-name
 | `/priceless-youtube-script-writer` | Full script lifecycle: draft, revise, finalize. Karlton hooks + Jasmine authority + Anthony's voice |
 | `/youtube-idea` | Generate scored video ideas matched to audience and outlier patterns |
 | `/shorts-script` | Write short-form video scripts (45-90s) for Reels/TikTok/Shorts |
+| `/youtube-description` | Generate optimized YouTube descriptions with timestamps, CTAs, and Anthony's bio |
 | `/daily-journal` | Capture today's learnings into lived experiences |
 
 **Sales & Marketing:**
