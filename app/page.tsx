@@ -55,6 +55,7 @@ const industries = [
   { title: 'E-Commerce Brands', href: '/industries/ecommerce' },
   { title: 'Real Estate', href: '/industries/real-estate' },
   { title: 'Content Creators', href: '/industries/creators' },
+  { title: 'Puerto Rico Act 60', href: '/industries/puerto-rico' },
 ]
 
 const stats = [

@@ -35,6 +35,12 @@ const industries = [
     href: '/industries/creators',
     icon: '🎬',
   },
+  {
+    title: 'Puerto Rico Act 60',
+    description: 'Full-lifecycle Act 60 advisory, from assessment through ongoing dual-shore compliance.',
+    href: '/industries/puerto-rico',
+    icon: '🇵🇷',
+  },
 ]
 
 export default function IndustriesPage() {

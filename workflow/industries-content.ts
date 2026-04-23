@@ -245,3 +245,47 @@ export const creatorsContent = {
   finalDescription: 'Book a free call and see how much you could be saving.',
   finalCta: 'Book Your Free Consultation',
 }
+
+export const puertoRicoContent = {
+  topBarText: 'IRS scrutiny on Act 60 is increasing',
+  topBarHighlight: 'Make sure you are compliant',
+
+  categoryLabel: 'Puerto Rico Act 60 Advisory',
+  headline: 'The Decree Is the Easy Part.',
+  headlineHighlight: 'We Handle What Comes After.',
+  description: 'Decree mills get you approved and disappear. We manage the full Act 60 journey, from assessment through years of dual-shore compliance, so you capture the savings without the IRS exposure.',
+  heroCta: 'Get Your Dual-Shore Assessment',
+
+  benefits: [
+    'Dual-Shore assessment with real break-even math',
+    'Entity restructuring and IP transfer pricing',
+    'Bona fide residency roadmap and monitoring',
+    'PR + US tax filing (Form 480, 1040, 1120-S)',
+    'Ongoing nexus monitoring and income sourcing',
+  ],
+
+  whoIsFor: [
+    'Online business owners with $500K+ in location-flexible income',
+    'SaaS founders, consultants, and agency owners considering the move',
+    'Entrepreneurs who already have a decree but need real compliance',
+    'High-net-worth operators looking to legally reduce their effective rate to 4%',
+  ],
+
+  processSteps: [
+    { num: '01', title: 'Dual-Shore Assessment', desc: 'We run the real math: income analysis, break-even, and a go/no-go recommendation' },
+    { num: '02', title: 'Entity Restructuring', desc: 'PR entity formation, IP transfers, and decree application support' },
+    { num: '03', title: 'Relocation Setup', desc: 'Bona fide residency plan, compliance systems, and income sourcing framework' },
+    { num: '04', title: 'Ongoing Management', desc: 'Annual PR + US filings, quarterly compliance reviews, and proactive advisory' },
+  ],
+
+  stats: [
+    { value: '4%', label: 'Effective Tax Rate' },
+    { value: '$25K+', label: 'Engagement Start' },
+    { value: '100%', label: 'Compliance Focused' },
+    { value: 'Dual-Shore', label: 'Filing Expertise' },
+  ],
+
+  finalHeadline: 'Stop Guessing. Get the Real Math.',
+  finalDescription: 'Book a Dual-Shore assessment and find out if Act 60 actually makes sense for your situation, with real numbers, not speculation.',
+  finalCta: 'Book Your Free Consultation',
+}
