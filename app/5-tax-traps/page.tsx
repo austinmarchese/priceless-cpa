@@ -370,7 +370,7 @@ export default function FiveTaxTrapsPage() {
     })
     setBookingSrc(`https://api.leadconnectorhq.com/widget/booking/L4e0QcVE77VAkFsP6ogx?${bookingParams.toString()}`)
 
-    setQualified(QUALIFIED_THRESHOLD.includes(form.revenue))
+    setQualified(true)
     setStatus('success')
 
     fetch('/api/leads', {
