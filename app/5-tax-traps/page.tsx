@@ -174,11 +174,14 @@ const STYLES = `
   /* Reveal */
   .tt-reveal { padding: 72px 0 48px; animation: fadeUp 0.6s ease; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  .tt-reveal-head { text-align: center; margin-bottom: 44px; }
+  .tt-reveal-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; max-width: 1180px; margin: 0 auto; padding: 0 40px; align-items: start; }
+  .tt-reveal-left { min-width: 0; }
+  .tt-reveal-right { position: sticky; top: 24px; }
+  .tt-reveal-head { text-align: left; margin-bottom: 44px; }
   .tt-reveal-eyebrow { font-size: 0.78rem; color: #b8935a; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin: 0 0 12px; }
   .tt-reveal-heading { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.2; color: #1a1f2e; margin: 0 0 12px; }
   .tt-reveal-heading .accent { color: #b8935a; font-style: italic; }
-  .tt-reveal-sub { font-size: 1rem; color: #6b6760; margin: 0; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+  .tt-reveal-sub { font-size: 1rem; color: #6b6760; margin: 0; line-height: 1.6; }
 
   /* Trap card */
   .tt-trap { background: #ffffff; border: 1px solid rgba(184, 147, 90, 0.18); border-radius: 16px; padding: 32px 36px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(26, 31, 46, 0.04); display: grid; grid-template-columns: auto 1fr; gap: 28px; }
@@ -189,7 +192,7 @@ const STYLES = `
   .tt-read-more { display: none; }
 
   /* Qualified CTA */
-  .tt-cta-dark { background: #1a1f2e; color: #f5f0e8; border-radius: 20px; padding: 56px 44px; margin-top: 40px; text-align: center; box-shadow: 0 12px 40px rgba(26, 31, 46, 0.18); }
+  .tt-cta-dark { background: #1a1f2e; color: #f5f0e8; border-radius: 20px; padding: 32px 28px; text-align: center; box-shadow: 0 12px 40px rgba(26, 31, 46, 0.18); }
   .tt-cta-eyebrow { font-size: 0.78rem; color: #d4b27a; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin: 0 0 16px; }
   .tt-cta-h { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3.5vw, 2.2rem); line-height: 1.2; margin: 0 0 16px; color: #f5f0e8; }
   .tt-cta-h .accent { color: #d4b27a; font-style: italic; }
@@ -222,6 +225,10 @@ const STYLES = `
     .tt-form-card { justify-self: stretch; max-width: none; padding: 26px 24px; }
     .tt-form-head { text-align: center; }
     .tt-reveal { padding: 56px 0 32px; }
+    .tt-reveal-grid { grid-template-columns: 1fr; padding: 0 24px; }
+    .tt-reveal-head { text-align: center; }
+    .tt-reveal-right { position: static; }
+    .tt-cta-dark { margin-top: 32px; }
     .tt-trap { padding: 26px 24px; gap: 18px; grid-template-columns: 1fr; }
     .tt-trap-num { font-size: 1.8rem; padding: 0; }
     .tt-trap-title { font-size: 1.2rem; margin-bottom: 12px; }
@@ -550,43 +557,45 @@ export default function FiveTaxTrapsPage() {
         {/* Reveal */}
         {isRevealed && (
           <section className="tt-reveal" ref={revealRef}>
-            <div className="tt-narrow">
-              <div className="tt-reveal-head">
-                <p className="tt-reveal-eyebrow">The 5 Traps</p>
-                <h2 className="tt-reveal-heading">
-                  Here are the <span className="accent">5 traps.</span>
-                </h2>
-                <p className="tt-reveal-sub">
-                  Read them once. You will see your own situation in at least three of them.
-                </p>
+            <div className="tt-reveal-grid">
+              <div className="tt-reveal-left">
+                <div className="tt-reveal-head">
+                  <p className="tt-reveal-eyebrow">The 5 Traps</p>
+                  <h2 className="tt-reveal-heading">
+                    Here are the <span className="accent">5 traps.</span>
+                  </h2>
+                  <p className="tt-reveal-sub">
+                    Read them once. You will see your own situation in at least three of them.
+                  </p>
+                </div>
+
+                {TRAPS.map((trap) => {
+                  const isExpanded = expandedTraps.has(trap.number)
+                  return (
+                    <article key={trap.number} className="tt-trap">
+                      <div className="tt-trap-num">{trap.number}</div>
+                      <div>
+                        <h3 className="tt-trap-title">{trap.title}</h3>
+                        <p className={`tt-trap-body ${isExpanded ? '' : 'tt-trap-body-collapsed'}`}>{trap.body}</p>
+                        <button
+                          type="button"
+                          className={`tt-read-more ${isExpanded ? 'tt-read-more-hidden' : ''}`}
+                          onClick={() => setExpandedTraps((prev) => {
+                            const next = new Set(prev)
+                            next.add(trap.number)
+                            return next
+                          })}
+                        >
+                          Read more
+                        </button>
+                        <p className="tt-trap-example">{trap.example}</p>
+                      </div>
+                    </article>
+                  )
+                })}
               </div>
 
-              {TRAPS.map((trap) => {
-                const isExpanded = expandedTraps.has(trap.number)
-                return (
-                  <article key={trap.number} className="tt-trap">
-                    <div className="tt-trap-num">{trap.number}</div>
-                    <div>
-                      <h3 className="tt-trap-title">{trap.title}</h3>
-                      <p className={`tt-trap-body ${isExpanded ? '' : 'tt-trap-body-collapsed'}`}>{trap.body}</p>
-                      <button
-                        type="button"
-                        className={`tt-read-more ${isExpanded ? 'tt-read-more-hidden' : ''}`}
-                        onClick={() => setExpandedTraps((prev) => {
-                          const next = new Set(prev)
-                          next.add(trap.number)
-                          return next
-                        })}
-                      >
-                        Read more
-                      </button>
-                      <p className="tt-trap-example">{trap.example}</p>
-                    </div>
-                  </article>
-                )
-              })}
-
-              {qualified && (
+              <div className="tt-reveal-right">
                 <div className="tt-cta-dark">
                   <p className="tt-cta-eyebrow">You Qualify</p>
                   <h3 className="tt-cta-h">
@@ -606,25 +615,7 @@ export default function FiveTaxTrapsPage() {
                   </div>
                   <p className="tt-cta-note">No obligation. 100% free. Takes 30 minutes.</p>
                 </div>
-              )}
-
-              {!qualified && (
-                <div className="tt-cta-soft">
-                  <p className="tt-form-eyebrow">Keep Going</p>
-                  <h3 className="tt-cta-soft-h tt-serif">
-                    You are <span className="accent">earlier</span> in the journey.
-                  </h3>
-                  <p className="tt-cta-soft-sub">
-                    Our 1-on-1 Tax Strategy Calls are built for entrepreneurs at $150K+ in revenue. Grab our free CPA audit tool so you know exactly what to ask your current accountant.
-                  </p>
-                  <a href="/tax-checklist" className="tt-cta-btn">
-                    Get the Free CPA Audit
-                    <svg className="tt-btn-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </a>
-                </div>
-              )}
+              </div>
             </div>
           </section>
         )}
