@@ -1,0 +1,187 @@
+{
+  "channel": {
+    "name": "Priceless CPA",
+    "subscribers": "0",
+    "videoCount": 6,
+    "tagline": "",
+    "lastUpdated": "2026-04-24"
+  },
+  "stats": {
+    "active": 2,
+    "filmed": 0,
+    "shelved": 0,
+    "posted": 4
+  },
+  "videos": [
+    {
+      "id": "tax-rate-37-to-12-5",
+      "order": null,
+      "name": "37% to 12.5% Tax Rate on $4M",
+      "status": "research",
+      "validated": false,
+      "personas": "all",
+      "sponsor": null,
+      "folder": "tax-rate-37-to-12-5",
+      "title": {
+        "primary": "How I Got My Client From 37% to 12.5% Tax Rate on $4M Income",
+        "variants": []
+      },
+      "meta": "3-layer system: entity structure + accounting + compliance, QBID/retirement, strategic investments",
+      "thumbnails": [],
+      "outliers": []
+    },
+    {
+      "id": "s-corp-costing-you-money",
+      "order": null,
+      "name": "Your S Corp Is Costing You Money",
+      "status": "research",
+      "validated": false,
+      "personas": "all",
+      "sponsor": null,
+      "folder": "s-corp-costing-you-money",
+      "title": {
+        "primary": "Your S Corp Is Costing You Money: 5 Ways It Happens",
+        "variants": []
+      },
+      "meta": "Listicle: payroll issues, basis issues, late filing, compliance traps, state/local issues",
+      "thumbnails": [],
+      "outliers": []
+    },
+    {
+      "id": "how-rich-sell-zero-taxes-part-2",
+      "order": 1,
+      "name": "How The Rich Sell Businesses ZERO Taxes Part 2",
+      "status": "editing",
+      "postedDate": "2026-04-24",
+      "validated": true,
+      "personas": "all",
+      "sponsor": null,
+      "folder": "how-rich-sell-zero-taxes-part-2",
+      "title": {
+        "primary": "How The Rich Sell Their Businesses and Pay ZERO Taxes Part 2",
+        "variants": []
+      },
+      "meta": "Section 1202 (QSBS)",
+      "thumbnails": [
+        {
+          "file": "how-rich-sell-zero-taxes-part-2.png",
+          "label": "Primary"
+        }
+      ],
+      "outliers": []
+    },
+    {
+      "id": "how-rich-sell-zero-taxes",
+      "order": 2,
+      "name": "How The Rich Sell Businesses ZERO Taxes",
+      "status": "editing",
+      "postedDate": "2026-04-24",
+      "validated": true,
+      "personas": "all",
+      "sponsor": null,
+      "folder": "how-rich-sell-zero-taxes",
+      "title": {
+        "primary": "How The Rich Sell Their Businesses and Pay ZERO Taxes",
+        "variants": []
+      },
+      "meta": "",
+      "thumbnails": [
+        {
+          "file": "how-rich-sell-zero-taxes.png",
+          "label": "Primary"
+        }
+      ],
+      "outliers": [
+        {
+          "screenshot": "outlier-1776961698636.png",
+          "primary": false
+        },
+        {
+          "screenshot": "outlier-1776961698944.png",
+          "primary": false
+        }
+      ]
+    },
+    {
+      "id": "how-rich-use-scorps",
+      "order": null,
+      "name": "How The Rich Use S-Corps",
+      "status": "posted",
+      "postedDate": "2026-04-24",
+      "validated": true,
+      "personas": "all",
+      "sponsor": null,
+      "folder": "how-rich-use-scorps",
+      "title": {
+        "primary": "How The Rich use S-Corps to SAVE $10k+ per year",
+        "variants": []
+      },
+      "meta": "",
+      "thumbnails": [
+        {
+          "file": "How-The-Rich-use-S-Corps-to-SAVE--10k--per-year-2--1-.png",
+          "label": "How-The-Rich-use-S-Corps-to-SAVE--10k--per-year-2--1-"
+        }
+      ],
+      "outliers": []
+    },
+    {
+      "id": "rental-property-tax-mistakes",
+      "order": 3,
+      "name": "Rental Property Tax Mistakes",
+      "status": "editing",
+      "postedDate": "2026-04-24",
+      "validated": true,
+      "personas": "all",
+      "sponsor": null,
+      "folder": "rental-property-tax-mistakes",
+      "title": {
+        "primary": "4 Huge Mistakes Rental Property Owners Make to Overpay Taxes",
+        "variants": []
+      },
+      "meta": "",
+      "thumbnails": [
+        {
+          "file": "The_Real_Estate_Tax_Strategy_Most_People_Get_Wrong.webp",
+          "label": "Primary"
+        }
+      ],
+      "outliers": [
+        {
+          "screenshot": "outlier-1776962001707.png",
+          "primary": false
+        },
+        {
+          "screenshot": "outlier-1776962002020.png",
+          "primary": false
+        },
+        {
+          "screenshot": "outlier-1776962002347.png",
+          "primary": false
+        },
+        {
+          "screenshot": "outlier-1776962002656.png",
+          "primary": false
+        },
+        {
+          "screenshot": "outlier-1776962002964.png",
+          "primary": false
+        }
+      ]
+    }
+  ],
+  "milestones": [
+    {
+      "id": "m-1776962354791-tge52",
+      "type": "package-finalization",
+      "date": null,
+      "afterVideoId": "rental-property-tax-mistakes"
+    },
+    {
+      "id": "m-1776962371373-m3ecx",
+      "type": "film-date",
+      "date": null,
+      "afterVideoId": "rental-property-tax-mistakes"
+    }
+  ]
+}
