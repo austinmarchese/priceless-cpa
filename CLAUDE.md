@@ -117,6 +117,34 @@ Skills are in `.claude/skills/[name]/SKILL.md`. When the user runs `/[skill-name
 | `/priceless-lead-magnet` | Generate a new lead magnet page with route and interactive quiz |
 | `/code-review` | Audit codebase for branding consistency and best practices |
 
+**Tax Planning (quarterly engagement — run in numbered order):**
+
+| Command | What it does |
+|---------|--------------|
+| `/priceless-tax-planning` | Main router for quarterly tax planning. Orchestrates the 8 operators and loads sub-skills. Start here for any full engagement. |
+| `/tax-return-analysis-1` | Phase 0.5 — extract carryforwards, basis, elections, prior-CPA methodology from prior-year returns |
+| `/bookkeeping-qa-2` | Phase 1 — verify QBO books reconcile before any projection work |
+| `/tax-projection-3` | Phase 2 — build baseline federal + state tax projection (the denominator for strategy deltas) |
+| `/payroll-analysis-4` | Phase 2.5 — S Corp reasonable comp + §162(l) health + HSA + retirement coordination |
+| `/tax-strategy-5` | Phase 3 — run eight operators, filter 25-strategy library, apply selection matrix, return ranked recommendations |
+| `/quarterly-memo-6` | Phase 4 — synthesize all phases into partner-reviewable Q1/Q2/Q3/Q4 memo + Karbon task block |
+
+**Tax Planning utilities (called on-demand by the numbered skills or directly):**
+
+| Command | What it does |
+|---------|--------------|
+| `/state-tax-lookup` | Pull state-specific rules for a client: rate structure, PTET mechanics, residency posture, OBBBA conformity, sourcing rules. Covers all 50 states + DC. |
+| `/industry-playbook` | Pull the industry-specific strategy playbook: what works, what doesn't, industry tax code triggers, audit posture. Covers 11 industries (E-Commerce, Real Estate Owner, Software/AI, Doctors, Construction, RE Agent, Digital Marketing, Home Services, Jewelry, Investment Firms, Car Washes). |
+| `/capital-deployment-screen` | Operator 8 evaluation for HNW clients (AGI > $750K, Full Wealth tier). Runs the 8-gate qualification and surfaces the 2-3 most relevant deployment vehicles from the 13-file library. Partner sign-off required for any Tier 1/2 recommendation. |
+
+**Tax Planning — standalone engagement workflows (separate SOW from quarterly):**
+
+| Command | What it does |
+|---------|--------------|
+| `/prior-year-amendments` | Revenue-generating SOL-urgent sweep: Stage 1 screening matrix → Stage 2 return-level checklist → Stage 3 economics break-even → Stage 4 client conversation (if PROCEED). Produces decision log for every client touched. Separate engagement letter from current-year planning. |
+
+All tax planning reference material (methodology, strategies, industries, capital deployment, 52 state files, workflows) lives under `.claude/skills/priceless-tax-planning/`. The numbered wrapper skills delegate into that library.
+
 **System:**
 
 | Command | What it does |
