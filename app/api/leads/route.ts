@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
     console.error('[leads] SLACK_WEBHOOK_URL is not set')
   } else {
     try {
-      const contactSearchUrl = `https://app.gohighlevel.com/v2/location/${GHL_LOCATION_ID}/contacts/smart_list`
+      const contactSearchUrl = `https://app.gohighlevel.com/v2/location/${GHL_LOCATION_ID}/contacts`
       const campaignLine = utmCampaign ? `*Campaign:*\n${utmCampaign}` : '*Campaign:*\nN/A'
       const headerText = qualified ? 'New Qualified Lead (5 Tax Traps)' : 'New Organic Lead (5 Tax Traps)'
 

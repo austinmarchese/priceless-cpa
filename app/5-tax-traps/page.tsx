@@ -186,6 +186,7 @@ const STYLES = `
   .tt-trap-title { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.35rem; color: #1a1f2e; line-height: 1.3; margin: 0 0 14px; font-weight: 400; }
   .tt-trap-body { font-size: 0.98rem; color: #6b6760; line-height: 1.7; margin: 0 0 16px; }
   .tt-trap-example { background: rgba(184, 147, 90, 0.08); border-left: 3px solid #b8935a; padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 0.9rem; color: #5a5550; line-height: 1.55; font-style: italic; margin: 0; }
+  .tt-read-more { display: none; }
 
   /* Qualified CTA */
   .tt-cta-dark { background: #1a1f2e; color: #f5f0e8; border-radius: 20px; padding: 56px 44px; margin-top: 40px; text-align: center; box-shadow: 0 12px 40px rgba(26, 31, 46, 0.18); }
@@ -225,6 +226,10 @@ const STYLES = `
     .tt-trap-num { font-size: 1.8rem; padding: 0; }
     .tt-trap-title { font-size: 1.2rem; margin-bottom: 12px; }
     .tt-trap-body { font-size: 0.95rem; }
+    .tt-trap-body-collapsed { display: none; }
+    .tt-read-more { display: inline-block; background: none; border: none; color: #b8935a; font-size: 0.9rem; font-weight: 600; padding: 0; margin: 0 0 14px; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+    .tt-read-more:hover { color: #9a7a48; }
+    .tt-read-more-hidden { display: none; }
     .tt-cta-dark { padding: 44px 28px; }
     .tt-cta-soft { padding: 36px 24px; }
     .tt-cta-btn { width: 100%; }
@@ -285,8 +290,9 @@ export default function FiveTaxTrapsPage() {
   const [emailSuggestion, setEmailSuggestion] = useState('')
   const [revenueError, setRevenueError] = useState('')
   const [qualified, setQualified] = useState(false)
+  const [expandedTraps, setExpandedTraps] = useState<Set<string>>(new Set())
   const [bookingHeight, setBookingHeight] = useState(1400)
-  const [bookingSrc, setBookingSrc] = useState('https://api.leadconnectorhq.com/widget/bookings/anthony-price-personal-calendar')
+  const [bookingSrc, setBookingSrc] = useState('https://api.leadconnectorhq.com/widget/booking/L4e0QcVE77VAkFsP6ogx')
   const revealRef = useRef<HTMLDivElement>(null)
 
   function validatePhone(value: string): string {
@@ -362,7 +368,7 @@ export default function FiveTaxTrapsPage() {
       email: form.email,
       phone: e164,
     })
-    setBookingSrc(`https://api.leadconnectorhq.com/widget/bookings/anthony-price-personal-calendar?${bookingParams.toString()}`)
+    setBookingSrc(`https://api.leadconnectorhq.com/widget/booking/L4e0QcVE77VAkFsP6ogx?${bookingParams.toString()}`)
 
     setQualified(QUALIFIED_THRESHOLD.includes(form.revenue))
     setStatus('success')
@@ -390,7 +396,7 @@ export default function FiveTaxTrapsPage() {
     <div className="tt-root">
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />
       <div className="tt-topbar">
-          For <strong>Serial Entrepreneurs</strong> at $250K+ Revenue
+          For <strong>Business Owners</strong> Making Over $250K+ Revenue
         </div>
 
         <nav className="tt-nav">
@@ -555,16 +561,30 @@ export default function FiveTaxTrapsPage() {
                 </p>
               </div>
 
-              {TRAPS.map((trap) => (
-                <article key={trap.number} className="tt-trap">
-                  <div className="tt-trap-num">{trap.number}</div>
-                  <div>
-                    <h3 className="tt-trap-title">{trap.title}</h3>
-                    <p className="tt-trap-body">{trap.body}</p>
-                    <p className="tt-trap-example">{trap.example}</p>
-                  </div>
-                </article>
-              ))}
+              {TRAPS.map((trap) => {
+                const isExpanded = expandedTraps.has(trap.number)
+                return (
+                  <article key={trap.number} className="tt-trap">
+                    <div className="tt-trap-num">{trap.number}</div>
+                    <div>
+                      <h3 className="tt-trap-title">{trap.title}</h3>
+                      <p className={`tt-trap-body ${isExpanded ? '' : 'tt-trap-body-collapsed'}`}>{trap.body}</p>
+                      <button
+                        type="button"
+                        className={`tt-read-more ${isExpanded ? 'tt-read-more-hidden' : ''}`}
+                        onClick={() => setExpandedTraps((prev) => {
+                          const next = new Set(prev)
+                          next.add(trap.number)
+                          return next
+                        })}
+                      >
+                        Read more
+                      </button>
+                      <p className="tt-trap-example">{trap.example}</p>
+                    </div>
+                  </article>
+                )
+              })}
 
               {qualified && (
                 <div className="tt-cta-dark">
