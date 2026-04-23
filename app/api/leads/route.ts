@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { trackEvent, identifyUser } from '@/lib/posthog'
 
 const GHL_LOCATION_ID = 'w9nlFqFeNgvMxlmA50dr'
 
@@ -126,6 +127,16 @@ export async function POST(request: NextRequest) {
       console.error('[leads] Slack exception:', err)
     }
   }
+
+  // Track lead in PostHog (server-side, fire-and-forget)
+  identifyUser(email, { email, name: firstName + ' ' + lastName, revenue: revenue || 'N/A' })
+  trackEvent(email, 'lead_captured', {
+    source: utmSource,
+    medium: utmMedium,
+    campaign: utmCampaign,
+    revenue: revenue || 'N/A',
+    qualified,
+  })
 
   // Return 200 as long as at least one channel succeeded. We never want to block reveal.
   const overallOk = ghlResult.ok || slackResult.ok

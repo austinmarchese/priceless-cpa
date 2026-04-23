@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import posthog from 'posthog-js'
 
 const QUALIFIED_THRESHOLD = ['$150K - $500K', '$500K - $1M', '$1M - $3M', '$3M+']
 
@@ -334,6 +335,21 @@ export default function FiveTaxTrapsPage() {
     return () => window.removeEventListener('message', onMessage)
   }, [])
 
+  // Track when user clicks into the booking iframe (window loses focus to iframe)
+  useEffect(() => {
+    if (status !== 'success') return
+    let tracked = false
+    function onBlur() {
+      if (tracked) return
+      if (document.activeElement?.tagName === 'IFRAME') {
+        tracked = true
+        posthog.capture('5_traps_booking_clicked')
+      }
+    }
+    window.addEventListener('blur', onBlur)
+    return () => window.removeEventListener('blur', onBlur)
+  }, [status])
+
   useEffect(() => {
     if (status === 'success' && revealRef.current) {
       revealRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -356,8 +372,8 @@ export default function FiveTaxTrapsPage() {
 
     if (!form.revenue) { setRevenueError('Please select your annual revenue.'); return }
 
-    // Reveal instantly. Fire lead capture in the background with keepalive so delivery is guaranteed
-    // even if the browser is navigating. This is the same pattern beacons use.
+    posthog.capture('5_traps_form_submitted', { revenue: form.revenue })
+
     setErrorMsg('')
 
     // Pre-fill the GHL booking widget with the data we already captured
