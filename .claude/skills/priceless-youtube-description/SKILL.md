@@ -84,8 +84,10 @@ Use this exact structure. Every description follows the same format for brand co
 The very first line of every description is the 5 Tax Traps lead magnet link. This appears in the YouTube preview (before "Show more") and drives traffic to the lead capture page:
 
 ```
-5 Tax Traps Your Accountant Is Missing (free guide): https://priceless.cpa/5-tax-traps
+5 Tax Traps Your Accountant Is Missing (free guide): https://priceless.cpa/5-tax-traps?utm_source=youtube&utm_campaign=[VIDEO_SLUG]
 ```
+
+Replace `[VIDEO_SLUG]` with the video's slug (e.g., `entity-restructuring`, `cost-seg-explained`). This lets PostHog and the lead form track which video drove each lead.
 
 This line is non-negotiable. It goes before the hook line on every video.
 
