@@ -1,5 +1,5 @@
 ---
-name: vsl-script
+name: priceless-vsl-script
 description: Write Video Sales Letter scripts for Priceless CPA landing pages, email funnels, and service offers using direct response frameworks
 ---
 
@@ -7,7 +7,7 @@ description: Write Video Sales Letter scripts for Priceless CPA landing pages, e
 
 ## When to Use
 
-Use `/vsl-script` when you need to:
+Use `/priceless-vsl-script` when you need to:
 - Write a VSL for a landing page (cold or warm traffic)
 - Write a VSL for a specific service offer (S-Corp restructuring, tax strategy, etc.)
 - Write an Awareness Bridge VSL (converts lead magnet users into sales call bookers)

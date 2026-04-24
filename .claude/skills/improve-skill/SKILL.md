@@ -134,7 +134,7 @@ Changes made:
 - Added step to save audience profile after page creation
 - Added learning: "Interview insights are reusable for future content"
 
-Next time you run `/industry-page`, it will save the audience profile.
+Next time you run `/priceless-industry-page`, it will save the audience profile.
 ```
 
 ## Learnings

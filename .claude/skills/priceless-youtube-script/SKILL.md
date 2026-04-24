@@ -1,5 +1,5 @@
 ---
-name: youtube-script
+name: priceless-youtube-script
 description: Write long-form YouTube scripts (10-20 min) for tax/wealth content targeting serial entrepreneurs
 ---
 
@@ -7,14 +7,14 @@ description: Write long-form YouTube scripts (10-20 min) for tax/wealth content 
 
 ## When to Use
 
-Use `/youtube-script` when you:
+Use `/priceless-youtube-script` when you:
 - Need to write a full YouTube video script (10-20 minutes)
 - Have a video idea or title from the outlier research to develop into a script
 - Want to create a deep-dive on a tax strategy, mistake, or framework
 
 ## How to Use
 
-Run `/youtube-script` with a topic, title, or idea number:
+Run `/priceless-youtube-script` with a topic, title, or idea number:
 - `/youtube-script cost segregation for real estate investors`
 - `/youtube-script --title "The IRS Is Targeting Entrepreneurs With Multiple Entities"`
 - `/youtube-script --idea 7` (references idea #7 from outlier titles)

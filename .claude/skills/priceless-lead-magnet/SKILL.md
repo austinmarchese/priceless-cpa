@@ -1,5 +1,5 @@
 ---
-name: lead-magnet
+name: priceless-lead-magnet
 description: Framework for creating lead magnet pages that capture emails and deliver value for Priceless CPA
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: industry-page
+name: priceless-industry-page
 description: Interview the user to understand a target industry, then generate a complete landing page with content and code
 triggers:
   - new industry page

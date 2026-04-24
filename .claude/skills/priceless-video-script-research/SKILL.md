@@ -1,16 +1,16 @@
 ---
-name: video-script-research
+name: priceless-video-script-research
 description: Research the body content of a YouTube video. Takes a locked title and builds an enriched outline with stats, examples, tax code references, and client stories.
 ---
 
 ## When to use
 
-Use `/video-script-research` when you:
+Use `/priceless-video-script-research` when you:
 - Have a locked video title and need to research what the video should actually cover
 - Want to build a research-backed outline before writing the script
 - Need stats, IRS data, tax code references, and client story ideas for a specific topic
 
-**Prerequisite:** The video title should already be decided (via `/video-idea-research` or manually). A project folder should already exist at `projects/videos/[slug]/`.
+**Prerequisite:** The video title should already be decided (via `/priceless-video-idea-research` or manually). A project folder should already exist at `projects/videos/[slug]/`.
 
 ## How to use
 
@@ -18,7 +18,7 @@ Run `/video-script-research [slug]` where slug is the project folder name:
 - `/video-script-research how-rich-avoid-irs-audits`
 - `/video-script-research write-off-your-house`
 
-Or just run `/video-script-research` and pick from existing projects.
+Or just run `/priceless-video-script-research` and pick from existing projects.
 
 ---
 

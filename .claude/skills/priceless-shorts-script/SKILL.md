@@ -1,5 +1,5 @@
 ---
-name: shorts-script
+name: priceless-shorts-script
 description: Write short-form video scripts for tax/wealth content targeting serial entrepreneurs
 ---
 
@@ -7,7 +7,7 @@ description: Write short-form video scripts for tax/wealth content targeting ser
 
 ## When to Use
 
-Use `/shorts-script` when you:
+Use `/priceless-shorts-script` when you:
 - Need to create a short-form video script (45-90 seconds) for Instagram/TikTok/YouTube Shorts
 - Have a tax strategy, mistake, or insight to turn into engaging content
 - Want to create standalone shorts or clips from long-form YouTube content

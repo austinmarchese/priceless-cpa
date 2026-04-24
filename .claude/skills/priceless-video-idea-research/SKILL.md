@@ -1,11 +1,11 @@
 ---
-name: video-idea-research
+name: priceless-video-idea-research
 description: "Title generation: (1) New video concept, (2) Riff on our outliers, (3) Translate competitor outliers"
 ---
 
 ## When to use
 
-Use `/video-idea-research` when you:
+Use `/priceless-video-idea-research` when you:
 - Have a video concept and need title options
 - Want to riff on your own best-performing titles
 - Want to translate competitor outliers to Priceless CPA's audience
@@ -13,7 +13,7 @@ Use `/video-idea-research` when you:
 
 ## How to use
 
-Run `/video-idea-research` -- you'll pick from 3 modes, then iterate.
+Run `/priceless-video-idea-research` -- you'll pick from 3 modes, then iterate.
 
 ## Process
 
@@ -240,7 +240,7 @@ After any round, ask: "Want to keep iterating, try a different angle, or lock on
 If locking one in:
 1. Create project folder at `projects/videos/[slug]/`
 2. Save `idea.md` with title, thumbnail concept, pattern, persona fit, shorts potential
-3. Suggest: "Ready to script? Run `/youtube-script` to start."
+3. Suggest: "Ready to script? Run `/priceless-youtube-script` to start."
 
 Continue until the user is satisfied.
 

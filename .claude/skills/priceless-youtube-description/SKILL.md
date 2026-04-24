@@ -1,5 +1,5 @@
 ---
-name: youtube-description
+name: priceless-youtube-description
 description: Generate optimized YouTube video descriptions for Priceless CPA with SEO keywords, timestamps, CTAs, and Anthony's bio
 ---
 
@@ -7,15 +7,15 @@ description: Generate optimized YouTube video descriptions for Priceless CPA wit
 
 ## When to Use
 
-Use `/youtube-description` when you:
+Use `/priceless-youtube-description` when you:
 - Have a finished or near-finished YouTube script and need the description
 - Want to generate a description for an existing published video
 - Need to batch-generate descriptions for multiple videos
 
 ## How to Use
 
-Run `/youtube-description` with a script reference or topic:
-- `/youtube-description` (will ask for input)
+Run `/priceless-youtube-description` with a script reference or topic:
+- `/priceless-youtube-description` (will ask for input)
 - `/youtube-description --script projects/videos/cost-seg/script.md`
 - `/youtube-description --title "How Entrepreneurs With $10M+ Structure Their Entities"`
 - `/youtube-description --topic cost segregation for real estate investors`
@@ -80,10 +80,19 @@ Use this exact structure. Every description follows the same format for brand co
 
 #### Section Details
 
-**HOOK LINE (Line 1)**
-The first 1-2 sentences that appear in the YouTube preview (before "Show more"). This is the most important line. It must:
+**LEAD MAGNET LINK (Line 1)**
+The very first line of every description is the 5 Tax Traps lead magnet link. This appears in the YouTube preview (before "Show more") and drives traffic to the lead capture page:
+
+```
+5 Tax Traps Your Accountant Is Missing (free guide): https://priceless.cpa/5-tax-traps
+```
+
+This line is non-negotiable. It goes before the hook line on every video.
+
+**HOOK LINE (Line 2-3)**
+The next 1-2 sentences that appear in the YouTube preview. This is the second most visible text after the lead magnet link. It must:
 - Create curiosity or state a specific benefit with a number
-- Speak directly to the serial entrepreneur persona
+- Speak directly to the business owner persona
 - Match the energy of the video title
 - No generic openers like "In this video..." or "Welcome back..."
 
@@ -139,12 +148,12 @@ Ask the user to confirm or provide the correct social/resource links if unsure.
 Use this bio block verbatim (do not rewrite each time):
 
 ```
-If you're new here, I'm Anthony Price, CPA.
+If you're new here, I'm Anthony Price. How I got here...
 
-21: Graduated from the University of Nevada with dual degrees in Finance and Accounting, started in public accounting
+21: Graduated from the University of Nevada with dual degrees in Finance and Accounting, and started in public accounting
 22: Worked with complex businesses, high-income individuals, and insurance companies across tax and audit
 23: Earned my CPA and built a foundation in both compliance and strategy
-25: Focused on what I saw mattered most: proactive tax planning and tax reduction strategies for seven-figure earners
+25: Started focusing on what I saw mattered most: proactive tax planning and tax reduction strategies for seven-figure earners
 26: Grew my CPA firm to 100 clients
 27: Crossed 200 clients and built the team to keep up with demand
 28: Built the firm to 300+ business owners and high-income earners focused on year-round tax planning
@@ -188,7 +197,7 @@ If a script file was provided, also offer to append the description to the scrip
 ## Example
 
 ```
-User: /youtube-description --script projects/videos/entity-restructuring/script.md
+User: /priceless-youtube-description --script projects/videos/entity-restructuring/script.md
 
 Claude: [Reads script, generates description]
 

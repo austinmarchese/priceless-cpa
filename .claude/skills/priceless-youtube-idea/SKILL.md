@@ -1,5 +1,5 @@
 ---
-name: youtube-idea
+name: priceless-youtube-idea
 description: Generate YouTube video ideas using proven outlier patterns matched to Priceless CPA's audience
 ---
 
@@ -7,7 +7,7 @@ description: Generate YouTube video ideas using proven outlier patterns matched 
 
 ## When to Use
 
-Use `/youtube-idea` when you:
+Use `/priceless-youtube-idea` when you:
 - Need fresh video ideas for the content calendar
 - Want to apply a proven outlier pattern to a new topic
 - Have a topic but need title/packaging help
@@ -15,7 +15,7 @@ Use `/youtube-idea` when you:
 
 ## How to Use
 
-- `/youtube-idea` — Generate 5 ideas across all patterns
+- `/priceless-youtube-idea` — Generate 5 ideas across all patterns
 - `/youtube-idea entity structure` — Generate ideas on a specific topic
 - `/youtube-idea --pattern contrarian` — Generate ideas using a specific pattern
 - `/youtube-idea --batch 10` — Generate a larger batch

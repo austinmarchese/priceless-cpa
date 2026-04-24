@@ -226,17 +226,25 @@ Here's exactly what this looks like:
 
 Place a soft CTA after the viewer has received at least one high-value point, ideally right before or after the strongest value moment in the body. It should feel like a natural aside, not a pitch break.
 
+**What it promotes:** The 5 Tax Traps lead magnet (first link in description). This is a free resource, not a sales pitch. Frame it as giving them something valuable they can use immediately.
+
 **Structure (20-30 seconds):**
-1. **Acknowledge the value just delivered** — "If what I just walked through is already saving you money, here's what most people do next..."
-2. **Name the gap** — The difference between watching and implementing. Reference the reactive-CPA frustration.
-3. **Offer the next step** — "If you want us to actually build this out for your situation, there's a link in the description to book a strategy call."
-4. **Transition back into content** — "But before you do that, there's one more piece you need to understand, because it's where most people mess this up..."
+1. **Acknowledge the density** — Signal that you know you're covering a lot. "I know I'm going through a lot of this quickly..."
+2. **Introduce the 5 Tax Traps** — Bridge from the video content to the traps. "...but there are a lot of tax traps you have to be aware of. I put together the five that I see most people usually fall into."
+3. **Direct them to the link** — "If you click the first link in the description below, I'll send that list directly over to you."
+4. **Sell the outcome, not the thing** — Make the value visceral. "Once you become aware of these, you will not forget them, and this could save you thousands and thousands of dollars each year."
+5. **Close it clean** — "So go check that out. First link in the description, entirely free."
+6. **Transition back into content** — Pick up naturally where you left off.
+
+**Example CTA (adapt to each video's context):**
+> "I know I'm going through a lot of this quickly, but there are a lot of tax traps that you have to be aware of. I put together the five that I see most people usually fall into. If you click the first link in the description below, I'll send that list directly over to you. It's crazy, the difference these make. Once you become aware of these, you will not forget them, and this could save you thousands and thousands of dollars each year. So go check that out. First link in the description, entirely free."
 
 **Rules:**
 - Never interrupt a point mid-thought. Place it between sections, at a natural value peak.
 - Keep it 20-30 seconds. Longer breaks churn retention.
-- Specific > generic. "Book a strategy call" beats "reach out."
-- Tie it to what they just learned, not a generic sales ask.
+- Always reference "first link in the description" (not generic "link below").
+- Emphasize it's free. No friction, no catch.
+- Tie the traps to whatever the video topic is when possible (e.g., "especially if you're dealing with [video topic]").
 - Only ONE mid-video CTA per script.
 
 ### COMMON MISTAKES (Optional Section)
@@ -608,7 +616,7 @@ If the project folder doesn't exist yet, create it. If an `idea.md` already exis
 
 ### Mid-Video CTA (~40-60% mark)
 
-[20-30s soft CTA tied to the value just delivered, then transition back into content]
+[20-30s 5 Tax Traps CTA — acknowledge density, introduce the traps, point to first link in description, sell the outcome, entirely free]
 
 [... as many sections as the topic needs]
 
