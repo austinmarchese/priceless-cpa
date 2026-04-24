@@ -126,7 +126,7 @@ Skills are in `.claude/skills/[name]/SKILL.md`. When the user runs `/[skill-name
 | `/create-consultant` | Clone an expert's frameworks |
 | `/ingest-source` | Ingest a raw source into `wiki/knowledge/`, summarize, extract entities/concepts/tax refs, add wikilinks |
 | `/update-system` | Pull latest main, preview changes, and brief you on what's new |
-| `/git-push` | Commit and push changes to GitHub |
+| `/push-system` | Review changes, flag risky modifications, and push to main or create a PR |
 
 ## YouTube Content Workflow
 
