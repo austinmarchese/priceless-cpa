@@ -1,7 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git add *)"
+      "mcp__excalidraw__clear_canvas",
+      "mcp__excalidraw__create_from_mermaid",
+      "mcp__excalidraw__get_canvas_screenshot",
+      "mcp__excalidraw__read_diagram_guide",
+      "mcp__excalidraw__batch_create_elements",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Notion__notion-create-pages",
+      "mcp__claude_ai_Notion__notion-search",
+      "Bash(git pull:*)",
+      "Bash(git add:*)",
+      "Bash(npx next:*)"
     ]
   }
 }

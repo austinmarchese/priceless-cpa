@@ -15,7 +15,7 @@
   "videos": [
     {
       "id": "tax-rate-37-to-12-5",
-      "order": null,
+      "order": 4,
       "name": "37% to 12.5% Tax Rate on $4M",
       "status": "research",
       "validated": false,
@@ -32,7 +32,7 @@
     },
     {
       "id": "s-corp-costing-you-money",
-      "order": null,
+      "order": 5,
       "name": "Your S Corp Is Costing You Money",
       "status": "research",
       "validated": false,
@@ -49,7 +49,7 @@
     },
     {
       "id": "how-rich-sell-zero-taxes-part-2",
-      "order": 1,
+      "order": 2,
       "name": "How The Rich Sell Businesses ZERO Taxes Part 2",
       "status": "editing",
       "postedDate": "2026-04-24",
@@ -72,7 +72,7 @@
     },
     {
       "id": "how-rich-sell-zero-taxes",
-      "order": 2,
+      "order": 1,
       "name": "How The Rich Sell Businesses ZERO Taxes",
       "status": "editing",
       "postedDate": "2026-04-24",

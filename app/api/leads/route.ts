@@ -80,7 +80,8 @@ export async function POST(request: NextRequest) {
     try {
       const contactSearchUrl = `https://app.gohighlevel.com/v2/location/${GHL_LOCATION_ID}/contacts`
       const campaignLine = utmCampaign ? `*Campaign:*\n${utmCampaign}` : '*Campaign:*\nN/A'
-      const headerText = qualified ? 'New Qualified Lead (5 Tax Traps)' : 'New Organic Lead (5 Tax Traps)'
+      const leadSource = utmCampaign === 's-corp-playbook' ? 'S-Corp Playbook' : '5 Tax Traps'
+      const headerText = qualified ? `New Qualified Lead (${leadSource})` : `New Organic Lead (${leadSource})`
 
       const slackResponse = await fetch(slackWebhookUrl, {
         method: 'POST',
