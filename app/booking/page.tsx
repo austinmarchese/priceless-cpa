@@ -1,9 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import type { Metadata } from 'next'
-
-const CALENDAR_ID = 'L4e0QcVE77VAkFsP6ogx'
+import BookingEmbed, { BOOKING_EMBED_STYLES } from '@/components/BookingEmbed'
 
 const STYLES = `
   .bk-root { background: #f5f0e8; color: #1a1f2e; font-family: 'DM Sans', system-ui, -apple-system, sans-serif; display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
@@ -24,8 +21,8 @@ const STYLES = `
   .bk-heading .accent { color: #b8935a; font-style: italic; }
   .bk-sub { font-size: 1rem; color: #6b6760; line-height: 1.6; margin: 0; }
 
-  .bk-wrap { background: #ffffff; border-radius: 16px; overflow: hidden; width: 100%; max-width: 700px; box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
-  .bk-iframe { width: 100%; min-height: 1400px; border: 0; display: block; background: #ffffff; }
+  .bk-embed-container { width: 100%; max-width: 700px; }
+  .bk-embed-container .bk-embed-wrap { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
 
   .bk-note { text-align: center; font-size: 0.85rem; color: #a8a39c; margin: 20px 0 0; }
 
@@ -37,7 +34,6 @@ const STYLES = `
   @media (max-width: 768px) {
     .bk-main { padding: 28px 16px 40px; }
     .bk-head { margin-bottom: 24px; }
-    .bk-iframe { min-height: 1300px; }
   }
   @media (max-width: 560px) {
     .bk-topbar { font-size: 10.5px; padding: 7px 14px; }
@@ -49,24 +45,9 @@ const STYLES = `
 `
 
 export default function BookingPage() {
-  const [iframeHeight, setIframeHeight] = useState(1400)
-
-  useEffect(() => {
-    function onMessage(e: MessageEvent) {
-      if (typeof e.origin !== 'string' || !e.origin.includes('leadconnectorhq.com')) return
-      const data = e.data
-      if (!data || typeof data !== 'object') return
-      const height = typeof data.height === 'number' ? data.height : Number(data.height)
-      if (!Number.isFinite(height) || height < 400) return
-      setIframeHeight(Math.ceil(height) + 40)
-    }
-    window.addEventListener('message', onMessage)
-    return () => window.removeEventListener('message', onMessage)
-  }, [])
-
   return (
     <div className="bk-root">
-      <style dangerouslySetInnerHTML={{ __html: STYLES }} />
+      <style dangerouslySetInnerHTML={{ __html: STYLES + BOOKING_EMBED_STYLES }} />
       <div className="bk-topbar">
         For <strong>Business Owners</strong> Making Over $250K+ Revenue
       </div>
@@ -86,14 +67,8 @@ export default function BookingPage() {
           </p>
         </div>
 
-        <div className="bk-wrap">
-          <iframe
-            src={`https://api.leadconnectorhq.com/widget/booking/${CALENDAR_ID}`}
-            title="Book a Tax Strategy Call"
-            className="bk-iframe"
-            style={{ height: `${iframeHeight}px` }}
-            scrolling="no"
-          />
+        <div className="bk-embed-container">
+          <BookingEmbed />
         </div>
 
         <p className="bk-note">No obligation. 100% free. Takes 30 minutes.</p>

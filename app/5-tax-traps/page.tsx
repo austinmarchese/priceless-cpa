@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import posthog from 'posthog-js'
+import BookingEmbed, { BOOKING_EMBED_STYLES } from '@/components/BookingEmbed'
 
 const QUALIFIED_THRESHOLD = ['$150K - $500K', '$500K - $1M', '$1M - $3M', '$3M+']
 
@@ -201,8 +202,7 @@ const STYLES = `
   .tt-cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 17px 36px; background: #b8935a; color: #ffffff; border-radius: 100px; font-size: 1rem; font-weight: 600; text-decoration: none; letter-spacing: 0.3px; box-shadow: 0 6px 24px rgba(184, 147, 90, 0.4); transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease; }
   .tt-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(184, 147, 90, 0.5); background: #c9a46a; }
   .tt-cta-note { margin-top: 18px; font-size: 0.82rem; color: #7a756e; }
-  .tt-booking-wrap { background: #ffffff; border-radius: 16px; overflow: hidden; margin: 8px 0 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.25); }
-  .tt-booking-iframe { width: 100%; min-height: 1400px; border: 0; display: block; background: #ffffff; }
+  .tt-cta-dark .bk-embed-wrap { margin: 8px 0 8px; }
 
   /* Soft CTA (unqualified) */
   .tt-cta-soft { background: #ffffff; border: 1px solid rgba(184, 147, 90, 0.2); border-radius: 20px; padding: 44px 40px; margin-top: 40px; text-align: center; box-shadow: 0 4px 20px rgba(26, 31, 46, 0.04); }
@@ -241,7 +241,6 @@ const STYLES = `
     .tt-cta-dark { padding: 44px 28px; }
     .tt-cta-soft { padding: 36px 24px; }
     .tt-cta-btn { width: 100%; }
-    .tt-booking-iframe { min-height: 1300px; }
     .tt-footer { padding: 32px 20px 24px; margin-top: 40px; }
   }
   @media (max-width: 560px) {
@@ -299,8 +298,7 @@ export default function FiveTaxTrapsPage() {
   const [revenueError, setRevenueError] = useState('')
   const [qualified, setQualified] = useState(false)
   const [expandedTraps, setExpandedTraps] = useState<Set<string>>(new Set())
-  const [bookingHeight, setBookingHeight] = useState(1400)
-  const [bookingSrc, setBookingSrc] = useState('https://api.leadconnectorhq.com/widget/booking/L4e0QcVE77VAkFsP6ogx')
+  const [bookingContact, setBookingContact] = useState<{ firstName: string; lastName: string; email: string; phone: string } | null>(null)
   const revealRef = useRef<HTMLDivElement>(null)
 
   function validatePhone(value: string): string {
@@ -318,21 +316,6 @@ export default function FiveTaxTrapsPage() {
       campaign: params.get('utm_campaign') || '5-tax-traps',
       content: params.get('utm_content') || '',
     })
-  }, [])
-
-  // Auto-resize the GHL booking iframe based on postMessage events it broadcasts.
-  useEffect(() => {
-    function onMessage(e: MessageEvent) {
-      if (typeof e.origin !== 'string' || !e.origin.includes('leadconnectorhq.com')) return
-      const data = e.data
-      if (!data || typeof data !== 'object') return
-      // GHL broadcasts { type: 'iframeHeight' | 'setHeight' | ..., height: number }
-      const height = typeof data.height === 'number' ? data.height : Number(data.height)
-      if (!Number.isFinite(height) || height < 400) return
-      setBookingHeight(Math.ceil(height) + 40)
-    }
-    window.addEventListener('message', onMessage)
-    return () => window.removeEventListener('message', onMessage)
   }, [])
 
   // Track when user clicks into the booking iframe (window loses focus to iframe)
@@ -385,14 +368,7 @@ export default function FiveTaxTrapsPage() {
     const digits = form.phone.replace(/\D/g, '')
     const e164 = digits.length === 10 ? `+1${digits}` : digits.length === 11 ? `+${digits}` : ''
 
-    const bookingParams = new URLSearchParams({
-      first_name: firstName,
-      last_name: lastName,
-      email: form.email,
-      phone: e164,
-    })
-    setBookingSrc(`https://api.leadconnectorhq.com/widget/booking/L4e0QcVE77VAkFsP6ogx?${bookingParams.toString()}`)
-
+    setBookingContact({ firstName, lastName, email: form.email, phone: e164 })
     setQualified(true)
     setStatus('success')
 
@@ -417,7 +393,7 @@ export default function FiveTaxTrapsPage() {
 
   return (
     <div className="tt-root">
-      <style dangerouslySetInnerHTML={{ __html: STYLES }} />
+      <style dangerouslySetInnerHTML={{ __html: STYLES + BOOKING_EMBED_STYLES }} />
       <div className="tt-topbar">
           For <strong>Business Owners</strong> Making Over $250K+ Revenue
         </div>
@@ -620,15 +596,12 @@ export default function FiveTaxTrapsPage() {
                   <p className="tt-cta-sub">
                     Book a free 30-minute Tax Strategy Call below. We will walk through which of these 5 traps is costing you the most, and what a proactive plan would look like for your business.
                   </p>
-                  <div className="tt-booking-wrap">
-                    <iframe
-                      src={bookingSrc}
-                      title="Book a Tax Strategy Call"
-                      className="tt-booking-iframe"
-                      style={{ height: `${bookingHeight}px` }}
-                      scrolling="no"
-                    />
-                  </div>
+                  <BookingEmbed
+                    firstName={bookingContact?.firstName}
+                    lastName={bookingContact?.lastName}
+                    email={bookingContact?.email}
+                    phone={bookingContact?.phone}
+                  />
                   <p className="tt-cta-note">No obligation. 100% free. Takes 30 minutes.</p>
                 </div>
               </div>
