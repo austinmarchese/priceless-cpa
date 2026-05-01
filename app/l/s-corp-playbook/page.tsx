@@ -100,7 +100,8 @@ const STYLES = `
   .tt-h1 { font-size: clamp(2rem, 4.2vw, 3.1rem); line-height: 1.1; color: #1a1f2e; margin: 0 0 18px; letter-spacing: -0.01em; }
   .tt-h1 .accent { color: #b8935a; font-style: italic; }
   .tt-sub { font-size: 1.02rem; color: #6b6760; line-height: 1.55; margin: 0 0 16px; }
-  .tt-callout { font-size: 1.05rem; color: #1a1f2e; font-weight: 600; font-style: italic; line-height: 1.5; margin: 0 0 28px; padding: 14px 20px; background: rgba(184, 147, 90, 0.10); border-left: 3px solid #b8935a; border-radius: 0 10px 10px 0; }
+  .tt-callout { font-size: 1.05rem; color: #1a1f2e; font-weight: 600; font-style: italic; line-height: 1.5; margin: 0 0 16px; padding: 14px 20px; background: rgba(184, 147, 90, 0.10); border-left: 3px solid #b8935a; border-radius: 0 10px 10px 0; }
+  .tt-callout-secondary { font-size: 0.92rem; color: #6b6760; line-height: 1.6; margin: 0 0 28px; padding: 0 2px; }
 
   /* Stats row */
   .tt-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 22px 0 0; border-top: 1px solid rgba(26, 31, 46, 0.1); max-width: 480px; }
@@ -357,9 +358,9 @@ export default function SCorpPlaybookPage() {
                   The S-Corp Owner&apos;s Tax <span className="accent">Playbook.</span>
                 </h1>
                 <p className="tt-sub">
-                  A 21-page breakdown of exactly how S-Corp owners save tens of thousands of dollars in taxes.
+                  A 21-page breakdown of exactly how S-Corp owners save tens of thousands of dollars in taxes without stacking up red flags and triggering an IRS audit.
                 </p>
-                <p className="tt-callout">The strategies your CPA should be running, but probably isn't.</p>
+                <p className="tt-callout">The strategies your CPA should be running, but probably isn&apos;t.</p>
 
                 <div className="tt-stats">
                   <div>
