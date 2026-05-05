@@ -84,7 +84,7 @@ Use this exact structure. Every description follows the same format for brand co
 The very first line of every description is the 5 Tax Traps lead magnet link. This appears in the YouTube preview (before "Show more") and drives traffic to the lead capture page:
 
 ```
-5 Tax Traps Your Accountant Is Missing (free guide): https://priceless.cpa/5-tax-traps?utm_source=youtube&utm_campaign=[VIDEO_SLUG]
+5 Tax Traps Your Accountant Is Missing (free guide): https://www.pricelesscpa.com/5-tax-traps?utm_source=youtube&utm_campaign=[VIDEO_SLUG]
 ```
 
 Replace `[VIDEO_SLUG]` with the video's slug (e.g., `entity-restructuring`, `cost-seg-explained`). This lets PostHog and the lead form track which video drove each lead.
@@ -131,20 +131,21 @@ Include relevant links:
 - Lead magnet (if applicable): "Take the 7 Questions Quiz: [link]"
 - Related videos: "Watch next: [title] [link]"
 - Social links
-- Website: https://priceless.cpa
+- Website: https://www.pricelesscpa.com
 
 Format:
 ```
 Free Resources:
-Take the 7 Questions Quiz: https://priceless.cpa/tax-checklist
-Visit: https://priceless.cpa
+Take the 7 Questions Quiz: https://www.pricelesscpa.com/tax-checklist
+Visit: https://www.pricelesscpa.com
 
 Follow Anthony:
-Instagram: https://instagram.com/priceless.cpa
-TikTok: https://tiktok.com/@priceless.cpa
+Instagram: https://www.instagram.com/taxtonecpa/
+Twitter: https://x.com/anthonypricecpa
+TikTok: https://www.tiktok.com/@anthonypricecpa
 ```
 
-Ask the user to confirm or provide the correct social/resource links if unsure.
+These are the locked social handles. Do not substitute or ask the user to confirm.
 
 **ABOUT ANTHONY / BIO**
 Use this bio block verbatim (do not rewrite each time):
@@ -221,15 +222,16 @@ If you own multiple businesses and everything runs through one entity, your "sim
 14:30 - The one thing to do before year-end
 
 Ready to stop overpaying? Book a free strategy call:
-https://priceless.cpa/book
+https://www.pricelesscpa.com/book
 
 Free Resources:
-Take the 7 Questions Quiz: https://priceless.cpa/tax-checklist
-Visit: https://priceless.cpa
+Take the 7 Questions Quiz: https://www.pricelesscpa.com/tax-checklist
+Visit: https://www.pricelesscpa.com
 
 Follow Anthony:
-Instagram: https://instagram.com/priceless.cpa
-TikTok: https://tiktok.com/@priceless.cpa
+Instagram: https://www.instagram.com/taxtonecpa/
+Twitter: https://x.com/anthonypricecpa
+TikTok: https://www.tiktok.com/@anthonypricecpa
 
 If you're new here, I'm Anthony Price, CPA.
 

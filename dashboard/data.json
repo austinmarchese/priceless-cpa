@@ -59,8 +59,14 @@
       "sponsor": null,
       "folder": "how-rich-sell-zero-taxes-part-2",
       "title": {
-        "primary": "How The Rich Sell Their Businesses and Pay ZERO Taxes Part 2",
-        "variants": []
+        "primary": "Selling Business in 2026? Here's How to Avoid Paying Taxes",
+        "variants": [
+          {
+            "text": "How The Rich Sell Their Businesses and Pay ZERO Taxes Part 2",
+            "chars": 60,
+            "label": "Previous primary"
+          }
+        ]
       },
       "meta": "Section 1202 (QSBS)",
       "thumbnails": [
