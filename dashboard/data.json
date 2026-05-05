@@ -2,22 +2,23 @@
   "channel": {
     "name": "Priceless CPA",
     "subscribers": "0",
-    "videoCount": 6,
+    "videoCount": 9,
     "tagline": "",
-    "lastUpdated": "2026-04-24"
+    "lastUpdated": "2026-05-05"
   },
   "stats": {
     "active": 2,
     "filmed": 0,
     "shelved": 0,
-    "posted": 4
+    "posted": 4,
+    "pending": 3
   },
   "videos": [
     {
       "id": "tax-rate-37-to-12-5",
       "order": 4,
       "name": "37% to 12.5% Tax Rate on $4M",
-      "status": "research",
+      "status": "editing",
       "validated": false,
       "personas": "all",
       "sponsor": null,
@@ -34,7 +35,7 @@
       "id": "s-corp-costing-you-money",
       "order": 5,
       "name": "Your S Corp Is Costing You Money",
-      "status": "research",
+      "status": "editing",
       "validated": false,
       "personas": "all",
       "sponsor": null,
@@ -64,17 +65,34 @@
       "meta": "Section 1202 (QSBS)",
       "thumbnails": [
         {
+          "file": "How-The-Rich-Sell-Their-Businesses-Without-Paying-Taxes-4.png",
+          "label": "How-The-Rich-Sell-Their-Businesses-Without-Paying-Taxes-4"
+        },
+        {
           "file": "how-rich-sell-zero-taxes-part-2.png",
           "label": "Primary"
+        },
+        {
+          "file": "How-The-Rich-Sell-Their-Businesses-Without-Paying-Taxes-1.png",
+          "label": "How-The-Rich-Sell-Their-Businesses-Without-Paying-Taxes-1"
         }
       ],
-      "outliers": []
+      "outliers": [
+        {
+          "screenshot": "outlier-1777730310482.png",
+          "primary": false
+        },
+        {
+          "screenshot": "outlier-1777962080818.png",
+          "primary": false
+        }
+      ]
     },
     {
       "id": "how-rich-sell-zero-taxes",
       "order": 1,
       "name": "How The Rich Sell Businesses ZERO Taxes",
-      "status": "editing",
+      "status": "posted",
       "postedDate": "2026-04-24",
       "validated": true,
       "personas": "all",
@@ -165,6 +183,108 @@
         },
         {
           "screenshot": "outlier-1776962002964.png",
+          "primary": false
+        }
+      ]
+    },
+    {
+      "id": "elon-musk-avoids-taxes",
+      "order": 6,
+      "name": "How Elon Musk ACTUALLY Avoids Taxes",
+      "status": "editing",
+      "validated": false,
+      "personas": "all",
+      "sponsor": null,
+      "folder": "elon-musk-avoids-taxes",
+      "title": {
+        "primary": "A CPA Explains How Elon Musk ACTUALLY Avoids Taxes",
+        "variants": [
+          "How Elon Musk ACTUALLY Avoids Taxes (And How to Copy Him at Your Scale)",
+          "How Elon Pays 0% Tax. Here's the Playbook You Can Steal."
+        ]
+      },
+      "meta": "Four levers Elon uses (equity comp, buy-borrow-die, domicile, entity choice) scaled down to serial entrepreneurs. Draft v4. ~19-20 min.",
+      "thumbnails": [
+        {
+          "file": "How-Elon-Musk-ACTUALLY-Avoids-Taxes.png",
+          "label": "How-Elon-Musk-ACTUALLY-Avoids-Taxes"
+        }
+      ],
+      "outliers": [
+        {
+          "screenshot": "outlier-1777959517660.png",
+          "primary": false
+        }
+      ]
+    },
+    {
+      "id": "write-off-your-house",
+      "order": 7,
+      "name": "How to Write Off Your House (Legally)",
+      "status": "editing",
+      "validated": false,
+      "personas": "all",
+      "sponsor": null,
+      "folder": "write-off-your-house",
+      "title": {
+        "primary": "How to Write Off Your House (Legally)",
+        "variants": [
+          "Your House Is a Tax Strategy (Here's How)",
+          "4 Ways Your House Saves You $10,000+ in Taxes",
+          "The Home Deductions Your CPA Never Mentioned",
+          "How Business Owners Turn Their House Into a Tax Shelter"
+        ]
+      },
+      "meta": "Home office deduction (Section 280A), Augusta Rule (280A(g)), itemized deductions, and Section 121 home sale exclusion. Stacking math.",
+      "thumbnails": [
+        {
+          "file": "_How-to-write-off-your-house--Legally-.png",
+          "label": "_How-to-write-off-your-house--Legally-"
+        }
+      ],
+      "outliers": [
+        {
+          "screenshot": "outlier-1777959586209.png",
+          "primary": false
+        }
+      ]
+    },
+    {
+      "id": "why-rich-dont-do-tax-strategy",
+      "order": 8,
+      "name": "Why The Rich Don't Do Tax Strategy",
+      "status": "editing",
+      "validated": false,
+      "personas": "all",
+      "sponsor": null,
+      "folder": "why-rich-dont-do-tax-strategy",
+      "title": {
+        "primary": "Why The Rich Don't Do Tax Strategy",
+        "variants": [
+          "5 IRS Rules That Can Destroy Your Tax Strategy",
+          "Why Most Tax Strategies Fail (And What Actually Works)",
+          "The IRS Has 5 Tests for Your Tax Plan. Here's How to Pass.",
+          "Your Tax Strategy Won't Survive an Audit. Here's Why."
+        ]
+      },
+      "meta": "Five IRS doctrines that test tax strategies: substance over form, economic substance, step transaction, assignment of income, penalty cascade. ~20 min.",
+      "thumbnails": [
+        {
+          "file": "Why-Smart-Investors-Do-This-After-Filing-Their-Taxes-2.png",
+          "label": "Why-Smart-Investors-Do-This-After-Filing-Their-Taxes-2"
+        },
+        {
+          "file": "Why-Smart-Investors-Do-This-After-Filing-Their-Taxes.png",
+          "label": "Why-Smart-Investors-Do-This-After-Filing-Their-Taxes"
+        }
+      ],
+      "outliers": [
+        {
+          "screenshot": "outlier-1777959681870.png",
+          "primary": false
+        },
+        {
+          "screenshot": "outlier-1777959682158.png",
           "primary": false
         }
       ]
