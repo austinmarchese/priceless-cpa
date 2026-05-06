@@ -20,7 +20,7 @@ export const BOOKING_EMBED_STYLES = `
 `
 
 export default function BookingEmbed({ firstName, lastName, email, phone }: BookingEmbedProps) {
-  const [height, setHeight] = useState(900)
+  const [height, setHeight] = useState(1200)
 
   const params = new URLSearchParams()
   if (firstName) params.set('first_name', firstName)
@@ -51,7 +51,7 @@ export default function BookingEmbed({ firstName, lastName, email, phone }: Book
         title="Book a Tax Strategy Call"
         className="bk-embed-iframe"
         style={{ height: `${height}px` }}
-        scrolling="no"
+        scrolling="auto"
       />
     </div>
   )
