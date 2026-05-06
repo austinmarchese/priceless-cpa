@@ -54,9 +54,10 @@ If not provided via flags, ask for:
 1. **Video title** (final, locked title)
 2. **Script or topic summary** (what the video covers, key points)
 3. **Timestamps** (section timestamps from the script, or ask for them)
-4. **Primary CTA** (default: book a strategy call)
-5. **Related videos** (optional, for linking in description)
-6. **Lead magnet** (optional, if there's a relevant lead magnet to link)
+4. **Related videos** (optional, for linking in description)
+5. **Lead magnet** (optional, if there's a relevant lead magnet to link)
+
+The strategy call CTA is locked to `https://www.pricelesscpa.com/booking`. Do not ask the user for a CTA link.
 
 ### Step 2: Generate the Description
 
@@ -118,10 +119,11 @@ Format:
 Pull directly from the script structure. Use the actual section titles, not generic labels. If timestamps aren't available, generate reasonable estimates based on the script sections and note them as estimates.
 
 **CTA BLOCK**
-Default CTA (adjust based on current marketing priorities):
+Use this exact CTA on every video. The booking link is locked. Do not substitute, shorten, or ask the user to confirm.
+
 ```
 Ready to stop overpaying? Book a free strategy call:
-[LINK - ask user or use default booking link]
+https://www.pricelesscpa.com/booking
 ```
 
 Keep to 1-2 lines. No hard sell. Match Anthony's soft CTA style from his closes.
@@ -187,6 +189,7 @@ Before presenting the final description, verify:
 | No em dashes | Commas, periods, or restructured sentences only |
 | Timestamps | Present and accurate to the script |
 | CTA | Soft, one clear next step |
+| Booking link | Exactly `https://www.pricelesscpa.com/booking` (locked, no variants) |
 | Bio | Exact format from template, not rewritten |
 | Length | Under 5,000 characters (YouTube limit) |
 | First 2 lines | Compelling in preview (before "Show more") |
@@ -222,7 +225,7 @@ If you own multiple businesses and everything runs through one entity, your "sim
 14:30 - The one thing to do before year-end
 
 Ready to stop overpaying? Book a free strategy call:
-https://www.pricelesscpa.com/book
+https://www.pricelesscpa.com/booking
 
 Free Resources:
 Take the 7 Questions Quiz: https://www.pricelesscpa.com/tax-checklist
