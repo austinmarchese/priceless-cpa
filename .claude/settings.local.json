@@ -16,7 +16,8 @@
       "Bash(git push *)",
       "Bash(git config *)",
       "Bash(git fetch *)",
-      "Bash(npx next:*)"
+      "Bash(npx next:*)",
+      "Bash(git stash *)"
     ]
   }
 }
