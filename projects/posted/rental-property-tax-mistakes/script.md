@@ -225,3 +225,57 @@ Leave a comment on any topics you want to see next.
 - fumbling 1031 exchange
 - debt basis - s-corp no corp level debt basis
 - living 2 out of 5 years and not factoring that in
+
+---
+
+## Packaging
+
+### YouTube Description
+
+```
+5 Tax Traps Your Accountant Is Missing (free guide): https://www.pricelesscpa.com/5-tax-traps?utm_source=youtube&utm_campaign=rental-property-tax-mistakes
+
+Real estate is the most tax friendly way to make money. Unless you screw it up like most investors do.
+
+These 4 mistakes are costing rental property owners tens, sometimes hundreds of thousands of dollars in taxes they should never be paying. In this video I break down exactly how depreciation works, the 4 scenarios that let you write off massive losses against your other income, when accelerated depreciation actually hurts you, and the entity mistake that can cost your family 6 to 7 figures down the line.
+
+0:00 - Why real estate is the most tax friendly investment
+1:30 - What depreciation actually is (with a $750k example)
+3:45 - Mistake 1: Not claiming depreciation fast enough
+5:30 - Cost segregation and the assets you can write off in year one
+7:15 - Mistake 2: Losing out on accelerated depreciation
+7:45 - Scenario 1: Real estate professional status (the 750 hour rule)
+9:30 - Scenario 2: Short term rentals and the 7 day rule
+11:00 - Scenario 3: Offsetting passive income from K-1s
+12:15 - Scenario 4: The mom and pop exclusion ($25k under $100k income)
+13:30 - Mistake 3: Claiming accelerated depreciation when you shouldn't
+15:45 - Mistake 4: Putting real estate in a corporation
+17:00 - Why S-Corp basis rules kill your losses
+18:30 - How the step-up in basis works for your kids
+20:00 - Final word on maximizing rental property tax benefits
+
+Ready to stop overpaying? Book a free strategy call:
+https://www.pricelesscpa.com/booking
+
+Free Resources:
+Take the 7 Questions Quiz: https://www.pricelesscpa.com/tax-checklist
+Visit: https://www.pricelesscpa.com
+
+Follow Anthony:
+Instagram: https://www.instagram.com/taxtonecpa/
+Twitter: https://x.com/anthonypricecpa
+TikTok: https://www.tiktok.com/@anthonypricecpa
+
+If you're new here, I'm Anthony Price. How I got here...
+
+21: Graduated from the University of Nevada with dual degrees in Finance and Accounting, and started in public accounting
+22: Worked with complex businesses, high-income individuals, and insurance companies across tax and audit
+23: Earned my CPA and built a foundation in both compliance and strategy
+25: Started focusing on what I saw mattered most: proactive tax planning and tax reduction strategies for seven-figure earners
+26: Grew my CPA firm to 100 clients
+27: Crossed 200 clients and built the team to keep up with demand
+28: Built the firm to 300+ business owners and high-income earners focused on year-round tax planning
+Today: We help high earners and business owners save an average of $50K+ per year through proactive tax strategy
+
+#TaxStrategy #RealEstateInvesting #RentalProperty #Depreciation #CostSegregation #RealEstateProfessional #ShortTermRental #CPA #TaxPlanning #BusinessOwner
+```

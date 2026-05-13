@@ -17,7 +17,12 @@
       "Bash(git config *)",
       "Bash(git fetch *)",
       "Bash(npx next:*)",
-      "Bash(git stash *)"
+      "Bash(git stash *)",
+      "Bash(python -c 'import json,sys *)",
+      "Bash(python -c ' *)",
+      "Bash(python *)",
+      "Bash(python3 *)",
+      "Bash(git *)"
     ]
   }
 }
