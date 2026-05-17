@@ -16,7 +16,7 @@
   "videos": [
     {
       "id": "tax-rate-37-to-12-5",
-      "order": 4,
+      "order": 1,
       "name": "37% to 12.5% Tax Rate on $4M",
       "status": "editing",
       "validated": false,
@@ -28,12 +28,17 @@
         "variants": []
       },
       "meta": "3-layer system: entity structure + accounting + compliance, QBID/retirement, strategic investments",
-      "thumbnails": [],
+      "thumbnails": [
+        {
+          "file": "How-I-Got-My-Client-From-37--to-12-5--Tax-Rate-on--4M-Income-2.png",
+          "label": "How-I-Got-My-Client-From-37--to-12-5--Tax-Rate-on--4M-Income-2"
+        }
+      ],
       "outliers": []
     },
     {
       "id": "s-corp-costing-you-money",
-      "order": 5,
+      "order": 2,
       "name": "Your S Corp Is Costing You Money",
       "status": "editing",
       "validated": false,
@@ -195,7 +200,7 @@
     },
     {
       "id": "elon-musk-avoids-taxes",
-      "order": 6,
+      "order": 3,
       "name": "How Elon Musk ACTUALLY Avoids Taxes",
       "status": "editing",
       "validated": false,
@@ -225,7 +230,7 @@
     },
     {
       "id": "write-off-your-house",
-      "order": 7,
+      "order": 4,
       "name": "How to Write Off Your House (Legally)",
       "status": "editing",
       "validated": false,
@@ -257,7 +262,7 @@
     },
     {
       "id": "why-rich-dont-do-tax-strategy",
-      "order": 8,
+      "order": 5,
       "name": "Why The Rich Don't Do Tax Strategy",
       "status": "editing",
       "validated": false,
