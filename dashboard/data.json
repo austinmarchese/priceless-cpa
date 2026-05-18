@@ -16,7 +16,7 @@
   "videos": [
     {
       "id": "tax-rate-37-to-12-5",
-      "order": 1,
+      "order": 3,
       "name": "37% to 12.5% Tax Rate on $4M",
       "status": "editing",
       "validated": false,
@@ -24,21 +24,48 @@
       "sponsor": null,
       "folder": "tax-rate-37-to-12-5",
       "title": {
-        "primary": "How I Got My Client From 37% to 12.5% Tax Rate on $4M Income",
-        "variants": []
+        "primary": "How I LEGALLY Reduced My Client's Tax Rate On $4M Income",
+        "variants": [
+          {
+            "text": "How I Got My Client From 37% to 12.5% Tax Rate on $4M Income",
+            "chars": 60,
+            "label": "Previous primary"
+          }
+        ]
       },
       "meta": "3-layer system: entity structure + accounting + compliance, QBID/retirement, strategic investments",
       "thumbnails": [
+        {
+          "file": "How-I-Got-My-Client-From-37--to-12-5--Tax-Rate-on--4M-Income-3.png",
+          "label": "How-I-Got-My-Client-From-37--to-12-5--Tax-Rate-on--4M-Income-3"
+        },
         {
           "file": "How-I-Got-My-Client-From-37--to-12-5--Tax-Rate-on--4M-Income-2.png",
           "label": "How-I-Got-My-Client-From-37--to-12-5--Tax-Rate-on--4M-Income-2"
         }
       ],
-      "outliers": []
+      "outliers": [
+        {
+          "screenshot": "outlier-1779109991074.png",
+          "primary": false
+        },
+        {
+          "screenshot": "outlier-1779109991456.png",
+          "primary": false
+        },
+        {
+          "screenshot": "outlier-1779109991801.png",
+          "primary": false
+        },
+        {
+          "screenshot": "outlier-1779110341293.png",
+          "primary": false
+        }
+      ]
     },
     {
       "id": "s-corp-costing-you-money",
-      "order": 2,
+      "order": 1,
       "name": "Your S Corp Is Costing You Money",
       "status": "editing",
       "validated": false,
@@ -51,7 +78,8 @@
       },
       "meta": "Listicle: payroll issues, basis issues, late filing, compliance traps, state/local issues",
       "thumbnails": [],
-      "outliers": []
+      "outliers": [],
+      "scheduled": false
     },
     {
       "id": "how-rich-sell-zero-taxes-part-2",
@@ -200,7 +228,7 @@
     },
     {
       "id": "elon-musk-avoids-taxes",
-      "order": 3,
+      "order": 5,
       "name": "How Elon Musk ACTUALLY Avoids Taxes",
       "status": "editing",
       "validated": false,
@@ -224,6 +252,14 @@
       "outliers": [
         {
           "screenshot": "outlier-1777959517660.png",
+          "primary": false
+        },
+        {
+          "screenshot": "outlier-1779110164581.png",
+          "primary": false
+        },
+        {
+          "screenshot": "outlier-1779110166339.png",
           "primary": false
         }
       ]
@@ -262,7 +298,7 @@
     },
     {
       "id": "why-rich-dont-do-tax-strategy",
-      "order": 5,
+      "order": 2,
       "name": "Why The Rich Don't Do Tax Strategy",
       "status": "editing",
       "validated": false,
@@ -298,7 +334,8 @@
           "screenshot": "outlier-1777959682158.png",
           "primary": false
         }
-      ]
+      ],
+      "scheduled": false
     }
   ],
   "milestones": [
