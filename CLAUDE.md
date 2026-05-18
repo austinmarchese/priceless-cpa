@@ -2,6 +2,40 @@
 
 This file provides guidance to Claude Code when working in this repository.
 
+## Operator Permissions (read first)
+
+This repo is shared. Multiple operators run Claude Code against it. Anything inside `web/` ships to production on push to `main` (Vercel auto-deploy), so it is treated differently from content.
+
+**Rule:** only Austin edits `web/`. Everyone else proposes website changes via a branch + PR tagged for Austin's review.
+
+**Hard-blocked path (enforced by `.claude/hooks/guard-website.sh`):**
+- `web/**` -- entire Next.js codebase (app, components, lib, public, workflow, scripts, package.json, build config). Write/Edit/MultiEdit/NotebookEdit denied unless `git config user.email` is on the allowlist.
+
+**Allowed without restriction (content OS):** `wiki/`, `raw/`, `projects/`, `dashboard/`, `reports/`, `clients/`, `.claude/skills/`, `.agents/skills/`, `docs/`.
+
+**New top-level directory at repo root** -- ask Austin first. Don't invent new buckets.
+
+Update the allowlist in `.claude/hooks/guard-website.sh` when a new trusted operator is onboarded.
+
+## Repo Layout (after web/ refactor)
+
+```
+priceless-cpa/
+├── web/             # Next.js site (deploys to prod) -- guarded
+├── wiki/            # organized knowledge base
+├── raw/             # unprocessed source material
+├── projects/        # active video/short/VSL work
+├── dashboard/       # video pipeline data
+├── reports/         # generated reports
+├── .claude/         # Claude Code skills, hooks, settings
+├── .agents/         # Codex skill mirror
+├── CLAUDE.md
+├── AGENTS.md
+└── README.md
+```
+
+Vercel project must have **Root Directory** set to `web` for builds to work.
+
 ## What This Is
 
 Priceless CPA's internal operating system. Two things live here:
@@ -67,13 +101,18 @@ When helping with content:
 | `projects/shorts/` | Short-form scripts ready to film (output of `/shorts-script`) |
 | `projects/vsls/` | VSL scripts for landing pages, funnels, and service offers (output of `/vsl-script`) |
 
-### Website
+### Website (`web/`)
+
+All Next.js code lives under `web/`. See "Operator Permissions" at the top of this file -- only Austin edits this tree.
 
 | Folder | Purpose |
 |--------|---------|
-| `app/` | Next.js pages (homepage, industries, lead magnets, services) |
-| `workflow/` | Content data for industry pages |
-| `public/` | Static assets (logo, illustrations) |
+| `web/app/` | Next.js pages (homepage, industries, lead magnets, services) |
+| `web/components/` | Shared React components |
+| `web/lib/` | Shared utilities (funnel data, posthog, etc.) |
+| `web/workflow/` | Content data for industry pages |
+| `web/public/` | Static assets (logo, illustrations) |
+| `web/scripts/` | Dev tooling (auto-restart wrapper) |
 
 ### Marketing & Sales
 
@@ -203,8 +242,10 @@ After running any skill, look for opportunities to improve it. If the user menti
 
 ## This is a Next.js Project
 
-The website lives in `app/`. Key files:
-- `app/page.tsx` -- Homepage
-- `app/industries/` -- Industry landing pages
-- `app/tax-checklist/` -- Lead magnet (7 Questions tool)
-- `workflow/industries-content.ts` -- Content for industry pages
+The website lives in `web/`. Run from inside that folder: `cd web && npm run dev`. Key files:
+- `web/app/page.tsx` -- Homepage
+- `web/app/industries/` -- Industry landing pages
+- `web/app/tax-checklist/` -- Lead magnet (7 Questions tool)
+- `web/workflow/industries-content.ts` -- Content for industry pages
+
+**Vercel:** project's **Root Directory** setting must be `web` (set in Vercel dashboard, not in this repo).

@@ -85,9 +85,13 @@ Skills are reusable workflows. Run them by typing `/skill-name` in Claude Code.
 
 ```
 priceless-cpa/
-├── app/                    # Next.js website
-│   ├── page.tsx           # Homepage
-│   └── industries/        # Industry landing pages
+├── web/                    # Next.js website (Vercel root dir = web)
+│   ├── app/page.tsx       # Homepage
+│   ├── app/industries/    # Industry landing pages
+│   ├── components/        # Shared React components
+│   ├── lib/               # Shared utilities
+│   ├── workflow/          # Content data (industries-content.ts)
+│   └── public/            # Static assets
 │
 ├── context/               # AI knowledge base
 │   ├── audience/          # Target personas and content strategies
@@ -105,8 +109,6 @@ priceless-cpa/
 │   ├── improve-skill/     # Improve existing skills
 │   └── git-push/          # Git workflow
 │
-├── Shorts/                # Completed short-form scripts ready to film
-├── workflow/              # Content data (industries-content.ts)
 ├── CLAUDE.md              # Instructions for Claude Code
 └── README.md              # This file
 ```

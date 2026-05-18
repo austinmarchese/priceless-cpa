@@ -119,7 +119,7 @@ Currently the tax checklist form (`app/tax-checklist/page.tsx`) posts to FormSub
 3. **Create the API route** — new file: `app/api/leads/route.ts`
 
    ```typescript
-   // app/api/leads/route.ts
+   // web/app/api/leads/route.ts
    import { NextRequest, NextResponse } from 'next/server'
 
    export async function POST(req: NextRequest) {

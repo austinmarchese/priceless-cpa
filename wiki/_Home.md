@@ -58,9 +58,9 @@ Knowledge base for Priceless CPA content creation. Everything needed to write sc
 
 | Folder | What's in it |
 |--------|-------------|
-| `app/` | Next.js pages (homepage, industries, lead magnets, services) |
-| `workflow/` | Content data for industry pages |
-| `public/` | Static assets (logo, illustrations) |
+| `web/app/` | Next.js pages (homepage, industries, lead magnets, services) |
+| `web/workflow/` | Content data for industry pages |
+| `web/public/` | Static assets (logo, illustrations) |
 
 ---
 

@@ -120,8 +120,8 @@ Once confirmed, do ALL of these:
 
 ### 7a. Read the template
 ```bash
-Read app/industries/lawyers/page.tsx
-Read workflow/industries-content.ts
+Read web/app/industries/lawyers/page.tsx
+Read web/workflow/industries-content.ts
 ```
 
 ### 7b. Add content to industries-content.ts

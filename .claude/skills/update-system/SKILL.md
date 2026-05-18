@@ -95,8 +95,8 @@ PROJECTS
   - projects/shorts/ , new shorts ready to film
 
 WEBSITE
-  - app/... , new page or component
-  - workflow/... , updated industry content
+  - web/app/... , new page or component
+  - web/workflow/... , updated industry content
 
 SETTINGS
   - .claude/settings.json or settings.local.json changed. You may be
