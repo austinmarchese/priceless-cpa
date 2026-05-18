@@ -68,7 +68,7 @@ export default function BookingPage() {
         </div>
 
         <div className="bk-embed-container">
-          <BookingEmbed />
+          <BookingEmbed source="booking-direct" />
         </div>
 
         <p className="bk-note">No obligation. 100% free. Takes 30 minutes.</p>

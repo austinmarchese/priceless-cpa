@@ -6,6 +6,7 @@ export default function FastTrackClubhousePage() {
   return (
     <CommunityLanding
       communityName="Fast Track Clubhouse"
+      source="fast-track-clubhouse"
       pillText="Complimentary Tax Audit · TikTok Shop Sellers"
       intro={
         <>

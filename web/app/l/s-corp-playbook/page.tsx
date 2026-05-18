@@ -544,6 +544,7 @@ export default function SCorpPlaybookPage() {
                     Book a free 30-minute Tax Strategy Call. We will walk through your S-Corp setup and show you exactly where the savings are for your specific situation.
                   </p>
                   <BookingEmbed
+                    source="s-corp-playbook"
                     firstName={bookingContact?.firstName}
                     lastName={bookingContact?.lastName}
                     email={bookingContact?.email}

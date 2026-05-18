@@ -65,6 +65,7 @@ const STYLES = `
 
 export type CommunityLandingProps = {
   communityName: string
+  source: string
   topbarLabel?: string
   pillText?: string
   headlineSuffix?: string
@@ -78,6 +79,7 @@ export type CommunityLandingProps = {
 
 export default function CommunityLanding({
   communityName,
+  source,
   topbarLabel,
   pillText = 'Complimentary Tax Audit',
   headlineSuffix,
@@ -135,7 +137,7 @@ export default function CommunityLanding({
               <h2 className="fc-booking-title fc-serif">{bookingTitle}</h2>
               <p className="fc-booking-note">{bookingNote}</p>
             </div>
-            <BookingEmbed />
+            <BookingEmbed source={source} />
           </div>
         </div>
       </div>
