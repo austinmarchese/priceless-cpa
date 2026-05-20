@@ -1,0 +1,89 @@
+{
+  "comment": "Edit this file to tune what counts as PII. Filename regexes are case-insensitive. Add client surnames to clientNames for higher-tier flagging.",
+  "filenamePatterns": {
+    "high": [
+      "\\b(1040|1120s?|1065|1041|990|706|709|5471|8865|8858|5472)\\b",
+      "\\bw-?2\\b",
+      "\\bw-?9\\b",
+      "\\b1099-?(nec|misc|div|int|r|b|k)?\\b",
+      "\\bk-?1\\b",
+      "\\bssn\\b",
+      "\\bein\\b",
+      "\\bschedule[-_ ]?[abcdek]\\b",
+      "tax[-_ ]?return",
+      "payroll[-_ ]?(register|report|summary)",
+      "general[-_ ]?ledger",
+      "trial[-_ ]?balance",
+      "balance[-_ ]?sheet",
+      "p[-_ ]?and[-_ ]?l",
+      "profit[-_ ]?(and|&)[-_ ]?loss"
+    ],
+    "medium": [
+      "\\bqbo\\b",
+      "\\bqbb\\b",
+      "quickbooks",
+      "bank[-_ ]?statement",
+      "invoice",
+      "receipt",
+      "expense[-_ ]?report",
+      "engagement[-_ ]?letter",
+      "client[-_ ]?(file|data|info)",
+      "\\b401k\\b",
+      "\\bira\\b",
+      "\\bhsa\\b",
+      "depreciation",
+      "fixed[-_ ]?asset"
+    ],
+    "low": [
+      "\\.pdf$",
+      "\\.csv$",
+      "\\.xlsx?$",
+      "\\.qbb$",
+      "\\.qbo$",
+      "\\.qbm$"
+    ]
+  },
+  "contentPatterns": {
+    "ssn": "\\b(?:ssn|social\\s*security|social\\s*sec)[\\s:#]*\\d{3}-\\d{2}-\\d{4}\\b",
+    "ssnAdjacent": "(?<![\\d-])\\d{3}-\\d{2}-\\d{4}(?![\\d-])(?=[\\s\\S]{0,80}(?:ssn|social|spouse|taxpayer|filer))",
+    "ein": "\\b(?:ein|fein|tax\\s*id|employer\\s*id)[\\s:#]*\\d{2}-\\d{7}\\b",
+    "routingNumber": "\\brouting\\s*(?:number|#)?[\\s:#]*\\d{9}\\b",
+    "creditCard": "\\b(?:card|cc|credit\\s*card)\\s*(?:number|#)?[\\s:#]*(?:\\d[ -]?){13,19}\\b"
+  },
+  "clientNames": [],
+  "scanDirs": {
+    "macos": [
+      "~/Downloads",
+      "~/Desktop",
+      "~/Documents"
+    ],
+    "windows": [
+      "%USERPROFILE%\\Downloads",
+      "%USERPROFILE%\\Desktop",
+      "%USERPROFILE%\\Documents",
+      "%USERPROFILE%\\OneDrive\\Documents"
+    ],
+    "linux": [
+      "~/Downloads",
+      "~/Desktop",
+      "~/Documents"
+    ]
+  },
+  "claudePaths": {
+    "code": "~/.claude/projects",
+    "desktopMacos": "~/Library/Application Support/Claude",
+    "desktopWindows": "%APPDATA%\\Claude",
+    "desktopLinux": "~/.config/Claude"
+  },
+  "ignoreDirs": [
+    "node_modules",
+    ".git",
+    ".next",
+    "dist",
+    "build",
+    ".cache",
+    "Library/Caches"
+  ],
+  "maxAgeDays": 90,
+  "maxFileSizeMB": 500
+}
