@@ -24,7 +24,53 @@
 **Thumbnail Concept:** Anthony's face on left, reacting with a slight smirk. Big red "37%" crossed out, green "12.5%" below it with arrow. Subtext smaller: "on $4M".
 
 **Description:**
-I got my client's effective tax rate down to 12.5% on $4M of net income. Zero penalties. Three audits, all closed in a week. No offshore, no loopholes, no gray areas. This video walks through the exact 3-layer system we used, from entity structure and accounting to QBID optimization and strategic asset-backed investments. If you're a high-income business owner wondering why you're still writing seven-figure checks to the IRS, this is the framework most CPAs won't build for you.
+
+```
+5 Tax Traps Your Accountant Is Missing (free guide): https://www.pricelesscpa.com/5-tax-traps?utm_source=youtube&utm_campaign=tax-rate-37-to-12-5
+
+I got my client's effective tax rate down to 12.5% on $4M of net income. Zero penalties. Three audits, all closed in a week.
+
+No offshore. No loopholes. No gray areas. This is the exact 3-layer system we used, from entity structure and clean accounting to QBID optimization and strategic asset-backed investments. If you're a high-income business owner still writing seven-figure checks to the IRS, this is the framework most CPAs won't build for you.
+
+0:00 - Beginning of 2024: the client who wanted under 15%
+1:00 - Who I am and how I think about aggressive positions
+1:20 - Layer 1a: Entity structure (S Corp as the hub, trust for investments)
+3:00 - Layer 1b: Professional-level accounting (three audit letters, three weeks to close)
+4:30 - The business sale story: full financial package delivered in one day
+5:30 - Layer 1c: The compliance calendar that produced zero penalties
+7:15 - Layer 2a: QBID and the §199A interaction most CPAs miss
+9:45 - Layer 2b: $70K/year Solo 401(k) compounding to $7.5M tax-free
+11:00 - Why layers 1 and 2 alone won't get you to 12.5%
+11:30 - Layer 3: Strategic investments, bonus depreciation, and active participation
+13:45 - Turning a 10% return into a 20% return with the tax stack
+14:30 - The result: 12.5% on $4M, zero penalties
+15:30 - What to do if you're starting from scratch
+
+Ready to stop overpaying? Book a free strategy call:
+https://www.pricelesscpa.com/booking
+
+Free Resources:
+Take the 7 Questions Quiz: https://www.pricelesscpa.com/tax-checklist
+Visit: https://www.pricelesscpa.com
+
+Follow Anthony:
+Instagram: https://www.instagram.com/taxtonecpa/
+Twitter: https://x.com/anthonypricecpa
+TikTok: https://www.tiktok.com/@anthonypricecpa
+
+If you're new here, I'm Anthony Price. How I got here...
+
+21: Graduated from the University of Nevada with dual degrees in Finance and Accounting, and started in public accounting
+22: Worked with complex businesses, high-income individuals, and insurance companies across tax and audit
+23: Earned my CPA and built a foundation in both compliance and strategy
+25: Started focusing on what I saw mattered most: proactive tax planning and tax reduction strategies for seven-figure earners
+26: Grew my CPA firm to 100 clients
+27: Crossed 200 clients and built the team to keep up with demand
+28: Built the firm to 300+ business owners and high-income earners focused on year-round tax planning
+Today: We help high earners and business owners save an average of $50K+ per year through proactive tax strategy
+
+#TaxStrategy #CPA #Entrepreneur #EntityStructuring #QBID #BonusDepreciation #SCorp #TaxPlanning #BusinessOwner #TaxTips
+```
 
 ---
 

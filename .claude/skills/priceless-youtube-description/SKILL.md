@@ -75,9 +75,9 @@ Use this exact structure. Every description follows the same format for brand co
 [RESOURCES / LINKS]
 
 [ABOUT ANTHONY / BIO]
-
-[TAGS LINE]
 ```
+
+The description ends on the bio. Do not add a hashtags/tags line.
 
 #### Section Details
 
@@ -85,12 +85,10 @@ Use this exact structure. Every description follows the same format for brand co
 The very first line of every description is the 5 Tax Traps lead magnet link. This appears in the YouTube preview (before "Show more") and drives traffic to the lead capture page:
 
 ```
-5 Tax Traps Your Accountant Is Missing (free guide): https://www.pricelesscpa.com/5-tax-traps?utm_source=youtube&utm_campaign=[VIDEO_SLUG]
+5 Tax Traps Your Accountant Is Missing (free guide): https://www.pricelesscpa.com/5-tax-traps?utm_source=youtube
 ```
 
-Replace `[VIDEO_SLUG]` with the video's slug (e.g., `entity-restructuring`, `cost-seg-explained`). This lets PostHog and the lead form track which video drove each lead.
-
-This line is non-negotiable. It goes before the hook line on every video.
+This line is non-negotiable. It goes before the hook line on every video. Keep the link exactly as written, with only `?utm_source=youtube` (no campaign or slug params).
 
 **HOOK LINE (Line 2-3)**
 The next 1-2 sentences that appear in the YouTube preview. This is the second most visible text after the lead magnet link. It must:
@@ -108,11 +106,11 @@ Examples:
 Brief, direct summary of what the viewer will learn. Written in Anthony's voice. Use specific numbers and outcomes when possible. No AI puffery. No "In this comprehensive video..." Just state what the video covers and why it matters.
 
 **TIMESTAMPS**
-Format:
+Wrap each timestamp in parentheses. Format:
 ```
-0:00 - [Section name]
-0:30 - [Section name]
-2:00 - [Section name]
+(0:00) - [Section name]
+(1:29) - [Section name]
+(5:16) - [Section name]
 ...
 ```
 
@@ -129,25 +127,17 @@ https://www.pricelesscpa.com/booking
 Keep to 1-2 lines. No hard sell. Match Anthony's soft CTA style from his closes.
 
 **RESOURCES / LINKS**
-Include relevant links:
-- Lead magnet (if applicable): "Take the 7 Questions Quiz: [link]"
-- Related videos: "Watch next: [title] [link]"
-- Social links
-- Website: https://www.pricelesscpa.com
+Use this exact block. Do not add the quiz, related videos, Twitter, or TikTok:
 
-Format:
 ```
-Free Resources:
-Take the 7 Questions Quiz: https://www.pricelesscpa.com/tax-checklist
+Work with me:
 Visit: https://www.pricelesscpa.com
 
 Follow Anthony:
 Instagram: https://www.instagram.com/taxtonecpa/
-Twitter: https://x.com/anthonypricecpa
-TikTok: https://www.tiktok.com/@anthonypricecpa
 ```
 
-These are the locked social handles. Do not substitute or ask the user to confirm.
+This is the locked links block. Do not substitute, add other handles, or ask the user to confirm.
 
 **ABOUT ANTHONY / BIO**
 Use this bio block verbatim (do not rewrite each time):
@@ -165,16 +155,7 @@ If you're new here, I'm Anthony Price. How I got here...
 Today: We help high earners and business owners save an average of $50K+ per year through proactive tax strategy
 ```
 
-**TAGS LINE**
-Generate 5-10 relevant hashtags and a keyword-rich tags line. Focus on:
-- Tax-specific terms from the video (e.g., #CostSegregation, #SCorp, #TaxStrategy)
-- Audience terms (e.g., #Entrepreneur, #RealEstateInvestor, #BusinessOwner)
-- General discovery (e.g., #CPA, #TaxPlanning, #TaxTips)
-
-Format:
-```
-#TaxStrategy #CPA #Entrepreneur #[TopicSpecific] #[TopicSpecific] #TaxPlanning #BusinessOwner #TaxTips
-```
+This is the last block in the description. End here.
 
 ### Step 3: Quality Check
 
@@ -190,6 +171,10 @@ Before presenting the final description, verify:
 | Timestamps | Present and accurate to the script |
 | CTA | Soft, one clear next step |
 | Booking link | Exactly `https://www.pricelesscpa.com/booking` (locked, no variants) |
+| Lead magnet link | Exactly `...5-tax-traps?utm_source=youtube` (no campaign/slug params) |
+| Timestamps | Wrapped in parentheses `(0:00) -` |
+| Links block | "Work with me:" + Visit + Instagram only (no quiz, no Twitter/TikTok) |
+| No tags line | Description ends on the bio, no hashtags |
 | Bio | Exact format from template, not rewritten |
 | Length | Under 5,000 characters (YouTube limit) |
 | First 2 lines | Compelling in preview (before "Show more") |
@@ -203,53 +188,44 @@ If a script file was provided, also offer to append the description to the scrip
 ## Example
 
 ```
-User: /priceless-youtube-description --script projects/videos/entity-restructuring/script.md
+User: /priceless-youtube-description --script projects/videos/tax-rate-37-to-12-5/script.md
 
 Claude: [Reads script, generates description]
 
-Here's the YouTube description for "The IRS Is Targeting Entrepreneurs With Multiple Entities":
+Here's the YouTube description for "How I Got My Client From 37% to 12.5% Tax Rate on $4M Income":
 ```
 
 ```
-I restructured 40+ entities this year. Every single owner was leaving money on the table.
+5 Tax Traps Your Accountant Is Missing (free guide): https://www.pricelesscpa.com/5-tax-traps?utm_source=youtube
 
-If you own multiple businesses and everything runs through one entity, your "simple" setup is probably costing you $20K-$50K per year in unnecessary taxes. In this video, I break down exactly how to tell if your structure is wrong, the three changes that fix it, and why most CPAs never bring this up.
+I got my client's effective tax rate down from 37% to 12.5% on $4M of net income without having a single penalty. And the steps I walk through don't require a offshore account, crazy loopholes or any gray areas. This is the exact 3-layer system we used, from entity structure and clean accounting to QBID optimization and strategic asset-backed investments. If you're a high-income business owner still writing seven-figure checks to the IRS, this is the framework most CPAs won't build for you.
 
-0:00 - Why your entity structure matters more than you think
-0:28 - The #1 sign your current setup is costing you
-2:15 - How multi-entity structuring actually works
-5:30 - The three changes that save the most
-8:00 - What to ask your CPA this week
-8:25 - Common mistakes I see with S-Corps and LLCs
-11:00 - Action steps you can take today
-14:30 - The one thing to do before year-end
+(0:00) - Beginning of 2024: the client who wanted under 15%
+(1:29) - Layer 1
+(5:16) - Layer 2
+(8:17) - Layer 3
 
 Ready to stop overpaying? Book a free strategy call:
 https://www.pricelesscpa.com/booking
 
-Free Resources:
-Take the 7 Questions Quiz: https://www.pricelesscpa.com/tax-checklist
+Work with me:
 Visit: https://www.pricelesscpa.com
 
 Follow Anthony:
 Instagram: https://www.instagram.com/taxtonecpa/
-Twitter: https://x.com/anthonypricecpa
-TikTok: https://www.tiktok.com/@anthonypricecpa
 
-If you're new here, I'm Anthony Price, CPA.
+If you're new here, I'm Anthony Price. How I got here...
 
-21: Graduated from the University of Nevada with dual degrees in Finance and Accounting, started in public accounting
+21: Graduated from the University of Nevada with dual degrees in Finance and Accounting, and started in public accounting
 22: Worked with complex businesses, high-income individuals, and insurance companies across tax and audit
 23: Earned my CPA and built a foundation in both compliance and strategy
-25: Focused on what I saw mattered most: proactive tax planning and tax reduction strategies for seven-figure earners
+25: Started focusing on what I saw mattered most: proactive tax planning and tax reduction strategies for seven-figure earners
 26: Grew my CPA firm to 100 clients
 27: Crossed 200 clients and built the team to keep up with demand
 28: Built the firm to 300+ business owners and high-income earners focused on year-round tax planning
 Today: We help high earners and business owners save an average of $50K+ per year through proactive tax strategy
-
-#TaxStrategy #CPA #EntityStructuring #SCorp #LLC #Entrepreneur #TaxPlanning #BusinessOwner #TaxTips #RealEstate
 ```
 
 ## Learnings
 
--
+- Description format is locked to the 37%-to-12.5% example: lead magnet line with `?utm_source=youtube` only, parenthesized timestamps, "Work with me:" links block (Visit + Instagram only), bio block, and no hashtags. Don't reintroduce the quiz line, extra social handles, or a tags line.

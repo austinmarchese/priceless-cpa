@@ -24,7 +24,7 @@
       "sponsor": null,
       "folder": "tax-rate-37-to-12-5",
       "title": {
-        "primary": "How I LEGALLY Reduced My Client's Tax Rate from 37% to 12%",
+        "primary": "How I LEGALLY Reduced My Client's Tax Rate On $4M Income",
         "variants": [
           {
             "text": "How I Got My Client From 37% to 12.5% Tax Rate on $4M Income",
@@ -32,8 +32,8 @@
             "label": "Previous primary"
           },
           {
-            "text": "How I LEGALLY Reduced My Client's Tax Rate On $4M Income",
-            "chars": 56,
+            "text": "How I LEGALLY Reduced My Client's Tax Rate from 37% to 12%",
+            "chars": 58,
             "label": "Previous primary"
           }
         ]
@@ -66,7 +66,16 @@
           "screenshot": "outlier-1779110341293.png",
           "primary": false
         }
-      ]
+      ],
+      "finalPackaging": {
+        "variants": [
+          {
+            "title": "How I LEGALLY Reduced My Client's Tax Rate from 37% to 12%",
+            "thumbnail": "How-I-Got-My-Client-From-37--to-12-5--Tax-Rate-on--4M-Income-2.png",
+            "addedAt": "2026-05-21T15:14:28.841Z"
+          }
+        ]
+      }
     },
     {
       "id": "s-corp-costing-you-money",
