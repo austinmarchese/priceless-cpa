@@ -118,3 +118,42 @@ Now remember, all these strategies are in the tax code. They're legal; they work
 **Chapters/Timestamps:**
 
 Hook → Home Office Deduction → Augusta Rule → Itemized Deductions & Home Sale Exclusion → The Full Math → Next Steps
+
+## Packaging
+
+### YouTube Description
+
+```
+5 Tax Traps Your Accountant Is Missing (free guide): https://www.pricelesscpa.com/5-tax-traps?utm_source=youtube
+
+The two biggest expenses in your life are housing and taxes. I've helped clients write off close to $20,000 a year in home-related expenses, and no, it's not by writing off the whole house. This is the exact 4-strategy stack we use: the actual-expenses home office deduction, the Augusta Rule for renting your home to your business tax-free, the itemized deductions most business owners now qualify for after the new SALT cap, and the Section 121 exclusion that shelters up to $500K in gains every time you sell. Every strategy is in the tax code. The only thing separating a tax filing from a tax plan is documentation.
+
+(0:00) - Why housing is your biggest untapped tax asset
+(1:30) - Home Office Deduction: simplified vs actual method
+(5:00) - The Augusta Rule (Section 280A) and the documentation that makes it audit-proof
+(8:30) - Itemized deductions and the Home Sale Exclusion (Section 121)
+(11:00) - The full math: stacking it all on a $400K income
+(13:00) - Next steps
+
+Ready to stop overpaying? Book a free strategy call:
+https://www.pricelesscpa.com/booking
+
+Work with me:
+Visit: https://www.pricelesscpa.com
+
+Follow Anthony:
+Instagram: https://www.instagram.com/taxtonecpa/
+
+If you're new here, I'm Anthony Price. How I got here...
+
+21: Graduated from the University of Nevada with dual degrees in Finance and Accounting, and started in public accounting
+22: Worked with complex businesses, high-income individuals, and insurance companies across tax and audit
+23: Earned my CPA and built a foundation in both compliance and strategy
+25: Started focusing on what I saw mattered most: proactive tax planning and tax reduction strategies for seven-figure earners
+26: Grew my CPA firm to 100 clients
+27: Crossed 200 clients and built the team to keep up with demand
+28: Built the firm to 300+ business owners and high-income earners focused on year-round tax planning
+Today: We help high earners and business owners save an average of $50K+ per year through proactive tax strategy
+```
+
+Note: Timestamps are estimates from the script structure. Replace with actual cut marks before publishing.

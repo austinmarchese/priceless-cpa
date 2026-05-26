@@ -229,3 +229,4 @@ Today: We help high earners and business owners save an average of $50K+ per yea
 ## Learnings
 
 - Description format is locked to the 37%-to-12.5% example: lead magnet line with `?utm_source=youtube` only, parenthesized timestamps, "Work with me:" links block (Visit + Instagram only), bio block, and no hashtags. Don't reintroduce the quiz line, extra social handles, or a tags line.
+- Hook + summary length is locked to roughly the 37%-to-12.5% north star: ~4-5 sentences, ~95 words total, in a single paragraph (not two). Don't split into separate hook and summary paragraphs and don't run long — the whole block should fit in the YouTube preview area and read like the north star example above.
