@@ -24,7 +24,10 @@
       "Bash(python3 *)",
       "Bash(git *)",
       "Bash(gh auth *)",
-      "Bash(start *)"
+      "Bash(start *)",
+      "Bash(gh api *)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(cmdkey *)"
     ]
   }
 }
