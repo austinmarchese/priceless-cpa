@@ -1,5 +1,7 @@
 'use client'
 
+import { Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import BookingEmbed, { BOOKING_EMBED_STYLES } from '@/components/BookingEmbed'
 
 const STYLES = `
@@ -44,7 +46,14 @@ const STYLES = `
   }
 `
 
-export default function BookingPage() {
+function BookingPageInner() {
+  const sp = useSearchParams()
+  const source = sp.get('utm_source') || sp.get('source') || 'booking-direct'
+  const medium = sp.get('utm_medium') || undefined
+  const campaign = sp.get('utm_campaign') || undefined
+  const content = sp.get('utm_content') || undefined
+  const term = sp.get('utm_term') || undefined
+
   return (
     <div className="bk-root">
       <style dangerouslySetInnerHTML={{ __html: STYLES + BOOKING_EMBED_STYLES }} />
@@ -68,7 +77,13 @@ export default function BookingPage() {
         </div>
 
         <div className="bk-embed-container">
-          <BookingEmbed source="booking-direct" />
+          <BookingEmbed
+            source={source}
+            medium={medium}
+            campaign={campaign}
+            content={content}
+            term={term}
+          />
         </div>
 
         <p className="bk-note">No obligation. 100% free. Takes 30 minutes.</p>
@@ -79,5 +94,13 @@ export default function BookingPage() {
         <p className="bk-footer-copy">&copy; Priceless CPA. All rights reserved.</p>
       </footer>
     </div>
+  )
+}
+
+export default function BookingPage() {
+  return (
+    <Suspense fallback={null}>
+      <BookingPageInner />
+    </Suspense>
   )
 }

@@ -6,6 +6,10 @@ const CALENDAR_ID = 'L4e0QcVE77VAkFsP6ogx'
 
 type BookingEmbedProps = {
   source: string
+  medium?: string
+  campaign?: string
+  content?: string
+  term?: string
   firstName?: string
   lastName?: string
   email?: string
@@ -20,14 +24,26 @@ export const BOOKING_EMBED_STYLES = `
   }
 `
 
-export default function BookingEmbed({ source, firstName, lastName, email, phone }: BookingEmbedProps) {
+export default function BookingEmbed({
+  source,
+  medium = 'landing-page',
+  campaign,
+  content,
+  term,
+  firstName,
+  lastName,
+  email,
+  phone,
+}: BookingEmbedProps) {
   const [height, setHeight] = useState(1200)
 
   const params = new URLSearchParams()
   params.set('source', source)
   params.set('utm_source', source)
-  params.set('utm_medium', 'landing-page')
-  params.set('utm_campaign', source)
+  params.set('utm_medium', medium)
+  params.set('utm_campaign', campaign || source)
+  if (content) params.set('utm_content', content)
+  if (term) params.set('utm_term', term)
   if (firstName) params.set('first_name', firstName)
   if (lastName) params.set('last_name', lastName)
   if (email) params.set('email', email)
