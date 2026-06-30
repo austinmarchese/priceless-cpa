@@ -330,6 +330,14 @@ At least one mistake should be "what your CPA is probably doing wrong" to reinfo
 - "This works for everyone" (lacks specificity)
 - Theory without practical application
 
+### Writing Rules
+
+1. **Write for speaking, not reading.** Short sentences. Conversational. How Anthony would actually talk in a meeting.
+2. **Anticipate objections.** Address the "yeah but..." moment before the viewer thinks it. If a strategy sounds too good, name the catch immediately. If it sounds aggressive, cite the authority that makes it legal.
+3. **One clear takeaway per section.** The viewer should be able to summarize each section in one sentence. If they can't, the section is doing too much. Split it or cut it.
+4. **No jargon without immediate translation.** If you say "QBI deduction," the next sentence explains it in plain English. Same with §199A, §1031, basis, accrual, etc.
+5. **End every section with a transition or re-hook.** Never let a section close flat. See Re-Hook Formulas below.
+
 ### Re-Hook Formulas (Every 60-90 Seconds)
 
 1. "That point was important but if you don't couple it with this one, you're missing the full picture"
@@ -352,6 +360,9 @@ Before presenting draft, verify:
 - [ ] Body points follow ascending value (each better than the last)
 - [ ] Re-hooks every 60-90 seconds
 - [ ] Each point has What → Why → How
+- [ ] Each section has ONE clear takeaway the viewer could summarize in one sentence
+- [ ] Each section ends with a transition or re-hook (no flat closes)
+- [ ] Major "yeah but..." objections are anticipated and addressed inline
 - [ ] Mid-video CTA placed at 40-60% mark, tied to value just delivered
 - [ ] ONE ending, not multiple
 

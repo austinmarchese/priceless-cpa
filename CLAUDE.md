@@ -140,8 +140,8 @@ Skills are in `.claude/skills/[name]/SKILL.md`. When the user runs `/[skill-name
 |---------|--------------|
 | `/priceless-video-idea-research` | Title generation: new concept, riff on outliers, or translate competitor titles |
 | `/priceless-video-script-research` | Research the body content of a locked video: stats, tax code, examples, enriched outline |
-| `/priceless-youtube-script` | Write a long-form YouTube script (10-20 min) from outline or topic |
-| `/priceless-youtube-script-writer` | Full script lifecycle: draft, revise, finalize. Karlton hooks + Jasmine authority + Anthony's voice |
+| `/priceless-youtube-script-writer` | Write + revise long-form YouTube scripts (10-20 min). Full lifecycle: draft, revise, finalize. Karlton hooks + Jasmine authority + Anthony's voice |
+| `/priceless-youtube-script-reviewer` | 6-parallel-agent QA pass on a finished script: consultants, voice match, past performance, quality + tax authority audit, packaging, intro validator |
 | `/priceless-youtube-idea` | Generate scored video ideas matched to audience and outlier patterns |
 | `/priceless-shorts-script` | Write short-form video scripts (45-90s) for Reels/TikTok/Shorts |
 | `/priceless-youtube-description` | Generate optimized YouTube descriptions with timestamps, CTAs, and Anthony's bio |
@@ -202,10 +202,11 @@ The typical flow for creating YouTube content:
 ```
 1. /priceless-video-idea-research   -> Generate titles (new concept, riff on outliers, or translate competitors)
 2. /priceless-video-script-research -> Deep research: north star video, topic deep dive, enriched outline
-3. /priceless-youtube-script        -> Write full script from outline with packaging
-4. /priceless-shorts-script --from-youtube [slug]  -> Cut shorts clips from the long-form script
-5. Film + edit
-6. /daily-journal                   -> Capture what worked after publishing
+3. /priceless-youtube-script-writer  -> Write + revise script. Full lifecycle (draft, revise, finalize)
+4. /priceless-youtube-script-reviewer  -> 6-agent QA pass on the draft (consultants, voice, past performance, quality + tax authority, packaging, intro)
+5. /priceless-shorts-script --from-youtube [slug]  -> Cut shorts clips from the long-form script
+6. Film + edit
+7. /daily-journal                   -> Capture what worked after publishing
 ```
 
 All YouTube context lives in one place:
