@@ -175,6 +175,7 @@ Skills are in `.claude/skills/[name]/SKILL.md`. When the user runs `/[skill-name
 | `/state-tax-lookup` | Pull state-specific rules for a client: rate structure, PTET mechanics, residency posture, OBBBA conformity, sourcing rules. Covers all 50 states + DC. |
 | `/industry-playbook` | Pull the industry-specific strategy playbook: what works, what doesn't, industry tax code triggers, audit posture. Covers 11 industries (E-Commerce, Real Estate Owner, Software/AI, Doctors, Construction, RE Agent, Digital Marketing, Home Services, Jewelry, Investment Firms, Car Washes). |
 | `/capital-deployment-screen` | Operator 8 evaluation for HNW clients (AGI > $750K, Full Wealth tier). Runs the 8-gate qualification and surfaces the 2-3 most relevant deployment vehicles from the 13-file library. Partner sign-off required for any Tier 1/2 recommendation. |
+| `/client-profile-sync` | Auto-populate the client profile from Karbon (REST API: age, entities, work history, custom fields) and Ping (MCP: goals, life events, planning intent from transcripts, with citations). Modes: `--setup` (one-time credential check + custom field creation), default sync, `--write-back` (post learnings to Karbon timeline). Architecture: `docs/integrations/karbon-ping-architecture.md`. |
 
 **Tax Planning — standalone engagement workflows (separate SOW from quarterly):**
 

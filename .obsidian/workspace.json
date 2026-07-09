@@ -20,8 +20,23 @@
               "icon": "lucide-file",
               "title": "team-walkthrough"
             }
+          },
+          {
+            "id": "8948bad70721fb16",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/integrations/karbon-ping-architecture.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "karbon-ping-architecture"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -183,8 +198,18 @@
       "bases:Create new base": false
     }
   },
-  "active": "f9737c12a98eb46a",
+  "active": "8948bad70721fb16",
   "lastOpenFiles": [
+    "docs/integrations/client-profile-sync-setup-guide.pdf",
+    "docs/integrations/toPdfViaTempFile12565-0.html",
+    "docs/integrations/toPdfViaTempFile12565-1.pdf",
+    "docs/integrations/keyur-setup-guide.md",
+    "projects/internal-ops/tech-stack/team-walkthrough.md",
+    "projects/videos/15-percent-tax-6-figure-income/script.md",
+    "projects/videos/internet-tax-scams-2026/script.md",
+    "projects/videos/owners-pay-generational-wealth/script.md",
+    "projects/videos/15-percent-tax-6-figure-income",
+    "projects/videos/internet-tax-scams-2026",
     "projects/internal-ops/tech-stack/feature-deep-dive.md",
     "skills/video-script-research/SKILL.md",
     "skills/video-script-research",
@@ -199,12 +224,8 @@
     "content/youtube/projects/smart-investors-after-filing",
     "content/youtube/projects/how-rich-become-poor",
     "content/youtube/projects/how-rich-avoid-irs-audits",
-    "content/youtube/projects/elon-musk-avoids-taxes",
-    "content/youtube/projects",
     "content/youtube/ideas/smart-investors-after-filing/idea.md",
-    "content/youtube/ideas/smart-investors-after-filing",
     "content/youtube/ideas/how-rich-become-poor/idea.md",
-    "content/youtube/ideas/how-rich-become-poor",
     "content/youtube/ideas/elon-musk-avoids-taxes/idea.md",
     "content/youtube/ideas/write-off-your-house/idea.md",
     "content/youtube/ideas/how-rich-avoid-irs-audits/idea.md",
@@ -224,10 +245,6 @@
     "reports/yt-packaging-round1/images/elon-thumb2.png",
     "reports/yt-packaging-round1/images/house-thumb1.png",
     "reports/yt-packaging-round1/images/smart-investors-thumb1.png",
-    "reports/yt-packaging-round1/images/smart-investors-outlier1.png",
-    "context/mvp-sales-process.md",
-    "content/youtube/outliers/status.md",
-    "content/youtube/outliers/titles.md",
-    "content/youtube/outliers/README.md"
+    "reports/yt-packaging-round1/images/smart-investors-outlier1.png"
   ]
 }
