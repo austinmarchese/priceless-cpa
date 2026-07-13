@@ -145,6 +145,22 @@ The analyst has populated a CLIENT-PROFILE per the template. Load it. Read all 1
 - Known events for current year
 - Open items from prior engagement
 
+### Step 3.5: Client Intake Gate — confirm or ask before running operators
+
+The profile and uploaded documents rarely contain everything the operators need. Before Step 4, run this **confirm-or-ask gate**: for each item below, confirm it from the profile/returns; if it is not there, **ask the analyst — do not assume.** Every item left unconfirmed must be labeled as an explicit assumption in the memo's Open Questions, never buried as a silent default.
+
+Must-confirm-or-ask checklist (each one materially changes the output):
+
+- **Owner age(s)** — sizes any defined-benefit / cash-balance plan; without it, retirement strategy is unquantifiable.
+- **Officer vs. staff payroll split, YTD** — the payroll/P&L total is whole-company; back out the officer portion. Confirm how much **officer comp, federal/state withholding, and estimated payments have actually run YTD** (often $0 early in the year — which drives the whole catch-up plan).
+- **Existing retirement plan?** (Solo 401(k), SEP, DB, cash balance) — avoid recommending what already exists.
+- **Source of capital gains** — portfolio (NIIT applies, taxed as investment) vs. active-business asset disposition (may be NII-excluded). Changes NIIT and the projection.
+- **New location / major asset — use and in-service date** — drives cost-seg + bonus-depreciation timing (current year vs. next).
+- **Family facts** — age-appropriate children (income-shifting), employed spouse (separate plan capacity).
+- **State posture from the prior-year return** — pull the **apportionment percentages** and **existing elections (e.g., PTET)** directly from the filed return; carry the same apportionment forward unless a known event changes it. Do not recompute from scratch when the return already establishes it.
+
+If a return is delivered as scanned images (common for brokerage-heavy 1040s), key figures may not be machine-readable — request the specific line values (e.g., total tax, AGI, capital gains) rather than guessing.
+
 ### Step 4: Run the eight cognitive operators
 
 Per `shared/FIRM-METHODOLOGY.md`, in order:
@@ -199,6 +215,35 @@ Any question the skill could not resolve from available data gets flagged in the
 - **Partner (credentialed CPA)**: reviews, signs off on aggressive positions, approves Path B disclosures, converts to client version, signs the final
 
 No memo goes to a client without partner sign-off.
+
+## Learnings from live engagements
+
+Reusable methods surfaced during real engagements. Apply them; deepen the relevant sub-skill when one recurs.
+
+### Reasonable comp ↔ QBI crossover (S Corp, non-SSTB)
+For a non-SSTB S Corp owner above the §199A income threshold, the QBI deduction is the lesser of **20% of QBI (the K-1 income)** or **50% of W-2 wages**. Officer salary moves these in opposite directions (every $1 of salary cuts K-1 by $1 but raises the wage limit by $0.50), so the tax-optimal salary is the **crossover where `50% × total W-2 wages = 20% × K-1`**. Solving per owner: `W ≈ (0.10 × EBOC − 0.25 × staff wages) / 0.70`, where EBOC = entity earnings before officer comp.
+- **The QBI wage limit uses TOTAL company W-2 wages (all officers + all staff), not officer comp alone.** More staff payroll lowers the officer salary needed to reach the crossover.
+- Under-comp does double damage: payroll-tax reclassification risk **and** a throttled QBI deduction. Don't default to "minimize salary."
+
+### Withholding even-pay rule (§6654(g)) and the wage-capacity ceiling
+W-2 withholding is **deemed paid evenly across all four quarters** regardless of when withheld, so heavy withholding in Q3/Q4 retroactively cures missed Q1/Q2 — something a late estimate cannot do. But **withholding can never exceed the wage** (after FICA), so K-1 income (no paycheck) must be covered by estimates unless salary is raised. Surface the trade-off: QBI-optimal comp leaves an estimate gap; raising comp to ~the full liability enables 100% withholding (zero estimates) at the cost of some QBI + extra Medicare.
+
+### Safe-harbor percentages by jurisdiction
+Pay the lesser of the current-year or prior-year test, per jurisdiction:
+- **Federal**: 110% of prior year (AGI > $150K; else 100%) or 90% of current.
+- **PA**: 100% of prior or 90% of current (no 110% bump).
+- **MA**: 100% of prior or **80%** of current (not 90%).
+When income is growing, the current-year test is usually the lower/binding one.
+
+### Multi-state for PA-resident S-corp owners
+- **PA has no PTET**, but PA grants resident owners a **credit for out-of-state PTET when the entity is an S corp** (72 P.S. §7314 — the partnership credit gap does NOT apply). Confirm the PA-40 claims it; it can cut PA tax materially.
+- **MA**: 63D PTE elective tax (5% base, ~90% refundable member credit) + **4% millionaire surtax** over the indexed threshold; the surtax is generally NOT covered by the 63D credit. Pull MA **apportionment from the prior-year return** and carry it forward.
+
+### Employee-side payroll deductions that reduce withholding capacity
+Only employee-paid items reduce the paycheck available for income-tax withholding: **PA employee SUI (~0.07%)**, **MA PFML employee share (~0.46%, if MA-covered)**, **PA local EIT (~1%)**, PA LST (~$52/yr). **MA unemployment is employer-only** and does NOT reduce withholding. >2% S-corp shareholder-officers may be **exempt from SUI/PFML** — confirm with the payroll provider.
+
+### Data extraction
+Brokerage-heavy 1040s are often delivered as scanned images whose form values are not machine-readable. Request the specific line figures (total tax, AGI, capital gains) rather than estimating; flag any number that could not be read from source.
 
 ## Version history
 
