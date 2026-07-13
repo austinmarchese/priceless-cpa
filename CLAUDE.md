@@ -154,6 +154,7 @@ Skills are in `.claude/skills/[name]/SKILL.md`. When the user runs `/[skill-name
 | `/priceless-vsl-script` | Write Video Sales Letter scripts for landing pages, funnels, and service offers |
 | `/priceless-industry-page` | Build a new industry landing page through interview |
 | `/priceless-lead-magnet` | Generate a new lead magnet page with route and interactive quiz |
+| `/priceless-ecommerce-blueprint` | E-commerce niche offer: quote Blueprint/Quarterback pricing and sales scripts, or build the client-facing Blueprint deliverable |
 | `/code-review` | Audit codebase for branding consistency and best practices |
 
 **Tax Planning (quarterly engagement — run in numbered order):**
