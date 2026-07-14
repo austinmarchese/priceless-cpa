@@ -1,5 +1,7 @@
 # Channel P&L — Working Template
 
+> **SUPERSEDED — read `references/channel-profit-methodology.md` instead.** That file has the sourced report paths, the reconciliation test, confidence labeling, and review gates this file lacks. This file is kept only until `SKILL.md` is updated to point at it; do not build §2 from this file alone.
+
 Rebuilds each sales channel's blended payout into real revenue, real cost, and real contribution profit. This is scratch work — fill it in, reconcile it, then paste only the finished table into Blueprint §2. Never hand a client this working file; it has no narrative, just numbers.
 
 ## Source data (pull fresh each engagement — don't reuse a prior period's figures)

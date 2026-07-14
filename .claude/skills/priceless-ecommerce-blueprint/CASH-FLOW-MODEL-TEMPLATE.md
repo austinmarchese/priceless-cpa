@@ -6,7 +6,7 @@ Models the lag every e-commerce business feels: money out for inventory and ads 
 
 | Need | Where to pull it |
 | :---- | :---- |
-| Net deposits (cash in) | QBO bank feed / register for the period, or the reconciled channel totals from `CHANNEL-PL-TEMPLATE.md` (Gross sales − Refunds − Fees − Fulfillment − Advertising, per channel, summed) |
+| Net deposits (cash in) | QBO bank feed / register for the period, or the reconciled channel totals from `references/channel-profit-methodology.md` (Gross sales − Refunds − Fees − Fulfillment − Advertising, per channel, summed) |
 | Inventory purchases | QBO accounts payable / bill payments to suppliers, or bank register if paid directly |
 | Ad spend | Ad platform billing (Amazon Ads, Meta, Google, TikTok) — actual spend, not budgeted |
 | Operating + tax | Remaining opex from QBO P&L (payroll, rent, software, etc.) plus any estimated tax payments made in the period |

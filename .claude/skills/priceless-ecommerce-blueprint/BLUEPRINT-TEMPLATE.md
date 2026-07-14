@@ -6,7 +6,7 @@
 > - Sections 2, 3, 5, 8, 9 are populated from their own component templates (Channel P&L, Nexus Map, Tax Plan, Cash Flow Model, SKU Profitability). Paste the finished output in; don't rebuild here.
 > - Voice: plain language, no accounting jargon, quarterback tone. No em dashes. Talk to a smart business owner who knows nothing about accounting.
 > - Target turnaround: 14 days from kickoff (soften if the Senior bench isn't built yet).
-> - Roles: Staff pulls data + fills tables. Senior writes §4, §5, §6 interpretation. Partner reviews + presents.
+> - Roles: Staff pulls data + fills tables. Senior writes §2, §4, §5, §6, §7, §8, §9 interpretation (every section with judgment-call narrative, not just §4-§6). Partner reviews + presents.
 
 ---
 
@@ -41,7 +41,7 @@ Here's where your business actually stands, and where the money is.
 
 ## 2. Your True Profit Picture (by channel)
 
-> **PREP NOTE:** Populate from the **Channel P&L template**. Source data: Amazon Seller Central > Reports > Payments > Date Range Report; Shopify > Analytics > Finances summary + Payouts; other channels' payout reports. Rebuild each platform's deposit into gross revenue minus each fee category minus COGS. This is a one-time manual pull for the Blueprint. Keep the number reconciled to what actually hit the bank.
+> **PREP NOTE:** Populate per `references/channel-profit-methodology.md` — source reports, the three-way reconciliation test, and confidence labeling all live there. This is a one-time manual pull for the Blueprint. Keep the number reconciled to what actually hit the bank.
 
 Amazon and Shopify don't hand you profit, they hand you a deposit, with sales, fees, refunds, and taxes already blended together. Here's what that deposit actually breaks down to, by channel.
 
@@ -62,9 +62,11 @@ Amazon and Shopify don't hand you profit, they hand you a deposit, with sales, f
 
 ---
 
-## 3. Sales Tax & Multi-State Nexus Exposure
+## 3. Multi-State Tax Exposure
 
-> **PREP NOTE:** Populate from the **Nexus Map template**. Pull sales by state + transaction counts from each platform. Compare to each state's economic nexus threshold (most: $100K or 200 transactions). Note marketplace-facilitator coverage: Amazon collects + remits in almost every state; Shopify/DTC does NOT. Exposure = uncollected tax in states where they crossed the threshold and aren't registered.
+### 3a. Sales Tax & Multi-State Nexus Exposure
+
+> **PREP NOTE:** Populate per `references/sales-tax-screening-rules.md` Part A. Verify each state's *current, actual* threshold and measurement period — do not assume $100K/200 transactions uniformly, thresholds vary and change by statute. Note marketplace-facilitator coverage: Amazon collects + remits in almost every state; Shopify/DTC does NOT. Exposure = uncollected tax in states where they crossed the threshold and aren't registered.
 
 The moment you sell across state lines, you can create a tax obligation you never signed up for, and it builds quietly until a state comes looking. Here's your map.
 
@@ -79,6 +81,23 @@ The moment you sell across state lines, you can create a tax obligation you neve
 - **Marketplace-facilitator note:** [Amazon is covering you in X states; your Shopify/DTC sales in Y states are your responsibility.]
 
 **What to do about it:** [Plain-language recommendation. Which states are urgent, the cleanest path to fix it. If material, note that historical cleanup / voluntary disclosure is a separate focused engagement.]
+
+### 3b. Income Tax Nexus Exposure
+
+> **PREP NOTE:** Populate per `references/sales-tax-screening-rules.md` Part B. This is a different question from 3a — sales tax nexus asks "do you owe sales tax," this asks "does your business need to FILE and pay STATE INCOME TAX in states beyond home base." Two separate triggers: (1) physical presence — FBA inventory stored in a state is property in that state and defeats P.L. 86-272 solicitation-only protection regardless of sales volume; (2) factor-presence economic nexus — only eight states have adopted any such standard, and most use figures other than the MTC's $500K model (see the reference file's state-by-state table). Verify current thresholds and each state's P.L. 86-272 posture with `/state-tax-lookup` — don't assume uniform rules across states.
+
+Sales tax isn't the only multi-state exposure. If Amazon stores your inventory in a state's fulfillment center, or your sales into a state cross that state's income tax threshold, your business may owe — and need to file — state income tax there too, independent of your sales tax picture.
+
+| State | Trigger | Your activity | Threshold | Crossed / present? | Currently filing? | Est. exposure |
+| :---- | :---- | :---- | :---- | :----: | :----: | ----: |
+| [State] | [FBA inventory / factor-presence sales] | [$ sales or "inventory stored"] | [$500K or N/A for inventory] | [Yes/No] | [Yes/No] | [$] |
+
+- **States with FBA inventory presence:** [list — pulled from Amazon's inventory location report]
+- **States crossed on factor-presence alone (no inventory):** [list]
+- **Currently filing state income tax in:** [N states]
+- **Estimated exposure / filing gap:** [$X, or "primarily a filing gap, not a large liability" if margins are thin in those states]
+
+**What to do about it:** [Plain-language recommendation — this is often more about starting to file correctly going forward than a large back-tax bill; frame accordingly. Flag if historical exposure looks material enough to warrant a separate voluntary-disclosure engagement, same as 3a.]
 
 ---
 
@@ -96,7 +115,7 @@ The moment you sell across state lines, you can create a tax obligation you neve
 
 ## 5. Your 12–18 Month Tax Plan
 
-> **PREP NOTE:** Populate from the **Tax Plan template**, which is pre-loaded with the e-comm strategy menu below (source: E-COMMERCE.md playbook). Keep only the strategies that apply, delete the rest, and put a real dollar estimate on each. Senior owns this section. Every row must tie to a number.
+> **PREP NOTE:** Pre-loaded with the e-comm strategy menu below, sourced live from `.claude/skills/priceless-tax-planning/tax-strategy/industries/E-COMMERCE.md` — no separate template file for this section. Keep only the strategies that apply, delete the rest, and put a real dollar estimate on each. Confirm the QBI phase-in threshold against the client's actual income before writing "full 20% available." Senior owns this section. Every row must tie to a number; the total row states its composite confidence rather than one unqualified sum (see `references/data-readiness-rules.md`).
 
 Here's every move worth making, when to make it, and what it saves. Not theory, your actual situation.
 
@@ -120,7 +139,7 @@ Here's every move worth making, when to make it, and what it saves. Not theory, 
 
 ## 6. Inventory & COGS Method Assessment
 
-> **PREP NOTE:** This is an ASSESSMENT, not a rebuild. Check: is the method right for their size (§471(c) threshold ~$30M avg gross receipts), is landed cost (product + freight + duties) captured, is inventory on the balance sheet real or static/zero (red flag), does COGS match the period. A full historical SKU rebuild is a SEPARATE paid project, say so if they need it.
+> **PREP NOTE:** Populate per `references/inventory-cogs-methodology.md` — this is an ASSESSMENT, not a rebuild. Check: is the method right for their size (§471(c)/§263A small-business threshold — see that file's sourced, year-specific table, don't use a flat "~$30M"), is landed cost (product + freight + duties) captured, is inventory on the balance sheet real or static/zero (red flag), does COGS match the period. A full historical SKU rebuild is a SEPARATE paid project, say so if they need it.
 
 **How your inventory and cost of goods are handled today:** [Current method in plain language.]
 
@@ -134,7 +153,7 @@ Here's every move worth making, when to make it, and what it saves. Not theory, 
 
 ## 7. Accounting System Blueprint
 
-> **PREP NOTE:** This is where you teach them how to track everything going forward, and set up the natural upsell. Recommend the stack: QBO + A2X (channel P&L), inventory tool, cash flow template, sales tax setup. Note what they can DIY vs. what realistically needs managing.
+> **PREP NOTE:** This is where you teach them how to track everything going forward, and set up the natural upsell. Recommend the stack: QBO + A2X (channel P&L), inventory tool, cash flow template, sales tax setup. `references/inventory-cogs-methodology.md`'s tooling table is a starting point for the inventory-tool row (market-research-sourced — verify with the vendor before it's a firm recommendation). Note what they can DIY vs. what realistically needs managing.
 
 You can't run a growing brand on a shoebox and a spreadsheet. Here's the system built for e-commerce, so your numbers stay this clear every month, not just today.
 

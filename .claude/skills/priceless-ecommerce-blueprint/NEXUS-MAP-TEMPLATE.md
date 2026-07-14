@@ -1,5 +1,7 @@
 # Sales Tax Nexus Map — Working Template
 
+> **SUPERSEDED — read `references/sales-tax-screening-rules.md` (Part A) instead.** That file corrects this one's unsourced threshold framing, adds measurement-period validation, and adds confidence/review gates. This file is kept only until `SKILL.md` is updated to point at it; do not build §3a from this file alone.
+
 Maps every state the client sells into against that state's economic nexus threshold, to find where they owe and aren't registered. Scratch work — fill in, verify thresholds, then paste the finished table into Blueprint §3.
 
 ## Source data

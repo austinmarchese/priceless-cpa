@@ -13,6 +13,8 @@ Ranks products by what they actually put in the client's pocket after landed cos
 
 ## Calculation
 
+**Perform this in an actual spreadsheet (Excel/Sheets), not as freeform narrative arithmetic** — per-SKU allocation of fees and ad spend across up to 20 rows is error-prone to do as chat-based reasoning. Paste only the checked, final table into the Blueprint.
+
 1. Pull units sold and revenue for every SKU in the period; sort descending by revenue.
 2. Take the top 20 SKUs by revenue, or roll up by product category if the catalog is long-tail (hundreds of low-volume SKUs).
 3. For each: **COGS** = units × landed unit cost (freight + duties included).
@@ -28,6 +30,8 @@ Ranks products by what they actually put in the client's pocket after landed cos
 - Tie every call-out to a specific reorder or ad-spend decision the client can act on, not just a ranking.
 
 ## Output → paste into Blueprint §9
+
+**"True margin $" excludes admin overhead/payroll — it's a contribution-margin variant, not net profit. Never present it as what the client actually keeps.**
 
 | SKU / Category | Units | Revenue | True margin $ | Margin % |
 | :---- | ----: | ----: | ----: | ----: |
