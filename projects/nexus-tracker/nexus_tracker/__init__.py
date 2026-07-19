@@ -10,4 +10,4 @@ package: everything reads from a single normalized transaction ledger, and all
 storage goes through one data-access layer (nexus_tracker/storage.py).
 """
 
-__version__ = "0.0.0"  # Session 0: scaffold only, no working features yet.
+__version__ = "0.1.0"  # Session 1: ledger + client shapes and threshold config loader.

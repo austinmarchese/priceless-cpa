@@ -82,8 +82,8 @@ after each. **Do not build multiple phases at once.**
 
 | Session | Phase |
 |---------|-------|
-| 0 | Scaffold + commit the spec **(this session — done)** |
-| 1 | SQLite ledger + clients tables, threshold JSON structure |
+| 0 | Scaffold + commit the spec **(done)** |
+| 1 | SQLite ledger + clients tables, threshold JSON structure **(done)** |
 | 2 | Nexus engine, tested against hand-made fake data |
 | 3 | Data-access layer over SQLite |
 | 4 | Web UI shell (select/add client, home view) |
@@ -96,6 +96,18 @@ after each. **Do not build multiple phases at once.**
 
 ## Status
 
-**Session 0 complete: scaffold only.** The package modules are placeholders with
-no working logic yet. How to run the app will be documented once the web shell
-exists (Session 4).
+**Session 1 complete: the data shapes exist.**
+
+- `nexus_tracker/ledger.py` — the `Transaction` and `Client` record shapes plus
+  the SQL schema for the `transactions` and `clients` tables (money in cents,
+  composite uniqueness, refund-references-original, schema version).
+- `nexus_tracker/thresholds.py` — loads and validates
+  `config/state_thresholds.json` into typed `StateThreshold` objects, with
+  plain-English errors on a malformed file.
+- `tests/test_shapes.py` — shape sanity checks. Run from the project root with
+  `python3 -m unittest`.
+
+No storage access, nexus engine, or UI yet. The `storage.py`, `engine.py`,
+importer, and web modules are still placeholders that name the session that
+builds them. How to run the app will be documented once the web shell exists
+(Session 4).

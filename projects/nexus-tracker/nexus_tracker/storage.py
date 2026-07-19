@@ -16,7 +16,8 @@ Built in Session 3.
 """
 
 # TODO(Session 3): implement the data-access layer over SQLite -- open/create the
-# shared database file, apply the schema from ledger.py, and expose plain
-# functions to add and read transactions and clients. Write it so a future swap
-# to a hosted database is a single-file change (keep the public functions stable
-# and storage-agnostic in name and shape).
+# shared database file, apply ledger.SCHEMA_STATEMENTS, stamp ledger.SCHEMA_VERSION
+# via PRAGMA user_version, turn on PRAGMA foreign_keys, and expose plain functions
+# to add and read the ledger.Transaction / ledger.Client shapes. Write it so a
+# future swap to a hosted database is a single-file change (keep the public
+# functions stable and storage-agnostic in name and shape).
