@@ -84,7 +84,7 @@ after each. **Do not build multiple phases at once.**
 |---------|-------|
 | 0 | Scaffold + commit the spec **(done)** |
 | 1 | SQLite ledger + clients tables, threshold JSON structure **(done)** |
-| 2 | Nexus engine, tested against hand-made fake data |
+| 2 | Nexus engine, tested against hand-made fake data **(done)** |
 | 3 | Data-access layer over SQLite |
 | 4 | Web UI shell (select/add client, home view) |
 | 5 | CSV importer with column mapping |
@@ -96,7 +96,7 @@ after each. **Do not build multiple phases at once.**
 
 ## Status
 
-**Session 1 complete: the data shapes exist.**
+**Session 2 complete: the nexus engine works (against fake data).**
 
 - `nexus_tracker/ledger.py` — the `Transaction` and `Client` record shapes plus
   the SQL schema for the `transactions` and `clients` tables (money in cents,
@@ -104,10 +104,15 @@ after each. **Do not build multiple phases at once.**
 - `nexus_tracker/thresholds.py` — loads and validates
   `config/state_thresholds.json` into typed `StateThreshold` objects, with
   plain-English errors on a malformed file.
-- `tests/test_shapes.py` — shape sanity checks. Run from the project root with
-  `python3 -m unittest`.
+- `nexus_tracker/engine.py` — a **pure function** over a sequence of
+  `Transaction` records: rolling per-state totals, threshold comparison for all
+  four logics, and crossing detection with effective dates. It never touches
+  storage (that arrives in Session 3) and never concludes "has nexus" — it
+  reports exposure facts. The measurement and refund/marketplace semantics are
+  documented at the top of the file.
+- `tests/` — shape checks plus 13 engine tests with hand-computed answers. Run
+  from the project root with `python3 -m unittest`.
 
-No storage access, nexus engine, or UI yet. The `storage.py`, `engine.py`,
-importer, and web modules are still placeholders that name the session that
-builds them. How to run the app will be documented once the web shell exists
-(Session 4).
+No storage access or UI yet. `storage.py`, the importers, and the web modules
+are still placeholders that name the session that builds them. How to run the
+app will be documented once the web shell exists (Session 4).
