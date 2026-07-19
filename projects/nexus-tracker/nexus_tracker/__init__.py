@@ -10,4 +10,4 @@ package: everything reads from a single normalized transaction ledger, and all
 storage goes through one data-access layer (nexus_tracker/storage.py).
 """
 
-__version__ = "0.2.0"  # Session 2: nexus engine (exposure totals + crossing detection).
+__version__ = "0.3.0"  # Session 3: SQLite data-access layer (the single storage boundary).

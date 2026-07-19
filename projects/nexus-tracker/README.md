@@ -85,7 +85,7 @@ after each. **Do not build multiple phases at once.**
 | 0 | Scaffold + commit the spec **(done)** |
 | 1 | SQLite ledger + clients tables, threshold JSON structure **(done)** |
 | 2 | Nexus engine, tested against hand-made fake data **(done)** |
-| 3 | Data-access layer over SQLite |
+| 3 | Data-access layer over SQLite **(done)** |
 | 4 | Web UI shell (select/add client, home view) |
 | 5 | CSV importer with column mapping |
 | 6 | Native Shopify connection |
@@ -96,23 +96,37 @@ after each. **Do not build multiple phases at once.**
 
 ## Status
 
-**Session 2 complete: the nexus engine works (against fake data).**
+**Session 3 complete: the storage boundary is real.**
 
 - `nexus_tracker/ledger.py` — the `Transaction` and `Client` record shapes plus
-  the SQL schema for the `transactions` and `clients` tables (money in cents,
-  composite uniqueness, refund-references-original, schema version).
+  the SQL schema (money in cents, composite uniqueness, refund-references-original,
+  schema version).
 - `nexus_tracker/thresholds.py` — loads and validates
-  `config/state_thresholds.json` into typed `StateThreshold` objects, with
-  plain-English errors on a malformed file.
+  `config/state_thresholds.json` into typed `StateThreshold` objects.
 - `nexus_tracker/engine.py` — a **pure function** over a sequence of
-  `Transaction` records: rolling per-state totals, threshold comparison for all
-  four logics, and crossing detection with effective dates. It never touches
-  storage (that arrives in Session 3) and never concludes "has nexus" — it
-  reports exposure facts. The measurement and refund/marketplace semantics are
-  documented at the top of the file.
-- `tests/` — shape checks plus 13 engine tests with hand-computed answers. Run
-  from the project root with `python3 -m unittest`.
+  `Transaction` records: rolling totals, threshold comparison, crossing
+  detection. Reports exposure facts; never touches storage; never concludes
+  "has nexus".
+- `nexus_tracker/storage.py` — the **single data-access layer**. A `Storage`
+  class over SQLite that speaks only in ledger shapes (add/get/list clients, add
+  and read transactions). Re-import is **conflict-aware**: an incoming
+  transaction is classified as new (inserted), identical (unchanged), or a
+  conflict — already present but with different data, which is left untouched and
+  flagged for review rather than silently ignored or silently overwritten.
+  Enforces foreign keys, waits on a busy lock, avoids WAL on synced drives,
+  stamps the schema version, and raises plain-English `StorageError`s
+  (unreachable folder, missing client, locked file). Swapping to a hosted
+  database means rewriting this one class with the same methods.
+- `tests/` — shapes, 13 engine tests, storage round-trips + engine integration,
+  and `test_architecture.py`, which parses the package and **fails the build if
+  any module other than `storage.py` imports sqlite3**. 37 tests, run from the
+  project root with `python3 -m unittest`.
 
-No storage access or UI yet. `storage.py`, the importers, and the web modules
-are still placeholders that name the session that builds them. How to run the
-app will be documented once the web shell exists (Session 4).
+No UI yet, and no importers — the ledger is written and read only by tests so
+far. The importers (`csv_importer.py`, `shopify.py`) and the web app are still
+placeholders that name the session that builds them. How to run the app will be
+documented once the web shell exists (Session 4).
+
+The database path defaults to `data/nexus.sqlite` (gitignored) locally, or the
+`NEXUS_DB_PATH` environment variable if set. Wiring the real synced-folder path
+into a friendly setup flow is Session 8.
