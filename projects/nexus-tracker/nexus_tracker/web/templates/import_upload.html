@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Import a CSV — {{ client.client_name }}{% endblock %}
+
+{% block content %}
+  <p><a class="backlink" href="{{ url_for('client_home', client_id=client.client_id) }}">← {{ client.client_name }}</a></p>
+  <h1>Import a CSV</h1>
+  <p class="lead">
+    Upload a spreadsheet of sales — an export from Amazon, Shopify, Stripe,
+    QuickBooks, or anywhere. On the next screen you'll say which columns to use.
+  </p>
+
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+
+  <div class="card">
+    <form method="post" action="{{ url_for('import_upload', client_id=client.client_id) }}" enctype="multipart/form-data">
+      <div class="field">
+        <label for="file">CSV file</label>
+        <input type="file" id="file" name="file" accept=".csv,text/csv">
+        <div class="hint">The file should have a header row naming each column.</div>
+      </div>
+      <button type="submit">Continue</button>
+    </form>
+  </div>
+{% endblock %}

@@ -23,10 +23,13 @@
 
   <h2>What you can do</h2>
   <div class="stack">
-    <div class="card action">
-      <strong>Import a CSV</strong> <span class="soon">Coming soon</span>
-      <div class="muted">Bring in sales from Amazon, Shopify, Stripe, QuickBooks, or any spreadsheet export.</div>
-    </div>
+    <a class="card client-row" href="{{ url_for('import_start', client_id=client.client_id) }}">
+      <span>
+        <strong>Import a CSV</strong>
+        <div class="muted">Bring in sales from Amazon, Shopify, Stripe, QuickBooks, or any spreadsheet export.</div>
+      </span>
+      <span class="muted">→</span>
+    </a>
     <div class="card action">
       <strong>Connect Shopify</strong> <span class="soon">Coming soon</span>
       <div class="muted">Pull orders straight from the client's Shopify store.</div>

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Import results — {{ client.client_name }}{% endblock %}
+
+{% block content %}
+  <p><a class="backlink" href="{{ url_for('client_home', client_id=client.client_id) }}">← {{ client.client_name }}</a></p>
+  <h1>Import results</h1>
+
+  <div class="card">
+    <p style="margin:0">
+      <strong>{{ report.inserted }}</strong>
+      new transaction{{ '' if report.inserted == 1 else 's' }} imported.
+      {% if report.unchanged %}
+        <br>{{ report.unchanged }} were already on file and unchanged.
+      {% endif %}
+    </p>
+  </div>
+
+  {% if report.conflicts %}
+    <h2>Already on file, but different ({{ report.conflict_count }})</h2>
+    <p class="lead">
+      These were left as they are — nothing was overwritten. If the new data is a
+      correction, fix it at the source and re-import.
+    </p>
+    <div class="card scroll">
+      <table>
+        <thead><tr><th>Order</th><th>What differs (on file → in this file)</th></tr></thead>
+        <tbody>
+          {% for c in report.conflicts %}
+            <tr>
+              <td>{{ c.transaction_id }}</td>
+              <td>
+                {% for f in c.changed_fields %}
+                  <div><span class="muted">{{ f }}:</span> {{ c.stored|attr(f) }} → {{ c.incoming|attr(f) }}</div>
+                {% endfor %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  {% if report.errors %}
+    <h2>Rows we couldn't read ({{ report.error_count }})</h2>
+    <p class="lead">Everything else imported fine. Fix these rows and re-import just them if you like.</p>
+    <div class="card scroll">
+      <table>
+        <thead><tr><th>Row</th><th>Problem</th></tr></thead>
+        <tbody>
+          {% for e in report.errors %}
+            <tr><td>{{ e.row_number }}</td><td>{{ e.problem }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  {% if not report.id_column_used %}
+    <div class="card muted">
+      No order-ID column was mapped, so rows were matched by their position in the
+      file. That's fine for re-importing this same file, but mapping an order-ID
+      column makes future imports de-duplicate reliably.
+    </div>
+  {% endif %}
+
+  <p>
+    <a class="btn" href="{{ url_for('client_home', client_id=client.client_id) }}">Done</a>
+    <a class="btn secondary" href="{{ url_for('import_start', client_id=client.client_id) }}">Import another file</a>
+  </p>
+{% endblock %}

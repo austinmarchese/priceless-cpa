@@ -10,4 +10,4 @@ package: everything reads from a single normalized transaction ledger, and all
 storage goes through one data-access layer (nexus_tracker/storage.py).
 """
 
-__version__ = "0.4.0"  # Session 4: web UI shell (select/add a client, client home view).
+__version__ = "0.5.0"  # Session 5: CSV importer with column mapping + import report.

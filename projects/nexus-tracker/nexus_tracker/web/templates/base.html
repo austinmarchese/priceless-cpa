@@ -49,10 +49,19 @@
     a.client-row .count { color: var(--muted); font-size: 0.9rem; }
     .stack > * + * { margin-top: 10px; }
     label { display: block; font-weight: 600; margin-bottom: 6px; }
-    input[type=text] {
+    input[type=text], select {
       width: 100%; padding: 11px 12px; font-size: 1rem;
       border: 1px solid var(--line); border-radius: 8px; background: #fff;
     }
+    input[type=file] { font-size: 0.95rem; }
+    table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+    th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    .scroll { overflow-x: auto; }
+    .field { margin-bottom: 16px; }
+    .hint { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+    .checkbox { font-weight: 400; display: flex; gap: 8px; align-items: flex-start; }
+    .checkbox input { margin-top: 4px; }
     button, .btn {
       display: inline-block; border: 0; border-radius: 8px; cursor: pointer;
       background: var(--accent); color: var(--accent-ink);

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Map columns — {{ client.client_name }}{% endblock %}
+
+{% macro colselect(name, label, headers, selected, optional, hint) %}
+  <div class="field">
+    <label for="{{ name }}">{{ label }}</label>
+    <select id="{{ name }}" name="{{ name }}">
+      {% if optional %}
+        <option value="">— none —</option>
+      {% else %}
+        <option value="">— choose a column —</option>
+      {% endif %}
+      {% for h in headers %}
+        <option value="{{ h }}" {% if h == selected %}selected{% endif %}>{{ h }}</option>
+      {% endfor %}
+    </select>
+    {% if hint %}<div class="hint">{{ hint }}</div>{% endif %}
+  </div>
+{% endmacro %}
+
+{% block content %}
+  <p><a class="backlink" href="{{ url_for('import_start', client_id=client.client_id) }}">← Choose a different file</a></p>
+  <h1>Map the columns</h1>
+  <p class="lead">Tell us which column in <strong>{{ filename }}</strong> holds each piece of information.</p>
+
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+
+  <h2>Preview</h2>
+  <div class="card scroll">
+    <table>
+      <thead><tr>{% for h in headers %}<th>{{ h }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {% for row in preview %}
+          <tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Columns</h2>
+  <div class="card">
+    <form method="post" action="{{ url_for('import_run', client_id=client.client_id) }}">
+      <input type="hidden" name="token" value="{{ token }}">
+      {{ colselect('map_date', 'Which column has the date?', headers, guess.date, false, '') }}
+      {{ colselect('map_state', 'Which column has the destination state?', headers, guess.state, false, 'A two-letter code (CA) or a full name (California).') }}
+      {{ colselect('map_amount', 'Which column has the sale amount?', headers, guess.amount, false, 'Negative amounts, or amounts in (parentheses), are imported as refunds.') }}
+      {{ colselect('map_transaction_id', 'Which column has the order ID?  (recommended)', headers, guess.transaction_id, true, 'Used so re-importing never double-counts an order. Without it, rows are matched by their position in the file.') }}
+      {{ colselect('map_marketplace', 'Which column marks marketplace-facilitated sales?  (optional)', headers, guess.marketplace, true, 'Sales where a marketplace such as Amazon collected the tax.') }}
+      <div class="field">
+        <label class="checkbox">
+          <input type="checkbox" name="marketplace_all" value="1">
+          <span>Every row in this file is marketplace-facilitated (for example, an Amazon export).</span>
+        </label>
+      </div>
+      <button type="submit">Import</button>
+    </form>
+  </div>
+{% endblock %}

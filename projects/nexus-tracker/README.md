@@ -87,7 +87,7 @@ after each. **Do not build multiple phases at once.**
 | 2 | Nexus engine, tested against hand-made fake data **(done)** |
 | 3 | Data-access layer over SQLite **(done)** |
 | 4 | Web UI shell (select/add client, home view) **(done)** |
-| 5 | CSV importer with column mapping |
+| 5 | CSV importer with column mapping **(done)** |
 | 6 | Native Shopify connection |
 | 7 | Exposure dashboard |
 | 8 | Make it usable by non-technical staff |
@@ -124,7 +124,7 @@ comes in Session 8.
 
 ## Status
 
-**Session 4 complete: the web shell runs.**
+**Session 5 complete: CSV import works end to end.**
 
 - `nexus_tracker/ledger.py` — the `Transaction` and `Client` record shapes plus
   the SQL schema (money in cents, composite uniqueness, refund-references-original,
@@ -151,16 +151,24 @@ comes in Session 8.
   come (import, Shopify, exposure — each marked "Coming soon"). It reads and
   writes only through `storage.py`, binds to `127.0.0.1`, and shows friendly
   pages for a missing client or an unreachable database instead of a stack trace.
-- `nexus_tracker/sample_data.py` — seeds two "(sample)" clients so the shell has
-  something to show before real importing exists.
-- `tests/` — shapes, engine, storage + engine integration, the sqlite boundary
-  check, and web-shell tests via Flask's test client. **44 tests**, run with
+- `nexus_tracker/importers/csv_importer.py` — turns a CSV export into ledger
+  transactions. The user maps columns (date, state, amount, optional order id and
+  marketplace flag); it accepts `CA` or `California`, common date formats, and
+  money like `$1,234.56` or `(25.00)`; a negative amount becomes a refund. Rows
+  it can't read are collected and reported in plain English (with the file line
+  number) — one bad row never stops the rest. Writes through `storage.py`, so the
+  Session 3 conflict handling flows straight into the report.
+- `nexus_tracker/us_states.py` — state-code/name lookup shared by the importer.
+- `nexus_tracker/web/` — the import flow: **upload → map columns → import →
+  report**. The report shows what was imported, what was already on file, what's
+  "already on file but different" (conflicts, for review), and any unreadable rows.
+- `nexus_tracker/sample_data.py` — seeds two "(sample)" clients.
+- `tests/` — shapes, engine, storage, the sqlite boundary check, web shell,
+  CSV importer core, and the import web flow. **64 tests**, run with
   `.venv/bin/python -m unittest`.
 
-No importers yet — the ledger is filled only by tests and the sample seeder. The
-importers (`csv_importer.py`, `shopify.py`) are still placeholders that name the
-session that builds them, and the client-page actions point at them as "Coming
-soon".
+Shopify (`importers/shopify.py`) is still a placeholder; its client-page action
+stays "Coming soon" until Session 6. The exposure dashboard is Session 7.
 
 The database path defaults to `data/nexus.sqlite` (gitignored) locally, or the
 `NEXUS_DB_PATH` environment variable if set. Wiring the real synced-folder path

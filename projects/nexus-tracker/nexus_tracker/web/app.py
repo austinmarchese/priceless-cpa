@@ -18,17 +18,33 @@ multi-user server; those are deferred in PROJECT_SPEC.md section 7). It binds to
 from __future__ import annotations
 
 import re
+import uuid
 
 from flask import Flask, abort, redirect, render_template, request, url_for
 
+from ..importers import csv_importer
+from ..importers.csv_importer import ColumnMapping, CsvImportError
 from ..ledger import Client
 from ..storage import Storage, StorageError
+
+MAX_UPLOAD_BYTES = 25 * 1024 * 1024  # 25 MB CSV upload cap
 
 
 def create_app(db_path: str = None) -> Flask:
     app = Flask(__name__)
+    app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_BYTES
     # One connection for the app's life; see module docstring.
     app.storage = Storage(db_path)
+    # Holds an uploaded CSV between the "upload" and "map columns" steps.
+    # In-memory is fine: single local process, and a lost upload just means
+    # the user picks the file again.
+    app.pending_uploads = {}
+
+    def require_client(client_id):
+        client = app.storage.get_client(client_id)
+        if client is None:
+            abort(404)
+        return client
 
     @app.get("/")
     def home():
@@ -51,9 +67,7 @@ def create_app(db_path: str = None) -> Flask:
 
     @app.get("/clients/<client_id>")
     def client_home(client_id):
-        client = app.storage.get_client(client_id)
-        if client is None:
-            abort(404)
+        client = require_client(client_id)
         transactions = app.storage.get_transactions_for_client(client_id)
         states = sorted({t.destination_state for t in transactions})
         return render_template(
@@ -62,6 +76,82 @@ def create_app(db_path: str = None) -> Flask:
             transaction_count=len(transactions),
             states=states,
         )
+
+    # -- CSV import (Session 5): upload -> map columns -> run -> report ----- #
+
+    @app.get("/clients/<client_id>/import")
+    def import_start(client_id):
+        return render_template("import_upload.html", client=require_client(client_id))
+
+    @app.post("/clients/<client_id>/import")
+    def import_upload(client_id):
+        client = require_client(client_id)
+        file = request.files.get("file")
+        if file is None or not file.filename:
+            return render_template("import_upload.html", client=client,
+                                   error="Please choose a CSV file to import."), 400
+        try:
+            text = csv_importer.decode_bytes(file.read())
+            headers, preview = csv_importer.read_headers_and_preview(text)
+        except CsvImportError as exc:
+            return render_template("import_upload.html", client=client, error=str(exc)), 400
+
+        token = uuid.uuid4().hex
+        app.pending_uploads[token] = {"filename": file.filename, "text": text}
+        return render_template(
+            "import_map.html", client=client, headers=headers, preview=preview,
+            token=token, filename=file.filename, guess=_guess_columns(headers),
+        )
+
+    @app.post("/clients/<client_id>/import/run")
+    def import_run(client_id):
+        client = require_client(client_id)
+        pending = app.pending_uploads.get(request.form.get("token", ""))
+        if pending is None:
+            return render_template(
+                "import_upload.html", client=client,
+                error="That upload expired before it finished. Please choose the file again."
+            ), 400
+
+        date = (request.form.get("map_date") or "").strip()
+        state = (request.form.get("map_state") or "").strip()
+        amount = (request.form.get("map_amount") or "").strip()
+        missing = [label for label, value in
+                   (("date", date), ("state", state), ("amount", amount)) if not value]
+        if missing:
+            return _remap(client, pending, request.form.get("token", ""),
+                          "Please choose a column for: " + ", ".join(missing) + ".")
+
+        mapping = ColumnMapping(
+            date=date, state=state, amount=amount,
+            transaction_id=(request.form.get("map_transaction_id") or "").strip() or None,
+            marketplace=(request.form.get("map_marketplace") or "").strip() or None,
+            marketplace_default=bool(request.form.get("marketplace_all")),
+        )
+        try:
+            report = csv_importer.import_csv(app.storage, client_id, pending["text"], mapping)
+        except CsvImportError as exc:
+            return _remap(client, pending, request.form.get("token", ""), str(exc))
+
+        app.pending_uploads.pop(request.form.get("token", ""), None)
+        return render_template("import_report.html", client=client, report=report)
+
+    def _remap(client, pending, token, error):
+        headers, preview = csv_importer.read_headers_and_preview(pending["text"])
+        return render_template(
+            "import_map.html", client=client, headers=headers, preview=preview,
+            token=token, filename=pending["filename"], guess=_guess_columns(headers),
+            error=error,
+        ), 400
+
+    @app.errorhandler(413)
+    def upload_too_large(_error):
+        return render_template(
+            "error.html",
+            title="That file is too large",
+            message="Please import a CSV smaller than 25 MB. If your export is "
+                    "very large, split it into a few files and import them one at a time.",
+        ), 413
 
     @app.errorhandler(404)
     def not_found(_error):
@@ -112,6 +202,27 @@ def _make_client_id(store: Storage, name: str) -> str:
         candidate = f"{base}-{suffix}"
         suffix += 1
     return candidate
+
+
+def _guess_columns(headers: list) -> dict:
+    """Best-guess column mapping from header names, to pre-select the dropdowns.
+
+    Only a convenience -- the user confirms or changes every choice.
+    """
+    def find(*needles):
+        for header in headers:
+            lowered = header.lower()
+            if any(n in lowered for n in needles):
+                return header
+        return ""
+
+    return {
+        "date": find("date"),
+        "state": find("state", "province", "ship to state", "destination"),
+        "amount": find("total", "amount", "sales", "price", "revenue"),
+        "transaction_id": find("order id", "order number", "order #", "transaction id", "order_id"),
+        "marketplace": find("marketplace", "channel", "facilitat"),
+    }
 
 
 def main() -> None:
