@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}{{ client.client_name }} — Sales Tax Nexus Tracker{% endblock %}
+
+{% block content %}
+  <p><a class="backlink" href="{{ url_for('home') }}">← All clients</a></p>
+  <h1>{{ client.client_name }}</h1>
+
+  <h2>Sales data on file</h2>
+  <div class="card">
+    {% if transaction_count %}
+      <p style="margin:0">
+        <strong>{{ transaction_count }}</strong>
+        transaction{{ '' if transaction_count == 1 else 's' }} on file,
+        across <strong>{{ states|length }}</strong>
+        state{{ '' if states|length == 1 else 's' }}:
+        <span class="muted">{{ states|join(', ') }}</span>
+      </p>
+    {% else %}
+      <p class="empty" style="margin:0">No sales data yet. Importing sales comes next (see below).</p>
+    {% endif %}
+  </div>
+
+  <h2>What you can do</h2>
+  <div class="stack">
+    <div class="card action">
+      <strong>Import a CSV</strong> <span class="soon">Coming soon</span>
+      <div class="muted">Bring in sales from Amazon, Shopify, Stripe, QuickBooks, or any spreadsheet export.</div>
+    </div>
+    <div class="card action">
+      <strong>Connect Shopify</strong> <span class="soon">Coming soon</span>
+      <div class="muted">Pull orders straight from the client's Shopify store.</div>
+    </div>
+    <div class="card action">
+      <strong>View exposure</strong> <span class="soon">Coming soon</span>
+      <div class="muted">See, state by state, how close this client is to each threshold and where they've crossed.</div>
+    </div>
+  </div>
+{% endblock %}

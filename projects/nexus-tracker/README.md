@@ -86,7 +86,7 @@ after each. **Do not build multiple phases at once.**
 | 1 | SQLite ledger + clients tables, threshold JSON structure **(done)** |
 | 2 | Nexus engine, tested against hand-made fake data **(done)** |
 | 3 | Data-access layer over SQLite **(done)** |
-| 4 | Web UI shell (select/add client, home view) |
+| 4 | Web UI shell (select/add client, home view) **(done)** |
 | 5 | CSV importer with column mapping |
 | 6 | Native Shopify connection |
 | 7 | Exposure dashboard |
@@ -94,9 +94,37 @@ after each. **Do not build multiple phases at once.**
 
 ---
 
+## Running it (local, for now)
+
+The app is a small local website you open in your browser. It uses Flask, so it
+needs a one-time setup in a project-local virtual environment:
+
+```
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+```
+
+To try it with sample data:
+
+```
+.venv/bin/python -m nexus_tracker.sample_data     # loads two "(sample)" clients
+.venv/bin/python -m nexus_tracker.web.app         # then open http://127.0.0.1:5000
+```
+
+Run the tests with:
+
+```
+.venv/bin/python -m unittest
+```
+
+A friendlier one-click launcher (and pointing it at the firm's synced folder)
+comes in Session 8.
+
+---
+
 ## Status
 
-**Session 3 complete: the storage boundary is real.**
+**Session 4 complete: the web shell runs.**
 
 - `nexus_tracker/ledger.py` — the `Transaction` and `Client` record shapes plus
   the SQL schema (money in cents, composite uniqueness, refund-references-original,
@@ -117,15 +145,22 @@ after each. **Do not build multiple phases at once.**
   stamps the schema version, and raises plain-English `StorageError`s
   (unreachable folder, missing client, locked file). Swapping to a hosted
   database means rewriting this one class with the same methods.
-- `tests/` — shapes, 13 engine tests, storage round-trips + engine integration,
-  and `test_architecture.py`, which parses the package and **fails the build if
-  any module other than `storage.py` imports sqlite3**. 37 tests, run from the
-  project root with `python3 -m unittest`.
+- `nexus_tracker/web/` — a **Flask** app (the UI shell). A home page that lists
+  clients and adds one (you type a business name; it makes the id for you), and a
+  per-client home view showing sales-on-file counts and the actions still to
+  come (import, Shopify, exposure — each marked "Coming soon"). It reads and
+  writes only through `storage.py`, binds to `127.0.0.1`, and shows friendly
+  pages for a missing client or an unreachable database instead of a stack trace.
+- `nexus_tracker/sample_data.py` — seeds two "(sample)" clients so the shell has
+  something to show before real importing exists.
+- `tests/` — shapes, engine, storage + engine integration, the sqlite boundary
+  check, and web-shell tests via Flask's test client. **44 tests**, run with
+  `.venv/bin/python -m unittest`.
 
-No UI yet, and no importers — the ledger is written and read only by tests so
-far. The importers (`csv_importer.py`, `shopify.py`) and the web app are still
-placeholders that name the session that builds them. How to run the app will be
-documented once the web shell exists (Session 4).
+No importers yet — the ledger is filled only by tests and the sample seeder. The
+importers (`csv_importer.py`, `shopify.py`) are still placeholders that name the
+session that builds them, and the client-page actions point at them as "Coming
+soon".
 
 The database path defaults to `data/nexus.sqlite` (gitignored) locally, or the
 `NEXUS_DB_PATH` environment variable if set. Wiring the real synced-folder path

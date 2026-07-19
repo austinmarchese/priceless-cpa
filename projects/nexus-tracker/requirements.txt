@@ -2,14 +2,15 @@
 # Kept minimal and mainstream on purpose (see PROJECT_SPEC.md section 3).
 #
 # The core of the app -- ledger, storage, nexus engine, CSV import -- uses only
-# the Python standard library (sqlite3, json, csv, datetime). Nothing to install
-# for those phases.
+# the Python standard library (sqlite3, json, csv, datetime).
 #
-# Real dependencies get added in the session that first needs them, so we can
-# see exactly why each one is here:
-#
-#   Sessions 4 & 7 (local web app):   a small mainstream framework, e.g. flask
-#   Session 6 (Shopify connection):   requests, plus cryptography for the
-#                                      encrypted per-store token
-#
-# The web framework choice is deferred to Session 4 and will be confirmed then.
+# Install into a project-local virtual environment:
+#   python3 -m venv .venv
+#   .venv/bin/python -m pip install -r requirements.txt
+
+# Session 4 & 7 -- the local web app the user opens in a browser.
+Flask>=3.0,<4
+
+# Session 6 (Shopify connection) will add, when built:
+#   requests          -- pulling orders from the Shopify Admin API
+#   cryptography      -- encrypting the per-store token at rest

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Your clients</h1>
+  <p class="lead">Pick a client to open, or add a new one.</p>
+
+  <h2>Clients</h2>
+  {% if clients %}
+    <div class="stack">
+      {% for client in clients %}
+        <div class="card">
+          <a class="client-row" href="{{ url_for('client_home', client_id=client.id) }}">
+            <span><strong>{{ client.name }}</strong></span>
+            <span class="count">
+              {% if client.transaction_count %}
+                {{ client.transaction_count }} transaction{{ '' if client.transaction_count == 1 else 's' }} on file
+              {% else %}
+                no sales data yet
+              {% endif %}
+            </span>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="card empty">No clients yet. Add your first one below.</div>
+  {% endif %}
+
+  <h2>Add a client</h2>
+  <div class="card">
+    {% if error %}<div class="error">{{ error }}</div>{% endif %}
+    <form method="post" action="{{ url_for('add_client') }}">
+      <label for="name">Business name</label>
+      <input type="text" id="name" name="name" placeholder="e.g. Acme Outdoors, LLC" autofocus>
+      <div><button type="submit">Add client</button></div>
+    </form>
+  </div>
+{% endblock %}
