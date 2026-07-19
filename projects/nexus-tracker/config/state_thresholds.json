@@ -1,0 +1,3 @@
+{
+  "_comment": "Placeholder. The firm's real per-state threshold rules go here. See state_thresholds.example.json for the shape, and PROJECT_SPEC.md section 5 for what each field means. The structure that reads this file is built in Session 1."
+}

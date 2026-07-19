@@ -1,0 +1,24 @@
+{
+  "_comment": "EXAMPLE ONLY. This file shows the shape of config/state_thresholds.json. Anthony supplies the real values there. One entry per state, keyed by two-letter postal code. Delete this comment key in the real file (or keep it -- the reader ignores keys starting with underscore).",
+  "CA": {
+    "dollar_threshold": 500000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "trailing_12_months",
+    "marketplace_counts": true
+  },
+  "NY": {
+    "dollar_threshold": 500000,
+    "transaction_threshold": 100,
+    "threshold_logic": "and",
+    "measurement_period": "trailing_12_months",
+    "marketplace_counts": true
+  },
+  "IL": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "trailing_12_months",
+    "marketplace_counts": false
+  }
+}

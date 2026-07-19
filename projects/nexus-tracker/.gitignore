@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Environment / secrets (never commit)
+.env
+*.env
+
+# The transaction database holds CLIENT DATA and must NOT be committed.
+# It lives in the firm's synced cloud folder, not in git. See PROJECT_SPEC.md section 3.
+*.sqlite
+*.sqlite3
+*.db
+data/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
