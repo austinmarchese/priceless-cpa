@@ -11,6 +11,6 @@
 # Session 4 & 7 -- the local web app the user opens in a browser.
 Flask>=3.0,<4
 
-# Session 6 (Shopify connection) will add, when built:
-#   requests          -- pulling orders from the Shopify Admin API
-#   cryptography      -- encrypting the per-store token at rest
+# Session 6 -- native Shopify connection.
+requests>=2.31,<3        # pulling orders from the Shopify Admin API
+cryptography>=42,<46     # encrypting the per-store token at rest

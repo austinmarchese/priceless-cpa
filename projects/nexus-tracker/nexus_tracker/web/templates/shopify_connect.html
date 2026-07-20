@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Connect Shopify — {{ client.client_name }}{% endblock %}
+
+{% block content %}
+  <p><a class="backlink" href="{{ url_for('client_home', client_id=client.client_id) }}">← {{ client.client_name }}</a></p>
+  <h1>Connect Shopify</h1>
+
+  {% if error %}<div class="error" style="white-space: pre-line;">{{ error }}</div>{% endif %}
+  {% if saved %}<div class="card" style="border-color:#bfe3c6;background:#f2fbf4;">Connection saved.</div>{% endif %}
+
+  {% if connection %}
+    <div class="card">
+      <p style="margin:0 0 12px;">Connected to <strong>{{ connection.shop_domain }}</strong>.</p>
+      <form method="post" action="{{ url_for('shopify_sync', client_id=client.client_id) }}">
+        <button type="submit">Sync orders now</button>
+      </form>
+      <div class="hint" style="margin-top:8px;">
+        Pulls the last 12+ months of orders and adds them to this client's sales data.
+      </div>
+    </div>
+  {% endif %}
+
+  <h2>{% if connection %}Update the token{% else %}Enter the store details{% endif %}</h2>
+  <div class="card">
+    <p class="hint" style="margin-top:0;">
+      In Shopify: <em>Settings → Apps and sales channels → Develop apps → your app →
+      API credentials</em>. Copy the <strong>Admin API access token</strong> and paste it below.
+      The token is stored encrypted; it is never shown again.
+    </p>
+    <form method="post" action="{{ url_for('shopify_save', client_id=client.client_id) }}">
+      <div class="field">
+        <label for="shop_domain">Store address</label>
+        <input type="text" id="shop_domain" name="shop_domain"
+               placeholder="your-store.myshopify.com"
+               value="{{ connection.shop_domain if connection else '' }}">
+      </div>
+      <div class="field">
+        <label for="token">Admin API access token</label>
+        <input type="password" id="token" name="token" placeholder="shpat_…" autocomplete="off">
+      </div>
+      <button type="submit">Save connection</button>
+    </form>
+  </div>
+{% endblock %}

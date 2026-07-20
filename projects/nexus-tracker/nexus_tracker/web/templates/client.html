@@ -30,10 +30,13 @@
       </span>
       <span class="muted">→</span>
     </a>
-    <div class="card action">
-      <strong>Connect Shopify</strong> <span class="soon">Coming soon</span>
-      <div class="muted">Pull orders straight from the client's Shopify store.</div>
-    </div>
+    <a class="card client-row" href="{{ url_for('shopify_connect', client_id=client.client_id) }}">
+      <span>
+        <strong>Connect Shopify</strong>
+        <div class="muted">Pull orders straight from the client's Shopify store.</div>
+      </span>
+      <span class="muted">→</span>
+    </a>
     <div class="card action">
       <strong>View exposure</strong> <span class="soon">Coming soon</span>
       <div class="muted">See, state by state, how close this client is to each threshold and where they've crossed.</div>

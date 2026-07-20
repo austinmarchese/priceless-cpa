@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Shopify sync — {{ client.client_name }}{% endblock %}
+
+{% block content %}
+  <p><a class="backlink" href="{{ url_for('client_home', client_id=client.client_id) }}">← {{ client.client_name }}</a></p>
+  <h1>Shopify sync results</h1>
+
+  <div class="card">
+    <p style="margin:0">
+      Pulled <strong>{{ report.fetched }}</strong> order{{ '' if report.fetched == 1 else 's' }} from Shopify.
+      <br><strong>{{ report.inserted }}</strong> new transaction{{ '' if report.inserted == 1 else 's' }} added.
+      {% if report.unchanged %}<br>{{ report.unchanged }} were already on file and unchanged.{% endif %}
+    </p>
+  </div>
+
+  {% if report.conflicts %}
+    <h2>Already on file, but different ({{ report.conflict_count }})</h2>
+    <p class="lead">Left unchanged. Review these — they may reflect an edited order.</p>
+    <div class="card scroll">
+      <table>
+        <thead><tr><th>Order</th><th>What differs (on file → from Shopify)</th></tr></thead>
+        <tbody>
+          {% for c in report.conflicts %}
+            <tr>
+              <td>{{ c.transaction_id }}</td>
+              <td>
+                {% for f in c.changed_fields %}
+                  <div><span class="muted">{{ f }}:</span> {{ c.stored|attr(f) }} → {{ c.incoming|attr(f) }}</div>
+                {% endfor %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  {% if report.skipped %}
+    <h2>Orders we couldn't place ({{ report.skipped_count }})</h2>
+    <p class="lead">These orders had no usable destination and weren't counted.</p>
+    <div class="card scroll">
+      <table>
+        <thead><tr><th>Order</th><th>Reason</th></tr></thead>
+        <tbody>
+          {% for s in report.skipped %}
+            <tr><td>{{ s.order_id }}</td><td>{{ s.reason }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  <p>
+    <a class="btn" href="{{ url_for('client_home', client_id=client.client_id) }}">Done</a>
+    <a class="btn secondary" href="{{ url_for('shopify_connect', client_id=client.client_id) }}">Back to Shopify</a>
+  </p>
+{% endblock %}

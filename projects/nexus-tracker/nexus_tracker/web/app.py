@@ -22,8 +22,10 @@ import uuid
 
 from flask import Flask, abort, redirect, render_template, request, url_for
 
-from ..importers import csv_importer
+from ..crypto import CryptoError
+from ..importers import csv_importer, shopify
 from ..importers.csv_importer import ColumnMapping, CsvImportError
+from ..importers.shopify import ShopifyError
 from ..ledger import Client
 from ..storage import Storage, StorageError
 
@@ -143,6 +145,45 @@ def create_app(db_path: str = None) -> Flask:
             token=token, filename=pending["filename"], guess=_guess_columns(headers),
             error=error,
         ), 400
+
+    # -- Shopify connection (Session 6) ------------------------------------ #
+
+    @app.get("/clients/<client_id>/shopify")
+    def shopify_connect(client_id):
+        client = require_client(client_id)
+        return render_template(
+            "shopify_connect.html", client=client,
+            connection=shopify.connection(app.storage, client_id),
+            saved=bool(request.args.get("saved")),
+        )
+
+    @app.post("/clients/<client_id>/shopify")
+    def shopify_save(client_id):
+        client = require_client(client_id)
+        shop = (request.form.get("shop_domain") or "").strip()
+        token = (request.form.get("token") or "").strip()
+        if not shop or not token:
+            return render_template(
+                "shopify_connect.html", client=client,
+                connection=shopify.connection(app.storage, client_id),
+                error="Please enter both the store address and the access token.",
+            ), 400
+        shopify.save_credentials(app.storage, client_id, shop, token)
+        return redirect(url_for("shopify_connect", client_id=client_id, saved=1))
+
+    @app.post("/clients/<client_id>/shopify/sync")
+    def shopify_sync(client_id):
+        client = require_client(client_id)
+        try:
+            report = shopify.import_shopify(app.storage, client_id)
+        except (ShopifyError, CryptoError) as exc:
+            # ShopifyAuthError (bad/expired token) is a ShopifyError subclass.
+            return render_template(
+                "shopify_connect.html", client=client,
+                connection=shopify.connection(app.storage, client_id),
+                error=str(exc),
+            ), 400
+        return render_template("shopify_report.html", client=client, report=report)
 
     @app.errorhandler(413)
     def upload_too_large(_error):

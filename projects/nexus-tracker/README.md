@@ -88,7 +88,7 @@ after each. **Do not build multiple phases at once.**
 | 3 | Data-access layer over SQLite **(done)** |
 | 4 | Web UI shell (select/add client, home view) **(done)** |
 | 5 | CSV importer with column mapping **(done)** |
-| 6 | Native Shopify connection |
+| 6 | Native Shopify connection **(done)** |
 | 7 | Exposure dashboard |
 | 8 | Make it usable by non-technical staff |
 
@@ -124,7 +124,7 @@ comes in Session 8.
 
 ## Status
 
-**Session 5 complete: CSV import works end to end.**
+**Session 6 complete: Shopify orders can be pulled in.**
 
 - `nexus_tracker/ledger.py` — the `Transaction` and `Client` record shapes plus
   the SQL schema (money in cents, composite uniqueness, refund-references-original,
@@ -162,13 +162,33 @@ comes in Session 8.
 - `nexus_tracker/web/` — the import flow: **upload → map columns → import →
   report**. The report shows what was imported, what was already on file, what's
   "already on file but different" (conflicts, for review), and any unreadable rows.
+- `nexus_tracker/importers/shopify.py` — pulls orders from the Shopify Admin API
+  using a per-store custom app token, backfills the trailing 12+ months, and maps
+  each order into the ledger (amount = total − tax, sourced to the shipping
+  state). Paginates via the Link header; a bad/expired token gives a plain
+  message telling the user where to get a fresh one. The HTTP layer is injectable
+  so it's fully tested without a live store.
+- `nexus_tracker/crypto.py` — encrypts the Shopify token at rest (Fernet). Key
+  from `NEXUS_SECRET_KEY` or a per-machine key file. See "Sharing tokens" below.
+- `nexus_tracker/web/` — a Connect Shopify page (enter store + token, saved
+  encrypted), a "Sync orders now" action, and a sync report.
 - `nexus_tracker/sample_data.py` — seeds two "(sample)" clients.
-- `tests/` — shapes, engine, storage, the sqlite boundary check, web shell,
-  CSV importer core, and the import web flow. **64 tests**, run with
+- `tests/` — shapes, engine, storage, the sqlite boundary check, web shell, CSV
+  importer + web flow, secret encryption, the Shopify client/mapping/backfill,
+  and the Shopify web flow (network faked throughout). **83 tests**, run with
   `.venv/bin/python -m unittest`.
 
-Shopify (`importers/shopify.py`) is still a placeholder; its client-page action
-stays "Coming soon" until Session 6. The exposure dashboard is Session 7.
+The exposure dashboard is Session 7; making it usable for non-technical staff
+(one-click launch, robustness) is Session 8.
+
+### Sharing Shopify tokens across the team
+
+The saved token is encrypted with a key. By default each machine makes its own
+key, so a token saved on one machine can't be read on another (you'll get a clear
+"re-enter the token" message, not a crash). To share saved tokens across the
+firm, set the **same** `NEXUS_SECRET_KEY` on each machine, delivered securely and
+**not** placed in the synced folder next to the database. This is a firm decision
+(see the Session 6 review notes).
 
 The database path defaults to `data/nexus.sqlite` (gitignored) locally, or the
 `NEXUS_DB_PATH` environment variable if set. Wiring the real synced-folder path
