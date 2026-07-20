@@ -1,7 +1,7 @@
 {
   "_comment": "DRAFT -- compiled 2026-07-19, NOT YET VERIFIED by the firm. Verify each state against primary sources (state DOR) or your Avalara/TaxJar subscription before relying on these for client work; wrong thresholds flow straight into exposure calls. Delete this comment once verified.",
   "_source": "Sales Tax Institute, Economic Nexus State Guide (page last updated 2026-05-04).",
-  "_caveats": "States with NO state sales tax are omitted: DE, MT, NH, OR. Alaska (AK) is a LOCAL obligation (Alaska Remote Seller commission), not a state tax. Non-calendar measurement windows are approximated with trailing_12_months: CT (12mo ending Sep 30), IL/MO (rolling, quarterly review), MN (12mo to quarter end), NY (four sales-tax quarters), VT (four calendar quarters), MS/TN/TX (preceding 12 months). KY's 200-transaction test is scheduled to end 2026-08-01.",
+  "_caveats": "States with NO state sales tax are omitted: DE, MT, NH, OR. Alaska (AK) is a LOCAL obligation (Alaska Remote Seller commission), not a state tax. Non-calendar measurement windows are approximated with trailing_12_months: CT (12mo ending Sep 30), IL/MO (rolling, quarterly review), MN (12mo to quarter end), NY (four sales-tax quarters), VT (four calendar quarters), MS/TN/TX (preceding 12 months). KY's 200-transaction test is scheduled to end 2026-08-01. Cross-checked against a second source (TaxCloud, 2026); GA was corrected to $100k OR 200 transactions after the two sources disagreed on whether GA's transaction test was removed -- confirm GA with the Georgia DOR.",
   "AK": {
     "dollar_threshold": 100000,
     "transaction_threshold": null,
@@ -67,8 +67,8 @@
   },
   "GA": {
     "dollar_threshold": 100000,
-    "transaction_threshold": null,
-    "threshold_logic": "dollar_only",
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
     "measurement_period": "current_or_prior_calendar_year",
     "marketplace_counts": false
   },
