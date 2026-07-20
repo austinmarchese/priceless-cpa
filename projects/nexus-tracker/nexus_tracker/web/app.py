@@ -205,7 +205,15 @@ def create_app(db_path: str = None) -> Flask:
                 connection=shopify.connection(require_storage(), client_id),
                 error="Please enter both the store address and the access token.",
             ), 400
-        shopify.save_credentials(require_storage(), client_id, shop, token)
+        try:
+            shopify.save_credentials(require_storage(), client_id, shop, token)
+        except ShopifyError as exc:
+            # e.g. the store address isn't a valid myshopify.com host.
+            return render_template(
+                "shopify_connect.html", client=client,
+                connection=shopify.connection(require_storage(), client_id),
+                error=str(exc),
+            ), 400
         return redirect(url_for("shopify_connect", client_id=client_id, saved=1))
 
     @app.post("/clients/<client_id>/shopify/sync")

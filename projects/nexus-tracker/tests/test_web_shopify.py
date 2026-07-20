@@ -9,6 +9,7 @@ import unittest
 from unittest import mock
 
 from nexus_tracker import crypto
+from nexus_tracker.importers import shopify
 from nexus_tracker.importers.shopify import (
     ShopifyAuthError,
     ShopifyImportReport,
@@ -52,6 +53,15 @@ class ShopifyWebTests(unittest.TestCase):
         self.assertIn("Connected to", page)
         self.assertIn("acme.myshopify.com", page)
         self.assertNotIn("shpat_SECRET", page)  # token never rendered back
+
+    def test_saving_a_non_shopify_address_is_rejected(self):
+        resp = self.client.post("/clients/c1/shopify", data={
+            "shop_domain": "evil.example.com", "token": "shpat_SECRET",
+        })
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn("Shopify store address", resp.get_data(as_text=True))
+        # Nothing should have been stored.
+        self.assertIsNone(shopify.connection(self.app.storage, "c1"))
 
     def test_saving_requires_both_fields(self):
         resp = self.client.post("/clients/c1/shopify", data={"shop_domain": "", "token": "x"})

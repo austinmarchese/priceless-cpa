@@ -83,6 +83,33 @@ class ApiClientTests(unittest.TestCase):
                 list(client.iter_orders("2025-06-01"))
 
 
+class ShopDomainValidationTests(unittest.TestCase):
+    def test_accepts_valid_shopify_hosts(self):
+        for good, expected in [
+            ("acme.myshopify.com", "acme.myshopify.com"),
+            ("ACME.MyShopify.com", "acme.myshopify.com"),
+            (" acme.myshopify.com ", "acme.myshopify.com"),
+            ("https://acme.myshopify.com/admin", "acme.myshopify.com"),
+        ]:
+            self.assertEqual(shopify._normalize_shop_domain(good), expected)
+
+    def test_rejects_non_shopify_hosts(self):
+        for bad in [
+            "evil.example.com",
+            "acme.myshopify.com.evil.com",
+            "real.myshopify.com@evil.com",   # userinfo trick -> true host is evil.com
+            "169.254.169.254",
+            "localhost",
+            "",
+        ]:
+            with self.assertRaises(ShopifyError):
+                shopify._normalize_shop_domain(bad)
+
+    def test_client_construction_rejects_bad_host(self):
+        with self.assertRaises(ShopifyError):
+            ShopifyClient("evil.example.com", "shpat_SECRET")
+
+
 class ImportTests(unittest.TestCase):
     def setUp(self):
         self._saved = os.environ.get(crypto.KEY_ENV)

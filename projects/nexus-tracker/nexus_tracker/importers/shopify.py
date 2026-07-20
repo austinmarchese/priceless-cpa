@@ -25,13 +25,20 @@ tested against canned responses without a live store or the network.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal, InvalidOperation
 from typing import Callable, Iterator, List, Optional, Tuple
+from urllib.parse import urlparse
 
 from .. import crypto, us_states
 from ..ledger import Transaction
+
+# A store address must be a Shopify *.myshopify.com host. Validating it stops the
+# access token from ever being sent to an attacker-supplied or mistyped host
+# (a typo, a doctored "setup" instruction, or an internal-network SSRF target).
+_SHOP_DOMAIN_RE = re.compile(r"^[a-z0-9][a-z0-9-]*\.myshopify\.com$")
 
 SOURCE = "shopify"
 API_VERSION = "2024-07"
@@ -84,6 +91,25 @@ class _SkipOrder(Exception):
     """One order can't be mapped; the message says why."""
 
 
+def _normalize_shop_domain(raw: str) -> str:
+    """Validate and normalize a store address to its bare *.myshopify.com host.
+
+    Tolerates a pasted URL ("https://acme.myshopify.com/admin") but uses the TRUE
+    host, so tricks like "real.myshopify.com@evil.com" resolve to "evil.com" and
+    are rejected. Raises ShopifyError on anything that isn't a Shopify store.
+    """
+    text = (raw or "").strip().lower()
+    if "://" not in text:
+        text = "https://" + text
+    host = urlparse(text).hostname or ""
+    if not _SHOP_DOMAIN_RE.match(host):
+        raise ShopifyError(
+            "That doesn't look like a Shopify store address. Use the store's "
+            "myshopify.com address, e.g. your-store.myshopify.com."
+        )
+    return host
+
+
 # --------------------------------------------------------------------------- #
 # API client                                                                  #
 # --------------------------------------------------------------------------- #
@@ -109,7 +135,9 @@ class ShopifyClient:
         api_version: str = API_VERSION,
         get: Callable[..., HttpResponse] = _default_get,
     ):
-        self.shop_domain = shop_domain.strip()
+        # Reject a non-Shopify host here too, so the token can never leave for
+        # a bad host even if a malformed value reached storage some other way.
+        self.shop_domain = _normalize_shop_domain(shop_domain)
         self._token = token
         self._api_version = api_version
         self._get = get
@@ -183,7 +211,7 @@ def save_credentials(store, client_id: str, shop_domain: str, token: str) -> Non
         raise ShopifyError(f"No client with id '{client_id}'.")
     settings = dict(client.settings or {})
     settings[SETTINGS_KEY] = {
-        "shop_domain": shop_domain.strip(),
+        "shop_domain": _normalize_shop_domain(shop_domain),  # rejects non-Shopify hosts
         "token_encrypted": crypto.encrypt(token.strip()),
     }
     store.update_client_settings(client_id, settings)
