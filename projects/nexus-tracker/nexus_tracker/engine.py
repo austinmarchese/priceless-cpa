@@ -284,15 +284,21 @@ def _first_crossing_cumulative(
     dollar_threshold_cents: Optional[int],
     transaction_threshold: Optional[int],
 ) -> Optional[date]:
-    """First date the cumulative totals meet the threshold (calendar periods)."""
+    """First date the cumulative totals meet the threshold (calendar periods).
+
+    The threshold is tested once per DAY, after the whole day's net is applied,
+    so a same-day sale and refund can't flag a crossing off a transient intraday
+    peak and the result never depends on row order within a day.
+    """
     run_dollars = 0
     run_count = 0
-    for d, txn in window_dated:  # _dated returns them already sorted by date
-        run_dollars += _signed_amount(txn)
-        if not txn.is_refund:
-            run_count += txn.transaction_count
+    for day, day_txns in _by_day(window_dated):
+        for txn in day_txns:
+            run_dollars += _signed_amount(txn)
+            if not txn.is_refund:
+                run_count += txn.transaction_count
         if _logic_met(logic, run_dollars, run_count, dollar_threshold_cents, transaction_threshold):
-            return d
+            return day
     return None
 
 
@@ -304,20 +310,21 @@ def _first_crossing_trailing(
 ) -> Optional[date]:
     """First date a trailing-12-month window meets the threshold.
 
-    Slides a window across the client's whole history. For each transaction date
-    D (the window's right edge), the window is (D minus one year, D].
+    Slides a window across the client's whole history, one DAY at a time. For a
+    right edge on date D the window is (D minus one year, D]; the day's whole net
+    is applied before testing, so the result is order-independent within a day.
     """
     left = 0
     run_dollars = 0
     run_count = 0
-    for right in range(len(dated)):
-        d_right, txn_right = dated[right]
-        run_dollars += _signed_amount(txn_right)
-        if not txn_right.is_refund:
-            run_count += txn_right.transaction_count
+    for day, day_txns in _by_day(dated):
+        for txn in day_txns:  # add the full day on the right edge
+            run_dollars += _signed_amount(txn)
+            if not txn.is_refund:
+                run_count += txn.transaction_count
 
-        boundary = _subtract_one_year(d_right)  # window is (boundary, d_right]
-        while left <= right and dated[left][0] <= boundary:
+        boundary = _subtract_one_year(day)  # window is (boundary, day]
+        while left < len(dated) and dated[left][0] <= boundary:
             d_left, txn_left = dated[left]
             run_dollars -= _signed_amount(txn_left)
             if not txn_left.is_refund:
@@ -325,8 +332,22 @@ def _first_crossing_trailing(
             left += 1
 
         if _logic_met(logic, run_dollars, run_count, dollar_threshold_cents, transaction_threshold):
-            return d_right
+            return day
     return None
+
+
+def _by_day(dated: List[Tuple[date, Transaction]]):
+    """Yield (date, [transactions]) groups from a date-sorted list."""
+    group_date = None
+    group: List[Transaction] = []
+    for d, txn in dated:
+        if d != group_date:
+            if group:
+                yield group_date, group
+            group_date, group = d, []
+        group.append(txn)
+    if group:
+        yield group_date, group
 
 
 def _logic_met(

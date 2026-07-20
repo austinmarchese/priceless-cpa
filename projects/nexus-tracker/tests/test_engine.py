@@ -210,6 +210,34 @@ class MeasurementPeriodTests(unittest.TestCase):
         self.assertEqual(ca.dollar_remaining_cents, 30 * 100)
 
 
+class SameDateDeterminismTests(unittest.TestCase):
+    """A crossing must not depend on row order within a single day."""
+
+    def _cross(self, txns, period="current_calendar_year"):
+        r = evaluate(txns, {"CA": threshold(dollars=100, period=period)}, date(2026, 12, 31))
+        s = only_state(r)
+        return s.crossed, s.effective_date
+
+    def test_same_day_sale_then_refund_order_independent(self):
+        sale_first = [sale("2026-03-01", 150, tid="s"), refund("2026-03-01", 120, original="s")]
+        refund_first = list(reversed(sale_first))
+        # The day nets +$30, below the $100 threshold -> not crossed, either order.
+        self.assertEqual(self._cross(sale_first), (False, None))
+        self.assertEqual(self._cross(refund_first), (False, None))
+
+    def test_same_day_two_sales_cross_on_that_day(self):
+        crossed, eff = self._cross([sale("2026-03-01", 60, tid="a"), sale("2026-03-01", 60, tid="b")])
+        self.assertTrue(crossed)
+        self.assertEqual(eff, date(2026, 3, 1))
+
+    def test_trailing_same_day_order_independent(self):
+        rows = [sale("2026-03-01", 150, tid="s"), refund("2026-03-01", 120, original="s")]
+        for txns in (rows, list(reversed(rows))):
+            r = evaluate(txns, {"CA": threshold(dollars=100, period="trailing_12_months")},
+                         date(2026, 7, 19))
+            self.assertFalse(only_state(r).crossed)
+
+
 class CurrentOrPriorYearTests(unittest.TestCase):
     """The dominant real-world rule: nexus if EITHER calendar year crossed."""
 
