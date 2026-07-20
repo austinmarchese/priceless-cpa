@@ -89,7 +89,7 @@ after each. **Do not build multiple phases at once.**
 | 4 | Web UI shell (select/add client, home view) **(done)** |
 | 5 | CSV importer with column mapping **(done)** |
 | 6 | Native Shopify connection **(done)** |
-| 7 | Exposure dashboard |
+| 7 | Exposure dashboard **(done)** |
 | 8 | Make it usable by non-technical staff |
 
 ---
@@ -124,7 +124,7 @@ comes in Session 8.
 
 ## Status
 
-**Session 6 complete: Shopify orders can be pulled in.**
+**Session 7 complete: the exposure dashboard is live.**
 
 - `nexus_tracker/ledger.py` — the `Transaction` and `Client` record shapes plus
   the SQL schema (money in cents, composite uniqueness, refund-references-original,
@@ -172,14 +172,22 @@ comes in Session 8.
   from `NEXUS_SECRET_KEY` or a per-machine key file. See "Sharing tokens" below.
 - `nexus_tracker/web/` — a Connect Shopify page (enter store + token, saved
   encrypted), a "Sync orders now" action, and a sync report.
+- `nexus_tracker/web/` (exposure) — the **exposure dashboard**. Per client, it
+  runs the engine and sorts each state into **Crossed** (with the date the
+  threshold was first reached), **Approaching** (a percent-of-threshold bar and
+  how much more in sales/transactions is needed), and **Sold in, no threshold
+  set** (surfaced for review). Framed as exposure facts with a standing reminder
+  that it does not determine nexus. Add `?as_of=YYYY-MM-DD` to measure as of a
+  past date. Reads the live `config/state_thresholds.json`; with no thresholds
+  set it shows a "configure thresholds" banner plus the raw per-state totals.
 - `nexus_tracker/sample_data.py` — seeds two "(sample)" clients.
 - `tests/` — shapes, engine, storage, the sqlite boundary check, web shell, CSV
-  importer + web flow, secret encryption, the Shopify client/mapping/backfill,
-  and the Shopify web flow (network faked throughout). **83 tests**, run with
-  `.venv/bin/python -m unittest`.
+  importer + web flow, secret encryption, the Shopify client/mapping/backfill and
+  its web flow, and the exposure dashboard (network and config faked throughout).
+  **90 tests**, run with `.venv/bin/python -m unittest`.
 
-The exposure dashboard is Session 7; making it usable for non-technical staff
-(one-click launch, robustness) is Session 8.
+Making it usable for non-technical staff (one-click launch, robustness when the
+synced folder is missing) is Session 8.
 
 ### Sharing Shopify tokens across the team
 

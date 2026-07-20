@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Exposure — {{ client.client_name }}{% endblock %}
+
+{% macro dims(e) %}
+  <div class="dims">
+    {% if e.dollar_threshold_cents is not none %}
+      <div>
+        Sales: <strong>{{ e.sales_cents | dollars }}</strong> of {{ e.dollar_threshold_cents | dollars }}
+        {% if not e.crossed and e.dollar_remaining_cents is not none %}
+          <span class="muted">({{ e.dollar_remaining_cents | dollars }} to go)</span>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if e.transaction_threshold is not none %}
+      <div>
+        Transactions: <strong>{{ e.transaction_count }}</strong> of {{ e.transaction_threshold }}
+        {% if not e.crossed and e.transaction_remaining is not none %}
+          <span class="muted">({{ e.transaction_remaining }} to go)</span>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+  <div class="hint">
+    Measured over {{ e.measurement_period | period_phrase }}; crosses when
+    {{ e.threshold_logic | logic_phrase }}.
+  </div>
+{% endmacro %}
+
+{% block content %}
+  <p><a class="backlink" href="{{ url_for('client_home', client_id=client.client_id) }}">← {{ client.client_name }}</a></p>
+  <h1>Sales tax exposure</h1>
+  <p class="lead">
+    As of {{ as_of }}. These are exposure facts for you to review — where sales
+    into a state have crossed, or are approaching, that state's economic nexus
+    threshold. This does not determine that the client has nexus or must register.
+  </p>
+
+  {% if not view.has_states %}
+    <div class="card empty">
+      No sales data yet. Import a CSV or connect Shopify for this client first.
+    </div>
+  {% else %}
+
+    {% if not view.any_thresholds %}
+      <div class="note">
+        No state thresholds are set yet, so nothing can be compared. Add them to
+        <strong>config/state_thresholds.json</strong> to see crossings and how close
+        each state is. Until then, this shows the raw sales totals per state below.
+      </div>
+    {% endif %}
+
+    {% if view.crossed %}
+      <h2>Crossed — review ({{ view.crossed | length }})</h2>
+      {% for item in view.crossed %}
+        {% set e = item.e %}
+        <div class="card flag">
+          <div class="statehead">
+            <strong>{{ e.state | state_name }} ({{ e.state }})</strong>
+            <span class="tag review">Crossed</span>
+          </div>
+          <div class="muted">Threshold first reached on {{ e.effective_date }}.</div>
+          {{ dims(e) }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    {% if view.approaching %}
+      <h2>Approaching ({{ view.approaching | length }})</h2>
+      {% for item in view.approaching %}
+        {% set e = item.e %}
+        <div class="card">
+          <div class="statehead">
+            <strong>{{ e.state | state_name }} ({{ e.state }})</strong>
+            <span class="pct">{{ item.progress }}% of threshold</span>
+          </div>
+          <div class="bar"><span style="width: {{ item.progress }}%"></span></div>
+          {{ dims(e) }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    {% if view.unconfigured %}
+      <h2>Sold in, no threshold set ({{ view.unconfigured | length }})</h2>
+      <p class="lead">The client has sold into these states, but no threshold is configured, so they can't be evaluated.</p>
+      {% for item in view.unconfigured %}
+        {% set e = item.e %}
+        <div class="card">
+          <div class="statehead">
+            <strong>{{ e.state | state_name }} ({{ e.state }})</strong>
+          </div>
+          <div class="dims">
+            <div>Sales: <strong>{{ e.sales_cents | dollars }}</strong> · {{ e.transaction_count }} transaction{{ '' if e.transaction_count == 1 else 's' }}</div>
+          </div>
+          <div class="hint">Add a threshold for {{ e.state }} to see whether this is exposure.</div>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+  {% endif %}
+{% endblock %}

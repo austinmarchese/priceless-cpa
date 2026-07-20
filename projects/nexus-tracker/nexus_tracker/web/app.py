@@ -19,15 +19,30 @@ from __future__ import annotations
 
 import re
 import uuid
+from datetime import date
 
 from flask import Flask, abort, redirect, render_template, request, url_for
 
+from .. import engine, thresholds, us_states
 from ..crypto import CryptoError
 from ..importers import csv_importer, shopify
 from ..importers.csv_importer import ColumnMapping, CsvImportError
 from ..importers.shopify import ShopifyError
 from ..ledger import Client
 from ..storage import Storage, StorageError
+from ..thresholds import ThresholdConfigError
+
+_PERIOD_PHRASE = {
+    "prior_calendar_year": "the prior calendar year",
+    "current_calendar_year": "the current calendar year",
+    "trailing_12_months": "the trailing 12 months",
+}
+_LOGIC_PHRASE = {
+    "dollar_only": "the sales amount reaches the threshold",
+    "transaction_only": "the number of transactions reaches the threshold",
+    "and": "both the sales amount and the number of transactions reach the thresholds",
+    "either": "either the sales amount or the number of transactions reaches its threshold",
+}
 
 MAX_UPLOAD_BYTES = 25 * 1024 * 1024  # 25 MB CSV upload cap
 
@@ -35,6 +50,10 @@ MAX_UPLOAD_BYTES = 25 * 1024 * 1024  # 25 MB CSV upload cap
 def create_app(db_path: str = None) -> Flask:
     app = Flask(__name__)
     app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_BYTES
+    app.jinja_env.filters["dollars"] = _dollars
+    app.jinja_env.filters["state_name"] = us_states.name_for
+    app.jinja_env.filters["period_phrase"] = lambda p: _PERIOD_PHRASE.get(p, p or "")
+    app.jinja_env.filters["logic_phrase"] = lambda l: _LOGIC_PHRASE.get(l, l or "")
     # One connection for the app's life; see module docstring.
     app.storage = Storage(db_path)
     # Holds an uploaded CSV between the "upload" and "map columns" steps.
@@ -185,6 +204,26 @@ def create_app(db_path: str = None) -> Flask:
             ), 400
         return render_template("shopify_report.html", client=client, report=report)
 
+    # -- Exposure dashboard (Session 7) ------------------------------------ #
+
+    @app.get("/clients/<client_id>/exposure")
+    def exposure(client_id):
+        client = require_client(client_id)
+        try:
+            thresholds_by_state = thresholds.load_thresholds()
+        except ThresholdConfigError as exc:
+            return render_template(
+                "error.html",
+                title="There's a problem with the threshold settings",
+                message=str(exc),
+            ), 500
+
+        as_of = _parse_as_of(request.args.get("as_of"))
+        transactions = app.storage.get_transactions_for_client(client_id)
+        result = engine.evaluate_client(transactions, thresholds_by_state, as_of, client_id)
+        view = _build_exposure_view(result, thresholds_by_state)
+        return render_template("exposure.html", client=client, view=view, as_of=as_of)
+
     @app.errorhandler(413)
     def upload_too_large(_error):
         return render_template(
@@ -243,6 +282,66 @@ def _make_client_id(store: Storage, name: str) -> str:
         candidate = f"{base}-{suffix}"
         suffix += 1
     return candidate
+
+
+def _dollars(cents) -> str:
+    """Format integer cents as US currency, exactly (no float rounding)."""
+    if cents is None:
+        return ""
+    sign = "-" if cents < 0 else ""
+    whole = abs(int(cents))
+    return f"{sign}${whole // 100:,}.{whole % 100:02d}"
+
+
+def _parse_as_of(raw) -> date:
+    """The date to measure exposure as of; defaults to today. Accepts YYYY-MM-DD."""
+    if raw:
+        try:
+            return date.fromisoformat(raw)
+        except ValueError:
+            pass
+    return date.today()
+
+
+def _progress(exposure) -> int:
+    """How far a not-yet-crossed state is toward crossing, 0-99%, logic-aware."""
+    dollar = (exposure.sales_cents / exposure.dollar_threshold_cents
+              if exposure.dollar_threshold_cents else None)
+    txn = (exposure.transaction_count / exposure.transaction_threshold
+           if exposure.transaction_threshold else None)
+    logic = exposure.threshold_logic
+    if logic == "transaction_only":
+        fraction = txn
+    elif logic == "and":                       # need both -> the lagging one gates
+        fraction = min(dollar, txn)
+    elif logic == "either":                    # either triggers -> the leading one
+        fraction = max(dollar, txn)
+    else:                                      # dollar_only
+        fraction = dollar
+    return min(99, int((fraction or 0) * 100))
+
+
+def _build_exposure_view(result, thresholds_by_state) -> dict:
+    """Sort the engine's per-state facts into crossed / approaching / unconfigured."""
+    crossed, approaching, unconfigured = [], [], []
+    for e in result.states:
+        if not e.threshold_configured:
+            unconfigured.append({"e": e, "progress": None})
+        elif e.crossed:
+            crossed.append({"e": e, "progress": None})
+        else:
+            approaching.append({"e": e, "progress": _progress(e)})
+
+    crossed.sort(key=lambda i: (i["e"].effective_date or date.min, i["e"].state))
+    approaching.sort(key=lambda i: (-i["progress"], i["e"].state))
+    unconfigured.sort(key=lambda i: (-i["e"].sales_cents, i["e"].state))
+    return {
+        "crossed": crossed,
+        "approaching": approaching,
+        "unconfigured": unconfigured,
+        "has_states": bool(result.states),
+        "any_thresholds": bool(thresholds_by_state),
+    }
 
 
 def _guess_columns(headers: list) -> dict:

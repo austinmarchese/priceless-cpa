@@ -37,6 +37,17 @@ _NAME_TO_CODE = {
 }
 
 
+# Reverse lookup for display (first name wins, e.g. DC -> "District Of Columbia").
+_CODE_TO_NAME = {}
+for _name, _code in _NAME_TO_CODE.items():
+    _CODE_TO_NAME.setdefault(_code, _name.title())
+
+
+def name_for(code: str) -> str:
+    """A human-readable state name for a code, or the code itself if unknown."""
+    return _CODE_TO_NAME.get(code, code)
+
+
 def to_code(value: str) -> Optional[str]:
     """Normalize a state value to its two-letter code, or None if unrecognized.
 
