@@ -136,10 +136,16 @@ class ThresholdLoaderTests(unittest.TestCase):
         )
         self.assertEqual(result["CA"].measurement_period, "current_or_prior_calendar_year")
 
-    def test_placeholder_config_loads_as_empty(self):
-        # The real file currently holds only a "_comment"; that must be fine.
-        result = thresholds.load_thresholds(CONFIG_DIR / "state_thresholds.json")
+    def test_config_with_only_notes_loads_as_empty(self):
+        # A config that holds only underscore "notes" keys is valid and empty.
+        result = self._load({"_comment": "notes", "_source": "somewhere"})
         self.assertEqual(result, {})
+
+    def test_live_config_file_loads_and_is_well_formed(self):
+        # The populated live config must load cleanly through the validator.
+        result = thresholds.load_thresholds(CONFIG_DIR / "state_thresholds.json")
+        self.assertGreater(len(result), 0)
+        self.assertIn("CA", result)
 
     def test_missing_file_is_friendly(self):
         with self.assertRaises(thresholds.ThresholdConfigError):

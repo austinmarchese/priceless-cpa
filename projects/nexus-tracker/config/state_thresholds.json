@@ -1,3 +1,334 @@
 {
-  "_comment": "Placeholder. The firm's real per-state threshold rules go here. See state_thresholds.example.json for the shape, and PROJECT_SPEC.md section 5 for what each field means. The structure that reads this file is built in Session 1."
+  "_comment": "DRAFT -- compiled 2026-07-19, NOT YET VERIFIED by the firm. Verify each state against primary sources (state DOR) or your Avalara/TaxJar subscription before relying on these for client work; wrong thresholds flow straight into exposure calls. Delete this comment once verified.",
+  "_source": "Sales Tax Institute, Economic Nexus State Guide (page last updated 2026-05-04).",
+  "_caveats": "States with NO state sales tax are omitted: DE, MT, NH, OR. Alaska (AK) is a LOCAL obligation (Alaska Remote Seller commission), not a state tax. Non-calendar measurement windows are approximated with trailing_12_months: CT (12mo ending Sep 30), IL/MO (rolling, quarterly review), MN (12mo to quarter end), NY (four sales-tax quarters), VT (four calendar quarters), MS/TN/TX (preceding 12 months). KY's 200-transaction test is scheduled to end 2026-08-01.",
+  "AK": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "AL": {
+    "dollar_threshold": 250000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "prior_calendar_year",
+    "marketplace_counts": false
+  },
+  "AR": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": false
+  },
+  "AZ": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": false
+  },
+  "CA": {
+    "dollar_threshold": 500000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "CO": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": false
+  },
+  "CT": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "and",
+    "measurement_period": "trailing_12_months",
+    "marketplace_counts": true
+  },
+  "DC": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "FL": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "prior_calendar_year",
+    "marketplace_counts": false
+  },
+  "GA": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": false
+  },
+  "HI": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "IA": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "ID": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "IL": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "trailing_12_months",
+    "marketplace_counts": false
+  },
+  "IN": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": false
+  },
+  "KS": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "KY": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "LA": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "MA": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": false
+  },
+  "MD": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "ME": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": false
+  },
+  "MI": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "MN": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "trailing_12_months",
+    "marketplace_counts": true
+  },
+  "MO": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "trailing_12_months",
+    "marketplace_counts": true
+  },
+  "MS": {
+    "dollar_threshold": 250000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "trailing_12_months",
+    "marketplace_counts": false
+  },
+  "NC": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "ND": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": false
+  },
+  "NE": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "NJ": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "NM": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "prior_calendar_year",
+    "marketplace_counts": false
+  },
+  "NV": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "NY": {
+    "dollar_threshold": 500000,
+    "transaction_threshold": 100,
+    "threshold_logic": "and",
+    "measurement_period": "trailing_12_months",
+    "marketplace_counts": true
+  },
+  "OH": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "OK": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": false
+  },
+  "PA": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "RI": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "SC": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "SD": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "TN": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "trailing_12_months",
+    "marketplace_counts": false
+  },
+  "TX": {
+    "dollar_threshold": 500000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "trailing_12_months",
+    "marketplace_counts": true
+  },
+  "UT": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": false
+  },
+  "VA": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": false
+  },
+  "VT": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "trailing_12_months",
+    "marketplace_counts": true
+  },
+  "WA": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "WI": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "WV": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": 200,
+    "threshold_logic": "either",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": true
+  },
+  "WY": {
+    "dollar_threshold": 100000,
+    "transaction_threshold": null,
+    "threshold_logic": "dollar_only",
+    "measurement_period": "current_or_prior_calendar_year",
+    "marketplace_counts": false
+  }
 }
