@@ -129,6 +129,11 @@ class DecodeAndPreviewTests(unittest.TestCase):
         text = csvimp.decode_bytes(raw)
         self.assertTrue(text.startswith("Date"))  # and decode removed it
 
+    def test_unreadable_file_gives_friendly_error(self):
+        # A NUL byte makes Python's csv reader raise; it should surface friendly.
+        with self.assertRaises(CsvImportError):
+            csvimp.read_headers_and_preview("Date,State,Amount\n2026-01-01,CA,\x00100\n")
+
     def test_headers_and_preview(self):
         headers, preview = csvimp.read_headers_and_preview(
             "Date,State,Amount\n2026-01-01,CA,100\n2026-01-02,NY,200\n"

@@ -114,6 +114,13 @@ class ImportReport:
 # Public API                                                                  #
 # --------------------------------------------------------------------------- #
 
+def _not_a_csv_error() -> CsvImportError:
+    return CsvImportError(
+        "We couldn't read this file as a CSV. Please make sure it's a plain CSV "
+        "export (not an Excel .xlsx or another format) and try again."
+    )
+
+
 def decode_bytes(raw: bytes) -> str:
     """Turn uploaded bytes into text, tolerating Excel's BOM and Windows files."""
     for encoding in ("utf-8-sig", "cp1252"):
@@ -132,40 +139,45 @@ def read_headers_and_preview(
 ) -> Tuple[List[str], List[List[str]]]:
     """The column names and first few rows, so the user can map columns."""
     reader = _make_reader(text)
-    headers = reader.fieldnames or []
-    if not headers:
-        raise CsvImportError(
-            "This file doesn't seem to have a header row of column names. "
-            "Please make sure the first row names the columns."
-        )
-    preview = []
-    for row in reader:
-        preview.append([(row.get(h) or "").strip() for h in headers])
-        if len(preview) >= max_rows:
-            break
+    try:
+        headers = reader.fieldnames or []
+        if not headers:
+            raise CsvImportError(
+                "This file doesn't seem to have a header row of column names. "
+                "Please make sure the first row names the columns."
+            )
+        preview = []
+        for row in reader:
+            preview.append([(row.get(h) or "").strip() for h in headers])
+            if len(preview) >= max_rows:
+                break
+    except csv.Error as exc:
+        raise _not_a_csv_error() from exc
     return list(headers), preview
 
 
 def parse_csv(text: str, mapping: ColumnMapping, client_id: str) -> ParseResult:
     """Turn CSV text into transactions plus a list of rows that couldn't be read."""
     reader = _make_reader(text)
-    headers = reader.fieldnames or []
-    if not headers:
-        raise CsvImportError(
-            "This file doesn't seem to have a header row of column names."
-        )
-    _check_mapped_columns_exist(mapping, headers)
-
     transactions: List[Transaction] = []
     errors: List[RowError] = []
     total = 0
-    for index, row in enumerate(reader):
-        total += 1
-        line_number = index + 2  # header is line 1
-        try:
-            transactions.append(_build_transaction(row, mapping, client_id, line_number))
-        except _RowProblem as problem:
-            errors.append(RowError(row_number=line_number, problem=str(problem)))
+    try:
+        headers = reader.fieldnames or []
+        if not headers:
+            raise CsvImportError(
+                "This file doesn't seem to have a header row of column names."
+            )
+        _check_mapped_columns_exist(mapping, headers)
+        for index, row in enumerate(reader):
+            total += 1
+            line_number = index + 2  # header is line 1
+            try:
+                transactions.append(_build_transaction(row, mapping, client_id, line_number))
+            except _RowProblem as problem:
+                errors.append(RowError(row_number=line_number, problem=str(problem)))
+    except csv.Error as exc:
+        raise _not_a_csv_error() from exc
 
     return ParseResult(
         transactions=tuple(transactions),

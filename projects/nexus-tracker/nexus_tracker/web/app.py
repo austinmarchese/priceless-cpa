@@ -47,6 +47,7 @@ _LOGIC_PHRASE = {
 }
 
 MAX_UPLOAD_BYTES = 25 * 1024 * 1024  # 25 MB CSV upload cap
+MAX_PENDING_UPLOADS = 10  # cap in-memory uploads awaiting column mapping
 
 
 def create_app(db_path: str = None) -> Flask:
@@ -149,6 +150,10 @@ def create_app(db_path: str = None) -> Flask:
 
         token = uuid.uuid4().hex
         app.pending_uploads[token] = {"filename": file.filename, "text": text}
+        # Drop the oldest uploads if too many are left un-mapped, so abandoned
+        # uploads can't grow memory without bound (dict keeps insertion order).
+        while len(app.pending_uploads) > MAX_PENDING_UPLOADS:
+            app.pending_uploads.pop(next(iter(app.pending_uploads)), None)
         return render_template(
             "import_map.html", client=client, headers=headers, preview=preview,
             token=token, filename=file.filename, guess=_guess_columns(headers),

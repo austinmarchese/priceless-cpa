@@ -135,8 +135,20 @@ class TransactionTests(unittest.TestCase):
 
     def test_transaction_for_unknown_client_is_friendly(self):
         with memory_store() as store:
-            with self.assertRaises(StorageError):
+            with self.assertRaises(StorageError) as ctx:
                 store.add_transactions([a_sale("s1", client_id="ghost")])
+            self.assertIn("client", str(ctx.exception).lower())  # FK-specific message
+
+    def test_same_date_rows_return_in_insertion_order(self):
+        with memory_store() as store:
+            store.add_client(a_client())
+            store.add_transactions([
+                a_sale("s1", day="2026-03-01"),
+                a_sale("s2", day="2026-03-01"),
+                a_sale("s3", day="2026-03-01"),
+            ])
+            ids = [t.transaction_id for t in store.get_transactions_for_client("c1")]
+            self.assertEqual(ids, ["s1", "s2", "s3"])  # deterministic via id tiebreaker
 
 
 class OpeningTests(unittest.TestCase):

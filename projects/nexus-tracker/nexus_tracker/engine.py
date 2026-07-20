@@ -208,10 +208,12 @@ def _evaluate_configured_state(
     dollar_remaining_cents = None
     transaction_remaining = None
     if not crossed:
+        # Clamp measured totals at 0 so "remaining to cross" never exceeds the
+        # threshold itself when a state is net-negative (heavily refunded).
         if dollar_threshold_cents is not None:
-            dollar_remaining_cents = max(0, dollar_threshold_cents - sales_cents)
+            dollar_remaining_cents = max(0, dollar_threshold_cents - max(0, sales_cents))
         if threshold.transaction_threshold is not None:
-            transaction_remaining = max(0, threshold.transaction_threshold - transaction_count)
+            transaction_remaining = max(0, threshold.transaction_threshold - max(0, transaction_count))
 
     return StateExposure(
         state=state,

@@ -83,6 +83,13 @@ class DollarOnlyTests(unittest.TestCase):
         self.assertEqual(ca.transaction_count, 3)
         self.assertIsNone(ca.dollar_remaining_cents)  # crossed -> not applicable
 
+    def test_net_negative_state_caps_remaining_at_threshold(self):
+        # Refunds exceed sales -> net negative; "to go" must not exceed the threshold.
+        txns = [sale("2026-01-01", 40, tid="s"), refund("2026-02-01", 60, original="s")]
+        ca = only_state(evaluate(txns, {"CA": threshold(dollars=100)}, date(2026, 12, 31)))
+        self.assertFalse(ca.crossed)
+        self.assertEqual(ca.dollar_remaining_cents, 100 * 100)  # capped, not $120
+
     def test_not_crossed_reports_how_close(self):
         txns = [sale("2026-03-01", 40_000), sale("2026-06-01", 25_000)]  # 65k
         result = evaluate(txns, {"CA": threshold(dollars=100_000)}, date(2026, 12, 31))

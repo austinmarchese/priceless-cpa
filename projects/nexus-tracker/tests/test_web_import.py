@@ -96,6 +96,12 @@ class ImportFlowTests(unittest.TestCase):
     def test_import_page_requires_real_client(self):
         self.assertEqual(self.client.get("/clients/ghost/import").status_code, 404)
 
+    def test_abandoned_uploads_are_capped(self):
+        from nexus_tracker.web.app import MAX_PENDING_UPLOADS
+        for i in range(MAX_PENDING_UPLOADS + 3):
+            self._upload(filename=f"file{i}.csv")  # upload but never map
+        self.assertLessEqual(len(self.app.pending_uploads), MAX_PENDING_UPLOADS)
+
     @staticmethod
     def _token(html):
         marker = 'name="token" value="'

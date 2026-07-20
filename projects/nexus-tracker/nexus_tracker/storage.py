@@ -233,7 +233,8 @@ class Storage:
     def get_transactions_for_client(self, client_id: str) -> List[Transaction]:
         """Every ledger row for a client, oldest first. This is what the engine reads."""
         rows = self._conn.execute(
-            f"SELECT {_TXN_COLUMNS} FROM transactions WHERE client_id = ? ORDER BY date",
+            f"SELECT {_TXN_COLUMNS} FROM transactions WHERE client_id = ? "
+            "ORDER BY date, id",  # id tiebreaker => deterministic same-date order
             (client_id,),
         ).fetchall()
         return [_row_to_txn(row) for row in rows]
@@ -335,11 +336,17 @@ class _WriteTransaction:
             return False
         self._conn.rollback()
         if isinstance(exc, sqlite3.IntegrityError):
-            raise StorageError(
-                "That write breaks a ledger rule: " + str(exc) + ".\n"
-                "A common cause is adding transactions for a client that hasn't "
-                "been created yet -- add the client first."
-            ) from exc
+            detail = str(exc)
+            if "FOREIGN KEY" in detail:
+                message = (
+                    "That write is for a client that doesn't exist yet. Add the "
+                    "client first, then import its transactions."
+                )
+            elif "UNIQUE" in detail:
+                message = "That record already exists."
+            else:
+                message = "That write breaks a ledger rule: " + detail + "."
+            raise StorageError(message) from exc
         if isinstance(exc, sqlite3.OperationalError):
             raise StorageError(
                 "The database couldn't complete the write: " + str(exc) + ".\n"
