@@ -53,6 +53,31 @@ class StorageResilienceTests(unittest.TestCase):
         app = create_app(":memory:")
         self.assertIsNotNone(app.storage)  # happy path unchanged
 
+    def test_reopens_when_the_db_file_is_replaced_by_sync(self):
+        import os
+        import tempfile
+        from nexus_tracker.ledger import Client
+        from nexus_tracker.storage import Storage
+
+        with tempfile.TemporaryDirectory() as tmp:
+            live = os.path.join(tmp, "nexus.sqlite")
+            with Storage(live) as s:                      # original file: client c1
+                s.add_client(Client(client_id="c1", client_name="Original"))
+
+            app = create_app(live)
+            client_page = app.test_client()
+            self.assertIn("Original", client_page.get("/").get_data(as_text=True))
+
+            # A teammate's change lands: sync swaps in a new file (new inode).
+            replacement = os.path.join(tmp, "replacement.sqlite")
+            with Storage(replacement) as s:
+                s.add_client(Client(client_id="c2", client_name="FromTeammate"))
+            os.replace(replacement, live)                 # atomic swap -> new inode
+
+            body = client_page.get("/").get_data(as_text=True)
+            self.assertIn("FromTeammate", body)           # picked up the new file
+            self.assertNotIn("Original", body)            # not the stale one
+
 
 if __name__ == "__main__":
     unittest.main()

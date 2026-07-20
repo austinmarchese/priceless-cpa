@@ -17,6 +17,7 @@ multi-user server; those are deferred in PROJECT_SPEC.md section 7). It binds to
 
 from __future__ import annotations
 
+import os
 import re
 import uuid
 from datetime import date
@@ -55,16 +56,27 @@ def create_app(db_path: str = None) -> Flask:
     app.jinja_env.filters["state_name"] = us_states.name_for
     app.jinja_env.filters["period_phrase"] = lambda p: _PERIOD_PHRASE.get(p, p or "")
     app.jinja_env.filters["logic_phrase"] = lambda l: _LOGIC_PHRASE.get(l, l or "")
-    # The ledger is opened lazily and cached, so the app still STARTS even when
-    # the synced folder isn't available yet. The first request then shows a
-    # friendly "can't reach your data" page (and retries), instead of the whole
-    # app failing to boot.
+    # The ledger connection is opened lazily and cached, so the app still STARTS
+    # when the synced folder isn't available yet (the first request then shows a
+    # friendly "can't reach your data" page and retries).
+    #
+    # It is also re-opened when the database FILE is replaced underneath us. Cloud
+    # sync (Drive/Dropbox/OneDrive) applies a teammate's changes by swapping in a
+    # new file, which gives it a new inode; a long-lived handle would otherwise
+    # keep reading the stale file and then fail writes. So on each request we
+    # compare the file's inode and re-open if it changed. (:memory: has no file,
+    # so it stays a single persistent connection -- used by the tests.)
     app.config["NEXUS_DB_PATH"] = db_path
     app.storage = None
+    app._storage_inode = None
 
     def require_storage():
+        if app.storage is not None and _db_inode(app.storage.db_path) != app._storage_inode:
+            app.storage.close()          # file was swapped by sync; drop the stale handle
+            app.storage = None
         if app.storage is None:
             app.storage = Storage(app.config["NEXUS_DB_PATH"])
+            app._storage_inode = _db_inode(app.storage.db_path)
         return app.storage
 
     try:
@@ -321,6 +333,20 @@ def _make_client_id(store: Storage, name: str) -> str:
         candidate = f"{base}-{suffix}"
         suffix += 1
     return candidate
+
+
+def _db_inode(path: str):
+    """The database file's inode, or None for :memory: or a missing file.
+
+    A changed inode means the file was replaced (by cloud sync), so the cached
+    connection must be re-opened.
+    """
+    if path == ":memory:":
+        return None
+    try:
+        return os.stat(path).st_ino
+    except OSError:
+        return None
 
 
 def _dollars(cents) -> str:
