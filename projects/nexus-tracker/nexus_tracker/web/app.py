@@ -54,42 +54,59 @@ def create_app(db_path: str = None) -> Flask:
     app.jinja_env.filters["state_name"] = us_states.name_for
     app.jinja_env.filters["period_phrase"] = lambda p: _PERIOD_PHRASE.get(p, p or "")
     app.jinja_env.filters["logic_phrase"] = lambda l: _LOGIC_PHRASE.get(l, l or "")
-    # One connection for the app's life; see module docstring.
-    app.storage = Storage(db_path)
+    # The ledger is opened lazily and cached, so the app still STARTS even when
+    # the synced folder isn't available yet. The first request then shows a
+    # friendly "can't reach your data" page (and retries), instead of the whole
+    # app failing to boot.
+    app.config["NEXUS_DB_PATH"] = db_path
+    app.storage = None
+
+    def require_storage():
+        if app.storage is None:
+            app.storage = Storage(app.config["NEXUS_DB_PATH"])
+        return app.storage
+
+    try:
+        require_storage()   # open now if we can; a missing folder is tolerated
+    except StorageError:
+        pass                # a request will retry and show a friendly page
+
     # Holds an uploaded CSV between the "upload" and "map columns" steps.
     # In-memory is fine: single local process, and a lost upload just means
     # the user picks the file again.
     app.pending_uploads = {}
 
     def require_client(client_id):
-        client = app.storage.get_client(client_id)
+        client = require_storage().get_client(client_id)
         if client is None:
             abort(404)
         return client
 
     @app.get("/")
     def home():
-        clients = [_summarize(app.storage, c) for c in app.storage.list_clients()]
+        store = require_storage()
+        clients = [_summarize(store, c) for c in store.list_clients()]
         return render_template("home.html", clients=clients)
 
     @app.post("/clients")
     def add_client():
+        store = require_storage()
         name = (request.form.get("name") or "").strip()
         if not name:
-            clients = [_summarize(app.storage, c) for c in app.storage.list_clients()]
+            clients = [_summarize(store, c) for c in store.list_clients()]
             return (
                 render_template("home.html", clients=clients,
                                 error="Please enter a business name."),
                 400,
             )
-        client_id = _make_client_id(app.storage, name)
-        app.storage.add_client(Client(client_id=client_id, client_name=name))
+        client_id = _make_client_id(store, name)
+        store.add_client(Client(client_id=client_id, client_name=name))
         return redirect(url_for("client_home", client_id=client_id))
 
     @app.get("/clients/<client_id>")
     def client_home(client_id):
         client = require_client(client_id)
-        transactions = app.storage.get_transactions_for_client(client_id)
+        transactions = require_storage().get_transactions_for_client(client_id)
         states = sorted({t.destination_state for t in transactions})
         return render_template(
             "client.html",
@@ -150,7 +167,7 @@ def create_app(db_path: str = None) -> Flask:
             marketplace_default=bool(request.form.get("marketplace_all")),
         )
         try:
-            report = csv_importer.import_csv(app.storage, client_id, pending["text"], mapping)
+            report = csv_importer.import_csv(require_storage(), client_id, pending["text"], mapping)
         except CsvImportError as exc:
             return _remap(client, pending, request.form.get("token", ""), str(exc))
 
@@ -172,7 +189,7 @@ def create_app(db_path: str = None) -> Flask:
         client = require_client(client_id)
         return render_template(
             "shopify_connect.html", client=client,
-            connection=shopify.connection(app.storage, client_id),
+            connection=shopify.connection(require_storage(), client_id),
             saved=bool(request.args.get("saved")),
         )
 
@@ -184,22 +201,22 @@ def create_app(db_path: str = None) -> Flask:
         if not shop or not token:
             return render_template(
                 "shopify_connect.html", client=client,
-                connection=shopify.connection(app.storage, client_id),
+                connection=shopify.connection(require_storage(), client_id),
                 error="Please enter both the store address and the access token.",
             ), 400
-        shopify.save_credentials(app.storage, client_id, shop, token)
+        shopify.save_credentials(require_storage(), client_id, shop, token)
         return redirect(url_for("shopify_connect", client_id=client_id, saved=1))
 
     @app.post("/clients/<client_id>/shopify/sync")
     def shopify_sync(client_id):
         client = require_client(client_id)
         try:
-            report = shopify.import_shopify(app.storage, client_id)
+            report = shopify.import_shopify(require_storage(), client_id)
         except (ShopifyError, CryptoError) as exc:
             # ShopifyAuthError (bad/expired token) is a ShopifyError subclass.
             return render_template(
                 "shopify_connect.html", client=client,
-                connection=shopify.connection(app.storage, client_id),
+                connection=shopify.connection(require_storage(), client_id),
                 error=str(exc),
             ), 400
         return render_template("shopify_report.html", client=client, report=report)
@@ -219,7 +236,7 @@ def create_app(db_path: str = None) -> Flask:
             ), 500
 
         as_of = _parse_as_of(request.args.get("as_of"))
-        transactions = app.storage.get_transactions_for_client(client_id)
+        transactions = require_storage().get_transactions_for_client(client_id)
         result = engine.evaluate_client(transactions, thresholds_by_state, as_of, client_id)
         view = _build_exposure_view(result, thresholds_by_state)
         return render_template("exposure.html", client=client, view=view, as_of=as_of)
@@ -253,6 +270,19 @@ def create_app(db_path: str = None) -> Flask:
                 "error.html",
                 title="There's a problem reaching your data",
                 message=str(error),
+            ),
+            500,
+        )
+
+    @app.errorhandler(500)
+    def internal_error(_error):
+        # Last resort: any unexpected error still shows a plain page, not a trace.
+        return (
+            render_template(
+                "error.html",
+                title="Something went wrong",
+                message="An unexpected problem came up. Please try again. If it "
+                        "keeps happening, let whoever set up this tool know.",
             ),
             500,
         )

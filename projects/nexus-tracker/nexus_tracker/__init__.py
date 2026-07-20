@@ -10,4 +10,4 @@ package: everything reads from a single normalized transaction ledger, and all
 storage goes through one data-access layer (nexus_tracker/storage.py).
 """
 
-__version__ = "0.7.0"  # Session 7: exposure dashboard (crossings, how-close, per client).
+__version__ = "0.8.0"  # Session 8: one-click launcher, resilient storage, friendly errors.

@@ -90,25 +90,30 @@ after each. **Do not build multiple phases at once.**
 | 5 | CSV importer with column mapping **(done)** |
 | 6 | Native Shopify connection **(done)** |
 | 7 | Exposure dashboard **(done)** |
-| 8 | Make it usable by non-technical staff |
+| 8 | Make it usable by non-technical staff **(done)** |
 
 ---
 
-## Running it (local, for now)
+## Running it
 
-The app is a small local website you open in your browser. It uses Flask, so it
-needs a one-time setup in a project-local virtual environment:
+**The easy way (for staff):** double-click **`start.command`** (macOS) or
+**`start.bat`** (Windows). The first run sets everything up (needs internet,
+once); after that it starts instantly, opens your browser, and you're in. To
+stop, close the window.
+
+To keep the data in your firm's shared folder so everyone sees the same clients,
+open that start file in a text editor and set `NEXUS_DB_PATH` to a path inside
+your Google Drive / OneDrive / Dropbox folder (there's a commented line showing
+how). If the shared folder isn't running yet, the app still opens and shows a
+plain page telling you what to do; start the sync app and reload.
+
+**The manual way (for developers):**
 
 ```
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
-```
-
-To try it with sample data:
-
-```
-.venv/bin/python -m nexus_tracker.sample_data     # loads two "(sample)" clients
-.venv/bin/python -m nexus_tracker.web.app         # then open http://127.0.0.1:5000
+.venv/bin/python -m nexus_tracker.sample_data   # optional: two "(sample)" clients
+.venv/bin/python -m nexus_tracker.launch        # opens the browser for you
 ```
 
 Run the tests with:
@@ -117,14 +122,20 @@ Run the tests with:
 .venv/bin/python -m unittest
 ```
 
-A friendlier one-click launcher (and pointing it at the firm's synced folder)
-comes in Session 8.
+## Before real use — set the state thresholds
+
+The one remaining setup step: fill in **`config/state_thresholds.json`** with the
+firm's real per-state thresholds (it currently holds only a placeholder). See
+`config/state_thresholds.example.json` for the shape. Until then, the exposure
+dashboard shows a "no thresholds set" banner and raw per-state totals; once the
+file is filled in, crossings and "how close" light up automatically.
 
 ---
 
 ## Status
 
-**Session 7 complete: the exposure dashboard is live.**
+**Session 8 complete: all eight build phases are done.** The one remaining step
+before real use is filling in the state thresholds (see above).
 
 - `nexus_tracker/ledger.py` — the `Transaction` and `Client` record shapes plus
   the SQL schema (money in cents, composite uniqueness, refund-references-original,
@@ -180,14 +191,19 @@ comes in Session 8.
   that it does not determine nexus. Add `?as_of=YYYY-MM-DD` to measure as of a
   past date. Reads the live `config/state_thresholds.json`; with no thresholds
   set it shows a "configure thresholds" banner plus the raw per-state totals.
+- `start.command` / `start.bat` + `nexus_tracker/launch.py` — the one-click
+  launcher: first-run setup, pick a free port (starts above macOS's AirPlay 5000),
+  open the browser, serve on 127.0.0.1 only.
+- `nexus_tracker/web/app.py` — storage now opens **lazily and resiliently**: the
+  app starts even if the synced folder is missing, and requests show a friendly
+  page (and retry) instead of the app failing to boot. A catch-all handler keeps
+  any unexpected error a plain page, never a stack trace.
 - `nexus_tracker/sample_data.py` — seeds two "(sample)" clients.
 - `tests/` — shapes, engine, storage, the sqlite boundary check, web shell, CSV
   importer + web flow, secret encryption, the Shopify client/mapping/backfill and
-  its web flow, and the exposure dashboard (network and config faked throughout).
-  **90 tests**, run with `.venv/bin/python -m unittest`.
-
-Making it usable for non-technical staff (one-click launch, robustness when the
-synced folder is missing) is Session 8.
+  its web flow, the exposure dashboard, and the launcher + storage resilience
+  (network and config faked throughout). **96 tests**, run with
+  `.venv/bin/python -m unittest`.
 
 ### Sharing Shopify tokens across the team
 
