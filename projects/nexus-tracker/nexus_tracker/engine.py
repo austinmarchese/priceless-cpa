@@ -53,6 +53,7 @@ silently treated as safe.
 
 from __future__ import annotations
 
+from collections import namedtuple
 from dataclasses import dataclass
 from datetime import date
 from typing import Iterable, List, Optional, Tuple
@@ -162,29 +163,45 @@ def _evaluate_configured_state(
         (t for t in txns if threshold.marketplace_counts or not t.marketplace_facilitated),
         as_of,
     )
-
-    window_start, window_end = _window_bounds(threshold.measurement_period, as_of)
-
-    # Current standing: totals over the measurement window ending at the as-of date.
-    in_window = [(d, t) for (d, t) in dated if _in_window(threshold.measurement_period, d, as_of)]
-    sales_cents = sum(_signed_amount(t) for (_d, t) in in_window)
-    transaction_count = sum(t.transaction_count for (_d, t) in in_window if not t.is_refund)
-
     dollar_threshold_cents = (
         threshold.dollar_threshold * 100 if threshold.dollar_threshold is not None else None
     )
+    logic = threshold.threshold_logic
+    txn_threshold = threshold.transaction_threshold
+    period = threshold.measurement_period
 
-    # Crossing detection. Calendar periods scan within the window; the trailing
-    # period slides a 12-month window across the client's whole history, because
-    # a crossing can have happened in an earlier window that has since rolled off.
-    if threshold.measurement_period == "trailing_12_months":
-        effective_date = _first_crossing_trailing(
-            dated, threshold.threshold_logic, dollar_threshold_cents, threshold.transaction_threshold
-        )
-    else:
-        effective_date = _first_crossing_cumulative(
-            in_window, threshold.threshold_logic, dollar_threshold_cents, threshold.transaction_threshold
-        )
+    if period == "trailing_12_months":
+        # Rolling 12-month window; a crossing can pre-date the current window, so
+        # the scan slides across the client's whole history.
+        window_start, window_end = _window_bounds(period, as_of)
+        in_window = [(d, t) for (d, t) in dated if _in_window(period, d, as_of)]
+        sales_cents = sum(_signed_amount(t) for (_d, t) in in_window)
+        transaction_count = sum(t.transaction_count for (_d, t) in in_window if not t.is_refund)
+        effective_date = _first_crossing_trailing(dated, logic, dollar_threshold_cents, txn_threshold)
+
+    elif period == "current_or_prior_calendar_year":
+        # Nexus if EITHER calendar year crossed. Report the year that drives the
+        # result: the prior year when it crossed (its crossing is the earliest),
+        # otherwise the current (live) year.
+        cur_start, cur_end = date(as_of.year, 1, 1), as_of
+        pri_start, pri_end = date(as_of.year - 1, 1, 1), date(as_of.year - 1, 12, 31)
+        current = _measure_window(dated, cur_start, cur_end, logic, dollar_threshold_cents, txn_threshold)
+        prior = _measure_window(dated, pri_start, pri_end, logic, dollar_threshold_cents, txn_threshold)
+        if prior.effective_date is not None:
+            effective_date = prior.effective_date
+            sales_cents, transaction_count = prior.sales_cents, prior.transaction_count
+            window_start, window_end = pri_start, pri_end
+        else:
+            effective_date = current.effective_date
+            sales_cents, transaction_count = current.sales_cents, current.transaction_count
+            window_start, window_end = cur_start, cur_end
+
+    else:  # prior_calendar_year or current_calendar_year -- a single fixed window
+        window_start, window_end = _window_bounds(period, as_of)
+        in_window = [(d, t) for (d, t) in dated if _in_window(period, d, as_of)]
+        sales_cents = sum(_signed_amount(t) for (_d, t) in in_window)
+        transaction_count = sum(t.transaction_count for (_d, t) in in_window if not t.is_refund)
+        effective_date = _first_crossing_cumulative(in_window, logic, dollar_threshold_cents, txn_threshold)
 
     crossed = effective_date is not None
 
@@ -246,6 +263,20 @@ def _evaluate_unconfigured_state(
 # --------------------------------------------------------------------------- #
 # Crossing detection                                                          #
 # --------------------------------------------------------------------------- #
+
+_WindowResult = namedtuple("_WindowResult", "sales_cents transaction_count effective_date")
+
+
+def _measure_window(dated, start, end, logic, dollar_threshold_cents, transaction_threshold):
+    """Totals and first-crossing date over one fixed calendar window [start, end]."""
+    in_window = [(d, t) for (d, t) in dated if start <= d <= end]
+    sales_cents = sum(_signed_amount(t) for (_d, t) in in_window)
+    transaction_count = sum(t.transaction_count for (_d, t) in in_window if not t.is_refund)
+    effective_date = _first_crossing_cumulative(
+        in_window, logic, dollar_threshold_cents, transaction_threshold
+    )
+    return _WindowResult(sales_cents, transaction_count, effective_date)
+
 
 def _first_crossing_cumulative(
     window_dated: List[Tuple[date, Transaction]],

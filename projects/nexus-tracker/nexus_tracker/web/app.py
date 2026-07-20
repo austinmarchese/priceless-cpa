@@ -33,6 +33,7 @@ from ..storage import Storage, StorageError
 from ..thresholds import ThresholdConfigError
 
 _PERIOD_PHRASE = {
+    "current_or_prior_calendar_year": "the current or prior calendar year",
     "prior_calendar_year": "the prior calendar year",
     "current_calendar_year": "the current calendar year",
     "trailing_12_months": "the trailing 12 months",

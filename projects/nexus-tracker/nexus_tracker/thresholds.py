@@ -23,8 +23,11 @@ from typing import Optional
 # The four ways the dollar and transaction thresholds can combine.
 THRESHOLD_LOGIC_VALUES = ("dollar_only", "transaction_only", "and", "either")
 
-# The window a state measures totals over.
+# The window a state measures totals over. "current_or_prior_calendar_year" is
+# the most common real-world rule: nexus if EITHER the current or the prior
+# calendar year crossed the threshold.
 MEASUREMENT_PERIOD_VALUES = (
+    "current_or_prior_calendar_year",
     "prior_calendar_year",
     "current_calendar_year",
     "trailing_12_months",

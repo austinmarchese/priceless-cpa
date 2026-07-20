@@ -122,6 +122,20 @@ class ThresholdLoaderTests(unittest.TestCase):
         self.assertEqual(result["NY"].threshold_logic, "and")
         self.assertFalse(result["IL"].marketplace_counts)
 
+    def test_current_or_prior_period_is_accepted(self):
+        result = self._load(
+            {
+                "CA": {
+                    "dollar_threshold": 100_000,
+                    "transaction_threshold": None,
+                    "threshold_logic": "dollar_only",
+                    "measurement_period": "current_or_prior_calendar_year",
+                    "marketplace_counts": True,
+                }
+            }
+        )
+        self.assertEqual(result["CA"].measurement_period, "current_or_prior_calendar_year")
+
     def test_placeholder_config_loads_as_empty(self):
         # The real file currently holds only a "_comment"; that must be fine.
         result = thresholds.load_thresholds(CONFIG_DIR / "state_thresholds.json")

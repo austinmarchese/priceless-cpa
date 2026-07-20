@@ -91,7 +91,11 @@ One entry per state, each with:
 - `threshold_logic`         — how the two combine: "dollar_only",
   "transaction_only", "and", or "either"
 - `measurement_period`      — which window the totals are measured over:
-  "prior_calendar_year", "current_calendar_year", or "trailing_12_months"
+  "current_or_prior_calendar_year", "prior_calendar_year", "current_calendar_year",
+  or "trailing_12_months". ("current_or_prior_calendar_year" — nexus if EITHER
+  the current or the prior calendar year crosses — is the most common real-world
+  rule and was added during threshold population; the engine evaluates both
+  year-windows and flags a crossing in either.)
 - `marketplace_counts`      — true/false: do marketplace-facilitated sales count
   toward this state's threshold?
 

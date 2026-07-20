@@ -210,6 +210,44 @@ class MeasurementPeriodTests(unittest.TestCase):
         self.assertEqual(ca.dollar_remaining_cents, 30 * 100)
 
 
+class CurrentOrPriorYearTests(unittest.TestCase):
+    """The dominant real-world rule: nexus if EITHER calendar year crossed."""
+
+    PERIOD = "current_or_prior_calendar_year"
+
+    def test_crossed_in_prior_year_only(self):
+        txns = [sale("2025-04-01", 120, tid="a")]  # prior year over; nothing this year
+        result = evaluate(txns, {"CA": threshold(dollars=100, period=self.PERIOD)}, date(2026, 7, 19))
+        ca = only_state(result)
+        self.assertTrue(ca.crossed)
+        self.assertEqual(ca.effective_date, date(2025, 4, 1))
+        self.assertEqual(ca.sales_cents, 120 * 100)  # prior-year figure drives
+
+    def test_crossed_in_current_year_only(self):
+        txns = [sale("2025-04-01", 40, tid="a"), sale("2026-05-01", 120, tid="b")]
+        result = evaluate(txns, {"CA": threshold(dollars=100, period=self.PERIOD)}, date(2026, 7, 19))
+        ca = only_state(result)
+        self.assertTrue(ca.crossed)
+        self.assertEqual(ca.effective_date, date(2026, 5, 1))
+        self.assertEqual(ca.sales_cents, 120 * 100)  # current-year figure drives
+
+    def test_not_crossed_reports_current_year_progress(self):
+        txns = [sale("2025-04-01", 40, tid="a"), sale("2026-05-01", 30, tid="b")]
+        result = evaluate(txns, {"CA": threshold(dollars=100, period=self.PERIOD)}, date(2026, 7, 19))
+        ca = only_state(result)
+        self.assertFalse(ca.crossed)
+        self.assertEqual(ca.sales_cents, 30 * 100)          # the live current year
+        self.assertEqual(ca.dollar_remaining_cents, 70 * 100)
+
+    def test_both_years_cross_reports_earliest(self):
+        txns = [sale("2025-04-01", 150, tid="a"), sale("2026-05-01", 150, tid="b")]
+        result = evaluate(txns, {"CA": threshold(dollars=100, period=self.PERIOD)}, date(2026, 7, 19))
+        ca = only_state(result)
+        self.assertTrue(ca.crossed)
+        self.assertEqual(ca.effective_date, date(2025, 4, 1))  # prior year is earliest
+        self.assertEqual(ca.sales_cents, 150 * 100)
+
+
 class UnconfiguredStateTests(unittest.TestCase):
     def test_state_without_threshold_is_surfaced_not_judged(self):
         txns = [sale("2026-01-01", 500, state="WY", tid="w")]
