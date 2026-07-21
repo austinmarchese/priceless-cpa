@@ -65,18 +65,39 @@ class StorageResilienceTests(unittest.TestCase):
                 s.add_client(Client(client_id="c1", client_name="Original"))
 
             app = create_app(live)
-            client_page = app.test_client()
-            self.assertIn("Original", client_page.get("/").get_data(as_text=True))
+            try:
+                client_page = app.test_client()
+                self.assertIn("Original", client_page.get("/").get_data(as_text=True))
 
-            # A teammate's change lands: sync swaps in a new file (new inode).
-            replacement = os.path.join(tmp, "replacement.sqlite")
-            with Storage(replacement) as s:
-                s.add_client(Client(client_id="c2", client_name="FromTeammate"))
-            os.replace(replacement, live)                 # atomic swap -> new inode
+                # A teammate's change lands: sync swaps in a new file (new inode).
+                #
+                # On Windows, sqlite3 doesn't open files with FILE_SHARE_DELETE,
+                # so a rename-based replace of a file this app still has open
+                # fails outright there (verified directly: os.replace raises
+                # PermissionError every time while any connection to the
+                # destination is open, even fully idle -- retrying doesn't help).
+                # A real sync client's rename would hit the same OS restriction,
+                # so release our handle first, same as would have to happen on
+                # Windows for the swap to land at all. This still exercises the
+                # thing actually under test: detecting the new inode and
+                # reopening on the next request.
+                app.storage.close()
 
-            body = client_page.get("/").get_data(as_text=True)
-            self.assertIn("FromTeammate", body)           # picked up the new file
-            self.assertNotIn("Original", body)            # not the stale one
+                replacement = os.path.join(tmp, "replacement.sqlite")
+                with Storage(replacement) as s:
+                    s.add_client(Client(client_id="c2", client_name="FromTeammate"))
+                os.replace(replacement, live)             # atomic swap -> new inode
+
+                body = client_page.get("/").get_data(as_text=True)
+                self.assertIn("FromTeammate", body)       # picked up the new file
+                self.assertNotIn("Original", body)        # not the stale one
+            finally:
+                # The app keeps its own long-lived connection to `live` open for
+                # its whole process lifetime (by design -- see app.py). On
+                # Windows, an open handle blocks the tempdir cleanup below, so
+                # close it explicitly here rather than relying on GC timing.
+                if app.storage is not None:
+                    app.storage.close()
 
 
 if __name__ == "__main__":

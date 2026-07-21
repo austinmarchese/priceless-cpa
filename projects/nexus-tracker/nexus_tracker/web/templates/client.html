@@ -6,6 +6,8 @@
   <p><a class="backlink" href="{{ url_for('home') }}">← All clients</a></p>
   <h1>{{ client.client_name }}</h1>
 
+  {% if cleared %}<div class="card" style="border-color:#bfe3c6;background:#f2fbf4;">All sales data cleared. Import fresh data below.</div>{% endif %}
+
   <h2>Sales data on file</h2>
   <div class="card">
     {% if transaction_count %}
@@ -15,6 +17,9 @@
         across <strong>{{ states|length }}</strong>
         state{{ '' if states|length == 1 else 's' }}:
         <span class="muted">{{ states|join(', ') }}</span>
+      </p>
+      <p style="margin:10px 0 0;">
+        <a class="backlink" style="color:#8a2b1e;" href="{{ url_for('clear_confirm', client_id=client.client_id) }}">Clear all sales data…</a>
       </p>
     {% else %}
       <p class="empty" style="margin:0">No sales data yet. Importing sales comes next (see below).</p>

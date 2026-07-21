@@ -12,8 +12,9 @@ folder. Later it may become a hosted database. Because every read and write goes
 through the `Storage` class below, that move is a change to THIS ONE FILE: you
 write a new class with the SAME public methods (add_client, get_client,
 list_clients, update_client_settings, add_transactions,
-get_transactions_for_client, count_transactions) backed by the new database, and
-nothing else in the app changes.
+get_transactions_for_client, count_transactions,
+delete_transactions_for_client) backed by the new database, and nothing else in
+the app changes.
 
 The public methods speak in the ledger's own shapes (ledger.Client,
 ledger.Transaction) and plain Python types. They never expose SQLite, cursors,
@@ -247,6 +248,25 @@ class Storage:
                 "SELECT COUNT(*) FROM transactions WHERE client_id = ?", (client_id,)
             ).fetchone()
         return int(row[0])
+
+    def delete_transactions_for_client(self, client_id: str) -> int:
+        """Remove every transaction on file for a client. The client record itself
+        is kept, so a corrected re-import can go straight back in.
+
+        For recovering from a bad import (wrong column mapping, wrong marketplace
+        flag) -- there is no way to selectively "fix" rows already on file, since
+        add_transactions treats a changed value as a conflict rather than an
+        overwrite. Clearing and re-importing clean is the supported path.
+
+        Returns the number of rows removed.
+        """
+        if self.get_client(client_id) is None:
+            raise StorageError(f"No client with id '{client_id}' to clear.")
+        with self._writing():
+            cur = self._conn.execute(
+                "DELETE FROM transactions WHERE client_id = ?", (client_id,)
+            )
+            return cur.rowcount
 
     # -- internals --------------------------------------------------------- #
 

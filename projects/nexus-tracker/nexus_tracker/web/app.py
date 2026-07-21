@@ -127,7 +127,22 @@ def create_app(db_path: str = None) -> Flask:
             client=client,
             transaction_count=len(transactions),
             states=states,
+            cleared=bool(request.args.get("cleared")),
         )
+
+    # -- Clear a client's sales data (recovering from a bad import) --------- #
+
+    @app.get("/clients/<client_id>/clear")
+    def clear_confirm(client_id):
+        client = require_client(client_id)
+        count = require_storage().count_transactions(client_id)
+        return render_template("clear_confirm.html", client=client, transaction_count=count)
+
+    @app.post("/clients/<client_id>/clear")
+    def clear_run(client_id):
+        client = require_client(client_id)
+        require_storage().delete_transactions_for_client(client_id)
+        return redirect(url_for("client_home", client_id=client.client_id, cleared=1))
 
     # -- CSV import (Session 5): upload -> map columns -> run -> report ----- #
 
@@ -429,10 +444,34 @@ def _guess_columns(headers: list) -> dict:
     return {
         "date": find("date"),
         "state": find("state", "province", "ship to state", "destination"),
-        "amount": find("total", "amount", "sales", "price", "revenue"),
+        "amount": _guess_amount(headers),
         "transaction_id": find("order id", "order number", "order #", "transaction id", "order_id"),
         "marketplace": find("marketplace", "channel", "facilitat"),
     }
+
+
+def _guess_amount(headers: list) -> str:
+    """Best-guess amount column, preferring a net-of-discount/refund figure.
+
+    A "Gross sales" or "Total sales" column is a tempting first match (Shopify
+    exports list Gross before Net), but it overstates discounted orders and can
+    hide refund rows entirely -- a mapping mistake found during a real client
+    import (see reports/nexus-tracker/test-analysis-2026-07-21.md, Issue 2).
+    Prefer anything with "net" in the name; only fall back to a gross/total
+    figure if there's no net-labeled column at all.
+    """
+    lowered = [h.lower() for h in headers]
+    needles = ("total", "amount", "sales", "price", "revenue")
+    for header, low in zip(headers, lowered):
+        if "net" in low and any(n in low for n in needles):
+            return header
+    for header, low in zip(headers, lowered):
+        if any(n in low for n in needles) and "gross" not in low:
+            return header
+    for header, low in zip(headers, lowered):
+        if any(n in low for n in needles):
+            return header
+    return ""
 
 
 def main() -> None:

@@ -138,6 +138,12 @@ def read_headers_and_preview(
     text: str, max_rows: int = 5
 ) -> Tuple[List[str], List[List[str]]]:
     """The column names and first few rows, so the user can map columns."""
+    if "\x00" in text:
+        # Older Python csv readers raised csv.Error on a NUL byte; newer ones
+        # (3.11+) silently accept it into the field value instead. A NUL byte
+        # reliably means this isn't a plain CSV export either way, so check
+        # for it ourselves rather than depending on that reader behavior.
+        raise _not_a_csv_error()
     reader = _make_reader(text)
     try:
         headers = reader.fieldnames or []

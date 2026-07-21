@@ -68,5 +68,38 @@ class WebShellTests(unittest.TestCase):
         self.assertIn("on file", home)
 
 
+class ClearDataTests(unittest.TestCase):
+    """Recovering from a bad import by clearing a client's transactions."""
+
+    def setUp(self):
+        self.app = create_app(":memory:")
+        seed(self.app.storage)
+        self.client = self.app.test_client()
+
+    def test_confirm_page_shows_transaction_count(self):
+        page = self.client.get("/clients/sample-acme/clear").get_data(as_text=True)
+        self.assertIn("Clear all sales data", page)
+        self.assertIn("6", page)  # sample-acme has 6 sample transactions
+
+    def test_clearing_removes_transactions_and_keeps_the_client(self):
+        resp = self.client.post("/clients/sample-acme/clear")
+        self.assertEqual(resp.status_code, 302)
+        self.assertIn("cleared=1", resp.headers["Location"])
+        self.assertEqual(self.app.storage.count_transactions("sample-acme"), 0)
+        self.assertIsNotNone(self.app.storage.get_client("sample-acme"))
+
+    def test_other_clients_are_unaffected(self):
+        self.client.post("/clients/sample-acme/clear")
+        self.assertEqual(self.app.storage.count_transactions("sample-riverbend"), 3)
+
+    def test_client_home_shows_cleared_banner(self):
+        page = self.client.get("/clients/sample-acme?cleared=1").get_data(as_text=True)
+        self.assertIn("cleared", page.lower())
+
+    def test_clear_requires_a_real_client(self):
+        self.assertEqual(self.client.get("/clients/ghost/clear").status_code, 404)
+        self.assertEqual(self.client.post("/clients/ghost/clear").status_code, 404)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Clear sales data — {{ client.client_name }}{% endblock %}
+
+{% block content %}
+  <p><a class="backlink" href="{{ url_for('client_home', client_id=client.client_id) }}">← {{ client.client_name }}</a></p>
+  <h1>Clear all sales data?</h1>
+
+  <div class="card flag">
+    <p style="margin:0 0 10px;">
+      This removes all <strong>{{ transaction_count }}</strong>
+      transaction{{ '' if transaction_count == 1 else 's' }} on file for
+      <strong>{{ client.client_name }}</strong>. The client itself is kept, so
+      you can re-import right after.
+    </p>
+    <p class="hint" style="margin:0;">
+      Use this to start over after a bad import (wrong column mapping, wrong
+      marketplace flag). There's no way to fix individual rows once they're on
+      file — re-importing over them only flags the differences for review
+      rather than replacing them.
+    </p>
+  </div>
+
+  <form method="post" action="{{ url_for('clear_run', client_id=client.client_id) }}">
+    <button type="submit" class="btn danger">Yes, clear all sales data</button>
+    <a class="btn secondary" href="{{ url_for('client_home', client_id=client.client_id) }}">Cancel</a>
+  </form>
+{% endblock %}

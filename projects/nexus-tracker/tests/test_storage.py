@@ -150,6 +150,25 @@ class TransactionTests(unittest.TestCase):
             ids = [t.transaction_id for t in store.get_transactions_for_client("c1")]
             self.assertEqual(ids, ["s1", "s2", "s3"])  # deterministic via id tiebreaker
 
+    def test_delete_transactions_for_client(self):
+        with memory_store() as store:
+            store.add_client(a_client())
+            store.add_client(a_client("c2", "Other Co"))
+            store.add_transactions([a_sale("s1"), a_sale("s2"), a_sale("s3", client_id="c2")])
+
+            removed = store.delete_transactions_for_client("c1")
+
+            self.assertEqual(removed, 2)
+            self.assertEqual(store.count_transactions("c1"), 0)
+            self.assertEqual(store.get_transactions_for_client("c1"), [])
+            self.assertIsNotNone(store.get_client("c1"))         # client record kept
+            self.assertEqual(store.count_transactions("c2"), 1)  # other clients untouched
+
+    def test_delete_transactions_for_unknown_client_is_friendly(self):
+        with memory_store() as store:
+            with self.assertRaises(StorageError):
+                store.delete_transactions_for_client("ghost")
+
 
 class OpeningTests(unittest.TestCase):
     def test_unreachable_folder_is_friendly(self):
