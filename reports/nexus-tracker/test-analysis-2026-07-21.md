@@ -123,11 +123,28 @@ database operation, not anything available in the app.
 
 ## 7. Recommendations before wider rollout
 
-1. **Add a "clear/reset this client's data" feature to the app.** This session
-   needed a one-off direct database operation to recover from a bad mapping;
-   staff without engineering support won't have that option.
-2. **Fix the 2 Windows-only test failures** for cross-platform reliability (not
-   launch-blocking, just worth cleaning up).
-3. **Re-import a full trailing-12-month (or longer) file for Anime Gear Guru**
-   before treating any current number as final — this test intentionally used
-   only 6 months of data.
+1. ~~Add a "clear/reset this client's data" feature to the app.~~ **Done.**
+   A client's home page now has a "Clear all sales data" link with a
+   confirmation step; it removes only that client's transactions and keeps
+   the client record so a corrected re-import can go straight back in. No
+   more direct database operations needed to recover from a bad mapping.
+2. ~~Fix the 2 Windows-only test failures.~~ **Done**, and one turned up a
+   genuine platform note worth knowing: Python's `sqlite3` doesn't open
+   database files with `FILE_SHARE_DELETE` on Windows, so **any** process
+   holding the db file open — including this app itself — blocks a
+   rename-based file replace. A cloud-sync client's own replace would hit the
+   same OS restriction. Not an immediate problem (this app hasn't been run
+   against synced storage in production yet), but worth remembering if a
+   Windows + OneDrive/Google Drive/Dropbox setup starts showing sync-related
+   errors down the line.
+3. **Still open:** re-import a full trailing-12-month (or longer) file for
+   Anime Gear Guru before treating any current number as final — this test
+   intentionally used only 6 months of data.
+
+Also fixed along the way: the CSV import screen's amount-column auto-guess
+previously defaulted to "Gross sales" over "Net sales" whenever both were
+present (Shopify lists Gross before Net in its export) — the exact mistake
+found in Issue 2. It now prefers a "net" column by default. The guess is
+still just a suggestion; the user confirms or changes it before every import.
+
+All fixes are pushed to `main` (7 new tests added; suite is now 121/121).
