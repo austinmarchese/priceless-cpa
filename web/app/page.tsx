@@ -71,14 +71,6 @@ const testimonials = [
   { name: 'Madison Radke', text: 'There is no software that matches having real, personal help. Anthony is responsive, exceptional at his work, and genuinely cares.' },
 ]
 
-const team = [
-  { name: 'Anthony Price', role: 'CEO & Founder, CPA', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/Anthony-300x300.webp' },
-  { name: 'Matthew Deepe', role: 'Tax Director, CPA', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/Matt-300x300.webp' },
-  { name: 'Billy Henriquez', role: 'Senior Accountant, CPA', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/IMG_8824-2-300x295.png' },
-  { name: 'Jeffrey Carpenter', role: 'Senior Accountant', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/Jeff-300x300.webp' },
-  { name: 'Natalia Shanko', role: 'Accounting Manager', image: 'https://pricelesscpa.com/wp-content/uploads/2025/08/Natalie-300x300.webp' },
-]
-
 export default function Home() {
   const [activeCard, setActiveCard] = useState(0)
   const [progressKey, setProgressKey] = useState(0)
@@ -443,22 +435,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Team */}
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-semibold text-white">Meet the team</h2>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {team.map((member, i) => (
-              <div key={i} className="bg-white/5 rounded-xl p-4 text-center border border-white/10 hover:border-[#c4a24e]/40 transition group">
-                <div className="relative w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden ring-2 ring-[#c4a24e]/30 group-hover:ring-[#c4a24e] transition">
-                  <Image src={member.image} alt={member.name} fill className="object-cover" sizes="64px" />
-                </div>
-                <h3 className="text-white font-medium text-sm">{member.name}</h3>
-                <p className="text-[#c4a24e] text-xs mt-1">{member.role}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 

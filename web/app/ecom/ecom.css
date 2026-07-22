@@ -1,0 +1,102 @@
+/* Scoped styles for the /ecom landing page */
+
+.ecom-root {
+  --paper: #fafaf6;
+  --ink: #0b0f0c;
+  --ink-soft: #3d443f;
+  --muted: #6b7370;
+  --line: #e6e4da;
+  --card: #ffffff;
+  --green: #0e9f5b;
+  --green-deep: #0a5c36;
+  --green-ink: #06371f;
+  --mint: #d9f3e4;
+  --mint-soft: #ecf8f1;
+  font-family: var(--font-body), -apple-system, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.ecom-root ::selection {
+  background: var(--mint);
+}
+
+.ec h1,
+.ec h2,
+.ec h3,
+.ec .font-display {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.ec {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* subtle paper grain */
+.ec-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+@keyframes ec-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.ec-marquee-track {
+  animation: ec-marquee 36s linear infinite;
+}
+
+.ec-marquee:hover .ec-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes ec-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ec-rise { animation: ec-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.ec-rise-1 { animation-delay: 0.05s; }
+.ec-rise-2 { animation-delay: 0.15s; }
+.ec-rise-3 { animation-delay: 0.25s; }
+.ec-rise-4 { animation-delay: 0.35s; }
+
+@keyframes ec-bar {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+.ec-bar { transform-origin: bottom; animation: ec-bar 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+.ec details > summary { list-style: none; cursor: pointer; }
+.ec details > summary::-webkit-details-marker { display: none; }
+.ec details[open] .ec-faq-plus { transform: rotate(45deg); }
+.ec-faq-plus { transition: transform 0.2s ease; }
+
+.ec-highlight {
+  background: linear-gradient(180deg, transparent 55%, var(--mint) 55%, var(--mint) 92%, transparent 92%);
+  padding: 0 0.12em;
+}
+
+.ec section[id] {
+  scroll-margin-top: 96px;
+}
+
+.ec-step-num {
+  color: var(--mint);
+  -webkit-text-stroke: 1.5px var(--green-deep);
+}
+
+/* Booking embed (mirrors BOOKING_EMBED_STYLES from components/BookingEmbed.tsx) */
+.bk-embed-wrap { background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.25); }
+.bk-embed-iframe { width: 100%; min-height: 700px; border: 0; display: block; background: #ffffff; }
+@media (max-width: 900px) {
+  .bk-embed-iframe { min-height: 650px; }
+}

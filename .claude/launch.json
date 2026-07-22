@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "priceless-cpa-web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "web",
+      "port": 3001
+    },
+    {
+      "name": "priceless-cpa-web-autorestart",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "app"],
+      "cwd": "web",
+      "port": 3001
+    }
+  ]
+}
