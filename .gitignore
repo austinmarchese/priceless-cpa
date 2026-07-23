@@ -34,3 +34,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 /web/next-env.d.ts
+
+# redact.py runtime output -- real client PII, never commit
+clients.txt
+*-REDACTED.pdf
+redaction-log-*.txt
+
+# python
+__pycache__/
+*.pyc
