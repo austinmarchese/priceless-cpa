@@ -249,7 +249,7 @@ export default function EcomPage() {
       <header className="sticky top-0 z-50 px-4 pt-4">
         <nav className="max-w-6xl mx-auto bg-white/85 backdrop-blur-md rounded-full border border-[var(--line)] shadow-[0_2px_20px_rgba(11,15,12,0.06)] pl-5 pr-2 py-2 flex items-center justify-between">
           <Link href="/ecom" className="flex items-center gap-2.5">
-            <span className="w-8 h-8 rounded-lg bg-[var(--ink)] text-[#7ee2ab] font-display font-bold grid place-items-center text-lg">P</span>
+            <img src="/logo.webp" alt="Priceless CPA" width={32} height={32} className="w-8 h-8 rounded-lg" />
             <span className="font-display font-bold text-[17px] tracking-tight">
               Priceless<span className="text-[var(--green)]"> CPA</span>
             </span>
