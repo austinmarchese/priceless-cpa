@@ -44,59 +44,28 @@ const clientBrands = [
   { name: 'Featured eCom brand', src: '/ecom-logos/brand-red.webp' },
 ]
 
-const combinedRevenue = '$250M+' // placeholder: sum of ecom client gross revenue
+const combinedRevenue = '$238M+' // combined public gross revenue across eCom clients
 
 const stats = [
-  { value: '$250M+', label: 'Client revenue managed', sub: 'across eCom brands' },
-  { value: '$4.2M+', label: 'Taxes saved', sub: 'found, documented, filed' },
-  { value: '40+', label: 'eCom brands served', sub: 'Shopify to 8-figure DTC' },
+  { value: '$238M+', label: 'Client revenue managed', sub: 'across eCom brands' },
+  { value: '$5.3M+', label: 'Taxes saved', sub: 'found, documented, filed' },
+  { value: '80+', label: 'eCom brands served', sub: 'Shopify to 8-figure DTC' },
 ]
 
-// Placeholder testimonials. Swap with real eCom client quotes + specific $ outcomes.
+// Real client testimonials (permission on file). Add more as they come in.
 const testimonials = [
   {
     quote:
-      'Our old CPA never once mentioned sales tax nexus. The audit found exposure in 6 states before it became a six-figure problem, and the tax plan paid for the engagement 9x over.',
-    name: 'Placeholder Client',
-    role: 'Founder, 8-figure supplement brand',
-  },
-  {
-    quote:
-      'First time anyone showed us true margin by channel. Turns out Amazon was eating us alive after fees and returns. We reallocated ad spend the same week.',
-    name: 'Placeholder Client',
-    role: 'Co-founder, DTC skincare',
-  },
-  {
-    quote:
-      'We went from "where did all the cash go" to a monthly scoreboard we actually trust. Inventory accounting finally matches reality.',
-    name: 'Placeholder Client',
-    role: 'CEO, jewelry eCom',
-  },
-  {
-    quote:
-      'The S Corp election and reasonable-comp plan alone saved us $34K the first year. It more than covered every dollar we pay them.',
-    name: 'Placeholder Client',
-    role: 'Founder, home & kitchen DTC',
-  },
-  {
-    quote:
-      'Switched from a $99/mo bookkeeping app to real eCom accountants. Landed COGS finally includes freight and 3PL, so I stopped flying blind on inventory buys.',
-    name: 'Placeholder Client',
-    role: 'Owner, 7-figure apparel brand',
-  },
-  {
-    quote:
-      'I message them in Slack and get an answer same day. My last CPA took three weeks to return an email during tax season. Night and day.',
-    name: 'Placeholder Client',
-    role: 'CEO, supplements + wellness',
+      "Before working with Anthony, it was difficult to find a CPA who was proactive and communicated effectively. Since working with Anthony, I've got a tax strategy in place, my return is filed, and I've referred five or six of my friends who are equally happy.",
+    result: 'Saved $35K/yr through tax strategy + proactive financial management',
+    name: 'Jeff Clayton',
+    role: 'Founder, TSJA Holdings',
   },
 ]
 
-// Placeholder third-party review scores. Swap with real profile links + scores.
+// Real review profiles. Google is live; more platforms coming.
 const ratingBadges = [
-  { platform: 'Google', score: '4.9', count: '38 reviews' },
-  { platform: 'Trustpilot', score: '4.8', count: '26 reviews' },
-  { platform: 'G2', score: '4.9', count: 'eCom Accounting' },
+  { platform: 'Google', score: '4.9', count: '24 reviews' },
 ]
 
 const whyUs = [
@@ -113,8 +82,8 @@ const whyUs = [
     desc: 'A dedicated Slack channel and a real person who knows your books. Not a ticket queue, not a rotating pool of junior staff.',
   },
   {
-    title: 'Replies within 1 business day',
-    desc: 'Ask a question, get an answer, usually same day. No three-week email silence in the middle of tax season when you need a decision now.',
+    title: 'Replies within 24–48 hours',
+    desc: 'Ask a question, get a real answer inside a day or two. No three-week email silence in the middle of tax season when you need a decision now.',
   },
   {
     title: 'Fee-back guarantee',
@@ -128,34 +97,39 @@ const whyUs = [
 
 const auditDeliverables = [
   {
-    title: 'Sales Tax & Nexus Exposure',
-    desc: 'Every state where you owe (or will soon), what the back-liability looks like, and the exact remediation path before it snowballs.',
-    tag: 'RISK',
-  },
-  {
-    title: 'State Income Tax Map',
-    desc: 'Where your revenue actually creates income tax obligations, and how to structure around the states that punish sellers.',
-    tag: 'RISK',
-  },
-  {
-    title: 'Inventory Accounting Method',
-    desc: 'FIFO vs weighted average vs the mess you have now. The right method changes your taxable income and your margins overnight.',
+    title: 'True Profit Reconstruction',
+    desc: 'Your real revenue, COGS, and true margin after every fee, ad dollar, and refund.',
     tag: 'PROFIT',
   },
   {
-    title: 'True COGS & Margin Tracking',
-    desc: 'Landed cost, freight, 3PL, returns. We rebuild your COGS so gross margin is a real number, not a guess.',
+    title: 'Sales Tax & State Nexus Exposure Map',
+    desc: 'Every state you owe in, your back exposure, and the cleanest fix.',
+    tag: 'RISK',
+  },
+  {
+    title: 'Entity & S Corp Structure Review',
+    desc: 'Whether an S Corp or cleaner entity setup keeps more money in your pocket.',
+    tag: 'SAVINGS',
+  },
+  {
+    title: '12–18 Month Tax Plan',
+    desc: 'A written plan around your income: every move worth making, when, and what it saves.',
+    tag: 'SAVINGS',
+  },
+  {
+    title: 'Inventory & COGS Method Check',
+    desc: 'Whether freight and duties are costed right, before a wrong method inflates your taxable income.',
     tag: 'PROFIT',
   },
   {
-    title: 'Channel & SKU Unit Economics',
-    desc: 'Profit by Shopify vs Amazon vs TikTok Shop, and by SKU. Know exactly which products and channels print money.',
+    title: 'Accounting System Blueprint',
+    desc: 'The exact tool setup so your books stay accurate in real time.',
     tag: 'CLARITY',
   },
   {
-    title: 'Entity Structure & Tax Plan',
-    desc: 'S Corp timing, reasonable comp, retirement stacking, and the full-year tax plan with dollar amounts attached to every move.',
-    tag: 'SAVINGS',
+    title: 'Implementation Roadmap',
+    desc: 'Everything above, sequenced by quarter, with who does what.',
+    tag: 'ROADMAP',
   },
 ]
 
@@ -168,7 +142,7 @@ const steps = [
   {
     n: '02',
     title: 'We dig in',
-    desc: 'Books, returns, sales channels, inventory. Our team runs the full 9-point analysis while you keep running the business.',
+    desc: 'Books, returns, sales channels, inventory. Our team runs the full 7-point analysis while you keep running the business.',
   },
   {
     n: '03',
@@ -184,21 +158,21 @@ const steps = [
 
 const ongoing = [
   {
-    name: 'Tax + S Corp Management',
-    who: 'For sellers who want the tax side handled',
-    features: ['Business + personal returns', 'S Corp payroll & compliance', 'Quarterly estimates that are actually right', 'Year-round tax strategy'],
+    name: 'Tax Advisory & Accounting Management',
+    who: 'Cash-basis accounting plus an annual advisory cycle that keeps taxes optimized',
+    features: ['Cash-basis bookkeeping & compliance', 'Business + personal tax returns', 'Annual tax-saving advisory cycle', 'S Corp payroll & quarterly estimates'],
     featured: false,
   },
   {
-    name: 'Accounting + Advisory',
-    who: 'For brands that need real books and a real plan',
-    features: ['eCom-specific bookkeeping', 'Inventory & COGS done right', 'Monthly margin scoreboard', 'Everything in Tax + S Corp'],
+    name: 'eCom Financial Operations',
+    who: 'Everything in Tier 1, plus proactive advisory and the systems that run your finances',
+    features: ['Everything in Tax Advisory & Accounting', 'Proactive, year-round advisory', 'KPI dashboards you can trust', 'Sales tax, inventory & per-SKU processes'],
     featured: true,
   },
   {
     name: 'eCom CFO',
-    who: 'For 7-8 figure operators scaling hard',
-    features: ['Channel & SKU profitability dashboards', 'Cash flow & inventory planning', 'Quarterly strategy sessions', 'Direct access, not a ticket queue'],
+    who: 'Strategic financial leadership on structure, capital, and how the business is built',
+    features: ['Everything in Financial Operations', 'Strategic financial leadership', 'Cash flow & inventory planning', 'Entity & operating-structure design'],
     featured: false,
   },
 ]
@@ -210,11 +184,11 @@ const faqs = [
   },
   {
     q: 'How does the guarantee work?',
-    a: 'If the audit does not identify tax savings and recoverable profit worth at least what you paid for it, we refund the difference. Simple. We can offer that because after dozens of eCom books, we have never opened one that was airtight.',
+    a: 'If we do not find tax savings worth at least our fee, we refund the difference. In practice we usually surface more than 5x the fee. "Found savings" counts whether or not you implement them: retirement contributions, QBI and other qualified calculations, and deductions you were not taking all count. We have never opened a set of eCom books with no money on the table.',
   },
   {
     q: 'How much does it cost?',
-    a: 'Flat fee, quoted on the call, based on your revenue and channel complexity. A $300K single-channel store is a very different project than a $5M multi-channel brand. Either way it is a fixed number you know before we start.',
+    a: 'Flat fee, typically $2,000 to $5,000 depending on the size and complexity of your business, quoted on the call. A $300K single-channel store is a very different project than a $5M multi-channel brand. Either way it is a fixed number you know before we start.',
   },
   {
     q: 'My CPA already does my taxes. Why do I need this?',
@@ -226,7 +200,7 @@ const faqs = [
   },
   {
     q: 'How long does the audit take?',
-    a: 'About two weeks from the moment we get access to your books and returns. You get the findings on a live walkthrough call, plus the written report.',
+    a: 'Your first deliverable lands in about a week from the moment we get access, with the full report completed inside a month. You get the findings on a live walkthrough call, plus the written report.',
   },
   {
     q: 'What happens after the audit?',
@@ -245,9 +219,12 @@ export default function EcomPage() {
   const [multiState, setMultiState] = useState(true)
   const [scored, setScored] = useState(false)
 
-  // Rough overpayment estimate (illustrative, not a quote).
-  const lowPct = 0.008 + (channels - 1) * 0.0015 + (multiState ? 0.004 : 0)
-  const highPct = 0.018 + (channels - 1) * 0.003 + (multiState ? 0.008 : 0)
+  // Rough leak estimate (illustrative, not a quote). Anthony: on a 7-figure store
+  // we typically find 2–4% of revenue in overpaid tax + financial slack. Extra
+  // channels add waste (nudges the high end); multi-state adds separate sales-tax
+  // EXPOSURE, surfaced as a note rather than baked into the % overpayment.
+  const lowPct = 0.02 + (channels - 1) * 0.0025
+  const highPct = 0.04 + (channels - 1) * 0.005
   const fmt = (n: number) => {
     if (n >= 1000) return '$' + Math.round(n / 1000).toLocaleString() + 'K'
     return '$' + (Math.round(n / 100) * 100).toLocaleString()
@@ -262,9 +239,7 @@ export default function EcomPage() {
       {/* ── Announcement bar ─────────────────────────────────────── */}
       <div className="relative z-40 bg-[var(--ink)] text-white text-center text-[13px] sm:text-sm px-4 py-2.5">
         <span className="font-bold text-[#7ee2ab]">{deadline.label} due in {deadline.days} days.</span>
-        <span className="opacity-90"> Most 7-figure stores overpay it by </span>
-        <span className="font-bold text-[#7ee2ab]">$30K+</span>
-        <span className="opacity-90">. </span>
+        <span className="opacity-90"> 7-figure stores either overpay by tens of thousands or leave a surprise bill for April 15. </span>
         <a href="#scorecard" className="font-bold underline underline-offset-4 decoration-[#7ee2ab] hover:text-[#7ee2ab] transition">
           Find your number →
         </a>
@@ -276,11 +251,11 @@ export default function EcomPage() {
           <Link href="/ecom" className="flex items-center gap-2.5">
             <span className="w-8 h-8 rounded-lg bg-[var(--ink)] text-[#7ee2ab] font-display font-bold grid place-items-center text-lg">P</span>
             <span className="font-display font-bold text-[17px] tracking-tight">
-              Priceless<span className="text-[var(--green)]">/</span>eCom
+              Priceless<span className="text-[var(--green)]"> CPA</span>
             </span>
           </Link>
           <div className="hidden md:flex items-center gap-7 text-sm font-medium text-[var(--ink-soft)]">
-            <a href="#cost" className="hover:text-[var(--ink)] transition">The Leak</a>
+            <a href="#cost" className="hover:text-[var(--ink)] transition">The Problem</a>
             <a href="#audit" className="hover:text-[var(--ink)] transition">The Audit</a>
             <a href="#results" className="hover:text-[var(--ink)] transition">Results</a>
             <a href="#faq" className="hover:text-[var(--ink)] transition">FAQ</a>
@@ -297,14 +272,13 @@ export default function EcomPage() {
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section className="relative z-10 max-w-6xl mx-auto px-5 pt-14 sm:pt-20 pb-10 grid lg:grid-cols-[1.05fr_0.95fr] gap-12 items-center">
         <div>
-          <div className="ec-rise inline-flex items-center gap-2 bg-white border border-[var(--line)] rounded-full pl-2 pr-4 py-1.5 text-[13px] font-semibold shadow-sm">
-            <span className="bg-[var(--mint)] text-[var(--green-ink)] rounded-full px-2 py-0.5 text-[11px] font-bold tracking-wide">NEW</span>
+          <div className="ec-rise inline-flex items-center gap-2 bg-white border border-[var(--line)] rounded-full px-4 py-1.5 text-[13px] font-semibold shadow-sm">
             The CPA firm built for 7-figure eCom brands
           </div>
           <h1 className="ec-rise ec-rise-1 mt-5 text-[38px] leading-[1.04] sm:text-[50px] lg:text-[54px] font-extrabold">
             Find the Money
             <br />
-            Your Store Is <span className="ec-highlight">Leaking</span>
+            Your Store Is <span className="ec-highlight">Losing</span>
           </h1>
           <ul className="ec-rise ec-rise-2 mt-7 space-y-3.5">
             {[
@@ -321,15 +295,15 @@ export default function EcomPage() {
           <div className="ec-rise ec-rise-3 mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
             <a
               href="#book"
-              className="inline-flex justify-center items-center bg-[var(--ink)] text-white font-semibold text-[16px] rounded-2xl px-7 py-4 shadow-[0_10px_30px_rgba(11,15,12,0.25)] hover:bg-[var(--green-deep)] hover:-translate-y-0.5 transition-all"
+              className="inline-flex justify-center items-center whitespace-nowrap bg-[var(--ink)] text-white font-semibold text-[16px] rounded-2xl px-7 py-4 shadow-[0_10px_30px_rgba(11,15,12,0.25)] hover:bg-[var(--green-deep)] hover:-translate-y-0.5 transition-all"
             >
-              Book a Call&nbsp;<span className="opacity-70">+</span>&nbsp;Show Me What I&apos;m Overpaying
+              Get Your Profit Audit
             </a>
             <a
               href="#scorecard"
-              className="inline-flex justify-center items-center bg-white border border-[var(--line)] text-[var(--ink)] font-semibold text-[16px] rounded-2xl px-7 py-4 hover:border-[var(--green)] hover:-translate-y-0.5 transition-all"
+              className="inline-flex justify-center items-center whitespace-nowrap bg-white border border-[var(--line)] text-[var(--ink)] font-semibold text-[16px] rounded-2xl px-7 py-4 hover:border-[var(--green)] hover:-translate-y-0.5 transition-all"
             >
-              Free 60-sec profit scan
+              Get My Estimate
             </a>
           </div>
           {/* Hero trust row: rating + client count */}
@@ -339,7 +313,7 @@ export default function EcomPage() {
               <span className="text-[var(--ink)]">4.9/5</span>
             </span>
             <span className="text-[var(--muted)] font-medium">
-              Trusted by <span className="text-[var(--ink)] font-bold">40+ eCom brands</span> doing {combinedRevenue} combined
+              Trusted by <span className="text-[var(--ink)] font-bold">80+ eCom brands</span> doing {combinedRevenue} combined
             </span>
           </div>
           <p className="ec-rise ec-rise-4 mt-3 text-sm text-[var(--muted)] font-medium">
@@ -429,16 +403,15 @@ export default function EcomPage() {
             </div>
           ))}
         </div>
-        <p className="mt-3 text-center text-[11px] text-[var(--muted)]">Placeholder review scores — swap with real profile links</p>
       </section>
 
       {/* ── Pain: the cost of DIY accounting ─────────────────────── */}
       <section id="cost" className="relative z-10 max-w-6xl mx-auto px-5 pt-20 pb-8">
         <h2 className="text-center text-[34px] sm:text-[44px] font-extrabold leading-tight">
-          Bad Accounting Is Quietly<br className="hidden sm:block" /> Your <span className="ec-highlight">Most Expensive Employee</span>
+          Where Bad Accounting <span className="ec-highlight">Costs You Money</span>
         </h2>
         <p className="mt-4 text-center text-[17px] text-[var(--muted)] max-w-xl mx-auto">
-          It doesn&apos;t show up on payroll. It shows up in three places:
+          It shows up in three places:
         </p>
 
         <div className="mt-12 grid md:grid-cols-3 gap-6">
@@ -482,7 +455,7 @@ export default function EcomPage() {
                 </div>
               </div>
             </div>
-            <h3 className="mt-5 text-[20px] font-bold">Phantom Profit</h3>
+            <h3 className="mt-5 text-[20px] font-bold">Profit That Isn&apos;t Real</h3>
             <p className="mt-2 text-[15px] text-[var(--ink-soft)] leading-relaxed">
               Revenue up, cash gone. When COGS, freight, and returns aren&apos;t tracked right, your P&amp;L says you&apos;re winning while your bank account says otherwise.
             </p>
@@ -505,7 +478,7 @@ export default function EcomPage() {
                 </div>
               ))}
             </div>
-            <h3 className="mt-5 text-[20px] font-bold">Sales Tax Time Bombs</h3>
+            <h3 className="mt-5 text-[20px] font-bold">Unpaid Sales Tax</h3>
             <p className="mt-2 text-[15px] text-[var(--ink-soft)] leading-relaxed">
               Cross a state&apos;s threshold and keep selling uncollected? That liability compounds monthly, comes out of your pocket, and states are getting aggressive about finding you.
             </p>
@@ -518,14 +491,11 @@ export default function EcomPage() {
         <div className="bg-white border border-[var(--line)] rounded-[32px] shadow-[0_24px_60px_rgba(11,15,12,0.10)] overflow-hidden md:grid md:grid-cols-[1fr_0.9fr]">
           {/* Left: inputs */}
           <div className="p-7 sm:p-10">
-            <span className="inline-block bg-[var(--mint)] text-[var(--green-ink)] text-[11px] font-bold tracking-[0.15em] rounded-full px-3 py-1">
-              FREE · 60 SECONDS · NO EMAIL
-            </span>
-            <h2 className="mt-4 text-[28px] sm:text-[34px] font-extrabold leading-tight">
-              What is your store <span className="ec-highlight">probably overpaying?</span>
+            <h2 className="text-[28px] sm:text-[34px] font-extrabold leading-tight">
+              What is your store <span className="ec-highlight">overpaying?</span>
             </h2>
             <p className="mt-2 text-[15px] text-[var(--muted)]">
-              Three questions. Instant estimate. No form, no email required.
+              Get an instant estimate of what you&apos;re likely overpaying.
             </p>
 
             <div className="mt-7 space-y-6">
@@ -588,7 +558,7 @@ export default function EcomPage() {
                 onClick={() => setScored(true)}
                 className="w-full bg-[var(--green-ink)] text-white font-semibold rounded-2xl px-6 py-4 hover:bg-black transition-colors"
               >
-                Show my estimated overpayment
+                Get My Estimate
               </button>
             </div>
           </div>
@@ -599,23 +569,25 @@ export default function EcomPage() {
               <div className="text-center text-white/50">
                 <div className="font-display text-[40px] font-extrabold text-white/20">$ ? ? ?</div>
                 <p className="mt-3 text-[14px] max-w-xs mx-auto">
-                  Set your numbers and hit the button. Your estimated annual overpayment appears here.
+                  Set your numbers and hit the button. Your estimated annual loss appears here.
                 </p>
               </div>
             ) : (
               <div className="text-center">
-                <p className="text-[12px] font-bold tracking-[0.15em] text-[#7ee2ab]">ESTIMATED ANNUAL OVERPAYMENT</p>
+                <p className="text-[12px] font-bold tracking-[0.15em] text-[#7ee2ab]">ESTIMATED ANNUAL LOSS</p>
+                <p className="mt-1 text-[11px] text-white/40">overpaid tax + untracked margin</p>
                 <p className="mt-3 font-display text-[40px] sm:text-[48px] font-extrabold leading-none">
                   {lowEst}<span className="text-white/40"> – </span>{highEst}
                 </p>
                 <p className="mt-4 text-[13px] text-white/60 leading-relaxed max-w-xs mx-auto">
-                  Ballpark from revenue, channel count, and multi-state exposure. The audit finds your exact number and the plan to stop it.
+                  Ballpark from revenue and channel count. The audit finds your exact number and the plan to stop it.
+                  {multiState && ' Selling into multiple states adds separate sales-tax exposure we map too.'}
                 </p>
                 <a
                   href="#book"
                   className="mt-6 inline-flex bg-[#7ee2ab] text-[var(--green-ink)] font-bold rounded-2xl px-6 py-3.5 hover:bg-white transition-colors"
                 >
-                  Get my exact number
+                  Get Your Profit Audit
                 </a>
                 <p className="mt-3 text-[11px] text-white/40">Rough estimate, not tax advice.</p>
               </div>
@@ -629,15 +601,12 @@ export default function EcomPage() {
         <div className="max-w-6xl mx-auto px-5 py-20">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <div>
-              <span className="inline-block bg-[#7ee2ab]/15 text-[#7ee2ab] text-[12px] font-bold tracking-[0.15em] rounded-full px-4 py-1.5">
-                THE LEAD OFFER · FLAT FEE · 2 WEEKS
-              </span>
-              <h2 className="mt-4 text-[36px] sm:text-[48px] font-extrabold leading-[1.05]">
+              <h2 className="text-[36px] sm:text-[48px] font-extrabold leading-[1.05]">
                 The eCom Profit<br />&amp; Tax Audit
               </h2>
             </div>
             <p className="max-w-md text-[16px] text-white/70 leading-relaxed">
-              One engagement. Every accounting, tax, and finance issue that actually moves money for an eCom brand — found, quantified, and turned into a plan.
+              One engagement. Every tax, profit, and finance issue that moves money, found and turned into a plan.
             </p>
           </div>
 
@@ -661,14 +630,14 @@ export default function EcomPage() {
                 Find the fee in savings, or we refund the difference.
               </p>
               <p className="mt-1.5 text-[15px] font-medium opacity-80">
-                We have never opened a set of eCom books that was airtight. Yours won&apos;t be the first.
+                Most audits surface more than 5x the fee.
               </p>
             </div>
             <a
               href="#book"
               className="shrink-0 bg-[var(--green-ink)] text-white font-semibold rounded-2xl px-7 py-4 hover:bg-black transition-colors"
             >
-              Claim Your Audit Slot
+              Get Your Profit Audit
             </a>
           </div>
         </div>
@@ -677,7 +646,7 @@ export default function EcomPage() {
       {/* ── Process ──────────────────────────────────────────────── */}
       <section className="relative z-10 max-w-6xl mx-auto px-5 py-20">
         <h2 className="text-center text-[34px] sm:text-[44px] font-extrabold">
-          From First Call to <span className="ec-highlight">Found Money</span>
+How the <span className="ec-highlight">Audit Works</span>
         </h2>
         <div className="mt-12 grid md:grid-cols-4 gap-5">
           {steps.map((s) => (
@@ -752,7 +721,7 @@ export default function EcomPage() {
                   <th className="text-left p-4 font-semibold text-[var(--muted)]">Generalist CPA</th>
                   <th className="text-left p-4 font-semibold text-[var(--muted)]">Software Alone</th>
                   <th className="text-left p-4">
-                    <span className="inline-block bg-[var(--green-ink)] text-white font-display font-bold rounded-xl px-4 py-2">Priceless/eCom</span>
+                    <span className="inline-block bg-[var(--green-ink)] text-white font-display font-bold rounded-xl px-4 py-2">Priceless CPA</span>
                   </th>
                 </tr>
               </thead>
@@ -786,7 +755,7 @@ export default function EcomPage() {
       {/* ── Why us / boutique advantages ─────────────────────────── */}
       <section className="relative z-10 max-w-6xl mx-auto px-5 py-20">
         <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-[34px] sm:text-[44px] font-extrabold">Why Brands Pick <span className="ec-highlight">Priceless/eCom</span></h2>
+          <h2 className="text-[34px] sm:text-[44px] font-extrabold">Why Brands Pick <span className="ec-highlight">Priceless CPA</span></h2>
           <p className="mt-3 text-[17px] text-[var(--muted)]">
             A boutique built for online sellers. No lock-ins, no ticket queues, no generalist guesswork.
           </p>
@@ -806,7 +775,7 @@ export default function EcomPage() {
       <section className="relative z-10 max-w-6xl mx-auto px-5 py-16 text-center">
         <p className="text-sm font-semibold text-[var(--muted)]">WE SPEAK YOUR STACK</p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          {['Shopify', 'Amazon FBA', 'TikTok Shop', 'Walmart', 'Etsy', 'eBay', 'QuickBooks', 'A2X', 'Stripe', 'Klaviyo', 'Meta Ads', '+ yours'].map((p) => (
+          {['Shopify', 'Amazon FBA', 'TikTok Shop', 'Walmart', 'WooCommerce', 'Etsy', 'eBay', 'QuickBooks', 'Xero', 'A2X', 'Finaloop', 'SellerBoard', 'Stripe', 'Klaviyo', 'Meta Ads', 'Gusto', 'Paychex', 'Ramp', '+ yours'].map((p) => (
             <span key={p} className="bg-white border border-[var(--line)] rounded-full px-5 py-2.5 text-[14px] font-semibold shadow-sm">
               {p}
             </span>
@@ -825,7 +794,6 @@ export default function EcomPage() {
             </div>
           ))}
         </div>
-        <p className="mt-3 text-center text-[11px] text-[var(--muted)]">Placeholder figures — swap with verified numbers</p>
       </section>
 
       {/* ── Testimonials ─────────────────────────────────────────── */}
@@ -833,20 +801,25 @@ export default function EcomPage() {
         <h2 className="text-center text-[34px] sm:text-[44px] font-extrabold">
           What eCom Founders Say
         </h2>
-        <div className="mt-12 grid md:grid-cols-3 gap-6">
+        <div className="mt-12 max-w-3xl mx-auto">
           {testimonials.map((t, i) => (
-            <figure key={i} className="bg-white border border-[var(--line)] rounded-3xl p-7 shadow-sm flex flex-col">
-              <div className="text-[#f0b429] text-[15px] tracking-[0.2em]">★★★★★</div>
-              <blockquote className="mt-4 text-[15px] text-[var(--ink-soft)] leading-relaxed flex-1">
+            <figure key={i} className="bg-white border border-[var(--line)] rounded-3xl p-8 sm:p-10 shadow-sm flex flex-col">
+              <div className="text-[#f0b429] text-[16px] tracking-[0.2em]">★★★★★</div>
+              <blockquote className="mt-5 text-[19px] sm:text-[22px] text-[var(--ink)] font-medium leading-relaxed">
                 &quot;{t.quote}&quot;
               </blockquote>
-              <figcaption className="mt-6 flex items-center gap-3">
-                <span className="w-10 h-10 rounded-full bg-[var(--mint)] grid place-items-center font-display font-bold text-[var(--green-deep)]">
+              {t.result && (
+                <p className="mt-5 inline-flex self-start items-center gap-2 bg-[var(--mint-soft)] text-[var(--green-ink)] text-[13px] font-bold rounded-full px-4 py-2">
+                  {t.result}
+                </p>
+              )}
+              <figcaption className="mt-7 flex items-center gap-3">
+                <span className="w-11 h-11 rounded-full bg-[var(--mint)] grid place-items-center font-display font-bold text-[var(--green-deep)]">
                   {t.name.charAt(0)}
                 </span>
                 <div>
-                  <p className="text-[14px] font-bold">{t.name}</p>
-                  <p className="text-[12px] text-[var(--muted)]">{t.role}</p>
+                  <p className="text-[15px] font-bold">{t.name}</p>
+                  <p className="text-[13px] text-[var(--muted)]">{t.role}</p>
                 </div>
               </figcaption>
             </figure>
@@ -882,17 +855,17 @@ export default function EcomPage() {
                 The pattern is always the same. Great at product. Great at marketing. And quietly bleeding money through the finance function: uncollected sales tax, inventory methods that inflate taxable income, margins nobody has actually calculated.
               </p>
               <p>
-                Generalist CPAs can&apos;t catch it because they see one eCom client a year. We see them every day. Same channels, same tax issues, same nine leaks, which is exactly why we productized the audit.
+                Generalist CPAs can&apos;t catch it because they see one eCom client a year. We see them every day. Same channels, same tax issues, same seven leaks, which is exactly why we productized the audit.
               </p>
               <p className="text-white font-semibold">
-                Fifteen minutes on a call and I&apos;ll tell you which leaks you probably have. Bring your last return if you want it to sting.
+                Fifteen minutes on a call and I&apos;ll tell you which leaks you likely have. Bring your last return and we&apos;ll look at it together.
               </p>
             </div>
             <a
               href="#book"
               className="mt-8 inline-flex bg-[#7ee2ab] text-[var(--green-ink)] font-bold rounded-2xl px-7 py-4 hover:bg-white transition-colors"
             >
-              Book a Call with Anthony
+              Get Your Profit Audit
             </a>
           </div>
         </div>
@@ -919,7 +892,7 @@ export default function EcomPage() {
         <div className="max-w-4xl mx-auto px-5 py-20">
           <div className="text-center">
             <h2 className="text-[34px] sm:text-[44px] font-extrabold">
-              Find Out What Your Store Is <span className="ec-highlight">Leaking</span>
+              Find Out What Your Store Is <span className="ec-highlight">Losing</span>
             </h2>
             <p className="mt-3 text-[17px] text-[var(--muted)] max-w-xl mx-auto">
               15 minutes. We&apos;ll look at your channels and your last return, and tell you exactly what the audit would go find. Flat-fee quote on the spot.
@@ -935,8 +908,7 @@ export default function EcomPage() {
       <footer className="relative z-10 bg-[var(--ink)] text-white/60 text-[13px]">
         <div className="max-w-6xl mx-auto px-5 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p>
-            <span className="font-display font-bold text-white">Priceless<span className="text-[#7ee2ab]">/</span>eCom</span>
-            {' '}· a Priceless CPA offering
+            <span className="font-display font-bold text-white">Priceless<span className="text-[#7ee2ab]"> CPA</span></span>
           </p>
           <div className="flex items-center gap-6">
             <Link href="/" className="hover:text-white transition">Main site</Link>

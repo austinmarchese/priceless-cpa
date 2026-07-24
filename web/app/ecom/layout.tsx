@@ -15,11 +15,11 @@ const body = Instrument_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Priceless eCom | The CPA Firm for 7-Figure eCommerce Brands',
+  title: 'Priceless CPA | The CPA Firm for 7-Figure eCommerce Brands',
   description:
     'The eCom Profit & Tax Audit: find the money your store is leaking in taxes, sales tax exposure, and inventory accounting. If we can\'t find you savings worth more than the fee, we refund the difference.',
   openGraph: {
-    title: 'Priceless eCom | The CPA Firm for 7-Figure eCommerce Brands',
+    title: 'Priceless CPA | The CPA Firm for 7-Figure eCommerce Brands',
     description:
       'Find the money your store is leaking in taxes, sales tax exposure, and inventory accounting.',
     siteName: 'Priceless CPA',
