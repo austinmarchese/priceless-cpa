@@ -53,6 +53,17 @@ export default function BookingEmbed({
   const src = `https://api.leadconnectorhq.com/widget/booking/${CALENDAR_ID}${query ? `?${query}` : ''}`
 
   useEffect(() => {
+    // GHL's official embed script — initializes the booking widget and drives auto-resize.
+    // Required: without it the iframe never renders the calendar.
+    const SCRIPT_SRC = 'https://link.msgsndr.com/js/form_embed.js'
+    if (!document.querySelector(`script[src="${SCRIPT_SRC}"]`)) {
+      const s = document.createElement('script')
+      s.src = SCRIPT_SRC
+      s.type = 'text/javascript'
+      s.async = true
+      document.body.appendChild(s)
+    }
+
     function onMessage(e: MessageEvent) {
       if (typeof e.origin !== 'string' || !e.origin.includes('leadconnectorhq.com')) return
       const data = e.data
