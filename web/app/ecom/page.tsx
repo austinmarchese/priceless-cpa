@@ -166,13 +166,13 @@ const ongoing = [
   {
     name: 'eCom Financial Operations',
     who: 'Everything in Tier 1, plus proactive advisory and the systems that run your finances',
-    features: ['Everything in Tax Advisory & Accounting', 'Proactive, year-round advisory', 'KPI dashboards you can trust', 'Sales tax, inventory & per-SKU processes'],
+    features: ['Everything in Tier 1', 'Proactive, year-round advisory', 'KPI dashboards you can trust', 'Sales tax, inventory & per-SKU processes'],
     featured: true,
   },
   {
     name: 'eCom CFO',
     who: 'Strategic financial leadership on structure, capital, and how the business is built',
-    features: ['Everything in Financial Operations', 'Strategic financial leadership', 'Cash flow & inventory planning', 'Entity & operating-structure design'],
+    features: ['Everything in Tier 2', 'Strategic financial leadership', 'Cash flow & inventory planning', 'Entity & operating-structure design'],
     featured: false,
   },
 ]
@@ -668,7 +668,7 @@ How the <span className="ec-highlight">Audit Works</span>
           </p>
         </div>
         <div className="mt-12 grid md:grid-cols-3 gap-6 items-stretch">
-          {ongoing.map((t) => (
+          {ongoing.map((t, i) => (
             <div
               key={t.name}
               className={`rounded-3xl p-7 flex flex-col ${
@@ -677,11 +677,16 @@ How the <span className="ec-highlight">Audit Works</span>
                   : 'bg-white border border-[var(--line)] shadow-sm'
               }`}
             >
-              {t.featured && (
-                <span className="self-start bg-[#7ee2ab] text-[var(--green-ink)] text-[11px] font-bold tracking-wide rounded-full px-3 py-1 mb-4">
-                  MOST POPULAR
+              <div className="flex items-center justify-between mb-2">
+                <span className={`text-[11px] font-bold tracking-[0.18em] ${t.featured ? 'text-[#7ee2ab]' : 'text-[var(--green)]'}`}>
+                  TIER {i + 1}
                 </span>
-              )}
+                {t.featured && (
+                  <span className="bg-[#7ee2ab] text-[var(--green-ink)] text-[11px] font-bold tracking-wide rounded-full px-3 py-1">
+                    MOST POPULAR
+                  </span>
+                )}
+              </div>
               <h3 className="text-[22px] font-bold">{t.name}</h3>
               <p className={`mt-1 text-[14px] ${t.featured ? 'text-white/70' : 'text-[var(--muted)]'}`}>{t.who}</p>
               <ul className="mt-5 space-y-3 flex-1">
