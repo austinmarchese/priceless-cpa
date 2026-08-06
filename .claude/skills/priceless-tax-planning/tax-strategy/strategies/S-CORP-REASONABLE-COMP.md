@@ -386,6 +386,11 @@ When reasonable comp appears in a client memo, documentation skill should produc
 For annual cover letter reference:
 > "Your 2026 W-2 is set at $95,000. This is the median of our RCReports benchmark for Miami-based [role] at your revenue level. Supports your Solo 401(k) maximum and meets reasonable compensation standards. Full analysis in our file; board resolution for signature attached."
 
+For the "why this saves you money" explanation — clients respond better to the worked partnership-vs-S-corp comparison than to a bare FICA-savings number. Use real client figures:
+> "As an S-corp, only the wages you run through payroll are subject to Social Security and Medicare tax, 15.3% combined. Distributions are completely free of that tax, since that income was already taxed as ordinary income on your K-1 when it was earned, not again when it is later withdrawn. If [entity] were taxed as a partnership instead, the full $[total business income] would be subject to self-employment tax, since the IRS would treat all of it as earnings from your own labor. As an S-corp paying $[wage] in wages, your payroll tax on that amount is $[X]. The difference, $[delta], is real money you keep by running the business as an S-corp with a properly benchmarked wage instead of taking everything as self-employment income. The important caveat: this only works because $[wage] is a defensible, benchmarked wage for your role — if the wage were set artificially low just to dodge payroll tax, that's exactly the pattern the IRS reclassifies on audit, so this savings is the reward for doing the wage analysis properly, not a shortcut."
+
+See the full plain-language explainer bank in `shared/CLIENT-FACING-MEMO-TEMPLATE.md`.
+
 ## Update status
 
 | Verification | Date | Source |
@@ -399,6 +404,7 @@ For annual cover letter reference:
 | SECURE 2.0 Roth catch-up (indirect) | Reviewed 2026-04 | SECURE 2.0 §603 |
 | RCReports methodology current | Continuously updated | RCReports firm subscription |
 | Watson, Glass Blocks, McAlary, Fleischer case status | Reviewed 2026-04 | Case law unchanged |
+| Worked partnership-vs-S-corp template language added | 2026-08 | Live engagement, T&A Contracting LLC Q3 2026 |
 
 **Last full review**: 2026-04 (Sprint 5.5 rebuild)
 **Next review trigger**: Annual SSA wage base update (October); annual IRS retirement limits (Notice, October/November); major new reasonable comp case law; RCReports methodology updates

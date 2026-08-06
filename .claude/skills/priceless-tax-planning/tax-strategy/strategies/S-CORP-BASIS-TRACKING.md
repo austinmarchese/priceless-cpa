@@ -258,6 +258,13 @@ Basis memo should emphasize:
 - Suspended loss tracking (if applicable)
 - Coordination with exit planning if relevant
 
+### Client-facing framing when draws are approaching or exceeding basis
+
+Clients almost never intuit why distributions can exceed basis when the bank balance looks fine — walk through the distinction and the two most common causes before giving the number:
+> "A quick distinction: a distribution is money moving from the business to you personally — it's your own money. A tax payment is money leaving the business for the IRS or [state]. They're not the same thing, and mixing them up is where basis questions get confusing. You can take money out of the business tax-free only up to your basis — roughly what you've invested plus your share of profits, minus what you've already withdrawn. Beyond that, withdrawals are taxed as a capital gain. This is rarely because the business had a bad year — two everyday situations create the mismatch: (1) the business has more debt than cash on hand, since basis tracks what you've invested and earned, not what the business owes; (2) depreciated assets create a gap between book cash and tax basis, since equipment or property that's been depreciated leaves real cash on hand while your tax basis has already been reduced by those deductions."
+
+Then quantify: end-of-prior-year basis, YTD draws (broken out into distributions vs. personal expenses run through the business, if applicable), the resulting cushion or shortfall, and — if a reasonable-comp catch-up is also happening this quarter — how much reclassifying draws to wages (see `strategies/S-CORP-REASONABLE-COMP.md` and `payroll-analysis/REASONABLE-COMP-DEEP-DIVE.md`) improves the basis position. Frame a thin cushion as something to plan around, not alarm about: recommend avoiding further personal spending through business accounts until the next update, and commit to modeling it precisely once the missing income estimate is confirmed. Full explainer bank in `shared/CLIENT-FACING-MEMO-TEMPLATE.md`.
+
 ## Cross-references
 
 - `strategies/S-CORP-ELECTION-ANALYSIS.md`
@@ -268,3 +275,5 @@ Basis memo should emphasize:
 ## Update status
 
 File created 2026-04. §1367 mechanics unchanged by OBBBA. Form 7203 continues as required.
+
+Updated 2026-08: added client-facing framing for the basis-vs-cash mismatch, sourced from a live engagement (T&A Contracting LLC Q3 2026).

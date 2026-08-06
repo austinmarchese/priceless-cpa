@@ -243,6 +243,7 @@ Fix approach:
 - Adjustment going forward
 - Amendment consideration for prior years within statute (cost/benefit)
 - Document client conversation on approach
+- **If distributions were already taken YTD before the first payroll run**: don't assume the catch-up payroll run requires new cash equal to the full comp target. Reclassify the already-drawn amount from distribution to wages first (books-only entry, improves the basis position too), then true up only the shortfall between what's been reclassified and the reasonable-comp target with an actual payroll run. Tell the client explicitly that the reclassified portion is not new money moving — see the client-facing explainer in `shared/CLIENT-FACING-MEMO-TEMPLATE.md`.
 
 ### Mistake 2: Comp set once, never adjusted
 
@@ -359,3 +360,6 @@ File updated 2026-04 with:
 - 2025/2026 §415(c) caps ($70,000/$72,000; with catch-up variants)
 - 2025/2026 employee deferral limits ($23,500/$24,500) and catch-ups
 - Solo 401(k) capacity math recalculated using 2026 amounts
+
+File updated 2026-08 with:
+- "Mistake 1" fix approach: added the reclassify-prior-draws-to-wages technique for mid-year comp catch-up when no payroll has run yet YTD (sourced from a live engagement, T&A Contracting LLC Q3 2026)

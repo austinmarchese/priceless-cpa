@@ -5,7 +5,9 @@ description: Quarterly tax planning and strategy for Priceless CPA clients. Load
 
 # Priceless Tax Planning
 
-> **Scope and status — April 2026 (v0.9.5)**
+> **Scope and status — August 2026 (v0.9.6)**
+>
+> v0.9.6 folds in real-engagement learnings from the T&A Contracting, LLC Q3 2026 client memo: a compact one-pager + talking-points deliverable format for payroll-driven Foundational-tier clients, a required "Your Advisory Value This Year" cumulative tracker, event-grouped cash-need framing, and a plain-language explainer bank (distribution reclassification, S-corp-vs-partnership savings math, basis-vs-cash mismatch) now referenced from `shared/CLIENT-FACING-MEMO-TEMPLATE.md`, `payroll-analysis/REASONABLE-COMP-DEEP-DIVE.md`, and `tax-strategy/strategies/S-CORP-REASONABLE-COMP.md` / `S-CORP-BASIS-TRACKING.md`.
 >
 > v0.9.5 completes Sprint 5.5 — a uniform depth upgrade across all 17 v0.3-era strategy files to match Sprint 5 depth standard. Every strategy file now includes Post-OBBBA current-law section, Interaction with other strategies, Deliverable Points for documentation skill handoff, Audit Posture, and tabular Update Status. Total strategy library: 25 files, 8,359 lines.
 >
@@ -245,8 +247,18 @@ Only employee-paid items reduce the paycheck available for income-tax withholdin
 ### Data extraction
 Brokerage-heavy 1040s are often delivered as scanned images whose form values are not machine-readable. Request the specific line figures (total tax, AGI, capital gains) rather than estimating; flag any number that could not be read from source.
 
+### Reclassifying prior draws as wages — no new cash moves
+When an S Corp owner has taken distributions YTD but run **no payroll yet**, the catch-up payroll run does not need to hand the owner fresh cash for the whole reasonable-comp target — it can **reclassify part of what's already been drawn** from "distribution" to "wages" on the books. The owner keeps the same dollars; only the categorization (and the withholding math) changes. This also improves the owner's basis position, since wages aren't basis-tested draws the way distributions are. Client memos must say explicitly that no money is moving a second time — this is the single most common point of client confusion in a mid-year comp catch-up. See `payroll-analysis/REASONABLE-COMP-DEEP-DIVE.md` ("Mistake 1") and `shared/CLIENT-FACING-MEMO-TEMPLATE.md` (plain-language explainer bank).
+
+### The "Your Advisory Value This Year" running tracker
+A cumulative table — Recommendation | What We Did | Estimated Value | Status — that starts in the first quarterly memo of the year and **carries forward and updates** in every subsequent quarter's memo, rather than resetting each quarter. It turns "what did we do for this fee" into a running total the client sees compound, and it forces every recommendation to eventually resolve to Estimated → Confirmed or get dropped with a reason. Now a required section in `shared/CLIENT-FACING-MEMO-TEMPLATE.md` for every tier.
+
+### Cash-need framing: group by payroll event, not just by tax type
+Clients read "how much do I need in the account, and by when" better than a tax-type-by-tax-type table alone. Pair the tax-type breakdown with a second table grouped by **funding event** (each payroll run, each PTET payment) showing Deposited-to-You vs. To-Agencies vs. Total-Needed per event. Same underlying numbers, but the event view is what actually drives the client's cash management. See the compact one-pager format in `shared/CLIENT-FACING-MEMO-TEMPLATE.md`.
+
 ## Version history
 
+- **v0.9.6** (August 2026, current): Real-engagement refinement from T&A Contracting LLC Q3 2026 memo — compact one-pager + talking-points format, required cumulative advisory-value tracker, event-grouped cash-need framing, plain-language explainer bank, mid-year reasonable-comp reclassification technique.
 - **v0.1** (April 2026): Initial skeleton with foundation files
 - **v0.2** (April 2026): Methodology, quarterly cadence, Path B framework, strategy matrix, output templates
 - **v0.3** (April 2026): Operator 8 (Capital Deployment), real 11 industries, 12 strategy files, client profile template, engagement standards
@@ -256,7 +268,7 @@ Brokerage-heavy 1040s are often delivered as scanned images whose form values ar
 - **v0.6** (April 2026): QSBS OBBBA update, verification banner added, VERIFICATION-STATUS.md created
 - **v0.7** (April 2026): HIGH priority OBBBA verification — QBI, Federal Tax Computation, Credits Reference, PTET Election
 - **v0.8** (April 2026): MEDIUM priority OBBBA verification — retirement plan limits (Solo 401(k), Mega Backdoor, Backdoor Roth, HSA, DB Plan), charitable (DAF, QCD), carryforward, family employment, S Corp comp
-- **v0.9.5** (April 2026, current): Sprint 5.5 — uniform depth upgrade. All 17 v0.3-era strategy files rebuilt to Sprint 5 depth standard. Added Post-OBBBA current-law sections, Interaction/stacking detail, Deliverable Points for documentation skill handoff, Audit Posture sections, tabular Update Status. No new files; depth-only upgrade. Total strategy library: 25 files, 8,359 lines.
+- **v0.9.5** (April 2026): Sprint 5.5 — uniform depth upgrade. All 17 v0.3-era strategy files rebuilt to Sprint 5 depth standard. Added Post-OBBBA current-law sections, Interaction/stacking detail, Deliverable Points for documentation skill handoff, Audit Posture sections, tabular Update Status. No new files; depth-only upgrade. Total strategy library: 25 files, 8,359 lines.
 - **v0.9** (April 2026): Sprint 5 — 11 industry vertical playbooks + 8 secondary strategy files (Cost Segregation, Real Estate STR/LTR/REPS, Roth Conversions, S Corp Election Analysis, S Corp Basis Tracking, Installment Sales)
 
 ## Build sequence (remainder of MVP)
