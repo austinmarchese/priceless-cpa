@@ -45,8 +45,8 @@ Here is your [Q2 2026] tax plan. Three things to know:
 [From Q2 onward — once there's more than one quarter of history — add a fourth
 line here, not buried at the end: "So far this year, this engagement has 
 identified about $[XX,XXX] in tax savings across [N] strategies — see 'Your 
-Advisory Value This Year' on the last page for the full breakdown." Pull the 
-running total straight from that section; don't recompute it separately.]
+Estimated Tax Savings This Year' on the last page for the full breakdown." Pull 
+the running total straight from that section; don't recompute it separately.]
 
 This quarter we focused on [1-2 sentence description of what we worked on].
 You should expect to spend about [time estimate] reviewing this and providing 
@@ -69,7 +69,7 @@ PAGE 2 — WHERE YOU STAND
    Projected Total Tax 2026: $XX,XXX
    Already Paid Toward 2026: $XX,XXX
    Next Payment Due: $XX,XXX on [DATE]
-   Estimated Advisory Value This Year: $XX,XXX (combined, if multi-owner)  ← from Q2 onward
+   Estimated Tax Savings This Year: $XX,XXX (combined, if multi-owner)  ← from Q2 onward
 ]
 
 [2-3 sentence narrative: "Based on your YTD income through [date] and 
@@ -192,21 +192,23 @@ C: Affiliate coordination memo (Path B)
 D: Partner dedicated time log (how Full Wealth hours were used)
 ```
 
-## Recurring section (all tiers): Your Advisory Value This Year
+## Recurring section (all tiers): Your Estimated Tax Savings This Year
 
 Every client-facing memo, starting with the first quarterly memo of the tax year, includes a cumulative value-tracker table. Unlike the rest of the memo, this section is **not rewritten each quarter — it carries forward and accumulates.**
 
+**Name it for the client's outcome, not the firm's value.** This section is called **"Your Estimated Tax Savings This Year,"** never "Advisory Value" or anything else that reads as the firm grading its own performance — Anthony's direct feedback on the T&A Contracting memo was that "Advisory Value" is "a little too obvious what we're trying to do." Say what the client got (savings), not what we think we're worth.
+
 **Surface it in two places, not one.** The full table stays near the end (Appendix B for Full Wealth, last section for the others) — but the running total also belongs **up front**, at the same visual weight as the projected-tax numbers, because clients skim the front and rarely make it to the back. Concretely:
-- Narrative PDF (all tiers): add "Estimated Advisory Value This Year" as a fourth line in the Page 2 highlighted numbers box, and as a fourth bullet in the cover letter's "three things to know."
-- Compact one-pager: add it as a third top-of-page callout next to Projected Income and Effective Tax Rate.
+- Narrative PDF (all tiers): add "Estimated Tax Savings This Year" as a fourth line in the Page 2 highlighted numbers box, and as a fourth bullet in the cover letter's "three things to know."
+- Spacious summary deck (see below): its own full-width band, same treatment as Projected Income and Effective Tax Rate.
 - Q1's memo is the exception — there's nothing to carry forward yet, so the front-page callout starts in Q2 once the table has at least one row.
 - **Always say "Estimated," never "Delivered" or "Guaranteed."** These are projections, not booked results — the label has to carry that on its face, not just in the fine print.
-- **For multi-owner entities, say "combined"** in the caption underneath (e.g., "Combined estimate across 3 strategies for both owners"), so no individual owner mistakes the total for their personal number.
+- **For multi-owner entities, say "combined"** in the caption underneath (e.g., "Combined estimate for both owners"), so no individual owner mistakes the total for their personal number.
 
 The front-page number must be pulled from the table at the end, never computed separately — one source of truth, two places it's shown.
 
 ```
-YOUR ADVISORY VALUE THIS YEAR
+YOUR ESTIMATED TAX SAVINGS THIS YEAR
 ================================================================
 Recommendation          | What We Did              | Estimated Value | Status
 -------------------------|---------------------------|------------------|----------
@@ -224,69 +226,77 @@ Rules for maintaining this table:
 - This table is the fastest way for a client (and for the partner, at renewal time) to see what the retainer is worth. Treat it as importantly as the projection numbers.
 - Feeds from the same structured task block that feeds Excel Tab 3 (Strategy Savings) — do not maintain it by hand in two places.
 
-## Compact one-pager + talking-points format (alternate deliverable)
+## Spacious summary deck + talking-points format (alternate deliverable)
 
-For Foundational-tier clients (especially payroll-driven S Corp owners where the story is dominated by *when to run payroll and how much*, not a long strategy list), a **two-document compact format** can replace the narrative PDF above. It trades narrative prose for tables the client can scan in under two minutes, with the reasoning kept in a separate companion doc for whoever wants the detail.
+For Foundational-tier clients (especially payroll-driven S Corp owners where the story is dominated by *when to run payroll and how much*, not a long strategy list), a **two-document format** can replace the narrative PDF above: a visual, large-type summary deck (Document 1) plus a companion doc with the full reasoning (Document 2). Trades narrative prose for things a client can scan in under two minutes, big enough to actually read.
 
-**Document 1 — the one-pager** (what most clients actually read):
+**This was originally built as a literal one-pager and Anthony explicitly overturned that instinct** — see "Density and type size" below before defaulting to compression. The goal is not to minimize the page count; it's to make each page effortless to take in at a glance.
+
+**Document 1 — the summary deck.** One topic per page, big type, generous white space — structured as a short sequence of full-page (or near-full-page) blocks rather than a single dense sheet:
 
 ```
-PRICELESS CPA — [Quarter] [Year] Tax Planning Update
-DRAFT, PENDING INTERNAL REVIEW banner while unreviewed
-Prepared for: [Client name(s)], [Entity name]     Date: [date]
+PAGE — Cover
+  PRICELESS CPA (eyebrow)
+  [Quarter] [Year] Tax Planning Update (large title)
+  DRAFT, PENDING INTERNAL REVIEW banner while unreviewed
+  Prepared for: [Client name(s)], [Entity name]     Date: [date]
 
-YOUR PROJECTED [YEAR] INCOME                YOUR PROJECTED EFFECTIVE TAX RATE
-$XXX,XXX                                     XX.X%
-[one-line description of the figure]        "About XX cents of every dollar earned,
-                                               all taxes combined." + one plain-
-                                               English sentence translating the rate.
+PAGE — The headline numbers (three full-width stacked bands, not squeezed side by side)
+  YOUR PROJECTED [YEAR] INCOME
+  $XXX,XXX  (huge, on-brand accent color)
+  [one-line description of the figure]
 
-[From Q2 onward, add a third callout here, same visual weight as the two above:
- ESTIMATED ADVISORY VALUE THIS YEAR — $XX,XXX
- "Combined estimate across [N] strategies[, for both owners — if multi-owner] — full 
- breakdown on the last page."
- Always label it "Estimated" (never "Delivered" / "Guaranteed") — these are projections,
- not booked results. For multi-owner entities, say "combined" explicitly so neither
- owner reads the figure as their individual number.]
+  YOUR EFFECTIVE TAX RATE
+  XX.X%
+  "About XX cents of every dollar earned, all taxes combined."
 
-Top Items To Know
-1. [Single most urgent action, one line]
-2. [Risk flag, one line]
-3. [Easy-win strategies available, one line]
+  ESTIMATED TAX SAVINGS THIS YEAR   ← from Q2 onward; see the recurring-section rules above
+  $XX,XXX
+  "Combined estimate for both owners — full breakdown on the last page."
+  [Always "Estimated," never "Delivered"/"Guaranteed." Always "Combined" for multi-owner entities.]
 
-================================================================
-[PAGE BREAK — page 1 stops here]
-================================================================
+  In plain terms: [one sentence translating the effective rate into cents-on-the-dollar]
 
-Key assumptions behind every number below
-[2-4 short bullets: what's actual vs. projected, and what's held flat from prior year]
+PAGE — Top Items To Know
+  1. [Single most urgent action, one line]
+  2. [Risk flag, one line]
+  3. [Easy-win strategies available, one line]
 
-Here's How That Projected $XX,XXX Breaks Down By Tax Type
-[Table: Tax Type × Q-by-Q columns × Full Year — federal withholding, state withholding,
- SS tax, Medicare tax, FUTA, SUI, PTET, etc. Subtotal row for payroll tax deposits,
- separate row for entity-level elections (PTET), GRAND TOTAL row.]
+PAGE — Key assumptions behind every number in this memo
+  [2-4 short bullets: what's actual vs. projected, and what's held flat from prior year]
 
-What's Projected To Land In Your Bank Account, By Event
-[Table: Event × Initiate date × Funds-Needed-By date × Deposited to You ×
- To Agencies × Total Needed — one row per payroll run / election payment, not
- per tax type. Include a SHORT footnote defining "Deposited to You" = your
- paycheck and "To Agencies" = the mandatory withholding that same run
- generates, plus the year totals — one or two sentences, not a paragraph.]
+PAGE — Here's how that projected $XX,XXX breaks down by tax type
+  [Table: Tax Type × Q-by-Q columns × Full Year — federal withholding, state withholding,
+   SS tax, Medicare tax, FUTA, SUI, PTET, etc. Subtotal row for payroll tax deposits,
+   separate row for entity-level elections (PTET), GRAND TOTAL row.]
 
-Summary of Recommended Actions
-[Table: Action Item × What It Means For You × Timing — every action from the
- memo in one scannable list, ordered by date.]
+PAGE — What's projected to land in your bank account, by event
+  [Table: Event × Initiate date × Funds-Needed-By date × Deposited to You ×
+   To Agencies × Total Needed — one row per payroll run / election payment, not
+   per tax type. Short footnote defining "Deposited to You" = your paycheck and
+   "To Agencies" = the mandatory withholding that same run generates, plus the
+   year totals — one or two sentences, not a paragraph.]
+
+PAGE — Summary of Recommended Actions
+  [Table: Action Item × What It Means For You × Timing — every action from the
+   memo in one scannable list, ordered by date.]
 ```
 
-**Lead with the header, boxes, and Top Items To Know** so a client gets the whole picture in the first few lines before hitting any table — that's the "page 1 reads like a summary" goal. But **don't force a page break to make that literal.** A hand-inserted page break only works if the remaining content (assumptions + both breakdown tables + actions table) actually fits on the next page as-is; if it doesn't need to spill over, a forced break just produces one mostly-blank page and pushes every later page down by one — bloat with no content behind it. Only break to a new page where the content naturally runs long enough to need it, and verify the actual rendered page count (see below) before deciding a break is needed at all — don't assume from how it reads in a text draft.
+### Density and type size
 
-**Adding a callout box narrows every existing box in that row — check for label wrap.** Going from two header boxes to three (e.g. adding "Estimated Advisory Value This Year") shrinks each box from half-width to third-width. A label that fit on one line at half-width can wrap to two at third-width, and because all boxes in a row share one height, that wrap grows the *entire* row — which can be just enough to push a tightly-fit one-pager onto a second, nearly-empty page. When adding a box to an existing row: shorten labels to fit the new width (drop redundant words — "Estimated Advisory Value" reads fine without "This Year" when the whole page is already about this year), and check rendered output, not just the XML/text draft.
+**Blow up the text; put way less information on each page.** This is a direct correction from an earlier draft that crammed the whole summary onto one physical page at 7-9pt body text to hit a "one-pager" page count — Anthony's reaction: too much to consume per page, make the type bigger and give it far more room even if that means several times as many pages. There is no target page count. A client should be able to glance at a page and get one idea, not scan a dense sheet for the number they need.
 
-**Verify page count for real, don't estimate from spacing values.** Twip-level spacing edits (a few hundred units on a `w:before`/`w:after`) rarely move a page count on their own — layout overflow (label wrap, table row growth, a forced break) is the usual actual cause, and it's easy to misdiagnose as "too much spacing" when the real culprit is upstream. If Word is available, open the file via COM (`Documents.Open` → `ComputeStatistics(2)` for page count, or walk `Paragraphs` checking `.Range.Information(3)` for which page each paragraph lands on) to find exactly where a document jumps pages before changing spacing values. Don't guess-and-iterate on spacing without checking the actual rendered result — it wastes a round trip and risks overcorrecting in the wrong direction.
+Rough starting sizes for this format on a US Letter page with ~0.43in margins: eyebrow ~12pt, title ~24-26pt, section headings ~13-16pt, the huge headline numbers ~40pt+, body/table text ~10-11pt, captions ~9-10pt. These are starting points, not fixed values — err bigger, then confirm nothing wraps awkwardly (see "Adding a callout box" below) and nothing overflows a page in a way that leaves a large orphaned gap.
 
-**Document 2 — Detailed Talking Points** (numbered sections, one per topic, in the order the one-pager raises them — e.g., Where the Business Stands; Payroll and Reasonable Compensation; Retirement; Distributions and Basis; state PTET; health insurance/HSA; bookkeeping notes; What We Need From You; Your Advisory Value This Year). Each section: plain-English explanation first, "why this saves you money" second (with the worked numeric comparison — see the plain-language explainer bank below), "to implement" steps last. No IRC citations in either document — those live only in the internal memo.
+**One topic per page by default — but combine adjacent topics onto one page when there's real, already-existing room left over, not by shrinking anything.** After laying out each topic on its own page at the sizes above, check the rendered output: if a page has substantial blank space below its content, it's a candidate to merge with the page after it — same type sizes, same content, just remove the page break and let it flow. Don't merge if it would force text to shrink or a table to break awkwardly across pages; in that case leave the break in. This was Anthony's second-round note on the T&A memo: combine (cover + headline numbers), (Top Items To Know + Key Assumptions), and (tax-type table + cash-need table) into three pages instead of six, because each pair had visible leftover space — while leaving Recommended Actions on its own page since it didn't have a natural partner.
 
-When to use this format instead of the narrative PDF: single or dual-owner S Corp, Foundational tier, engagement is mostly payroll timing + a small number of well-understood strategies (PTET, Solo 401(k), §162(l), basis monitoring). Switch to the full narrative format once the client has enough simultaneous strategies (cost seg, DAF bunching, multi-entity) that a scannable one-pager can't hold the story.
+**Adding a callout box narrows every existing box in that row — check for label wrap.** Going from two header boxes to three in the same row shrinks each box's width. A label that fit on one line at half-width can wrap to two at third-width, and because all boxes in a row share one height, that wrap grows the *entire* row — enough to push a tightly-fit page onto a second, nearly-empty one. Prefer stacking headline numbers as full-width bands (see the layout above) over squeezing them side by side; it sidesteps the wrap risk entirely and reads bigger and cleaner besides.
+
+**Verify page count and layout for real — don't estimate from spacing values or guess from the text draft.** If Word is available, open the file via COM (`Documents.Open` → `ComputeStatistics(2)` for page count, or walk `Paragraphs` checking `.Range.Information(3)` for which page each paragraph lands on) to find exactly where a document breaks pages, then render to PDF and look at each page (e.g. PyMuPDF/`fitz` if Poppler/LibreOffice aren't available) before sending. Don't iterate blind on spacing/font-size numbers without checking the actual rendered result each time — it wastes round trips and risks overcorrecting in the wrong direction.
+
+**Document 2 — Detailed Talking Points** (numbered sections, one per topic, in the order the summary deck raises them — e.g., Where the Business Stands; Payroll and Reasonable Compensation; Retirement; Distributions and Basis; state PTET; health insurance/HSA; bookkeeping notes; What We Need From You; Your Estimated Tax Savings This Year). Each section: plain-English explanation first, "why this saves you money" second (with the worked numeric comparison — see the plain-language explainer bank below), "to implement" steps last. No IRC citations in either document — those live only in the internal memo. This document can stay denser than Document 1 — it's the opt-in detail for whoever wants to read further, not the first thing a client sees.
+
+When to use this format instead of the narrative PDF: single or dual-owner S Corp, Foundational tier, engagement is mostly payroll timing + a small number of well-understood strategies (PTET, Solo 401(k), §162(l), basis monitoring). Switch to the full narrative format once the client has enough simultaneous strategies (cost seg, DAF bunching, multi-entity) that this format can't hold the story without becoming dense again.
 
 ## Plain-language explainer bank
 
@@ -854,6 +864,7 @@ The corresponding Excel model has the 7 tabs populated with Sarah's specific num
 
 ## Version history
 
+- v1.4 (August 2026): Direct partner feedback (Anthony) on the T&A Contracting memo reversed the density instinct entirely — renamed "Compact one-pager" to "Spacious summary deck," rewrote the format as one topic per page with much larger type, replaced the earlier "avoid a forced page break" caution with "one topic per page by default, merge only where a page already has visible leftover room," and switched headline numbers from squeezed side-by-side boxes to full-width stacked bands. Also renamed "Your Advisory Value This Year" to "Your Estimated Tax Savings This Year" everywhere (front-page callout and the back-page tracker) — client-outcome framing instead of firm-value framing.
 - v1.3 (August 2026): Corrected v1.2's forced page break, which produced a mostly-blank extra page — Top Items To Know still leads (page 1 reads as a summary), but no hard break unless content actually needs one. Documented the callout-box column-narrowing/label-wrap trap and the Word-COM page-count verification method.
 - v1.2 (August 2026): Front-page value callout now labeled "Estimated" (never "Delivered"/"Guaranteed") and explicitly "Combined" for multi-owner entities. Compact one-pager restructured into a real page-1-summary / page-2-detail split with an actual page break — Top Items To Know moved to page 1, assumptions/tables/actions moved to page 2 with looser spacing. Cash-need footnote trimmed to essentials.
 - v1.1 (August 2026): Added the "Your Advisory Value This Year" cumulative tracker (now required, all tiers, surfaced both up front — cover letter/highlighted box/one-pager header — and in full at the back), the compact one-pager + talking-points alternate format, the plain-language explainer bank, and the event-grouped cash-need view for Tab 4 — sourced from the T&A Contracting, LLC Q3 2026 client memo.

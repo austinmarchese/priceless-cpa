@@ -5,9 +5,11 @@ description: Quarterly tax planning and strategy for Priceless CPA clients. Load
 
 # Priceless Tax Planning
 
-> **Scope and status — August 2026 (v0.9.6)**
+> **Scope and status — August 2026 (v0.9.7)**
 >
-> v0.9.6 folds in real-engagement learnings from the T&A Contracting, LLC Q3 2026 client memo: a compact one-pager + talking-points deliverable format for payroll-driven Foundational-tier clients, a required "Your Advisory Value This Year" cumulative tracker, event-grouped cash-need framing, and a plain-language explainer bank (distribution reclassification, S-corp-vs-partnership savings math, basis-vs-cash mismatch) now referenced from `shared/CLIENT-FACING-MEMO-TEMPLATE.md`, `payroll-analysis/REASONABLE-COMP-DEEP-DIVE.md`, and `tax-strategy/strategies/S-CORP-REASONABLE-COMP.md` / `S-CORP-BASIS-TRACKING.md`.
+> v0.9.7 corrects v0.9.6's deliverable density based on direct partner feedback (Anthony): the compact client deliverable is now a **spacious summary deck** — one topic per page, much larger type, no target page count — instead of a crammed one-pager, and the recurring value tracker is named "Your Estimated Tax Savings This Year" (client-outcome framing, not "Advisory Value"). See `shared/CLIENT-FACING-MEMO-TEMPLATE.md` under "Density and type size."
+>
+> v0.9.6 folded in the first round of real-engagement learnings from the T&A Contracting, LLC Q3 2026 client memo: the two-document deliverable format for payroll-driven Foundational-tier clients, a required cumulative savings tracker, event-grouped cash-need framing, and a plain-language explainer bank (distribution reclassification, S-corp-vs-partnership savings math, basis-vs-cash mismatch) now referenced from `shared/CLIENT-FACING-MEMO-TEMPLATE.md`, `payroll-analysis/REASONABLE-COMP-DEEP-DIVE.md`, and `tax-strategy/strategies/S-CORP-REASONABLE-COMP.md` / `S-CORP-BASIS-TRACKING.md`.
 >
 > v0.9.5 completes Sprint 5.5 — a uniform depth upgrade across all 17 v0.3-era strategy files to match Sprint 5 depth standard. Every strategy file now includes Post-OBBBA current-law section, Interaction with other strategies, Deliverable Points for documentation skill handoff, Audit Posture, and tabular Update Status. Total strategy library: 25 files, 8,359 lines.
 >
@@ -250,15 +252,19 @@ Brokerage-heavy 1040s are often delivered as scanned images whose form values ar
 ### Reclassifying prior draws as wages — no new cash moves
 When an S Corp owner has taken distributions YTD but run **no payroll yet**, the catch-up payroll run does not need to hand the owner fresh cash for the whole reasonable-comp target — it can **reclassify part of what's already been drawn** from "distribution" to "wages" on the books. The owner keeps the same dollars; only the categorization (and the withholding math) changes. This also improves the owner's basis position, since wages aren't basis-tested draws the way distributions are. Client memos must say explicitly that no money is moving a second time — this is the single most common point of client confusion in a mid-year comp catch-up. See `payroll-analysis/REASONABLE-COMP-DEEP-DIVE.md` ("Mistake 1") and `shared/CLIENT-FACING-MEMO-TEMPLATE.md` (plain-language explainer bank).
 
-### The "Your Advisory Value This Year" running tracker
-A cumulative table — Recommendation | What We Did | Estimated Value | Status — that starts in the first quarterly memo of the year and **carries forward and updates** in every subsequent quarter's memo, rather than resetting each quarter. It turns "what did we do for this fee" into a running total the client sees compound, and it forces every recommendation to eventually resolve to Estimated → Confirmed or get dropped with a reason. Now a required section in `shared/CLIENT-FACING-MEMO-TEMPLATE.md` for every tier.
+### The "Your Estimated Tax Savings This Year" running tracker
+A cumulative table — Recommendation | What We Did | Estimated Value | Status — that starts in the first quarterly memo of the year and **carries forward and updates** in every subsequent quarter's memo, rather than resetting each quarter. It turns "what did we do for this fee" into a running total the client sees compound, and it forces every recommendation to eventually resolve to Estimated → Confirmed or get dropped with a reason. Now a required section in `shared/CLIENT-FACING-MEMO-TEMPLATE.md` for every tier. Name it for what the client got ("Estimated Tax Savings"), never for how the firm wants to be perceived ("Advisory Value") — a partner will call out self-congratulatory framing immediately, and correctly.
 
 ### Cash-need framing: group by payroll event, not just by tax type
-Clients read "how much do I need in the account, and by when" better than a tax-type-by-tax-type table alone. Pair the tax-type breakdown with a second table grouped by **funding event** (each payroll run, each PTET payment) showing Deposited-to-You vs. To-Agencies vs. Total-Needed per event. Same underlying numbers, but the event view is what actually drives the client's cash management. See the compact one-pager format in `shared/CLIENT-FACING-MEMO-TEMPLATE.md`.
+Clients read "how much do I need in the account, and by when" better than a tax-type-by-tax-type table alone. Pair the tax-type breakdown with a second table grouped by **funding event** (each payroll run, each PTET payment) showing Deposited-to-You vs. To-Agencies vs. Total-Needed per event. Same underlying numbers, but the event view is what actually drives the client's cash management. See the spacious summary deck format in `shared/CLIENT-FACING-MEMO-TEMPLATE.md`.
+
+### Density: one topic per page, big type, no target page count
+An early draft of the compact client deliverable crammed a full quarterly summary onto one physical page at 7-9pt type to hit a "one-pager" page count. Partner feedback (Anthony) reversed this outright: blow the text up, put far less on each page, and don't optimize for page count at all — a client should get one idea per glance, not scan a dense sheet. The corrected default is one topic per page at much larger type sizes, merging two adjacent pages only when rendering shows genuine leftover space on both (never by shrinking text to make two things fit). Full sizing guidance and the merge rule are in `shared/CLIENT-FACING-MEMO-TEMPLATE.md` under "Density and type size."
 
 ## Version history
 
-- **v0.9.6** (August 2026, current): Real-engagement refinement from T&A Contracting LLC Q3 2026 memo — compact one-pager + talking-points format, required cumulative advisory-value tracker, event-grouped cash-need framing, plain-language explainer bank, mid-year reasonable-comp reclassification technique.
+- **v0.9.7** (August 2026, current): Partner feedback (Anthony) reversed the density of the compact deliverable — one topic per page, much larger type, no target page count — and renamed the recurring value tracker to "Your Estimated Tax Savings This Year" throughout.
+- **v0.9.6** (August 2026): Real-engagement refinement from T&A Contracting LLC Q3 2026 memo — compact one-pager + talking-points format, required cumulative advisory-value tracker, event-grouped cash-need framing, plain-language explainer bank, mid-year reasonable-comp reclassification technique.
 - **v0.1** (April 2026): Initial skeleton with foundation files
 - **v0.2** (April 2026): Methodology, quarterly cadence, Path B framework, strategy matrix, output templates
 - **v0.3** (April 2026): Operator 8 (Capital Deployment), real 11 industries, 12 strategy files, client profile template, engagement standards
