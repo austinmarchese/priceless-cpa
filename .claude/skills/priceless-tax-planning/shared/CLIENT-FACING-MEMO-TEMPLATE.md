@@ -239,16 +239,24 @@ PAGE — Cover
   PRICELESS CPA (eyebrow)
   [Quarter] [Year] Tax Planning Update (large title)
   DRAFT, PENDING INTERNAL REVIEW banner while unreviewed
-  Prepared for: [Client name(s)], [Entity name]     Date: [date]
+  Prepared for: [Client name(s)]                    Date: [date]
+  [Entity name]                                      ← its own line, not run into the names
 
 PAGE — The headline numbers (three full-width stacked bands, not squeezed side by side)
-  YOUR PROJECTED [YEAR] INCOME
+  YOUR PROJECTED [YEAR] AGI
   $XXX,XXX  (huge, on-brand accent color)
   [one-line description of the figure]
 
-  YOUR EFFECTIVE TAX RATE
+  [If a partner wants a "before this year's changes" baseline shown (see "Baseline vs.
+   as-recommended numbers" below), the income band becomes a two-column comparison
+   instead of one number: same band, one label spanning both, then WITHOUT THIS YEAR'S
+   CHANGES / $XXX,XXX on the left and WITH OUR RECOMMENDED PLAN / $XXX,XXX on the right,
+   with a note underneath explaining the delta. Never show the baseline alone.]
+
+  YOUR EFFECTIVE TAX RATE (WITH OUR RECOMMENDED PLAN)   ← label the scenario whenever a baseline appears elsewhere on the page
   XX.X%
-  "About XX cents of every dollar earned, all taxes combined."
+  "About XX cents of every dollar earned goes to taxes overall, combining federal,
+   Colorado, and payroll tax — once this year's plan is in place."
 
   ESTIMATED TAX SAVINGS THIS YEAR   ← from Q2 onward; see the recurring-section rules above
   $XX,XXX
@@ -287,6 +295,18 @@ PAGE — Summary of Recommended Actions
 **Blow up the text; put way less information on each page.** This is a direct correction from an earlier draft that crammed the whole summary onto one physical page at 7-9pt body text to hit a "one-pager" page count — Anthony's reaction: too much to consume per page, make the type bigger and give it far more room even if that means several times as many pages. There is no target page count. A client should be able to glance at a page and get one idea, not scan a dense sheet for the number they need.
 
 Rough starting sizes for this format on a US Letter page with ~0.43in margins: eyebrow ~12pt, title ~24-26pt, section headings ~13-16pt, the huge headline numbers ~40pt+, body/table text ~10-11pt, captions ~9-10pt. These are starting points, not fixed values — err bigger, then confirm nothing wraps awkwardly (see "Adding a callout box" below) and nothing overflows a page in a way that leaves a large orphaned gap.
+
+### Baseline vs. as-recommended numbers — label both, never show one alone
+
+Sometimes a partner deliberately wants a headline figure to show a **counterfactual** — "here's what your number would look like without this year's changes" — as a way of making the value of the engagement visible. That's a legitimate choice, not a data error. But shipped without care, it produces a memo that looks broken in two ways: a reader who knows the real numbers (or has access to the underlying model) sees an unlabeled figure that doesn't match anything else in the file, and a reader doing their own math might divide a baseline number against an as-recommended number and get a rate that means nothing.
+
+Rules for any baseline/counterfactual headline number:
+
+- **Show it paired, never alone.** "Without this year's changes: $X" belongs next to "With our recommended plan: $Y," not standing by itself as if it were simply "your income." Use the two-column band variant in the headline-numbers page above.
+- **Label the scenario on every derived figure too.** If the effective tax rate, a savings total, or any other ratio is built from the as-recommended side, its own label should say so ("Your Effective Tax Rate (With Our Recommended Plan)") — don't let a reader assume it pairs with whatever other number is nearby.
+- **Never divide a baseline figure against an as-recommended figure**, or vice versa, even implicitly. The tax-type breakdown table, the cash-need table, and the effective rate should all draw from the *same* scenario (normally: the plan being recommended) — the baseline income number is a reference point, not an input to any other calculation in the memo.
+- **State the mechanism, not just the number.** A one-line note under the comparison ("Implementing the S-corp wage structure, Solo 401(k), and PTET election shifts about $X out of taxable income this year — deferred or excluded, not gone") turns a bare number gap into something the client actually understands.
+- **Don't compute a counterfactual tax bill unless it's actually been modeled.** The baseline AGI is usually cheap to approximate (raw pre-adjustment income), but the baseline *tax liability* depends on assumptions (would they have taken $0 wages? no PTET election? unoptimized comp?) that are rarely pinned down — showing a baseline effective rate without having actually built that scenario in the workbook invites a confidently-wrong number. If nobody asks for it, don't invent it; if someone does, model it explicitly first.
 
 **One topic per page by default — but combine adjacent topics onto one page when there's real, already-existing room left over, not by shrinking anything.** After laying out each topic on its own page at the sizes above, check the rendered output: if a page has substantial blank space below its content, it's a candidate to merge with the page after it — same type sizes, same content, just remove the page break and let it flow. Don't merge if it would force text to shrink or a table to break awkwardly across pages; in that case leave the break in. This was Anthony's second-round note on the T&A memo: combine (cover + headline numbers), (Top Items To Know + Key Assumptions), and (tax-type table + cash-need table) into three pages instead of six, because each pair had visible leftover space — while leaving Recommended Actions on its own page since it didn't have a natural partner.
 
@@ -864,6 +884,7 @@ The corresponding Excel model has the 7 tabs populated with Sarah's specific num
 
 ## Version history
 
+- v1.5 (August 2026): Added the baseline/counterfactual headline-number rules (label both sides, never divide across scenarios, don't invent an unmodeled baseline tax rate) and the two-column before/after income band variant — from a near-miss where an intentional "without this year's changes" AGI wasn't labeled and nearly got divided against as-recommended tax figures. Also: entity name goes on its own line under client names in the cover block, not run together.
 - v1.4 (August 2026): Direct partner feedback (Anthony) on the T&A Contracting memo reversed the density instinct entirely — renamed "Compact one-pager" to "Spacious summary deck," rewrote the format as one topic per page with much larger type, replaced the earlier "avoid a forced page break" caution with "one topic per page by default, merge only where a page already has visible leftover room," and switched headline numbers from squeezed side-by-side boxes to full-width stacked bands. Also renamed "Your Advisory Value This Year" to "Your Estimated Tax Savings This Year" everywhere (front-page callout and the back-page tracker) — client-outcome framing instead of firm-value framing.
 - v1.3 (August 2026): Corrected v1.2's forced page break, which produced a mostly-blank extra page — Top Items To Know still leads (page 1 reads as a summary), but no hard break unless content actually needs one. Documented the callout-box column-narrowing/label-wrap trap and the Word-COM page-count verification method.
 - v1.2 (August 2026): Front-page value callout now labeled "Estimated" (never "Delivered"/"Guaranteed") and explicitly "Combined" for multi-owner entities. Compact one-pager restructured into a real page-1-summary / page-2-detail split with an actual page break — Top Items To Know moved to page 1, assumptions/tables/actions moved to page 2 with looser spacing. Cash-need footnote trimmed to essentials.

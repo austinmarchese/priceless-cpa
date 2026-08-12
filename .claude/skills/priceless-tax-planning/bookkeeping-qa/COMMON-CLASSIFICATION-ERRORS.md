@@ -104,6 +104,17 @@ If documentation missing, reclassify to owner draw.
 - Personal hobby courses
 - General education unrelated to current business role
 
+### Uncategorized Expense — the catch-all that hides both answers
+
+**Don't default to "routine cleanup, nothing needed from the client"** just because a transaction landed in Uncategorized Expense. That bucket is where QBO auto-sorts anything the client's bank feed couldn't map to a rule, and it mixes two very different situations that need opposite treatment:
+
+- **Legitimate business expense missing only a category** (e.g., a subcontractor paid via Zelle, a job-site cash payment) — genuinely routine; just needs the right expense account.
+- **Personal draw that never got coded as a distribution** — not routine at all. If it's personal, it's basis-tested (see the S-corp basis/distribution discussion elsewhere in the engagement) and needs to flow into the same bucket as any other personal spending run through the business.
+
+**How to spot the ambiguous ones**: bank/ATM withdrawals, Zelle/Venmo/CashApp payments to *individuals* (not vendor businesses), and card charges split to an owner's personal account name in the GL. Any of these could be either a subcontractor payment or a personal draw — the transaction description alone doesn't tell you which, and guessing wrong in either direction is a real error (miscoding a personal draw as a deductible expense understates income; miscoding a legitimate subcontractor payment as a distribution overstates the owner's basis-tested draws for no reason).
+
+**Fix**: ask the client which it is — don't silently pick one. Name the specific transactions (who was paid, how much, by what method) in the memo's open-questions section rather than burying the ambiguity inside a "routine, nothing needed from you" line. See the Client Intake Gate confirm-or-ask principle in `SKILL.md` Step 3.5 — this is the same rule applied to bookkeeping QA, not just intake.
+
 ## Misclassifications within business expenses
 
 Not owner personal — but wrong category within business expenses.
