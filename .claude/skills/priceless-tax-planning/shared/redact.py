@@ -116,6 +116,33 @@ SIGNATORY_LABELS = re.compile(
 
 REDACT_COLOR = (0, 0, 0)  # black
 
+OUTPUT_MARKERS = ("-REDACTED", "-REDACTION-INCOMPLETE")
+
+
+def find_source_pdfs(folder: Path) -> list:
+    """
+    Source PDFs in a folder, excluding this script's own outputs.
+
+    Windows filesystems are case-insensitive, so globbing both "*.pdf" and
+    "*.PDF" (as earlier versions of this function did, independently, in two
+    places) matches every file twice on Windows -- silently doubling
+    redaction work and duplicating every log entry. De-dupe by lowercased
+    name. Also excludes "-REDACTION-INCOMPLETE" outputs, not just
+    "-REDACTED" ones, so a rerun doesn't treat last run's unusable
+    placeholder as a fresh source file.
+    """
+    seen = set()
+    pdfs = []
+    for p in sorted(folder.glob("*.pdf")) + sorted(folder.glob("*.PDF")):
+        key = p.name.lower()
+        if key in seen:
+            continue
+        if any(marker in p.stem for marker in OUTPUT_MARKERS):
+            continue
+        seen.add(key)
+        pdfs.append(p)
+    return pdfs
+
 
 def generate_name_variants(entries: list) -> list:
     """
@@ -338,8 +365,7 @@ def collect_known_pii(folder: Path) -> set:
     ein_pattern = re.compile(r"\b(\d{2})-(\d{7})\b")
     ssn_pattern = re.compile(r"\b(\d{3})[- ](\d{2})[- ](\d{4})\b")
     known = set()
-    pdfs = [p for p in folder.glob("*.pdf") if "-REDACTED" not in p.stem]
-    pdfs += [p for p in folder.glob("*.PDF") if "-REDACTED" not in p.stem]
+    pdfs = find_source_pdfs(folder)
     for pdf in pdfs:
         try:
             doc = fitz.open(str(pdf))
@@ -391,10 +417,12 @@ def redact_file(input_path: Path, client_entries: list, known_pii: set = None, o
     log = [f"\n{'-' * 50}", f"File: {input_path.name}"]
 
     out_dir = output_dir or input_path.parent
-    output_path = out_dir / f"{input_path.stem}-REDACTED.pdf"
+    trusted_output_path = out_dir / f"{input_path.stem}-REDACTED.pdf"
+    incomplete_output_path = out_dir / f"{input_path.stem}-REDACTION-INCOMPLETE.pdf"
 
     doc = fitz.open(str(input_path))
     total = 0
+    skipped_pages = []
 
     for page in doc:
         rotation = page.rotation
@@ -411,24 +439,43 @@ def redact_file(input_path: Path, client_entries: list, known_pii: set = None, o
         log.append(f"  Page {page.number + 1}: {mode}")
 
         if (scanned or force_ocr) and not OCR_AVAILABLE:
-            log.append("    [SKIP] Tesseract not installed")
+            log.append("    [SKIP] Tesseract not installed -- page NOT checked for PII")
+            skipped_pages.append(page.number + 1)
             continue
 
         total += redact_page(page, log, client_entries, use_ocr=(scanned or force_ocr), known_pii=known_pii)
 
     strip_metadata(doc)
-    doc.save(str(output_path), garbage=4, deflate=True)
-    doc.close()
 
-    log.append(f"  Redactions applied: {total}")
-    log.append(f"  Metadata: stripped")
-    log.append(f"  Saved as: {output_path.name}")
-    return output_path, total, log
+    # Never let a page that couldn't be scanned for PII produce a file named
+    # like a trusted, complete redaction. A prior version of this script
+    # silently skipped unreadable scanned/image pages here and still wrote
+    # "-REDACTED.pdf" -- that shipped a real client SSN and EIN to an
+    # engagement folder because nothing downstream had any signal that the
+    # file was incomplete. Route incomplete output to a distinctly named
+    # file instead of silently downgrading to a partial "REDACTED" file.
+    if skipped_pages:
+        output_path = incomplete_output_path
+        doc.save(str(output_path), garbage=4, deflate=True)
+        doc.close()
+        log.append(f"  Redactions applied: {total}")
+        log.append(f"  Metadata: stripped")
+        log.append(f"  [INCOMPLETE] Page(s) {skipped_pages} could not be checked for PII (no OCR engine found).")
+        log.append(f"  Saved as: {output_path.name} -- DO NOT use as a redacted deliverable.")
+        log.append(f"  Fix: install Tesseract (see script docstring), then rerun this file.")
+    else:
+        output_path = trusted_output_path
+        doc.save(str(output_path), garbage=4, deflate=True)
+        doc.close()
+        log.append(f"  Redactions applied: {total}")
+        log.append(f"  Metadata: stripped")
+        log.append(f"  Saved as: {output_path.name}")
+
+    return output_path, total, log, skipped_pages
 
 
 def process_folder(folder: Path):
-    pdfs = [p for p in sorted(folder.glob("*.pdf")) if "-REDACTED" not in p.stem]
-    pdfs += [p for p in sorted(folder.glob("*.PDF")) if "-REDACTED" not in p.stem]
+    pdfs = find_source_pdfs(folder)
 
     if not pdfs:
         print("No PDF files found in that folder.")
@@ -447,12 +494,17 @@ def process_folder(folder: Path):
 
     print(f"\nFound {len(pdfs)} PDF(s)\n")
     all_log, grand_total = [], 0
+    incomplete_files = []
 
     for pdf in pdfs:
-        out, count, log = redact_file(pdf, client_entries, known_pii=known_pii)
+        out, count, log, skipped_pages = redact_file(pdf, client_entries, known_pii=known_pii)
         all_log.extend(log)
         grand_total += count
-        mark = "+" if count > 0 else "o"
+        if skipped_pages:
+            incomplete_files.append((out, skipped_pages))
+            mark = "!"
+        else:
+            mark = "+" if count > 0 else "o"
         print(f"  {mark}  {pdf.name}  ->  {out.name}  ({count} redactions)")
 
     ts = datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -462,6 +514,17 @@ def process_folder(folder: Path):
     print(f"\n{'-' * 50}")
     print(f"Total: {grand_total} redaction(s) across {len(pdfs)} file(s)")
     print(f"Log saved: {log_file.name}")
+
+    if incomplete_files:
+        print(f"\n{'!' * 50}")
+        print(f"STOP: {len(incomplete_files)} file(s) are NOT safe to use -- pages could not")
+        print(f"be checked for PII because no OCR engine (Tesseract) was found:")
+        for out, pages in incomplete_files:
+            print(f"  - {out.name}  (page(s) {pages})")
+        print(f"\nInstall Tesseract (see redact.py docstring for the link), then rerun")
+        print(f"this tool on the ORIGINAL files -- do not hand these -INCOMPLETE files")
+        print(f"to anyone as if they were redacted.")
+        print(f"{'!' * 50}")
 
 
 def main():
@@ -504,9 +567,17 @@ def main():
         client_entries = load_client_list(p.parent)
         if client_entries:
             print(f"Client list loaded: {len(client_entries)} entries")
-        out, count, log = redact_file(p, client_entries)
+        out, count, log, skipped_pages = redact_file(p, client_entries)
         print("\n".join(log))
-        print(f"\nDone - {count} redaction(s). Saved: {out.name}")
+        if skipped_pages:
+            print(f"\n{'!' * 50}")
+            print(f"STOP: this file is NOT safe to use. Page(s) {skipped_pages} could not")
+            print(f"be checked for PII because no OCR engine (Tesseract) was found.")
+            print(f"Install Tesseract (see redact.py docstring for the link), then rerun")
+            print(f"this file. Do not hand {out.name} to anyone as if it were redacted.")
+            print(f"{'!' * 50}")
+        else:
+            print(f"\nDone - {count} redaction(s). Saved: {out.name}")
     elif p.is_dir():
         process_folder(p)
     else:

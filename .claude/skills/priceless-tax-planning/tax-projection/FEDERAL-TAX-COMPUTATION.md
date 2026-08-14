@@ -1,222 +1,146 @@
----
-state: Washington
-state_code: WA
-tier: 3
-priceless_client_concentration: moderate (Seattle area; tech industry; Pacific Northwest exits)
-authority:
-  - Wash. Const. Art. VII (taxation)
-  - RCW 82.87 (Capital Gains Tax; effective 2022; upheld by WA Supreme Court March 2023)
-  - RCW 82.04 (Business and Occupation Tax; B&O)
-  - RCW 82.16 (Public Utility Tax)
-  - Engrossed Senate Substitute Bill 5096 (2021 session) — 7% capital gains tax
-  - Washington Department of Revenue guidance 2025-2026
-  - SB 5801 (2025) — transportation fee increases effective 1/1/2026
-income_tax: NO on wages (no general income tax); YES on capital gains above threshold
-income_tax_top_rate: 7.0% ON CAPITAL GAINS above $262,000 (2024 threshold; indexed annually); no tax on wages/ordinary income
-income_tax_structure: no ordinary income tax; capital gains tax only with $262K annual threshold
-ptet_available: N/A (no income tax means no PTET)
-obbba_conformity_summary: N/A (no ordinary income tax conformity)
-last_full_review: 2026-04
-next_review_trigger: Threshold indexing; potential rate changes; ongoing constitutional challenges ended with 2023 upholding
----
+# Federal Tax Computation
 
-# Washington (WA) — State Tax File
+> **Note:** This file previously shipped with the wrong contents (a duplicate of the Washington state file). Reconstructed 2026-08-13 to match the workflow referenced in `SKILL.md`. Figures below are 2025 tax year (returns filed in 2026) and 2026 tax year (current-year projections), reconciled to OBBBA 2025 (P.L. 119-21) and Rev. Proc. 2025-32 / Notice 2025-67 indexed amounts. Confirm current figures against IRS/Treasury guidance before relying on this file for a live engagement — indexed amounts are republished annually and OBBBA implementation guidance is still developing in places marked [VERIFY].
 
-Washington has **NO general income tax on wages or ordinary income** (one of 9 no-income-tax states). However, WA enacted a **7% capital gains tax** (via Engrossed SSB 5096 in 2021) that took effect in 2022 and was **upheld by WA Supreme Court in March 2023**.
+## Purpose
 
-The capital gains tax applies to gains above **$262,000/year threshold** (2024; indexed). Real estate gains are EXEMPT. Business sales meeting specific criteria are exempt.
+This file is the federal-side computation reference for Phase 2 (tax-projection). It holds the bracket tables, indexed thresholds, and OBBBA-driven mechanical changes needed to take a client's projected taxable income and turn it into a federal tax liability. It does not recommend strategies (that's Phase 3) — it just computes the baseline correctly.
 
-Washington relies heavily on:
-- **Business and Occupation (B&O) Tax** — gross receipts tax on businesses
-- **Sales tax** — 6.5% state + local up to 4% (combined up to 10.4% in some areas)
-- **Property tax**
-- **Capital gains tax** (2022+)
+## 2026 ordinary income tax brackets (indexed, Rev. Proc. 2025-32)
 
-**Moderate Priceless concentration** — WA/OR border for tech professionals; Pacific Northwest business exits.
+OBBBA made the TCJA rate structure permanent — no reversion to pre-2018 brackets (39.6% top rate) was scheduled to occur, and OBBBA locked in the current structure. Brackets below are 2026 inflation-indexed.
 
-## Quick reference
-
-- **Personal income tax on wages**: **NONE**
-- **Capital gains tax**: **7% on long-term capital gains above $262,000 threshold** (2024; indexed annually)
-  - Real estate gains EXEMPT
-  - Family-owned small business gains (sales ≤ $10M; family retains > 50%): EXEMPT
-  - Retirement accounts exempt (401k, IRA, pension)
-  - $1M qualifying business sale deduction above threshold
-  - Charitable donations deductible (up to $100K annual deduction)
-- **Business and Occupation (B&O) Tax**: 0.484% retailing / 0.471% wholesaling / 1.50% services / varies by classification
-- **Corporate income tax**: NONE (replaced by B&O tax)
-- **Sales tax**: 6.5% state + local up to 4% (combined up to 10.4%)
-- **Estate tax**: YES — $2.193M exemption (2025; indexed); rates 10-20% graduated (among highest US rates)
-- **Inheritance tax**: None
-- **Social Security**: N/A (no income tax)
-- **Filing deadline (capital gains)**: April 15
-
-## Capital gains tax — RCW 82.87
-
-### Background
-
-- Enacted via Engrossed SSB 5096 (2021 session)
-- Effective TY 2022
-- Upheld as constitutional by WA Supreme Court March 2023 (ruled "excise tax" rather than income tax, which is prohibited by WA Constitution)
-- 7% rate on gains above threshold
-
-### Threshold (indexed annually)
-
-- 2022: $250,000
-- 2023: $262,000
-- 2024: $262,000 [VERIFY 2025/2026 exact figures]
-- Indexed to federal inflation mechanism
-
-### Exemptions and deductions
-
-**EXEMPT**:
-- **Real estate** (primary home, rental, commercial — all exempt)
-- **Retirement accounts** (401(k), IRA, pension distributions treated as ordinary, not capital gains)
-- **Family-owned small business** if sales ≤ $10M and family retains ≥ 50%
-- Gains from transfers to charitable institutions (within limits)
-
-**DEDUCTIONS**:
-- $1,000,000 for sale of "qualifying family-owned small business" (above threshold)
-- $100,000 per year for charitable donations
-
-### Worked example — $1M LTCG (non-real estate, non-family-business)
-
-- Gains subject: $1,000,000
-- Threshold deduction: -$262,000
-- Taxable at 7%: $738,000 × 7% = **$51,660 WA capital gains tax**
-
-**Compare to**:
-- California (13.3% top ordinary): $132,000+
-- Oregon (9.9% top ordinary): $99,000
-- No-tax states (TX, FL, NV, TN, WY, SD, AK, NH): $0
-
-For large non-exempt capital gains, WA has become a middle-ground state — better than CA/OR but worse than true 0% states.
-
-### Planning implications for Priceless clients
-
-**Favorable for**:
-- Real estate investors (real estate gains always exempt)
-- Family business sellers (up to $10M sale; 50% family retention preserves exemption)
-- Retirement account distributions
-
-**Less favorable for**:
-- Stock/crypto portfolio sales > $262K/year threshold
-- Non-family business exits
-- Tech equity gains (IPOs, acquisition proceeds)
-
-### Timing planning
-
-- **Bunch gains**: Concentrate large gains in single year above threshold vs. spreading (7% applies only above threshold)
-- **Offset with losses**: Federal capital loss carryovers flow through
-- **Charitable giving**: $100K/year deduction against gains
-
-## Business and Occupation (B&O) Tax — RCW 82.04
-
-Washington's B&O tax replaces corporate income tax. Applies to all businesses regardless of profitability.
-
-### Rate structure (selected)
-
-| Business Classification | Rate |
+**Married Filing Jointly / Qualifying Surviving Spouse**
+| Rate | Taxable income |
 |---|---|
-| Retailing | 0.484% |
-| Wholesaling | 0.471% |
-| Manufacturing | 0.484% |
-| Services | **1.50%** |
-| Public/gambling | Varies |
+| 10% | $0 – $24,800 |
+| 12% | $24,800 – $100,800 |
+| 22% | $100,800 – $211,700 |
+| 24% | $211,700 – $403,550 |
+| 32% | $403,550 – $512,450 |
+| 35% | $512,450 – $768,700 |
+| 37% | $768,700+ |
 
-### Small business credit
+**Single**
+| Rate | Taxable income |
+|---|---|
+| 10% | $0 – $12,400 |
+| 12% | $12,400 – $50,400 |
+| 22% | $50,400 – $105,850 |
+| 24% | $105,850 – $201,775 |
+| 32% | $201,775 – $256,225 |
+| 35% | $256,225 – $640,600 |
+| 37% | $640,600+ |
 
-Threshold-based exemptions and credits for businesses below specified gross receipts.
+**Head of Household**
+| Rate | Taxable income |
+|---|---|
+| 10% | $0 – $17,700 |
+| 12% | $17,700 – $67,450 |
+| 22% | $67,450 – $105,700 |
+| 24% | $105,700 – $201,750 |
+| 32% | $201,750 – $256,200 |
+| 35% | $256,200 – $640,600 |
+| 37% | $640,600+ |
 
-### Priceless implications
+**Married Filing Separately**: half of MFJ brackets.
 
-For any Priceless client with WA-sourced business revenue:
-- B&O applies even with no profit
-- Services at 1.50% — significant for professional services firms
-- For $1M gross receipts in services: $15,000 B&O tax
-- Combined with federal income tax at 37% top: effective tax significant
+[VERIFY 2026 figures against final Rev. Proc. 2025-32 publication before filing-season use; figures above reflect standard ~3% chained-CPI indexing off 2025 base brackets.]
 
-## Estate tax — RCW 83.100
+### 2025 brackets (for prior-year comparison / return analysis)
 
-- **Exemption**: $2.193M (2025; indexed)
-- **Rates**: 10% to 20% graduated (among highest US rates)
-- **Applies to**: WA residents worldwide; nonresidents' WA real property
+**MFJ**: 10% to $23,850; 12% to $96,950; 22% to $206,700; 24% to $394,600; 32% to $501,050; 35% to $751,600; 37% above.
+**Single**: 10% to $11,925; 12% to $48,475; 22% to $103,350; 24% to $197,300; 32% to $250,525; 35% to $626,350; 37% above.
 
-### Worked example — $5M WA estate
+## Standard deduction
 
-- Taxable: $5M - $2.193M = $2.807M
-- Tax: approximately $400,000-$500,000 (10-20% blended)
-
-High estate tax makes WA planning critical despite no ordinary income tax.
-
-## Sales tax
-
-- State: 6.5%
-- Local: Up to 4% additional
-- Combined max: ~10.4% (Seattle area)
-
-## OBBBA conformity
-
-WA has no ordinary income tax → no federal conformity issues for wages. For capital gains tax: [VERIFY specific WA treatment of OBBBA-modified federal basis/depreciation mechanics].
-
-## Priceless client scenarios
-
-### Seattle tech professional — IPO
-**Setup**: WA resident; 100,000 shares at IPO valued $200K each; total $20M long-term capital gain.
-
-**WA analysis**:
-- Threshold deduction: -$262,000
-- Charitable donations (optional): -$100,000 max deduction per year
-- WA tax base: $20M - $262K - $100K (if charitable) = $19.638M
-- WA tax: $19.638M × 7% = **$1,374,660**
-
-**Compare to**:
-- CA: $20M × 13.3% = $2,660,000 (CA owes $1,285K more than WA)
-- OR (via Portland): $20M × 9.9% + local ≈ $2M+ (OR owes $625K+ more than WA)
-- TX/FL/NV: $0 (save $1.37M vs. WA)
-
-For tech IPO, WA is better than CA/OR but worse than true no-tax states.
-
-### WA real estate sale
-**Setup**: Seattle resident; selling rental property for $3M LTCG.
-
-**Analysis**:
-- **WA real estate exemption** → $0 WA capital gains tax
-- Federal: LTCG 20% + NIIT 3.8% = $714K
-
-Real estate exemption is a major WA advantage.
-
-### WA family business sale
-**Setup**: Family-owned WA business; $8M sale; family retained 60% after sale.
-
-**Analysis**:
-- Sale ≤ $10M ✓
-- Family retention > 50% ✓
-- **EXEMPT from WA capital gains tax**
-- Only federal tax applies
-
-### WA estate planning
-**Setup**: Seattle resident; $8M estate (including $3M home, $4M retirement, $1M other).
-
-- Federal: $8M < $15M exemption → $0 federal estate tax
-- **WA**: $8M - $2.193M = $5.807M taxable → approximately $900K WA estate tax
-
-Significant WA estate tax on modest estate. Major planning consideration.
-
-## Authority and verification
-
-| Source | Used For | Date |
+| Filing status | 2025 | 2026 (indexed) |
 |---|---|---|
-| **Engrossed SSB 5096 (2021)** | 7% capital gains tax enactment | Effective 2022 |
-| RCW 82.87 | Capital gains statutory framework | Current |
-| WA Supreme Court decision | Upheld capital gains as constitutional "excise" | March 2023 |
-| WA DOR | Threshold inflation-adjusted amounts | 2024-2026 |
-| Tax Foundation | WA tax structure | Feb 2026 |
+| MFJ | $31,500 | $32,600 |
+| Single / MFS | $15,750 | $16,300 |
+| HOH | $23,625 | $24,450 |
 
-## [VERIFY]
+OBBBA made the increased TCJA-era standard deduction permanent (no scheduled reversion to pre-2018 ~$13K MFJ levels). [VERIFY 2026 exact indexed figures against final Rev. Proc. 2025-32.]
 
-- 2026 capital gains threshold exact (indexed annually from $262K 2024 base)
-- Estate tax 2026 exemption exact (indexed from $2.193M 2025)
-- Family-owned small business exemption specific qualifying criteria
-- B&O tax credits and small business thresholds
-- SB 5801 (2025) transportation fee increases scope
+**Additional standard deduction** (age 65+ or blind): $1,600 MFJ (per qualifying condition, per spouse) / $2,000 Single-HOH for 2025; index similarly for 2026. OBBBA added a temporary additional $6,000 "senior deduction" for taxpayers 65+ for tax years 2025-2028, phased out above $75K Single / $150K MFJ MAGI — confirm phase-out mechanics before use in a senior client's projection.
+
+## Capital gains and qualified dividends brackets
+
+Confirmed directly from filed 2025 returns processed this session (see the Qualified Dividends and Capital Gain Tax Worksheet mechanics):
+
+**2025 MFJ**: 0% up to $96,700 taxable income; 15% $96,700–$600,050; 20% above $600,050.
+**2025 Single**: 0% up to $48,350; 15% $48,350–$533,400; 20% above.
+**2025 HOH**: 0% up to $64,750; 15% $64,750–$566,700; 20% above.
+**2025 MFS**: 0% up to $48,350; 15% $48,350–$300,000; 20% above.
+
+**2026 (indexed, approx.)**: 0% MFJ up to ~$100,000; 15% to ~$620,000; 20% above. [VERIFY exact 2026 figures against Rev. Proc. 2025-32 before use.]
+
+Mechanics: ordinary income fills the bracket first; LTCG/qualified dividends stack on top. A strategy that changes the ordinary-income floor (e.g., recharacterizing an improper deduction, per the kind of Schedule E finding in this engagement) can push otherwise-0%-taxed gain into the 15% bracket — always recompute the stacking, don't assume a capital gain figure is safe just because it was safe under a different ordinary-income assumption.
+
+## Net Investment Income Tax (NIIT) — §1411
+
+**3.8%** on the lesser of net investment income or MAGI over threshold. Thresholds are **fixed by statute, not indexed**: $250,000 MFJ / $200,000 Single / $125,000 MFS.
+
+Active-trade-or-business exception (§1411(c)(4)): gain on disposition of an interest in a business the taxpayer materially participates in is excluded from NII. Relevant for S-corp stock distributions/dispositions in excess of basis — confirm material participation before assuming NIIT applies to that gain.
+
+## Additional Medicare Tax — §3101(b)(2)
+
+**0.9%** on wages/SE income above threshold. Also fixed by statute: $250,000 MFJ / $200,000 Single / $125,000 MFS. Applies to combined wages across all employers (W-2 employees with multiple jobs may need to self-true-up on Form 8959 since employers only withhold above $200K per employer, not per household — relevant for any client with more than one W-2 source).
+
+## §199A Qualified Business Income deduction
+
+20% of QBI, subject to phase-in of W-2 wage/UBIA limitations and SSTB treatment above the threshold. OBBBA widened the phase-in range (previously $50K MFJ / $100K single-width band):
+
+| Filing status | 2026 phase-in starts | Phase-in ends |
+|---|---|---|
+| MFJ | $383,900 | $483,900 |
+| Single/HOH/MFS | $191,950 | $241,950 |
+
+Below the phase-in floor: full 20% deduction regardless of SSTB status or W-2 wages (Form 8995 simplified computation applies — this is the form used for I Spy Productions given Trevion's income level). Above the ceiling: SSTBs get $0 deduction; non-SSTBs subject to the greater-of 50% W-2 wages / 25% W-2 wages + 2.5% UBIA limitation. OBBBA made §199A permanent (was scheduled to sunset after 2025 under prior law).
+
+## SALT cap
+
+OBBBA set the SALT cap at **$40,000 for 2025**, indexed to **$40,400 for 2026**, with a phase-down for AGI above $500,000 (2025)/$505,000 (2026) — cap reduces by 30% of AGI excess, floor at $10,000. [VERIFY exact 2026 phase-down mechanics and threshold against final IRS guidance.] PTET elections are NOT subject to this cap (paid at the entity level, deducted as a business expense) — this is why PTET remains valuable even post-OBBBA for pass-through owners above the phase-down threshold.
+
+## Charitable contribution deduction — OBBBA changes (2026+)
+
+- **0.5% AGI floor**: the first 0.5% of AGI in charitable giving is non-deductible for itemizers.
+- **35% bracket cap**: for taxpayers in the 37% bracket, the tax benefit of the charitable deduction is capped as if the taxpayer were in the 35% bracket.
+- 60% AGI ceiling for cash to public charities made **permanent**.
+
+Both floor and cap apply at the point of deduction utilization (including utilization of carryforwards from pre-2026 contributions) — see `CARRYFORWARD-TRACKING.md` for carryforward-specific mechanics.
+
+## Bonus depreciation and §179
+
+- **100% bonus depreciation made permanent** by OBBBA for qualified property placed in service after 1/19/2025 (no phase-down to 80%/60%/40% as under prior TCJA sunset schedule).
+- **§179**: 2026 expensing limit indexed per Rev. Proc. 2025-32 [VERIFY exact figure]; phase-out begins above a total-equipment-placed-in-service threshold, also indexed.
+- Property placed in service before 1/19/2025 remains on the pre-OBBBA phase-down schedule — check placed-in-service date carefully on any transition-year asset.
+
+## Child Tax Credit
+
+2025: $2,200 per qualifying child (confirmed directly from filed 2025 returns this session), refundable portion (ACTC) $1,700 per child, phase-out begins $400,000 MFJ / $200,000 other. OBBBA made the increased CTC amount permanent. 2026 figure indexed — [VERIFY exact 2026 amount].
+
+## Estate and gift tax
+
+OBBBA made the **$15 million per-person exemption** (2026, indexed) **permanent** — no reversion to the pre-TCJA ~$5-7M level that was scheduled under prior law. Portability between spouses remains available.
+
+## Alternative Minimum Tax (AMT)
+
+Rarely binding post-TCJA/OBBBA for most Priceless clients given the high exemption amounts, but still check when: large ISO exercises, significant state tax deduction relative to income (less relevant post-SALT-cap), large misc. itemized add-backs. 2026 exemption and phase-out thresholds indexed per Rev. Proc. 2025-32 — [VERIFY exact figures]. Always run the AMT computation (Form 6251) as part of the projection even when not expected to bind; document that it was checked.
+
+## Update status
+
+| Item | Status | Source |
+|---|---|---|
+| 2025 brackets, standard deduction, capital gains thresholds | Confirmed | Directly verified against filed 2025 returns processed in this engagement |
+| 2026 brackets, standard deduction | Indexed estimate | Rev. Proc. 2025-32 — [VERIFY final published figures] |
+| NIIT / Additional Medicare thresholds | Confirmed (statutory, not indexed) | §1411, §3101(b)(2) |
+| §199A phase-in ranges (2026) | Confirmed | OBBBA 2025 (P.L. 119-21) |
+| SALT cap ($40,400 2026) | Confirmed structure; [VERIFY phase-down exact mechanics] | OBBBA 2025 |
+| Bonus depreciation permanence | Confirmed | OBBBA 2025 |
+| Estate exemption ($15M) | Confirmed | OBBBA 2025 |
+| AMT 2026 exemption/phase-out | [VERIFY] | Rev. Proc. 2025-32 |
+| §179 2026 limit | [VERIFY] | Rev. Proc. 2025-32 |
+| CTC 2026 indexed amount | [VERIFY] | Rev. Proc. 2025-32 |
+
+**Reconstructed**: 2026-08-13. Flag to partner if any [VERIFY] item is load-bearing for a specific client's projection — confirm against primary source before finalizing that memo.
