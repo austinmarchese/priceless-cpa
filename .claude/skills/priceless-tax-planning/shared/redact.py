@@ -24,6 +24,29 @@ For scanned PDFs (OCR):
     It's found automatically if it's on your PATH or in a standard Windows
     install location. If you installed it somewhere else, set an environment
     variable before running, e.g.: set TESSERACT_PATH=C:/path/to/tesseract.exe
+
+    No admin rights on your machine? The normal installer needs them (it
+    writes to Program Files), and so does "choco install tesseract". Use
+    this instead -- it installs to your own user folder, no elevation
+    needed:
+
+        1. Download the installer from the wiki link above (direct link
+           changes with each release; grab the current 64-bit .exe).
+        2. Run it silently to a user-writable folder, e.g. in PowerShell:
+             Start-Process -FilePath ".\tesseract-setup.exe" -ArgumentList `
+               "/VERYSILENT", "/SUPPRESSMSGBOXES", "/CURRENTUSER", `
+               "/DIR=`"$env:LOCALAPPDATA\Tesseract-OCR`"" -Wait
+        3. Point this script at it permanently:
+             [Environment]::SetEnvironmentVariable("TESSERACT_PATH", `
+               "$env:LOCALAPPDATA\Tesseract-OCR\tesseract.exe", "User")
+        4. Rerun this tool on the ORIGINAL files. Safe to rerun on a file
+           that already produced a "-REDACTION-INCOMPLETE" output -- it
+           only redoes the pages that couldn't be read before.
+
+    Don't manually rename a "-REDACTION-INCOMPLETE.pdf" file to drop the
+    "-INCOMPLETE" suffix and treat it as done -- this tool decides that
+    naming itself once every page has actually been checked. A hand-renamed
+    file just gets treated as a new source file on the next run.
 """
 
 import fitz  # pymupdf

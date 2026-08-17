@@ -5,7 +5,9 @@ description: Quarterly tax planning and strategy for Priceless CPA clients. Load
 
 # Priceless Tax Planning
 
-> **Scope and status — August 2026 (v0.9.8)**
+> **Scope and status — August 2026 (v0.9.9)**
+>
+> v0.9.9 fixes a redaction-tool blocker hit on the Dr. Uffelman Q3 2026 engagement: `redact.py` correctly refused to produce a trusted output when Tesseract OCR wasn't installed, but had no guidance for machines without admin rights, where the standard installer requires elevation. The script's docstring now documents a non-admin install path. See `SKILL.md` Learnings and `shared/redact.py`.
 >
 > v0.9.8 adds three findings from finishing the T&A Contracting Q3 2026 memo: (1) Excel models built with `openpyxl` must be recalculated and checked for formula errors before any number in them is trusted — a marginal-tax-bracket `SUMPRODUCT` formula was silently returning `#VALUE!` across 13 cells; (2) baseline/counterfactual headline numbers (e.g., "what your AGI would look like without this year's changes") must be labeled and shown paired with the as-recommended figure, never divided against it; (3) ambiguous "Uncategorized Expense" transactions (cash withdrawals, Zelle to individuals) get asked about, not waved off as routine. See `SKILL.md` Learnings, `bookkeeping-qa/COMMON-CLASSIFICATION-ERRORS.md`, and `shared/CLIENT-FACING-MEMO-TEMPLATE.md`.
 >
@@ -226,8 +228,29 @@ No memo goes to a client without partner sign-off.
 
 Reusable methods surfaced during real engagements. Apply them; deepen the relevant sub-skill when one recurs.
 
+### Redaction tool: Tesseract missing, and no admin rights to install it the normal way
+
+On the Dr. Uffelman Q3 2026 engagement, `shared/redact.py` correctly flagged three source PDFs as `-REDACTION-INCOMPLETE` because Tesseract OCR wasn't installed, so rotated and scanned pages couldn't be checked for PII. That refusal is working as intended (see the tool's own commit history around the prior silent-skip bug); the fix is installing Tesseract, not changing the script's behavior. The obstacle worth documenting: the standard Windows installer writes to `Program Files` and needs admin rights, and `choco install` fails the same way on a non-elevated machine. Neither this analyst nor the machine had admin access.
+
+**Working fix, no admin required**: download the installer directly from `https://github.com/UB-Mannheim/tesseract/wiki` and run it silently to a user-writable directory instead of the default location:
+
+```
+Start-Process -FilePath ".\tesseract-setup.exe" -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES", "/CURRENTUSER", "/DIR=`"$env:LOCALAPPDATA\Tesseract-OCR`"" -Wait
+```
+
+Then set `TESSERACT_PATH` (User scope, persists across sessions) so `redact.py` finds it automatically:
+
+```
+[Environment]::SetEnvironmentVariable("TESSERACT_PATH", "$env:LOCALAPPDATA\Tesseract-OCR\tesseract.exe", "User")
+```
+
+Rerunning `redact.py` on the same folder afterward is safe even on files already partially processed. It only re-flags pages it can't read, and pages already redacted stay redacted. Full detail now in the script's own docstring (`shared/redact.py`).
+
+**Also worth knowing**: if an earlier incomplete run's output file happens to get renamed to something not ending in `-REDACTED` or `-REDACTION-INCOMPLETE` (for example, manually stripping "-INCOMPLETE" by hand), the tool will treat it as a fresh source file on the next run rather than recognizing it as already-partially-processed. Harmless — it just produces a doubled-up filename — but don't manually rename incomplete outputs; let the tool's own naming stand until Tesseract is installed and a clean rerun produces the trusted file.
+
 ### Reasonable comp ↔ QBI crossover (S Corp, non-SSTB)
-For a non-SSTB S Corp owner above the §199A income threshold, the QBI deduction is the lesser of **20% of QBI (the K-1 income)** or **50% of W-2 wages**. Officer salary moves these in opposite directions (every $1 of salary cuts K-1 by $1 but raises the wage limit by $0.50), so the tax-optimal salary is the **crossover where `50% × total W-2 wages = 20% × K-1`**. Solving per owner: `W ≈ (0.10 × EBOC − 0.25 × staff wages) / 0.70`, where EBOC = entity earnings before officer comp.
+For a non-SSTB S Corp owner above the §199A income threshold, the QBI deduction is the lesser of **20% of QBI (the K-1 income)** or **50% of W-2 wages**. Officer salary moves these in opposite directions (every $1 of salary cuts K-1 by $1 but raises the wage limit by $0.50), so the tax-optimal salary is the **crossover where `50% × total W-2 wages = 20% × K-1`**. Solving per owner: `W ≈ (0.20 × EBOC − 0.50 × staff wages) / 0.70`, where EBOC = entity earnings before officer comp.
+- **Correction (2026-08-14):** this formula previously read `(0.10 × EBOC − 0.25 × staff wages) / 0.70` — exactly half the correct coefficients, caught while running the DC Construction Q3 2026 engagement. Verify any prior recommendation built on the old formula: plug the resulting W back into `20% × (EBOC − W)` and `50% × (W + staff wages)` — at the true crossover these must be equal. The old formula silently understated the QBI-optimal salary by 2x.
 - **The QBI wage limit uses TOTAL company W-2 wages (all officers + all staff), not officer comp alone.** More staff payroll lowers the officer salary needed to reach the crossover.
 - Under-comp does double damage: payroll-tax reclassification risk **and** a throttled QBI deduction. Don't default to "minimize salary."
 
@@ -271,7 +294,8 @@ A memo sometimes needs to show a client "what your number would look like withou
 
 ## Version history
 
-- **v0.9.8** (August 2026, current): Excel-recalculation requirement (with a real SUMPRODUCT/#VALUE! bracket-calc bug and fix), baseline/counterfactual headline-number labeling rules, and an Uncategorized Expense ask-don't-assume note in bookkeeping QA — all from finishing the T&A Contracting Q3 2026 engagement.
+- **v0.9.9** (August 2026, current): `shared/redact.py` docstring now documents a no-admin-rights install path for Tesseract OCR, plus a note on not manually renaming incomplete redaction outputs. From the Dr. Uffelman Q3 2026 engagement.
+- **v0.9.8**: Excel-recalculation requirement (with a real SUMPRODUCT/#VALUE! bracket-calc bug and fix), baseline/counterfactual headline-number labeling rules, and an Uncategorized Expense ask-don't-assume note in bookkeeping QA — all from finishing the T&A Contracting Q3 2026 engagement.
 - **v0.9.7** (August 2026): Partner feedback (Anthony) reversed the density of the compact deliverable — one topic per page, much larger type, no target page count — and renamed the recurring value tracker to "Your Estimated Tax Savings This Year" throughout.
 - **v0.9.6** (August 2026): Real-engagement refinement from T&A Contracting LLC Q3 2026 memo — compact one-pager + talking-points format, required cumulative advisory-value tracker, event-grouped cash-need framing, plain-language explainer bank, mid-year reasonable-comp reclassification technique.
 - **v0.1** (April 2026): Initial skeleton with foundation files
